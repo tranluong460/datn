@@ -4,6 +4,10 @@ import {
   InfoHotel,
   RoomList,
 } from "../../../components";
+<<<<<<< Updated upstream
+=======
+import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
+>>>>>>> Stashed changes
 
 const HotelDetailPage = () => {
   return (

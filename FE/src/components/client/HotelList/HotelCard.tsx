@@ -2,14 +2,14 @@ import { CiLocationOn } from "react-icons/ci";
 import { AiOutlineStar } from "react-icons/ai";
 import { Button } from "../..";
 
-const HotelCard = () => {
+const HotelCard = (data:any) => {
   return (
     <>
       <div className="grid lg:grid-cols-3 grid-cols-1 p-3 mb-4 gap-3 rounded-lg bg-light dark:bg-dark">
         <div className="relative">
           <a href="hotel-detail/1" className="no-underline">
             <img
-              src="https://booking.muongthanh.com/images/hotels/hotels/original/_hkt6859_1679810462_1691467982.jpg"
+              src={data?.data?.images[0]}
               alt="Mường Thanh Grand Sài Gòn Centre"
               className="rounded-md w-full xl:h-48 md:h-44 object-contain"
             />
@@ -19,7 +19,7 @@ const HotelCard = () => {
         <div className="box-border">
           <h2 className="font-semibold text-2xl leading-normal mb-4 text-textLight dark:text-textDark">
             <a href="#" className="no-underline">
-              Mường Thanh Grand Sài Gòn Centre
+             {data?.data?.name}
             </a>
           </h2>
 
@@ -58,7 +58,7 @@ const HotelCard = () => {
                   <p>Chỉ từ</p>
 
                   <p className="text-md lg:text-2xl font-bold text-textLight dark:text-textDark">
-                    2,025,000
+                    {data?.data?.price? data?.data?.price : "1"}
                     <span>VNĐ</span>
                   </p>
 

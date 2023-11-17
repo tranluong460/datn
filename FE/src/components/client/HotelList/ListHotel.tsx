@@ -1,14 +1,14 @@
 import { HotelCard } from "../..";
 
-const ListHotel = () => {
+const ListHotel = (data:any) => {
+  console.log(data)
   return (
     <>
       <div className="box-border">
-        <HotelCard />
+        {data?.data?.data?.map((hotel:any) => {
+        return <HotelCard data={hotel}/>
+        })}
 
-        <HotelCard />
-
-        <HotelCard />
       </div>
     </>
   );
