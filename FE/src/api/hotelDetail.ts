@@ -1,17 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const HotelDetailApi = createApi({
+export const hotelApi = createApi({
   reducerPath: "hotel",
-  tagTypes: ["HotelDetail"],
+  tagTypes: ["Hotel"],
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:8080/",
   }),
   endpoints: (builder) => ({
-    getHotelDetailById: builder.query<any, number | string>({
+    getHotelDetailById: builder.query({
       query: (id) => `/hotel/${id}`,
-      providesTags: ["HotelDetail"],
+      providesTags: ["Hotel"],
     }),
   }),
 });
 
-export const { useGetHotelDetailByIdQuery } = HotelDetailApi;
+export const { useGetHotelDetailByIdQuery } = hotelApi;

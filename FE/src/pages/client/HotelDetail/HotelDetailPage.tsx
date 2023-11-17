@@ -5,13 +5,11 @@ import {
   InfoHotel,
   RoomList,
 } from "../../../components";
-
 import { useGetHotelDetailByIdQuery } from "../../../api/hotelDetail";
-import { useEffect } from "react";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data } = useGetHotelDetailByIdQuery(id!);
+  const { data } = useGetHotelDetailByIdQuery(id);
 
   return (
     <>
