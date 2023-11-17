@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  getAll,
   register,
   login,
   lockAccount,
@@ -13,6 +14,7 @@ import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
 const router = express.Router();
 
+router.get("/", isAdminMiddleware, getAll);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/lock-account/:id", isAdminMiddleware, lockAccount);
