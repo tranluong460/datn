@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { authApi } from "../api/auth";
 import { userApi } from "../api/user";
-import { hotelApi } from "../api/hotelDetail";
+import { hotelApi } from "../api/hotel";
 
 export const store = configureStore({
   reducer: {
