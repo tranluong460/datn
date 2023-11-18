@@ -74,7 +74,7 @@ const InfoDrawn = ({ info, isOpen, loading, onClosed }: InfoDrawnProps) => {
     {
       key: "7",
       label: "Ngày tạo",
-      children: moment(info?.createdAt).format("DD/MM/YYYY"),
+      children: info?.createdAt && moment(info?.createdAt).format("DD/MM/YYYY"),
       span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
     },
     {
