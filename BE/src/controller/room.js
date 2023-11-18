@@ -1,10 +1,10 @@
+import mongoose from "mongoose";
+
 import { RoomModel } from "../models";
 import { sendResponse } from "../utils";
 import { RoomValidate } from "../validate";
 import { uploadImageToCloudinary } from "../utils";
 import { validateFormMiddleware } from "../middleware";
-
-import { ObjectId } from "mongodb";
 
 export const getAll = async (req, res) => {
   try {
@@ -59,7 +59,9 @@ export const create = async (req, res) => {
   if (req.fields.id_amenities) {
     const id_amenities = req.fields.id_amenities.split(",");
 
-    const amenities = id_amenities.map((item) => new ObjectId(item));
+    const amenities = id_amenities.map(
+      (item) => new mongoose.Types.ObjectId(item)
+    );
     req.fields.id_amenities = amenities;
   }
 
@@ -109,7 +111,9 @@ export const update = async (req, res) => {
   if (req.fields.id_amenities) {
     const id_amenities = req.fields.id_amenities.split(",");
 
-    const amenities = id_amenities.map((item) => new ObjectId(item));
+    const amenities = id_amenities.map(
+      (item) => new mongoose.Types.ObjectId(item)
+    );
     req.fields.id_amenities = amenities;
   }
 
