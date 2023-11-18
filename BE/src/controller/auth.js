@@ -37,6 +37,34 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getInfoUserById = async (req, res) => {
+  const idUser = req.params.id;
+
+  try {
+    const user = await UserModel.findById(idUser);
+
+    if (!user || user.length === 0) {
+      return sendResponse(res, 404, "Không tìm thấy người dùng");
+    }
+
+    const infoUser = await InformationModel.findById(user.id_information);
+
+    if (!infoUser || infoUser.length === 0) {
+      return sendResponse(res, 404, "Không có thông tin người dùng");
+    }
+
+    return sendResponse(res, 200, "Thông tin người dùng", infoUser);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy thông tin người dùng"
+    );
+  }
+};
+
 export const register = async (req, res) => {
   const { email, password } = req.body;
 
