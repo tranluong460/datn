@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { Drawer, Descriptions } from "antd";
+import { Drawer, Descriptions, Image } from "antd";
 import type { DescriptionsProps } from "antd";
 
 type InformationProps = {
@@ -60,6 +60,12 @@ const InfoDrawn = ({ info, isOpen, onClosed }: InfoDrawnProps) => {
       key: "6",
       label: "Ngày tạo",
       children: moment(info?.createdAt).format("DD/MM/YYYY"),
+      span: 2,
+    },
+    {
+      key: "7",
+      label: "Hình ảnh",
+      children: <Image src={info?.id_information.image} />,
       span: 2,
     },
   ];
