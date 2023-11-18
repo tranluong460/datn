@@ -1,7 +1,10 @@
 import { HotelModel } from "../models";
 import { sendResponse } from "../utils";
 import { HotelValidate } from "../validate";
-import { validateMiddleware } from "../middleware";
+import { uploadImageToCloudinary } from "../utils";
+import { validateFormMiddleware } from "../middleware";
+
+import { ObjectId } from "mongodb";
 
 export const getAll = async (req, res) => {
   try {
@@ -25,7 +28,9 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const hotel = await HotelModel.findById(req.params.id);
+    const hotel = await HotelModel.findById(req.params.id)
+      .populate("id_amenities")
+      .populate("id_review");
 
     if (!hotel || hotel.length === 0) {
       return sendResponse(res, 404, "Không có thông tin khách sạn");
@@ -44,9 +49,41 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+  const imagesArray = [];
+
+  for (const field in req.files) {
+    if (req.files.hasOwnProperty(field)) {
+      const file = req.files[field];
+      imagesArray.push({
+        name: field,
+        url: file.path,
+      });
+    }
+  }
+
+  req.fields.images = imagesArray;
+
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(",");
+
+    const amenities = id_amenities.map((item) => new ObjectId(item));
+    req.fields.id_amenities = amenities;
+  }
+
   try {
-    validateMiddleware(req, res, HotelValidate, async () => {
-      const data = await HotelModel.create(req.body);
+    validateFormMiddleware(req, res, HotelValidate, async () => {
+      const newImages = await Promise.all(
+        req.fields.images.map(uploadImageToCloudinary)
+      );
+
+      const images = newImages.map((imageUrl) => ({
+        url: imageUrl,
+      }));
+
+      const data = await HotelModel.create({
+        ...req.fields,
+        images,
+      });
 
       if (!data) {
         return sendResponse(res, 404, "Thêm khách sạn thất bại");
@@ -62,9 +99,43 @@ export const create = async (req, res) => {
 };
 
 export const update = async (req, res) => {
+  const imagesArray = [];
+
+  for (const field in req.files) {
+    if (req.files.hasOwnProperty(field)) {
+      const file = req.files[field];
+      imagesArray.push({
+        name: field,
+        url: file.path,
+      });
+    }
+  }
+
+  req.fields.images = imagesArray;
+
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(",");
+
+    const amenities = id_amenities.map((item) => new ObjectId(item));
+    req.fields.id_amenities = amenities;
+  }
+
   try {
-    validateMiddleware(req, res, HotelValidate, async () => {
-      const data = await HotelModel.findByIdAndUpdate(req.params.id, req.body, {
+    validateFormMiddleware(req, res, HotelValidate, async () => {
+      const newImages = await Promise.all(
+        req.fields.images.map(uploadImageToCloudinary)
+      );
+
+      const images = newImages.map((imageUrl, index) => ({
+        url: imageUrl,
+      }));
+
+      const newData = {
+        ...req.fields,
+        images,
+      };
+
+      const data = await HotelModel.findByIdAndUpdate(req.params.id, newData, {
         new: true,
       });
 

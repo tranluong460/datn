@@ -24,6 +24,7 @@ const hotelSchema = new mongoose.Schema(
     },
     status: {
       type: String,
+      default: "Có sẵn",
       enum: ["Có sẵn", "Đã đóng cửa", "Đang sửa", "Hết chỗ", "Ngừng hoạt động"],
     },
     email: {
@@ -34,16 +35,18 @@ const hotelSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    city: {
-      type: String,
-      required: true,
-    },
+
     id_amenities: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Amenities",
+        required: true,
       },
     ],
+    city: {
+      type: String,
+      required: true,
+    },
     id_review: [
       {
         type: mongoose.Schema.Types.ObjectId,

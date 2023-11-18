@@ -11,10 +11,8 @@ const roomValidate = joi.object({
     .required()
     .items(
       joi.object({
-        url: joi
-          .string()
-          .required()
-          .messages(validationErrors("Đường dẫn ảnh")),
+        name: joi.string().required().messages(validationErrors("Tên")),
+        url: joi.string().required().messages(validationErrors("Đường dẫn")),
       })
     )
     .messages(validationErrors("Ảnh")),
@@ -26,7 +24,7 @@ const roomValidate = joi.object({
   price: joi.number().min(0).required().messages(validationErrors("Giá phòng")),
   status: joi
     .string()
-    .required()
+    .optional()
     .messages(validationErrors("Trạng Thái phòng")),
   description: joi
     .string()

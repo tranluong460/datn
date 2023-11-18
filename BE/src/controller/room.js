@@ -1,7 +1,10 @@
 import { RoomModel } from "../models";
 import { sendResponse } from "../utils";
 import { RoomValidate } from "../validate";
-import { validateMiddleware } from "../middleware";
+import { uploadImageToCloudinary } from "../utils";
+import { validateFormMiddleware } from "../middleware";
+
+import { ObjectId } from "mongodb";
 
 export const getAll = async (req, res) => {
   try {
@@ -21,7 +24,10 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const room = await RoomModel.findById(req.params.id);
+    const room = await RoomModel.findById(req.params.id)
+      .populate("id_amenities")
+      .populate("id_hotel")
+      .populate("id_roomType");
 
     if (!room || room.length === 0) {
       return sendResponse(res, 404, "Không có thông tin phòng");
@@ -36,9 +42,41 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+  const imagesArray = [];
+
+  for (const field in req.files) {
+    if (req.files.hasOwnProperty(field)) {
+      const file = req.files[field];
+      imagesArray.push({
+        name: field,
+        url: file.path,
+      });
+    }
+  }
+
+  req.fields.images = imagesArray;
+
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(",");
+
+    const amenities = id_amenities.map((item) => new ObjectId(item));
+    req.fields.id_amenities = amenities;
+  }
+
   try {
-    validateMiddleware(req, res, RoomValidate, async () => {
-      const data = await RoomModel.create(req.body);
+    validateFormMiddleware(req, res, RoomValidate, async () => {
+      const newImages = await Promise.all(
+        req.fields.images.map(uploadImageToCloudinary)
+      );
+
+      const images = newImages.map((imageUrl, index) => ({
+        url: imageUrl,
+      }));
+
+      const data = await RoomModel.create({
+        ...req.fields,
+        images,
+      });
 
       if (!data) {
         return sendResponse(res, 404, "Thêm phòng thất bại");
@@ -52,12 +90,45 @@ export const create = async (req, res) => {
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm phòng");
   }
 };
-1;
 
 export const update = async (req, res) => {
+  const imagesArray = [];
+
+  for (const field in req.files) {
+    if (req.files.hasOwnProperty(field)) {
+      const file = req.files[field];
+      imagesArray.push({
+        name: field,
+        url: file.path,
+      });
+    }
+  }
+
+  req.fields.images = imagesArray;
+
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(",");
+
+    const amenities = id_amenities.map((item) => new ObjectId(item));
+    req.fields.id_amenities = amenities;
+  }
+
   try {
-    validateMiddleware(req, res, RoomValidate, async () => {
-      const data = await RoomModel.findByIdAndUpdate(req.params.id, req.body, {
+    validateFormMiddleware(req, res, RoomValidate, async () => {
+      const newImages = await Promise.all(
+        req.fields.images.map(uploadImageToCloudinary)
+      );
+
+      const images = newImages.map((imageUrl, index) => ({
+        url: imageUrl,
+      }));
+
+      const newData = {
+        ...req.fields,
+        images,
+      };
+
+      const data = await RoomModel.findByIdAndUpdate(req.params.id, newData, {
         new: true,
       });
 
