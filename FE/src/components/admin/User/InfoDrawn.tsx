@@ -37,7 +37,12 @@ const InfoDrawn = ({ info, isOpen, loading, onClosed }: InfoDrawnProps) => {
     {
       key: "2",
       label: "Giới tính",
-      children: info?.id_information.sex === 0 ? "Nam" : "Nữ",
+      children:
+        info?.id_information.sex === 0
+          ? "Nam"
+          : info?.id_information.sex === 1
+          ? "Nữ"
+          : "",
       span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
     },
     {
@@ -61,7 +66,9 @@ const InfoDrawn = ({ info, isOpen, loading, onClosed }: InfoDrawnProps) => {
     {
       key: "6",
       label: "Ngày sinh",
-      children: moment(info?.id_information.birthday).format("MM/DD/YYYY"),
+      children:
+        info?.id_information.birthday &&
+        moment(info?.id_information.birthday).format("DD/MM/YYYY"),
       span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
     },
     {
