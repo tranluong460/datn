@@ -8,9 +8,7 @@ import { ObjectId } from "mongodb";
 
 export const getAll = async (req, res) => {
   try {
-    const hotelList = await HotelModel.find()
-      .populate("id_amenities")
-      .populate("id_review");
+    const hotelList = await HotelModel.find();
 
     if (!hotelList || hotelList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách khách sạn");
@@ -78,7 +76,7 @@ export const create = async (req, res) => {
         req.fields.images.map(uploadImageToCloudinary)
       );
 
-      const images = newImages.map((imageUrl, index) => ({
+      const images = newImages.map((imageUrl) => ({
         url: imageUrl,
       }));
 

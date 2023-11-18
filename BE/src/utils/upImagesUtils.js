@@ -8,12 +8,10 @@ cloudinary.config({
 
 export const uploadImageToCloudinary = async (image) => {
   try {
-    if (typeof image === "object" && image.url) {
-      const result = await cloudinary.uploader.upload(image.url);
-      return result.secure_url;
-    } else {
-      throw new Error("Invalid image object or path.");
-    }
+    const uploadOptions = { folder: "datn" };
+
+    const result = await cloudinary.uploader.upload(image.url, uploadOptions);
+    return result.secure_url;
   } catch (error) {
     console.error("Error uploading image to Cloudinary", error);
     throw error;

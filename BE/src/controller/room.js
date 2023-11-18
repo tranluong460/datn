@@ -8,10 +8,7 @@ import { ObjectId } from "mongodb";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find()
-      .populate("id_amenities")
-      .populate("id_hotel")
-      .populate("id_roomType");
+    const roomList = await RoomModel.find();
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
