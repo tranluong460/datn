@@ -5,7 +5,7 @@ import {
   InfoHotel,
   RoomList,
 } from "../../../components";
-import { useGetHotelDetailByIdQuery } from "../../../api/hotelDetail";
+import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string }>();

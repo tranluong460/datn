@@ -1,11 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import customFetchBase from "./customFetchBase";
 
 export const hotelApi = createApi({
   reducerPath: "hotel",
   tagTypes: ["Hotel"],
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/",
-  }),
+  baseQuery: customFetchBase,
   endpoints: (builder) => ({
     getHotelDetailById: builder.query({
       query: (id) => `/hotel/${id}`,

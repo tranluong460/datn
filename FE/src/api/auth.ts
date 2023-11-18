@@ -39,6 +39,22 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+    getAll: builder.query({
+      query: () => ({
+        url: "auth/",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Auth"],
+    }),
+    lockAccount: builder.mutation({
+      query: (id) => ({
+        url: `auth/lock-account/${id}`,
+        method: "POST",
+        credentials: "include",
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
@@ -47,4 +63,6 @@ export const {
   useRegisterMutation,
   useUserQuery,
   useLogoutMutation,
+  useGetAllQuery,
+  useLockAccountMutation,
 } = authApi;

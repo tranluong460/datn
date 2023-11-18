@@ -21,7 +21,7 @@ const Top = () => {
             <h1 className="md:text-[3.2rem] text-[2rem] font-semibold mt-[1rem] mb-[2rem] text-textLight dark:text-textDark">
               Tạo dấu ấn trong kỳ nghỉ của bạn với
               <br className="block sm:hidden" />
-              <span className="text-orange-500"> King Hotel</span>
+              <span className="text-orange-500"> Seven Teen</span>
             </h1>
 
             <p className="text-[1.1rem] leading-[2rem] text-textLight2nd dark:text-textDark2nd">
