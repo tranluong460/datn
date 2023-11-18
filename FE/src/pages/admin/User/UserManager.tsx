@@ -1,7 +1,14 @@
-import type { ColumnsType } from "antd/es/table";
-import { Button, Table, Tag, Popconfirm, message } from "antd";
+import { useState } from "react";
 
-import { useGetAllQuery, useLockAccountMutation } from "../../../api/user";
+import type { ColumnsType } from "antd/es/table";
+import { Button, Table, Tag, Popconfirm, message, Tooltip } from "antd";
+
+import {
+  useGetAllQuery,
+  useGetInfoUserMutation,
+  useLockAccountMutation,
+} from "../../../api/user";
+import { InfoDrawn } from "../../../components";
 
 interface DataType {
   _id: string;
@@ -15,13 +22,18 @@ interface DataType {
 const UserManager = () => {
   const { data, isSuccess } = useGetAllQuery("");
   const [lockAccount] = useLockAccountMutation();
+  const [infoUser] = useGetInfoUserMutation();
 
+  const key0 = "lockAccountMutation";
+  const key1 = "getInfoMutation";
   const [messageApi, contextHolder] = message.useMessage();
-  const key = "lockAccountMutation";
+
+  const [open, setOpen] = useState(false);
+  const [info, setInfo] = useState();
 
   const onSubmit = (id: string) => {
     messageApi.open({
-      key,
+      key: key0,
       type: "loading",
       content: "Loading...",
     });
@@ -30,7 +42,7 @@ const UserManager = () => {
       .unwrap()
       .then((response) => {
         messageApi.open({
-          key,
+          key: key0,
           type: "success",
           content: response.message,
           duration: 2,
@@ -38,7 +50,7 @@ const UserManager = () => {
       })
       .catch((error) => {
         messageApi.open({
-          key,
+          key: key0,
           type: "error",
           content: error.data.message,
           duration: 2,
@@ -46,11 +58,50 @@ const UserManager = () => {
       });
   };
 
+  const getInfo = (id: string) => {
+    messageApi.open({
+      key: key1,
+      type: "loading",
+      content: "Đang lấy thông tin người dùng...",
+    });
+
+    infoUser(id)
+      .unwrap()
+      .then((response) => {
+        setOpen(true);
+        setInfo(response.data);
+
+        messageApi.open({
+          key: key1,
+          type: "success",
+          content: response.message,
+          duration: 0.1,
+        });
+      })
+      .catch((error) => {
+        messageApi.open({
+          key: key1,
+          type: "error",
+          content: error.data.message,
+          duration: 2,
+        });
+      });
+  };
+
+  const onClosed = () => {
+    setOpen(false);
+  };
+
   const columns: ColumnsType<DataType> = [
     {
       title: "ID",
       dataIndex: "_id",
       key: "_id",
+      render: (_id) => (
+        <Tooltip placement="right" title="Click để xem thông tin chi tiết">
+          <button onClick={() => getInfo(_id)}>{_id}</button>
+        </Tooltip>
+      ),
     },
     {
       title: "Tài khoản",
@@ -76,7 +127,13 @@ const UserManager = () => {
       render: (_, { _id, isLockAccount, role }) => (
         <>
           {role === "Admin" ? (
-            <p className="text-red-500">Administrator</p>
+            <Tooltip
+              placement="left"
+              color="red"
+              title="Không thể thực hiện hành động trên tài khoản này"
+            >
+              <p className="text-red-500 cursor-pointer">Administrator</p>
+            </Tooltip>
           ) : (
             <>
               {isLockAccount ? (
@@ -113,6 +170,8 @@ const UserManager = () => {
         dataSource={data?.data}
         loading={!isSuccess}
       />
+
+      <InfoDrawn info={info} isOpen={open} onClosed={onClosed} />
     </>
   );
 };

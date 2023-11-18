@@ -41,19 +41,15 @@ export const getInfoUserById = async (req, res) => {
   const idUser = req.params.id;
 
   try {
-    const user = await UserModel.findById(idUser);
+    const user = await UserModel.findById(idUser)
+      .select("-password")
+      .populate("id_information");
 
     if (!user || user.length === 0) {
       return sendResponse(res, 404, "Không tìm thấy người dùng");
     }
 
-    const infoUser = await InformationModel.findById(user.id_information);
-
-    if (!infoUser || infoUser.length === 0) {
-      return sendResponse(res, 404, "Không có thông tin người dùng");
-    }
-
-    return sendResponse(res, 200, "Thông tin người dùng", infoUser);
+    return sendResponse(res, 200, "Thông tin người dùng", user);
   } catch (error) {
     console.error(error);
 
