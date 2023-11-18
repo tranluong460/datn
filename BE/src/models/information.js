@@ -6,6 +6,10 @@ const informationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    sex: {
+      type: Number,
+      required: false,
+    },
     image: {
       type: String,
       required: false,

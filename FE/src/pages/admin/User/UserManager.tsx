@@ -22,7 +22,7 @@ interface DataType {
 const UserManager = () => {
   const { data, isSuccess } = useGetAllQuery("");
   const [lockAccount] = useLockAccountMutation();
-  const [infoUser] = useGetInfoUserMutation();
+  const [infoUser, resultGetInfo] = useGetInfoUserMutation();
 
   const key0 = "lockAccountMutation";
   const key1 = "getInfoMutation";
@@ -59,24 +59,12 @@ const UserManager = () => {
   };
 
   const getInfo = (id: string) => {
-    messageApi.open({
-      key: key1,
-      type: "loading",
-      content: "Đang lấy thông tin người dùng...",
-    });
+    setOpen(true);
 
     infoUser(id)
       .unwrap()
       .then((response) => {
-        setOpen(true);
         setInfo(response.data);
-
-        messageApi.open({
-          key: key1,
-          type: "success",
-          content: response.message,
-          duration: 0.1,
-        });
       })
       .catch((error) => {
         messageApi.open({
@@ -171,7 +159,12 @@ const UserManager = () => {
         loading={!isSuccess}
       />
 
-      <InfoDrawn info={info} isOpen={open} onClosed={onClosed} />
+      <InfoDrawn
+        info={info}
+        isOpen={open}
+        onClosed={onClosed}
+        loading={resultGetInfo.isLoading}
+      />
     </>
   );
 };
