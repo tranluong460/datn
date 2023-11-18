@@ -1,4 +1,5 @@
 // Admin
+import InfoDrawn from "./admin/User/InfoDrawn";
 
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
@@ -39,6 +40,9 @@ import Container from "./Container";
 import Input from "./Input";
 
 export {
+  // Admin
+  InfoDrawn,
+
   // Auth
   InfoUser,
   Sidebar,

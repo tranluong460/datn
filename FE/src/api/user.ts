@@ -22,7 +22,19 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    getInfoUser: builder.mutation({
+      query: (id) => ({
+        url: `auth/info-user/${id}`,
+        method: "POST",
+        credentials: "include",
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const { useGetAllQuery, useLockAccountMutation } = userApi;
+export const {
+  useGetAllQuery,
+  useLockAccountMutation,
+  useGetInfoUserMutation,
+} = userApi;

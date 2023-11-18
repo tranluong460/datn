@@ -18,6 +18,10 @@ const informationSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    birthday: {
+      type: Date,
+      required: false,
+    },
   },
   { timestamps: true, versionKey: false }
 );

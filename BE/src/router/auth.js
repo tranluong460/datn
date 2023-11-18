@@ -16,7 +16,7 @@ import { isAdminMiddleware, loginMiddleware } from "../middleware";
 const router = express.Router();
 
 router.get("/", isAdminMiddleware, getAll);
-router.get("/info-user/:id", isAdminMiddleware, getInfoUserById);
+router.post("/info-user/:id", isAdminMiddleware, getInfoUserById);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/lock-account/:id", isAdminMiddleware, lockAccount);
