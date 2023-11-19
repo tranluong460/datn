@@ -6,10 +6,18 @@ const amenitiesSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
-      default: 0,
-    },
+    features: [
+      {
+        name: {
+          type: String,
+          required: false,
+        },
+        surcharge: {
+          type: Boolean,
+          required: false,
+        },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
