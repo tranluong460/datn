@@ -12,7 +12,7 @@ const amenitiesValidate = joi.object({
         name: joi.string().required().messages(validationErrors("Tên")),
         surcharge: joi
           .boolean()
-          .required()
+          .optional()
           .messages(validationErrors("Phụ phí")),
       })
     )

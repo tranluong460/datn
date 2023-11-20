@@ -7,7 +7,7 @@ export const hotelApi = createApi({
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
     getHotelDetailById: builder.query({
-      query: (id) => `/hotel/${id}`,
+      query: (id: string) => `/hotel/${id}`,
       providesTags: ["Hotel"],
     }),
   }),
