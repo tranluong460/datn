@@ -1,4 +1,6 @@
 // Admin
+import CreateAmenitiesModal from "./admin/Amenities/CreateAmenitiesModal";
+import EditAmenitiesModal from "./admin/Amenities/EditAmenitiesModal";
 import InfoDrawn from "./admin/User/InfoDrawn";
 
 // Auth
@@ -41,6 +43,8 @@ import Input from "./Input";
 
 export {
   // Admin
+  CreateAmenitiesModal,
+  EditAmenitiesModal,
   InfoDrawn,
 
   // Auth

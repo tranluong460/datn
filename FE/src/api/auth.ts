@@ -48,7 +48,7 @@ export const authApi = createApi({
       providesTags: ["Auth"],
     }),
     lockAccount: builder.mutation({
-      query: (id) => ({
+      query: (id: string) => ({
         url: `auth/lock-account/${id}`,
         method: "POST",
         credentials: "include",

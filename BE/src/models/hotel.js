@@ -8,6 +8,7 @@ const hotelSchema = new mongoose.Schema(
     },
     images: [
       {
+        _id: false,
         url: {
           type: String,
           required: true,
@@ -35,7 +36,10 @@ const hotelSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
+    city: {
+      type: String,
+      required: true,
+    },
     id_amenities: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -43,10 +47,6 @@ const hotelSchema = new mongoose.Schema(
         required: true,
       },
     ],
-    city: {
-      type: String,
-      required: true,
-    },
     id_review: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -14,6 +14,7 @@ import {
 
 import { TbBrandBooking } from "react-icons/tb";
 import { LiaHotelSolid } from "react-icons/lia";
+import { PiLightbulbFilament } from "react-icons/pi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import {
@@ -54,6 +55,7 @@ const BaseAdmin = () => {
     getItem("Đặt Phòng", "/admin/booking-manager", <TbBrandBooking />),
     getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />),
     getItem("Loại phòng", "/admin/roomType-manager", <AiOutlineHdd />),
+    getItem("Tiện ích", "/admin/amenities-manager", <PiLightbulbFilament />),
     getItem("Người dùng", "/admin/user-manager", <AiOutlineUser />),
   ];
 

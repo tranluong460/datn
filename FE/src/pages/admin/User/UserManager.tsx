@@ -20,6 +20,8 @@ interface DataType {
 }
 
 const UserManager = () => {
+  const [currentItem, setCurrentItem] = useState(5);
+
   const { data, isSuccess } = useGetAllQuery("");
   const [lockAccount] = useLockAccountMutation();
   const [infoUser, resultGetInfo] = useGetInfoUserMutation();
@@ -148,6 +150,17 @@ const UserManager = () => {
     },
   ];
 
+  const paginationConfig = {
+    pageSize: currentItem,
+    showSizeChanger: true,
+    pageSizeOptions: ["5", "10", "20", "50"],
+    onShowSizeChange: (_current: number, size: number) => {
+      setCurrentItem(size);
+    },
+
+    showTotal: (total: number, range: number[]) =>
+      `${range[0]}-${range[1]} của ${total} mục`,
+  };
   return (
     <>
       {contextHolder}
@@ -157,6 +170,7 @@ const UserManager = () => {
         columns={columns}
         dataSource={data?.data}
         loading={!isSuccess}
+        pagination={paginationConfig}
       />
 
       <InfoDrawn

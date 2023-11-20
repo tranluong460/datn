@@ -8,12 +8,14 @@ const amenitiesSchema = new mongoose.Schema(
     },
     features: [
       {
+        _id: false,
         name: {
           type: String,
           required: false,
         },
         surcharge: {
           type: Boolean,
+          default: false,
           required: false,
         },
       },

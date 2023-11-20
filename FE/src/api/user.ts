@@ -15,7 +15,7 @@ export const userApi = createApi({
       providesTags: ["User"],
     }),
     lockAccount: builder.mutation({
-      query: (id) => ({
+      query: (id: string) => ({
         url: `auth/lock-account/${id}`,
         method: "POST",
         credentials: "include",
@@ -23,7 +23,7 @@ export const userApi = createApi({
       invalidatesTags: ["User"],
     }),
     getInfoUser: builder.mutation({
-      query: (id) => ({
+      query: (id: string) => ({
         url: `auth/info-user/${id}`,
         method: "POST",
         credentials: "include",
