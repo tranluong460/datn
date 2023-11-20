@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Popconfirm, Space, Table, message } from "antd";
+import { Button, Popconfirm, Popover, Space, Table, Tag, message } from "antd";
 
 import {
   useDeleteAmenitiesMutation,
@@ -75,13 +75,28 @@ const AmenitiesManager = () => {
       title: "Tên tiện ích",
       dataIndex: "name",
       key: "name",
-    },
-    {
-      title: "Chi tiết",
-      dataIndex: "features",
-      key: "features",
-      render: (features) => (
-        <Button onClick={() => console.log(features)}>features</Button>
+      render: (name, { features }) => (
+        <Popover
+          className="cursor-pointer"
+          placement="rightTop"
+          title="Features"
+          content={() => (
+            <Space direction="vertical" size={"middle"}>
+              {features.map(
+                (item: { name: string; surcharge: boolean }, index) => (
+                  <Space key={item.name} direction="horizontal">
+                    <div>
+                      {index + 1}. {item.name}
+                    </div>
+                    {item.surcharge && <Tag>Phụ phí</Tag>}
+                  </Space>
+                )
+              )}
+            </Space>
+          )}
+        >
+          {name}
+        </Popover>
       ),
     },
     {
