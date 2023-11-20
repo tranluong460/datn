@@ -8,7 +8,7 @@ import {
 import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
 
 const HotelDetailPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string | undefined }>();
   const { data } = useGetHotelDetailByIdQuery(id);
 
   return (
