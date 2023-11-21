@@ -8,6 +8,7 @@ const hotelSchema = new mongoose.Schema(
     },
     images: [
       {
+        _id: false,
         url: {
           type: String,
           required: true,
@@ -24,6 +25,7 @@ const hotelSchema = new mongoose.Schema(
     },
     status: {
       type: String,
+      default: "Có sẵn",
       enum: ["Có sẵn", "Đã đóng cửa", "Đang sửa", "Hết chỗ", "Ngừng hoạt động"],
     },
     email: {
@@ -42,6 +44,7 @@ const hotelSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Amenities",
+        required: true,
       },
     ],
     id_review: [

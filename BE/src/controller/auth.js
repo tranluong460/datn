@@ -17,6 +17,50 @@ import {
 
 dotenv.config();
 
+export const getAll = async (req, res) => {
+  try {
+    const userList = await UserModel.find().select("-password");
+
+    if (!userList || userList.length === 0) {
+      return sendResponse(res, 404, "Không có danh sách người dùng");
+    }
+
+    return sendResponse(res, 200, "Danh sách người dùng", userList);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách người dùng"
+    );
+  }
+};
+
+export const getInfoUserById = async (req, res) => {
+  const idUser = req.params.id;
+
+  try {
+    const user = await UserModel.findById(idUser)
+      .select("-password")
+      .populate("id_information");
+
+    if (!user || user.length === 0) {
+      return sendResponse(res, 404, "Không tìm thấy người dùng");
+    }
+
+    return sendResponse(res, 200, "Thông tin người dùng", user);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy thông tin người dùng"
+    );
+  }
+};
+
 export const register = async (req, res) => {
   const { email, password } = req.body;
 

@@ -1,4 +1,9 @@
 // Admin
+import CreateAmenitiesModal from "./admin/Amenities/CreateAmenitiesModal";
+import EditAmenitiesModal from "./admin/Amenities/EditAmenitiesModal";
+import CreateRoomTypeModal from "./admin/RoomType/CreateRoomTypeModal";
+import EditRoomTypeModal from "./admin/RoomType/EditRoomTypeModal";
+import InfoDrawn from "./admin/User/InfoDrawn";
 
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
@@ -39,6 +44,13 @@ import Container from "./Container";
 import Input from "./Input";
 
 export {
+  // Admin
+  CreateAmenitiesModal,
+  EditAmenitiesModal,
+  CreateRoomTypeModal,
+  EditRoomTypeModal,
+  InfoDrawn,
+
   // Auth
   InfoUser,
   Sidebar,
