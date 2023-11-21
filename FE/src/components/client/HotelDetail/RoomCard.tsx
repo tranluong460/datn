@@ -1,6 +1,12 @@
 import { Button } from "../..";
+import { useGetOneRoomTypeQuery } from "../../../api/roomType";
 
-const RoomCard = () => {
+const RoomCard = (getRoom: any) => {
+  console.log("🚀 ~ file: RoomCard.tsx:8 ~ RoomCard ~ data:", getRoom);
+  const { data: RoomTypeName } = useGetOneRoomTypeQuery(
+    getRoom.getRoom.id_roomType || ""
+  );
+
   return (
     <>
       <div className="h-auto transition duration-300 rounded-md bg-light dark:bg-dark">
@@ -13,14 +19,14 @@ const RoomCard = () => {
         </div>
 
         <div className="flex-1 p-5 text-textLight2nd dark:text-textDark2nd">
-          <h5 className="font-semibold text-lg">Phòng Deluxe King</h5>
+          <h5 className="font-semibold text-lg"> {RoomTypeName?.data?.name}</h5>
 
           <div className="flex flex-row justify-between items-center">
             <div className="mt-3">
               <span className="mr-1 text-xs">Chỉ từ</span>
 
               <span className="text-md text-yellow-500 font-bold capitalize">
-                1,300,500 VNĐ
+                {getRoom?.getRoom?.price}
               </span>
 
               <span className="ml-1 text-xs">/đêm</span>
