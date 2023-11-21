@@ -28,7 +28,7 @@ const CreateAmenitiesModal = ({
         onCancel();
       })
       .catch((error) => {
-        message.error(error.data.errors);
+        message.error(error.data.message);
       });
   };
 
