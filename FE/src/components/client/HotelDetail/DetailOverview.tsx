@@ -23,34 +23,6 @@ const DetailOverview = ({ name, description }: hotelDetail) => {
                   {name}
                 </strong>
                 {description}
-                <br />
-              </p>
-              <br />
-              <p className="text-textLight2nd dark:text-textDark2nd">
-                Với tổng cộng 124 phòng tiêu chuẩn quốc tế, khách sạn
-                <strong className="text-textLight dark:text-textDark">
-                  Mường Thanh Grand Sài Gòn Centre
-                </strong>
-                có nhiều loại phòng phù hợp với khách công vụ và cho đoàn khách
-                du lịch. Tất cả các loại phòng được thiết kế trang nhã, tinh tế
-                với chất liệu gần gũi với thiên nhiên. Bên cạnh đó, hệ thống cửa
-                kính an toàn trong phòng sẽ đem lại cho Quý khách những góc nhìn
-                toàn cảnh và đầy màu sắc khi ngắm nhìn thành phố náo nhiệt lúc
-                lên đèn.
-                <br />
-              </p>
-              <br />
-              <p className="text-textLight2nd dark:text-textDark2nd">
-                Phương châm của khách sạn{" "}
-                <strong className="text-textLight dark:text-textDark">
-                  Mường Thanh Grand Sài Gòn Centre
-                </strong>{" "}
-                là mang đến sự ấm áp nồng hậu, và lòng hiếu khách đã được trải
-                dài trong suốt những năm qua trong chuỗi khách sạn Mường Thanh.
-                Kết hợp với những tiện nghi của một khách sạn hiện đại, chúng
-                tôi liên tục phấn đấu để cải thiện chất lượng dịch vụ, vì chúng
-                tôi tin rằng chất lượng dịch vụ sẽ mang đến sự hài lòng cho quý
-                khách.
               </p>
             </div>
           </div>

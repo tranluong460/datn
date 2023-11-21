@@ -6,10 +6,23 @@ import {
   RoomList,
 } from "../../../components";
 import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
+import { useGetOneRoomQuery } from "../../../api/room";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string | undefined }>();
   const { data } = useGetHotelDetailByIdQuery(id);
+  console.log(
+    "🚀 ~ file: HotelDetailPage.tsx:14 ~ HotelDetailPage ~ data:",
+    data
+  );
+
+  const rooms = data?.data?.id_room[1];
+
+  const { data: RoomLists } = useGetOneRoomQuery("655cb658cab441b60737b5dd");
+  console.log(
+    "🚀 ~ file: HotelDetailPage.tsx:20 ~ HotelDetailPage ~ RoomList:",
+    RoomLists
+  );
 
   return (
     <>
