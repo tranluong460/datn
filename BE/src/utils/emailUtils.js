@@ -1,7 +1,12 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
-import { emailOauthRegister, emailRegister } from "../views";
+import {
+  formChangePassword,
+  emailOauthRegister,
+  emailRegister,
+  formPasswordChanged,
+} from "../views";
 
 dotenv.config();
 
@@ -31,5 +36,25 @@ export const sendMailOauthRegister = async (name, email, password) => {
     subject: "Đăng ký tài khoản thành công",
     text: `Chào bạn, ${name}`,
     html: emailOauthRegister(name, password),
+  });
+};
+
+export const sendRestPassword = async (name, email, randomCode) => {
+  await transporter.sendMail({
+    from: "bavuongnganhthuongcung4@gmail.com",
+    to: email,
+    subject: "Thay đổi mật khẩu",
+    text: `Chào bạn, ${name}`,
+    html: formChangePassword(name, randomCode),
+  });
+};
+
+export const sendChangedPassword = async (name, email) => {
+  await transporter.sendMail({
+    from: "bavuongnganhthuongcung4@gmail.com",
+    to: email,
+    subject: "Thay đổi mật khẩu",
+    text: `Chào bạn, ${name}`,
+    html: formPasswordChanged(name),
   });
 };

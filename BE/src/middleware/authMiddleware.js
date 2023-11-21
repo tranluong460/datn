@@ -7,8 +7,6 @@ import { sendResponse } from "../utils";
 dotenv.config();
 
 export const isAdminMiddleware = async (req, res, next) => {
-  // console.log(req?.cookies?.accessToken);
-
   try {
     const accessToken = req?.cookies?.accessToken;
 
