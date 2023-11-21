@@ -25,10 +25,6 @@ const UserMenu = () => {
       .unwrap()
       .then((response) => {
         toast.success(response.message);
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -39,7 +35,7 @@ const UserMenu = () => {
     <>
       <div className="relative z-10">
         <div onClick={onToggle} className="hidden md:block cursor-pointer">
-          <Avatar key={data} imageUser={data?.data.image} />
+          <Avatar key={data?.data.image} imageUser={data?.data.image} />
         </div>
 
         <div onClick={onToggle} className="block md:hidden cursor-pointer">
