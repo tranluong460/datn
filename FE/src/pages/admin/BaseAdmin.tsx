@@ -10,6 +10,7 @@ import {
   Popover,
   Dropdown,
   Breadcrumb,
+  message,
 } from "antd";
 
 import { TbBrandBooking } from "react-icons/tb";
@@ -26,6 +27,7 @@ import {
 } from "react-icons/ai";
 
 import { Logo } from "../../components";
+import { useLogoutMutation, useUserQuery } from "../../api/auth";
 
 const { Header, Content, Footer, Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -34,6 +36,20 @@ const BaseAdmin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  const [logoutUser] = useLogoutMutation();
+  const { data } = useUserQuery("");
+
+  const logoutAccount = () => {
+    logoutUser(null)
+      .unwrap()
+      .then((response) => {
+        message.success(response.message);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getItem = (
     label: React.ReactNode,
@@ -92,7 +108,7 @@ const BaseAdmin = () => {
       label: "Đăng xuất",
       icon: <AiOutlineLogout />,
       danger: true,
-      onClick: () => alert("Đăng xuất"),
+      onClick: logoutAccount,
     },
   ];
 
@@ -150,7 +166,10 @@ const BaseAdmin = () => {
             </Popover>
 
             <Dropdown menu={{ items }} className="cursor-pointer">
-              <Avatar size="large" src={<img src="/user.jpg" alt="avatar" />} />
+              <Avatar
+                size="large"
+                src={<img src={data?.data?.image} alt="avatar" />}
+              />
             </Dropdown>
           </Header>
 
