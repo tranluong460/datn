@@ -19,6 +19,7 @@ export const getAllBooking = async (req, res) => {
         }
       })
     if (data) {
+      return sendResponse(res, 200, 'Lấy dữ liệu thành công', data);
 
     }
   } catch (error) {

@@ -25,8 +25,7 @@
     "mongoose": "^7.3.1",
     "multer": "1.4.5-lts.1",
     "nodemailer": "^6.9.4",
-    "qs": "^6.11.2",
-    "stripe": "^14.4.0"
+    "qs": "^6.11.2"
   },
   "devDependencies": {
     "aws-sdk": "^2.1419.0",
