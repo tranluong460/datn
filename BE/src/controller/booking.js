@@ -19,7 +19,14 @@ export const getAllBooking = async (req, res) => {
         }
       })
     if (data) {
-      return sendResponse(res, 200, 'Lấy dữ liệu thành công', data);
+
+      const newData = data.map((item) => {
+        item.id_user.password = undefined;
+        item.id_user.role = undefined;
+        return item
+      })
+
+      return sendResponse(res, 200, 'Lấy dữ liệu thành công', newData);
 
     }
   } catch (error) {
