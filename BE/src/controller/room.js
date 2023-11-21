@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import { RoomModel } from "../models";
+import { RoomModel, HotelModel } from "../models";
 import { sendResponse } from "../utils";
 import { RoomValidate } from "../validate";
 import { uploadImageToCloudinary } from "../utils";
@@ -83,6 +83,12 @@ export const create = async (req, res) => {
       if (!data) {
         return sendResponse(res, 404, "Thêm phòng thất bại");
       }
+
+      await HotelModel.findByIdAndUpdate(
+        req.fields.id_hotel,
+        { $push: { id_room: data._id } },
+        { new: true }
+      );
 
       return sendResponse(res, 200, "Thêm phòng thành công", data);
     });

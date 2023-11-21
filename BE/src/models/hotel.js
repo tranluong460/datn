@@ -47,6 +47,12 @@ const hotelSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    id_room: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Room",
+      },
+    ],
     id_review: [
       {
         type: mongoose.Schema.Types.ObjectId,
