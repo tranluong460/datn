@@ -41,7 +41,7 @@ const roomSchema = new mongoose.Schema(
     },
     id_roomType: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "roomType",
+      ref: "RoomType",
     },
   },
   { timestamps: true, versionKey: false }
