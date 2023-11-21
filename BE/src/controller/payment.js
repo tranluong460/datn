@@ -2,35 +2,13 @@ import { sendResponse } from "../utils";
 import { PaymentModel } from "../models";
 import { PaymentValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
-import stripe from 'stripe';
-import dotenv from "dotenv";
-dotenv.config()
-// Khởi tạo đối tượng Stripe với khóa API của bạn
-const stripeClient = stripe(process.env.SECRET_KEY);
+
+
+
 export const create = async (req, res) => {
   try {
     validateMiddleware(req, res, PaymentValidate, async () => {
-      const { amount, cardToken, description } = req.body;
-      // Tạo thanh toán sử dụng Stripe
-      const paymentIntent = await stripeClient.paymentIntents.create({
-        amount,
-        currency: 'vnd', // Đổi thành đơn vị tiền tệ mong muốn
-        payment_method: cardToken,
-        description,
-      });
-
-      // Nếu thanh toán thành công, lưu thông tin thanh toán vào MongoDB
-      const payment = await PaymentModel.create({
-        amount,
-        cardLast4: paymentIntent.payment_method_details.card.last4,
-        transactionId: paymentIntent.id,
-        description,
-        ...req.body
-      });
-      if (!payment) {
-        return sendResponse(res, 404, 'Thanh toán không thành công')
-      }
-      return sendResponse(res, 200, 'Thanh toán thành công', payment)
+      return 123
 
     })
   } catch (error) {
