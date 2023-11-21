@@ -46,3 +46,50 @@ export const emailOauthRegister = (name, password) => {
     </div>
   `;
 };
+
+export const formChangePassword = (name, randomCode) => {
+  return /*html*/ `
+    <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
+        <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
+          Xin chào, ${name}!
+        </div>
+        <div style="font-size: 16px; color: #555555; line-height: 1.6;">
+          <p>Chúng tôi nhận được yêu cầu thay đổi mật khẩu cho tài khoản của bạn.</p>
+          <p>Mã xác nhận của bạn là: <strong>${randomCode}</strong></p>
+          <p>Vui lòng sử dụng mã này để thay đổi mật khẩu của bạn theo bước tiếp theo trên trang web của chúng tôi.</p>
+          <p>Đây là một mã xác nhận duy nhất và chỉ có hiệu lực trong một khoảng thời gian ngắn.</p>
+          <p>Nếu bạn không thực hiện yêu cầu này, vui lòng liên hệ chúng tôi ngay lập tức qua địa chỉ email
+            <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
+            hoặc số điện thoại 1800-203-203.
+          </p>
+          <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
+          <p>Trân trọng,</p>
+          <p>King Hotel</p>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
+export const formPasswordChanged = (name) => {
+  return /*html*/ `
+    <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
+        <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
+          Xin chào, ${name}!
+        </div>
+        <div style="font-size: 16px; color: #555555; line-height: 1.6;">
+          <p>Mật khẩu của bạn đã được thay đổi thành công.</p>
+          <p>Nếu bạn không thực hiện thay đổi này, vui lòng liên hệ chúng tôi ngay lập tức qua địa chỉ email
+            <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
+            hoặc số điện thoại 1800-203-203.
+          </p>
+          <p>Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi!</p>
+          <p>Trân trọng,</p>
+          <p>King Hotel</p>
+        </div>
+      </div>
+    </div>
+  `;
+};
