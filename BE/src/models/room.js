@@ -2,14 +2,6 @@ import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema(
   {
-    room_number: {
-      type: Number,
-      required: true,
-    },
-    room_floor: {
-      type: Number,
-      required: true,
-    },
     images: [
       {
         _id: false,
@@ -19,7 +11,7 @@ const roomSchema = new mongoose.Schema(
         },
       },
     ],
-    capacity: {
+    quantity: {
       type: Number,
       required: true,
     },
@@ -31,7 +23,7 @@ const roomSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "Có sẵn",
-      enum: ["Có sẵn", "Đã đặt", "Đang sử dụng", "Bảo trì", "Đang dọn dẹp"],
+      enum: ["Có sẵn", "Đã hết phòng"],
     },
     description: {
       type: String,
@@ -49,7 +41,7 @@ const roomSchema = new mongoose.Schema(
     },
     id_roomType: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "roomType",
+      ref: "RoomType",
     },
   },
   { timestamps: true, versionKey: false }

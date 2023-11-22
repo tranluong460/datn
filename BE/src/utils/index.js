@@ -1,5 +1,10 @@
 import { loginToken } from "./authUtils";
-import { sendMailRegister, sendMailOauthRegister } from "./emailUtils";
+import {
+  sendMailRegister,
+  sendMailOauthRegister,
+  sendRestPassword,
+  sendChangedPassword,
+} from "./emailUtils";
 import { generateRandomCode } from "./generateRandomUtils";
 import { getGoogleOauthToken, getGoogleUser } from "./oauthUtils";
 import { sendResponse } from "./responseUtils";
@@ -10,6 +15,8 @@ export {
   loginToken,
   sendMailRegister,
   sendMailOauthRegister,
+  sendRestPassword,
+  sendChangedPassword,
   generateRandomCode,
   getGoogleOauthToken,
   getGoogleUser,

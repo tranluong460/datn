@@ -3,8 +3,6 @@ import joi from "joi";
 import { validationErrors } from "../utils";
 
 const roomValidate = joi.object({
-  room_number: joi.number().required().messages(validationErrors("Số phòng")),
-  room_floor: joi.number().required().messages(validationErrors("Tầng")),
   images: joi
     .array()
     .min(1)
@@ -16,11 +14,11 @@ const roomValidate = joi.object({
       })
     )
     .messages(validationErrors("Ảnh")),
-  capacity: joi
+  quantity: joi
     .number()
     .min(1)
     .required()
-    .messages(validationErrors("Sức chứa")),
+    .messages(validationErrors("Số lượng")),
   price: joi.number().min(0).required().messages(validationErrors("Giá phòng")),
   status: joi
     .string()
