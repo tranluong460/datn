@@ -6,10 +6,15 @@ import {
   RoomList,
 } from "../../../components";
 import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
+import { Loading } from "../..";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string | undefined }>();
-  const { data } = useGetHotelDetailByIdQuery(id);
+  const { data, isLoading } = useGetHotelDetailByIdQuery(id);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -36,7 +41,7 @@ const HotelDetailPage = () => {
               Các loại phòng
             </h2>
 
-            <RoomList />
+            <RoomList listRoom={data?.data?.id_room} />
           </div>
         </Container>
       </div>
