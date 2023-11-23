@@ -16,9 +16,7 @@ import {
   generateRandomCode,
   sendRestPassword,
   sendChangedPassword,
-  FormEmail,
-  FormRestPassword,
-  sendMail
+  sendForgotPassword,
 } from "../utils";
 
 dotenv.config();
@@ -424,9 +422,10 @@ export const changePassword = async (req, res) => {
   }
 };
 
-//TODO quên mật khẩu
+// Quên mật khẩu
 export const getSecurityCode = async (req, res) => {
-  const { email } = req.body
+  const { email } = req.body;
+
   const user = await UserModel.findOne({ email }).populate("id_information");
   if (!user) {
     return res.status(404).json({
@@ -437,80 +436,87 @@ export const getSecurityCode = async (req, res) => {
   let randomCode = generateRandomCode(6);
   let randomString = uuidv4();
 
-  const token = jwt.sign(
-    { email: email, randomCode: randomCode, randomString: randomString },
+  const resetToken = jwt.sign(
+    { email, randomCode, randomString },
     process.env.SECRET_KEY,
     { expiresIn: "3m" }
   );
 
-  const resetPasswordUrl = `${process.env.APP_URL}/user/forget-password/${randomString}`;
-  sendMail(user.name, user.email, randomCode, resetPasswordUrl);
+  res.cookie("resetToken", resetToken, { httpOnly: true });
 
-  return res.status(200).json({
-    message: "Gửi mã thành công",
-    accessCode: token,
-  });
+  const resetPasswordUrl = `${process.env.PUBLIC_URL}/forgot-password/${randomString}`;
+
+  sendForgotPassword(
+    user.id_information.name,
+    user.email,
+    randomCode,
+    resetPasswordUrl
+  );
+
+  return sendResponse(res, 200, "Gửi mã thành công");
 };
 
 export const resetPassword = async (req, res) => {
   const { password, randomString, randomCode } = req.body;
-  try {
-    const token = req.headers.authorization.split(" ")[1];
 
-    const decoded = jwt.verify(token, process.env.SECRET_KEY,);
+  try {
+    const resetToken = req?.cookies?.resetToken;
+    const decoded = jwt.verify(resetToken, process.env.SECRET_KEY);
 
     const user = await UserModel.findOne({ email: decoded.email });
 
     if (!user) {
-      return res.status(404).json({
-        message: "User không tồn tại",
-      });
+      return sendResponse(res, 404, "Người dùng không tồn tại");
     }
 
     if (
       randomString !== decoded.randomString ||
       randomCode !== decoded.randomCode
     ) {
-      return res.status(400).json({
-        message: "Mã bảo mật không chính xác!",
-      });
+      return sendResponse(res, 400, "Mã bảo mật không chính xác");
     }
 
-    if (password.length < 6) {
-      return res.status(400).json({
-        message: "Mật khẩu phải có độ dài từ 6 ký tự trở lên",
-      });
+    if (password.length < 12) {
+      return sendResponse(
+        res,
+        400,
+        "Mật khẩu phải có độ dài từ 12 ký tự trở lên"
+      );
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
-      return res.status(400).json({
-        message: "Không được giống mật khẩu cũ",
-      });
+      return sendResponse(res, 400, "Không được giống mật khẩu cũ");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const userNew = await UserModel.findOneAndUpdate(
       { email: decoded.email },
       { password: hashedPassword },
       { new: true }
-    );
+    ).populate("id_information");
 
-    return res.status(200).json({
-      message: "Đổi mật khẩu thành công",
-    });
-  } catch (err) {
-    console.error(err);
+    res.cookie("changeCode", "", { maxAge: 1 });
+    sendChangedPassword(userNew?.id_information.name, userNew.email);
 
-    if (err.name === "TokenExpiredError") {
+    return sendResponse(res, 200, "Đổi mật khẩu thành công");
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
       return res.status(401).json({
         message: "Token đã hết hạn!",
       });
+    } else if (error instanceof jwt.NotBeforeError) {
+      return res.status(401).json({
+        message: "Token chưa có hiệu lực!",
+      });
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({
+        message: "Token không hợp lệ!",
+      });
     }
 
-    return res.status(500).json({
-      message: "Đã có lỗi xảy ra khi đổi mật khẩu",
-    });
+    console.error(error);
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };

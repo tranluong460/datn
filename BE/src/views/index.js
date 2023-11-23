@@ -3,6 +3,7 @@ import {
   emailOauthRegister,
   formChangePassword,
   formPasswordChanged,
+  formResetPassword,
 } from "./formEmail";
 
 export {
@@ -10,4 +11,5 @@ export {
   emailOauthRegister,
   formChangePassword,
   formPasswordChanged,
+  formResetPassword,
 };
