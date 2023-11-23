@@ -1,11 +1,27 @@
 import { Button } from "../..";
 import { useGetOneRoomTypeQuery } from "../../../api/roomType";
 
-const RoomCard = (getRoom: any) => {
-  console.log("🚀 ~ file: RoomCard.tsx:8 ~ RoomCard ~ data:", getRoom);
-  const { data: RoomTypeName } = useGetOneRoomTypeQuery(
-    getRoom.getRoom.id_roomType || ""
-  );
+interface RoomType {
+  _id: string;
+  images: {
+    url: string;
+  }[];
+  quantity: number;
+  price: number;
+  status: string;
+  description: string;
+  id_amenities: string[];
+  id_hotel: string;
+  id_roomType: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+type RoomCardProps = {
+  room: RoomType;
+};
+const RoomCard = ({ room }: RoomCardProps) => {
+  const { data } = useGetOneRoomTypeQuery(room?.id_roomType);
 
   return (
     <>
@@ -19,14 +35,14 @@ const RoomCard = (getRoom: any) => {
         </div>
 
         <div className="flex-1 p-5 text-textLight2nd dark:text-textDark2nd">
-          <h5 className="font-semibold text-lg"> {RoomTypeName?.data?.name}</h5>
+          <h5 className="font-semibold text-lg"> {data?.data?.name} </h5>
 
           <div className="flex flex-row justify-between items-center">
             <div className="mt-3">
               <span className="mr-1 text-xs">Chỉ từ</span>
 
               <span className="text-md text-yellow-500 font-bold capitalize">
-                {getRoom?.getRoom?.price}
+                {room?.price}
               </span>
 
               <span className="ml-1 text-xs">/đêm</span>

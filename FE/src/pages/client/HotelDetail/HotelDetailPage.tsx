@@ -1,4 +1,3 @@
-import { Alert, Spin } from "antd";
 import { useParams } from "react-router-dom";
 import {
   Container,
@@ -7,39 +6,14 @@ import {
   RoomList,
 } from "../../../components";
 import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
-import { useEffect, useState } from "react";
+import { Loading } from "../..";
 
 const HotelDetailPage = () => {
-  const [loading, setLoading] = useState(true);
-
   const { id } = useParams<{ id: string | undefined }>();
-  const { data } = useGetHotelDetailByIdQuery(id);
-  console.log(
-    "🚀 ~ file: HotelDetailPage.tsx:13 ~ HotelDetailPage ~ data:",
-    data
-  );
-  const list = data?.data?.id_room.map((room: any) => {
-    return room;
-  });
+  const { data, isLoading } = useGetHotelDetailByIdQuery(id);
 
-  useEffect(() => {
-    if (data) {
-      setLoading(false);
-    }
-  }, [data]);
-
-  if (loading) {
-    return (
-      <div className="h-[685px] flex text-center justify-center mt-[50px]">
-        <Spin tip="Loading..." className="h-screen">
-          <Alert
-            message="Đang load khách sạn"
-            description="Nếu đợi quá lâu mà không loading xong có thể khách sạn không tồn tại !"
-            type="info"
-          />
-        </Spin>
-      </div>
-    );
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
@@ -67,7 +41,7 @@ const HotelDetailPage = () => {
               Các loại phòng
             </h2>
 
-            <RoomList getRoom={list} />
+            <RoomList listRoom={data?.data?.id_room} />
           </div>
         </Container>
       </div>
