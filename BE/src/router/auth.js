@@ -13,6 +13,8 @@ import {
   getCode,
   checkCode,
   changePassword,
+  getSecurityCode,
+  resetPassword
 } from "../controller/auth";
 import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
@@ -30,5 +32,7 @@ router.post("/logout", logout);
 router.post("/send-code", getCode);
 router.post("/check-code", checkCode);
 router.post("/change-password", changePassword);
+router.post("/forgot-password", getSecurityCode);
+router.post("/reset-password", resetPassword);
 
 export default router;

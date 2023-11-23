@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
 
 import { validateMiddleware } from "../middleware";
 import { InformationModel, UserModel } from "../models";
@@ -15,6 +16,9 @@ import {
   generateRandomCode,
   sendRestPassword,
   sendChangedPassword,
+  FormEmail,
+  FormRestPassword,
+  sendMail
 } from "../utils";
 
 dotenv.config();
@@ -417,5 +421,96 @@ export const changePassword = async (req, res) => {
 
     console.error(error);
     return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+//TODO quên mật khẩu
+export const getSecurityCode = async (req, res) => {
+  const { email } = req.body
+  const user = await UserModel.findOne({ email }).populate("id_information");
+  if (!user) {
+    return res.status(404).json({
+      message: "Email không tồn tại",
+    });
+  }
+
+  let randomCode = generateRandomCode(6);
+  let randomString = uuidv4();
+
+  const token = jwt.sign(
+    { email: email, randomCode: randomCode, randomString: randomString },
+    process.env.SECRET_KEY,
+    { expiresIn: "3m" }
+  );
+
+  const resetPasswordUrl = `${process.env.APP_URL}/user/forget-password/${randomString}`;
+  sendMail(user.name, user.email, randomCode, resetPasswordUrl);
+
+  return res.status(200).json({
+    message: "Gửi mã thành công",
+    accessCode: token,
+  });
+};
+
+export const resetPassword = async (req, res) => {
+  const { password, randomString, randomCode } = req.body;
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+
+    const decoded = jwt.verify(token, process.env.SECRET_KEY,);
+
+    const user = await UserModel.findOne({ email: decoded.email });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User không tồn tại",
+      });
+    }
+
+    if (
+      randomString !== decoded.randomString ||
+      randomCode !== decoded.randomCode
+    ) {
+      return res.status(400).json({
+        message: "Mã bảo mật không chính xác!",
+      });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({
+        message: "Mật khẩu phải có độ dài từ 6 ký tự trở lên",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      return res.status(400).json({
+        message: "Không được giống mật khẩu cũ",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const userNew = await UserModel.findOneAndUpdate(
+      { email: decoded.email },
+      { password: hashedPassword },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      message: "Đổi mật khẩu thành công",
+    });
+  } catch (err) {
+    console.error(err);
+
+    if (err.name === "TokenExpiredError") {
+      return res.status(401).json({
+        message: "Token đã hết hạn!",
+      });
+    }
+
+    return res.status(500).json({
+      message: "Đã có lỗi xảy ra khi đổi mật khẩu",
+    });
   }
 };

@@ -4,6 +4,9 @@ import {
   sendMailOauthRegister,
   sendRestPassword,
   sendChangedPassword,
+  FormRestPassword,
+  FormEmail,
+  sendMail
 } from "./emailUtils";
 import { generateRandomCode } from "./generateRandomUtils";
 import { getGoogleOauthToken, getGoogleUser } from "./oauthUtils";
@@ -23,4 +26,7 @@ export {
   sendResponse,
   uploadImageToCloudinary,
   validationErrors,
+  FormRestPassword,
+  FormEmail,
+  sendMail
 };
