@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from "uuid";
 
 import { validateMiddleware } from "../middleware";
 import { InformationModel, UserModel } from "../models";
@@ -15,6 +16,7 @@ import {
   generateRandomCode,
   sendRestPassword,
   sendChangedPassword,
+  sendForgotPassword,
 } from "../utils";
 
 dotenv.config();
@@ -395,6 +397,105 @@ export const changePassword = async (req, res) => {
     if (!userNew) {
       return sendResponse(res, 404, "Đổi mật khẩu thất bại");
     }
+
+    res.cookie("changeCode", "", { maxAge: 1 });
+    sendChangedPassword(userNew?.id_information.name, userNew.email);
+
+    return sendResponse(res, 200, "Đổi mật khẩu thành công");
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({
+        message: "Token đã hết hạn!",
+      });
+    } else if (error instanceof jwt.NotBeforeError) {
+      return res.status(401).json({
+        message: "Token chưa có hiệu lực!",
+      });
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({
+        message: "Token không hợp lệ!",
+      });
+    }
+
+    console.error(error);
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+// Quên mật khẩu
+export const getSecurityCode = async (req, res) => {
+  const { email } = req.body;
+
+  const user = await UserModel.findOne({ email }).populate("id_information");
+  if (!user) {
+    return res.status(404).json({
+      message: "Email không tồn tại",
+    });
+  }
+
+  let randomCode = generateRandomCode(6);
+  let randomString = uuidv4();
+
+  const resetToken = jwt.sign(
+    { email, randomCode, randomString },
+    process.env.SECRET_KEY,
+    { expiresIn: "3m" }
+  );
+
+  res.cookie("resetToken", resetToken, { httpOnly: true });
+
+  const resetPasswordUrl = `${process.env.PUBLIC_URL}/forgot-password/${randomString}`;
+
+  sendForgotPassword(
+    user.id_information.name,
+    user.email,
+    randomCode,
+    resetPasswordUrl
+  );
+
+  return sendResponse(res, 200, "Gửi mã thành công");
+};
+
+export const resetPassword = async (req, res) => {
+  const { password, randomString, randomCode } = req.body;
+
+  try {
+    const resetToken = req?.cookies?.resetToken;
+    const decoded = jwt.verify(resetToken, process.env.SECRET_KEY);
+
+    const user = await UserModel.findOne({ email: decoded.email });
+
+    if (!user) {
+      return sendResponse(res, 404, "Người dùng không tồn tại");
+    }
+
+    if (
+      randomString !== decoded.randomString ||
+      randomCode !== decoded.randomCode
+    ) {
+      return sendResponse(res, 400, "Mã bảo mật không chính xác");
+    }
+
+    if (password.length < 12) {
+      return sendResponse(
+        res,
+        400,
+        "Mật khẩu phải có độ dài từ 12 ký tự trở lên"
+      );
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
+      return sendResponse(res, 400, "Không được giống mật khẩu cũ");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const userNew = await UserModel.findOneAndUpdate(
+      { email: decoded.email },
+      { password: hashedPassword },
+      { new: true }
+    ).populate("id_information");
 
     res.cookie("changeCode", "", { maxAge: 1 });
     sendChangedPassword(userNew?.id_information.name, userNew.email);

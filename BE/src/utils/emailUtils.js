@@ -7,7 +7,7 @@ import {
   emailOauthRegister,
   emailRegister,
   formPasswordChanged,
-
+  formResetPassword,
 } from "../views";
 import { emailBooking, emailBookingError } from "../views/formEmail";
 const transporter = nodemailer.createTransport({
@@ -76,5 +76,20 @@ export const sendChangedPassword = async (name, email) => {
     subject: "Thay đổi mật khẩu",
     text: `Chào bạn, ${name}`,
     html: formPasswordChanged(name),
+  });
+};
+
+export const sendForgotPassword = async (
+  name,
+  email,
+  randomCode,
+  resetPasswordUrl
+) => {
+  await transporter.sendMail({
+    from: "bavuongnganhthuongcung4@gmail.com",
+    to: email,
+    subject: "Quên mật khẩu",
+    text: `Chào bạn, ${name}`,
+    html: formResetPassword(name, email, randomCode, resetPasswordUrl),
   });
 };

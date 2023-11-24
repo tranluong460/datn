@@ -4,6 +4,7 @@ import {
   sendMailOauthRegister,
   sendRestPassword,
   sendChangedPassword,
+  sendForgotPassword,
 } from "./emailUtils";
 import { emailBooking, emailBookingError } from "../views/formEmail";
 import { generateRandomCode } from "./generateRandomUtils";
@@ -25,5 +26,6 @@ export {
   uploadImageToCloudinary,
   validationErrors,
   emailBooking,
-  emailBookingError
+  emailBookingError,
+  sendForgotPassword,
 };
