@@ -6,7 +6,9 @@ import {
   sendChangedPassword,
   sendForgotPassword,
 } from "./emailUtils";
+
 import { emailBooking, emailBookingError } from "../views/formEmail";
+
 import { generateRandomCode } from "./generateRandomUtils";
 import { getGoogleOauthToken, getGoogleUser } from "./oauthUtils";
 import { sendResponse } from "./responseUtils";
@@ -19,13 +21,14 @@ export {
   sendMailOauthRegister,
   sendRestPassword,
   sendChangedPassword,
+  sendForgotPassword,
   generateRandomCode,
   getGoogleOauthToken,
   getGoogleUser,
   sendResponse,
   uploadImageToCloudinary,
   validationErrors,
+  //
   emailBooking,
   emailBookingError,
-  sendForgotPassword,
 };
