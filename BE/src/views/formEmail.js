@@ -47,42 +47,12 @@ export const emailOauthRegister = (name, password) => {
   `;
 };
 
-
-
-export const emailBooking = (name, room, check_in, check_out, phone, address) => {
-  return /*html */ `
-<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
+export const formChangePassword = (name, randomCode) => {
+  return /*html*/ `
+    <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
       <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
         <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
-          Chào mừng ${name} đến với chúng tôi!
-        </div>
-        <div style="font-size: 16px; color: #555555; line-height: 1.6;">
-          <p>Xin chân thành cảm ơn ${name} đã lựa chọn chúng tôi.</p>
-          <p>Thông tin đặt phòng của bạn đã được tạo thành công trên trang web của chúng tôi.</p>
-          <p>Tên của bạn là: <strong>${name}</strong></p>
-          <p>Số điện thoại: <strong>${phone}</strong></p>
-          <p>Địa chỉ: <strong>${address}</strong></p>
-          <p>Số phòng: <strong>${room}</strong></p>
-          <p>Thời gian checkIn: <strong>${check_in}</strong></p>
-          <p>Thời gian checkOut: <strong>${check_out}</strong></p>
-          <p>Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ, đừng ngần ngại liên hệ với chúng tôi qua địa chỉ email
-          <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
-          hoặc số điện thoại 1800-203-203.
-          </p>
-          <p>Chúng tôi rất mong được phục vụ bạn trong thời gian tới.</p>
-          </div>
-          </div>
-        </div>
-`
-}
-
-export const formChangePassword = (name, randomCode) => {
-
-  return /*html*/ `
-  <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
-  <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
-    <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
-          Xin chào, ${name}!
+            Xin chào, ${name}!
         </div>
         <div style="font-size: 16px; color: #555555; line-height: 1.6;">
           <p>Chúng tôi nhận được yêu cầu thay đổi mật khẩu cho tài khoản của bạn.</p>
@@ -91,7 +61,7 @@ export const formChangePassword = (name, randomCode) => {
           <p>Đây là một mã xác nhận duy nhất và chỉ có hiệu lực trong một khoảng thời gian ngắn.</p>
           <p>Nếu bạn không thực hiện yêu cầu này, vui lòng liên hệ chúng tôi ngay lập tức qua địa chỉ email
             <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
-            hoặc số điện thoại 1800-203-203.
+              hoặc số điện thoại 1800-203-203.
           </p>
           <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
           <p>Trân trọng,</p>
@@ -102,35 +72,7 @@ export const formChangePassword = (name, randomCode) => {
   `;
 };
 
-
-export const emailBookingError = (name, room, check_in, check_out, phone, address) => {
-  return /*html*/ `
-  <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
-    <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
-      <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
-        Chào mừng ${name} đến với chúng tôi!
-      </div>
-      <div style="font-size: 16px; color: #555555; line-height: 1.6;">
-        <p>Xin chân thành cảm ơn ${name} đã lựa chọn chúng tôi.</p>
-        <p>Thông tin đặt phòng của bạn đã được hủy thành công trên trang web của chúng tôi.</p>
-        <p>Tên của bạn là: <strong>${name}</strong></p>
-        <p>Số điện thoại: <strong>${phone}</strong></p>
-        <p>Địa chỉ: <strong>${address}</strong></p>
-        <p>Số phòng: <strong>${room}</strong></p>
-        <p>Thời gian checkIn: <strong>${check_in}</strong></p>
-        <p>Thời gian checkOut: <strong>${check_out}</strong></p>
-        <p>Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ, đừng ngần ngại liên hệ với chúng tôi qua địa chỉ email
-        <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
-        hoặc số điện thoại 1800-203-203.
-        </p>
-        <p>Chúng tôi rất mong được phục vụ bạn trong thời gian tới.</p>
-        </div>
-        </div>
-        </div>`
-}
-
 export const formPasswordChanged = (name) => {
-
   return /*html*/ `
     <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
       <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
@@ -184,4 +126,71 @@ export const formResetPassword = (
       </div>
     </div>
   `;
+};
+
+export const emailBooking = (
+  name,
+  room,
+  check_in,
+  check_out,
+  phone,
+  address
+) => {
+  return /*html */ `
+<div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
+      <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
+        <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
+          Chào mừng ${name} đến với chúng tôi!
+        </div>
+        <div style="font-size: 16px; color: #555555; line-height: 1.6;">
+          <p>Xin chân thành cảm ơn ${name} đã lựa chọn chúng tôi.</p>
+          <p>Thông tin đặt phòng của bạn đã được tạo thành công trên trang web của chúng tôi.</p>
+          <p>Tên của bạn là: <strong>${name}</strong></p>
+          <p>Số điện thoại: <strong>${phone}</strong></p>
+          <p>Địa chỉ: <strong>${address}</strong></p>
+          <p>Số phòng: <strong>${room}</strong></p>
+          <p>Thời gian checkIn: <strong>${check_in}</strong></p>
+          <p>Thời gian checkOut: <strong>${check_out}</strong></p>
+          <p>Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ, đừng ngần ngại liên hệ với chúng tôi qua địa chỉ email
+          <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
+          hoặc số điện thoại 1800-203-203.
+          </p>
+          <p>Chúng tôi rất mong được phục vụ bạn trong thời gian tới.</p>
+          </div>
+          </div>
+        </div>
+  `;
+};
+
+export const emailBookingError = (
+  name,
+  room,
+  check_in,
+  check_out,
+  phone,
+  address
+) => {
+  return /*html*/ `
+  <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
+      <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
+        Chào mừng ${name} đến với chúng tôi!
+      </div>
+      <div style="font-size: 16px; color: #555555; line-height: 1.6;">
+        <p>Xin chân thành cảm ơn ${name} đã lựa chọn chúng tôi.</p>
+        <p>Thông tin đặt phòng của bạn đã được hủy thành công trên trang web của chúng tôi.</p>
+        <p>Tên của bạn là: <strong>${name}</strong></p>
+        <p>Số điện thoại: <strong>${phone}</strong></p>
+        <p>Địa chỉ: <strong>${address}</strong></p>
+        <p>Số phòng: <strong>${room}</strong></p>
+        <p>Thời gian checkIn: <strong>${check_in}</strong></p>
+        <p>Thời gian checkOut: <strong>${check_out}</strong></p>
+        <p>Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ, đừng ngần ngại liên hệ với chúng tôi qua địa chỉ email
+        <a href="mailto:support@kinghotel.com" style="color: #007bff;  text-decoration: none;" >support@kinghotel.com</a>
+        hoặc số điện thoại 1800-203-203.
+        </p>
+        <p>Chúng tôi rất mong được phục vụ bạn trong thời gian tới.</p>
+        </div>
+        </div>
+        </div>`;
 };

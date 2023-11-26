@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
+dotenv.config();
 
 import {
   formChangePassword,
@@ -9,7 +10,9 @@ import {
   formPasswordChanged,
   formResetPassword,
 } from "../views";
+
 import { emailBooking, emailBookingError } from "../views/formEmail";
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -39,26 +42,6 @@ export const sendMailOauthRegister = async (name, email, password) => {
   });
 };
 
-
-export const sendMailBook = async (name, email, room, check_in, check_out, phone, address) => {
-  await transporter.sendMail({
-    from: process.env.MAIL,
-    to: email,
-    subject: "Đặt phòng thành công",
-    text: `Chào bạn, ${name}`,
-    html: emailBooking(name, room, check_in, check_out, phone, address),
-  });
-};
-
-export const sendMailBookError = async (name, email, room, check_in, check_out, phone, address) => {
-  await transporter.sendMail({
-    from: process.env.MAIL,
-    to: email,
-    subject: "Hủy đặt phòng thành công",
-    text: `Chào bạn, ${name}`,
-    html: emailBookingError(name, room, check_in, check_out, phone, address),
-  })
-}
 export const sendRestPassword = async (name, email, randomCode) => {
   await transporter.sendMail({
     from: "bavuongnganhthuongcung4@gmail.com",
@@ -91,5 +74,41 @@ export const sendForgotPassword = async (
     subject: "Quên mật khẩu",
     text: `Chào bạn, ${name}`,
     html: formResetPassword(name, email, randomCode, resetPasswordUrl),
+  });
+};
+
+export const sendMailBook = async (
+  name,
+  email,
+  room,
+  check_in,
+  check_out,
+  phone,
+  address
+) => {
+  await transporter.sendMail({
+    from: process.env.MAIL,
+    to: email,
+    subject: "Đặt phòng thành công",
+    text: `Chào bạn, ${name}`,
+    html: emailBooking(name, room, check_in, check_out, phone, address),
+  });
+};
+
+export const sendMailBookError = async (
+  name,
+  email,
+  room,
+  check_in,
+  check_out,
+  phone,
+  address
+) => {
+  await transporter.sendMail({
+    from: process.env.MAIL,
+    to: email,
+    subject: "Hủy đặt phòng thành công",
+    text: `Chào bạn, ${name}`,
+    html: emailBookingError(name, room, check_in, check_out, phone, address),
   });
 };

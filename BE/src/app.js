@@ -34,7 +34,6 @@ app.use("/review", ReviewRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
 
-
 mongoose.connect(process.env.DB_URL);
 
 export const viteNodeApp = app;
