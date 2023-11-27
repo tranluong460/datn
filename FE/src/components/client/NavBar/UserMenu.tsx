@@ -50,7 +50,7 @@ const UserMenu = () => {
                   label="Thông tin cá nhân"
                   onClick={() => navigate("/auth")}
                 />
-                {data?.data?.role === "Admin" && (
+                {data?.data.role === "Admin" && (
                   <MenuItem label="Admin" onClick={() => navigate("/admin")} />
                 )}
 
