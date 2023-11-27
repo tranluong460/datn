@@ -1,104 +1,74 @@
 import { sendResponse } from "../utils";
 import { PaymentModel } from "../models";
-import { PaymentValidate } from "../validate";
-import { validateMiddleware } from "../middleware";
-import axios from "axios";
-import crypto from 'crypto';
-import config from 'config';
-import qs from 'qs';
-import dateFormat from 'dateformat';
+import crypto from "crypto";
+import moment from "moment";
+import querystring from "qs";
 
-
-/**
- * 
- * Hàm createPaymentUrl trong đoạn mã của bạn có nhiệm vụ tạo URL thanh toán 
- * và chuyển hướng người dùng đến cổng thanh toán VNPAY để thực hiện thanh toán
- */
-export const createPaymentUrl = (req, res) => {
-  try {
-    // Kiểm tra thông tin đầu vào
-    const amount = parseFloat(req.body.amount);
-    if (isNaN(amount) || amount <= 0) {
-      return res.status(400).json({ error: 'Số tiền không hợp lệ' });
+function sortObject(obj) {
+  let sorted = {};
+  let str = [];
+  let key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      str.push(encodeURIComponent(key));
     }
-
-    const bankCode = req.body.bankCode || '';
-    const orderInfo = req.body.orderDescription || '';
-    const orderType = req.body.orderType || '';
-    let locale = req.body.language || 'vn';
-
-    // Chuyển đổi giá trị số tiền
-    const vnp_Amount = amount * 100;
-
-    const ipAddr =
-      req.headers['x-forwarded-for'] ||
-      req.connection.remoteAddress ||
-      req.socket.remoteAddress ||
-      req.connection.socket.remoteAddress;
-
-    const tmnCode = 'WMVBW0IU';
-    const secretKey = 'GAFTZWCBLKWZEZTBZCOOQEZHWAVCLNHS';
-    const vnpUrl = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
-    const returnUrl = 'http://localhost:5173/';
-
-    const date = new Date();
-    const createDate = dateFormat(date, 'yyyymmddHHmmss');
-    const orderId = dateFormat(date, 'HHmmss');
-
-    const vnp_Params = {
-      vnp_Version: '2.1.0',
-      vnp_Command: 'pay',
-      vnp_TmnCode: tmnCode,
-      vnp_Locale: locale,
-      vnp_CurrCode: 'VND',
-      vnp_TxnRef: orderId,
-      vnp_OrderInfo: orderInfo,
-      vnp_OrderType: orderType,
-      vnp_Amount: vnp_Amount,
-      vnp_ReturnUrl: returnUrl,
-      vnp_IpAddr: ipAddr,
-      vnp_CreateDate: createDate,
-    };
-
-    // Kiểm tra và thêm các giá trị không bắt buộc
-    if (bankCode) {
-      vnp_Params['vnp_BankCode'] = bankCode;
-    }
-
-    const sortedParams = Object.keys(vnp_Params)
-      .sort()
-      .reduce((acc, key) => {
-        acc[key] = vnp_Params[key];
-        return acc;
-      }, {});
-
-    const signData = Object.keys(sortedParams)
-      .map((key) => `${key}=${sortedParams[key]}`)
-      .join('&');
-
-    // Sửa chữ ký ở đây, sử dụng SHA-512 và khóa bí mật
-    const hmac = crypto.createHmac('sha512', secretKey);
-    const signed = hmac.update(Buffer.from(signData, 'utf-8')).digest('hex');
-    vnp_Params['vnp_SecureHash'] = signed;
-
-    // Kiểm tra tính hợp lệ của chữ ký
-    if (signed == vnp_Params.vnp_SecureHash) {
-
-      // Nếu chữ ký hợp lệ, thực hiện chuyển trang
-      const redirectUrl = `${vnpUrl}?${qs.stringify(vnp_Params, { encode: false })}`;
-      // console.log(redirectUrl);
-      res.redirect(redirectUrl);
-    } else {
-      // Nếu chữ ký không hợp lệ, trả về lỗi
-      res.status(400).json({ error: 'Chữ ký không hợp lệ' });
-    }
-  } catch (error) {
-    console.error('Lỗi tạo URL thanh toán:', error);
-    res.status(500).json({ error: 'Lỗi Nội bộ của Server' });
   }
+  str.sort();
+  for (key = 0; key < str.length; key++) {
+    sorted[str[key]] = encodeURIComponent(obj[str[key]]).replace(/%20/g, "+");
+  }
+  return sorted;
+}
+
+export const createPaymentUrl = (req, res) => {
+  process.env.TZ = "Asia/Ho_Chi_Minh";
+
+  let date = new Date();
+  let createDate = moment(date).format("YYYYMMDDHHmmss");
+
+  let ipAddr =
+    req.headers["x-forwarded-for"] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    req.connection.socket.remoteAddress;
+
+  let tmnCode = "KTNV227U";
+  let secretKey = "NLRZCNSNHGCVECUHGMENJBBMZZOMNJLV";
+  let vnpUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+  let returnUrl = "http://localhost:8888/order/vnpay_return";
+  let orderId = moment(date).format("DDHHmmss");
+  let amount = req.body.amount;
+
+  let locale = req.body.language;
+  if (locale === null || locale === "") {
+    locale = "vn";
+  }
+  let currCode = "VND";
+  let vnp_Params = {};
+  vnp_Params["vnp_Version"] = "2.1.0";
+  vnp_Params["vnp_Command"] = "pay";
+  vnp_Params["vnp_TmnCode"] = tmnCode;
+  vnp_Params["vnp_Locale"] = locale;
+  vnp_Params["vnp_CurrCode"] = currCode;
+  vnp_Params["vnp_TxnRef"] = orderId;
+  vnp_Params["vnp_OrderInfo"] = "Thanh toan cho ma GD:" + orderId;
+  vnp_Params["vnp_OrderType"] = "other";
+  vnp_Params["vnp_Amount"] = amount * 100;
+  vnp_Params["vnp_ReturnUrl"] = returnUrl;
+  vnp_Params["vnp_IpAddr"] = ipAddr;
+  vnp_Params["vnp_CreateDate"] = createDate;
+
+  vnp_Params = sortObject(vnp_Params);
+
+  let signData = querystring.stringify(vnp_Params, { encode: false });
+  let hmac = crypto.createHmac("sha512", secretKey);
+  let signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+  vnp_Params["vnp_SecureHash"] = signed;
+  vnpUrl += "?" + querystring.stringify(vnp_Params, { encode: false });
+
+  console.log(vnpUrl);
+  return sendResponse(res, 200, 'Chuyển sang trang thanh toán', vnpUrl);
 };
-
-
 
 // khi thanh toán thành công hoặc thất bại
 export const vnpayCallback = async (req, res) => {
@@ -114,9 +84,9 @@ export const vnpayCallback = async (req, res) => {
       // Lưu vào MongoDB
       const order = new PaymentModel({
         amount: amount,
-        paymentStatus: 'Thành công', // Hoặc trạng thái tương ứng
+        paymentStatus: "Thành công", // Hoặc trạng thái tương ứng
         // Các trường khác của đơn hàng
-        ...req.body
+        ...req.body,
       });
 
       await order.save();
@@ -131,14 +101,13 @@ export const vnpayCallback = async (req, res) => {
       // await sendEmail(emailOptions);
 
       // Trả về phản hồi cho người dùng
-      sendResponse(res, 200, 'Payment success', order);
+      sendResponse(res, 200, "Payment success", order);
     } else {
       // Xử lý đơn hàng không hợp lệ
-      sendResponse(res, 400, 'Invalid payment');
+      sendResponse(res, 400, "Invalid payment");
     }
   } catch (error) {
-    console.error('Error processing VNPAY callback:', error);
-    sendResponse(res, 500, 'Internal Server Error');
+    console.error("Error processing VNPAY callback:", error);
+    sendResponse(res, 500, "Internal Server Error");
   }
 };
-
