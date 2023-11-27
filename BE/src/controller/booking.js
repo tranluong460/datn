@@ -1,146 +1,125 @@
-import bcrypt from "bcrypt";
-import nodemailer from "nodemailer";
+import moment from "moment";
 
-import { UserModel } from "../models";
-import { InformationModel } from "../models";
 import { BookingModel } from "../models";
 import { BookingValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
-import { sendResponse } from "../utils";
-import { sendMailBook, sendMailBookError } from "../utils/emailUtils";
+import {
+  sendMailBooking,
+  sendMailCancelBooking,
+  sendMailSuccessBooking,
+  sendResponse,
+} from "../utils";
 
-export const getAllBooking = async (req, res) => {
+export const getAll = async (req, res) => {
   try {
-    const data = await BookingModel.find().populate('id_room').populate('id_user')
-      .populate({
-        path: 'id_user',
-        populate: {
-          path: 'id_information'
-        }
-      })
-    if (data) {
+    const bookingList = await BookingModel.find();
 
-      const newData = data.map((item) => {
-        item.id_user.password = undefined;
-        item.id_user.role = undefined;
-        return item
-      })
-
-      return sendResponse(res, 200, 'Lấy dữ liệu thành công', newData);
-
+    if (!bookingList || bookingList.length === 0) {
+      return sendResponse(res, 404, "Không có danh sách đặt phòng");
     }
+
+    return sendResponse(res, 200, "Danh sách đặt phòng", bookingList);
   } catch (error) {
-    console.log(error);
-    return sendResponse(res, 500, 'Lỗi server')
-  }
-}
+    console.error(error);
 
-export const create = async (req, res) => {
-  try {
-    validateMiddleware(req, res, BookingValidate, async () => {
-      const { phone, address } = req.body;
-      const user = await UserModel.findOne({ email: req.user.email })
-
-
-      const info = await InformationModel.findOneAndUpdate(
-        { _id: user.id_information },
-        { $set: { phone: phone, address: address } },
-        { new: true }, // Trả về văn bản đã cập nhật thay vì bản gốc
-
-      );
-      const newBooking = await BookingModel.create({
-        id_user: user._id,
-        ...req.body
-      });
-      await newBooking.populate('id_room')
-      const infoRoom = newBooking.id_room;
-
-      if (!newBooking) {
-        return sendResponse(res, 404, 'Không đặt được phòng');
-      }
-
-      // sendMailBook(info.name, user.email, infoRoom.room_number, newBooking.check_in, newBooking.check_out, info.phone, info.address)
-      return sendResponse(res, 200, 'Đặt phòng thành công', newBooking)
-    });
-
-  } catch (error) {
-    return sendResponse(res, 500, 'Lỗi server')
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách đặt phòng"
+    );
   }
 };
 
-export const updateBooking = async (req, res) => {
+export const create = async (req, res) => {
+  const user = req.user;
+
   try {
-    const booking = await BookingModel.findOne({ _id: req.params.id })
-    // nếu status là đang chờ xử lý thì chuyển đổi sang status khác
-    if (booking.status == 'Đang chờ xử lý') {
-      const newStatus = await BookingModel.findOneAndUpdate(
-        { _id: booking._id },
-        { status: req.body.status },
-        { new: true }
-      )
+    validateMiddleware(req, res, BookingValidate, async () => {
+      const data = await BookingModel.create({
+        id_user: user._id,
+        ...req.body,
+      });
 
-      const updatedBooking = await BookingModel.findById(newStatus._id)
-        .populate('id_room')
-        .populate('id_user')
-        .populate({
-          path: 'id_user',
-          populate: {
-            path: 'id_information'
-          }
-        })
-      updatedBooking.id_user.password = undefined
-      if (newStatus.status == 'Đã hủy bỏ') {
-        sendMailBookError(
-          updatedBooking.id_user.id_information.name,
-          updatedBooking.id_user.email,
-          updatedBooking.id_room.room_number,
-          updatedBooking.check_in,
-          updatedBooking.check_out,
-          updatedBooking.id_user.id_information.phone,
-          updatedBooking.id_user.id_information.address
-        )
-
-        return sendResponse(res, 200, 'Hủy đặt phòng thành công', updatedBooking)
+      if (!data) {
+        return sendResponse(res, 404, "Đặt phòng thất bại");
       }
-      if (newStatus.status == 'Đã xác nhận') {
-        sendMailBook(
-          updatedBooking.id_user.id_information.name,
-          updatedBooking.id_user.email,
-          updatedBooking.id_room.room_number,
-          updatedBooking.check_in,
-          updatedBooking.check_out,
-          updatedBooking.id_user.id_information.phone,
-          updatedBooking.id_user.id_information.address
-        )
-        return sendResponse(res, 200, 'Cập nhật trạng thái thành công', updatedBooking)
 
-      }
-      return sendResponse(res, 200, 'Cập nhật trạng thái thành công', updatedBooking)
+      const check_in = moment(data.check_in).format("DD/MM/YYYY");
+      const check_out = moment(data.check_out).format("DD/MM/YYYY");
+      const room_quantity = data.list_room.length;
 
-    } else if (booking.status == 'Hoàn thành' || booking.status == 'Đã hủy bỏ' || booking.status == 'Vắng mặt') {
-      return sendResponse(res, 404, 'Không được cập nhật trạng thái')
+      sendMailBooking(
+        user.email,
+        user.id_information.name,
+        check_in,
+        check_out,
+        room_quantity,
+        data.total_price
+      );
 
-    }
-    const newStatus = await BookingModel.findOneAndUpdate(
-      { _id: booking._id },
-      { status: req.body.status },
-      { new: true }
-    )
-    // Retrieve the updated document using findById and then populate
-    const updatedBooking = await BookingModel.findById(newStatus._id)
-      .populate('id_room')
-      .populate('id_user')
-      .populate({
-        path: 'id_user',
-        populate: {
-          path: 'id_information'
-        }
-      })
-    updatedBooking.id_user.password = undefined
-    return sendResponse(res, 200, 'Cập nhật trạng thái thành công', updatedBooking)
-
+      return sendResponse(res, 200, "Đặt phòng thành công", data);
+    });
   } catch (error) {
-    console.log(error);
-    return sendResponse(res, 500, 'Lỗi server')
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
-}
+};
+
+export const update = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    if (!status) {
+      return sendResponse(res, 404, "Trạng thái không dược để trống");
+    }
+
+    const booking = await BookingModel.findById(id);
+    if (booking.status === "Đã hủy bỏ" || booking.status === "Thành công") {
+      return sendResponse(res, 404, "Không thể cập nhật trạng thái");
+    }
+    const newBooking = await BookingModel.findOneAndUpdate(
+      { _id: id },
+      { status: status },
+      { new: true }
+    ).populate({
+      path: "id_user",
+      populate: {
+        path: "id_information",
+      },
+    });
+
+    if (newBooking.status === "Đã hủy bỏ") {
+      const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
+      const check_out = moment(newBooking.check_out).format("DD/MM/YYYY");
+
+      sendMailCancelBooking(
+        newBooking.id_user.email,
+        newBooking.id_user.id_information.name,
+        check_in,
+        check_out
+      );
+    }
+
+    if (newBooking.status === "Thành công") {
+      sendMailSuccessBooking(
+        newBooking.id_user.email,
+        newBooking.id_user.id_information.name
+      );
+    }
+
+    return sendResponse(
+      res,
+      200,
+      newBooking.status == "Đã hủy bỏ"
+        ? "Hủy đặt phòng thành công"
+        : "Cập nhật trạng thái thành công",
+      newBooking
+    );
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};

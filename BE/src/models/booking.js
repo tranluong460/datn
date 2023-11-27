@@ -4,7 +4,7 @@ const BookingSchema = new mongoose.Schema(
   {
     id_user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
     },
     check_in: {
       type: Date,
@@ -18,26 +18,35 @@ const BookingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    payment_method: {
+      type: String,
+      required: false,
+      enum: ["Zalo Pay", "VN Pay", "MoMo"],
+      default: "VN Pay",
+    },
+    id_payment: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+    },
+    list_room: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Room",
+      },
+    ],
     status: {
       type: String,
       enum: [
-        "Đang chờ xử lý",
-        "Đã xác nhận",
         "Chờ thanh toán",
+        "Đang xử lý",
+        "Đã xác nhận",
         "Đã hủy bỏ",
         "Vắng mặt",
-        "Thanh toán thành công",
-        "Đã hoàn tiền",
         "Đã nhận phòng",
-        "Đã trả phòng"
+        "Thành Công",
       ],
-      default: "Đang chờ xử lý",
+      default: "Chờ thanh toán",
     },
-    id_room: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Room'
-    },
-
   },
   { timestamps: true, versionKey: false }
 );

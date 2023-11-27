@@ -9,9 +9,10 @@ import {
   emailRegister,
   formPasswordChanged,
   formResetPassword,
+  emailBooking,
+  emailCancelBooking,
+  emailSuccessBooking,
 } from "../views";
-
-import { emailBooking, emailBookingError } from "../views/formEmail";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -56,7 +57,7 @@ export const sendChangedPassword = async (name, email) => {
   await transporter.sendMail({
     from: "bavuongnganhthuongcung4@gmail.com",
     to: email,
-    subject: "Thay đổi mật khẩu",
+    subject: "Thay đổi mật khẩu thành công",
     text: `Chào bạn, ${name}`,
     html: formPasswordChanged(name),
   });
@@ -77,38 +78,51 @@ export const sendForgotPassword = async (
   });
 };
 
-export const sendMailBook = async (
-  name,
+export const sendMailBooking = async (
   email,
-  room,
-  check_in,
-  check_out,
-  phone,
-  address
+  name,
+  checkInDate,
+  checkOutDate,
+  roomQuantity,
+  totalPrice
 ) => {
   await transporter.sendMail({
     from: process.env.MAIL,
     to: email,
     subject: "Đặt phòng thành công",
     text: `Chào bạn, ${name}`,
-    html: emailBooking(name, room, check_in, check_out, phone, address),
+    html: emailBooking(
+      name,
+      checkInDate,
+      checkOutDate,
+      roomQuantity,
+      totalPrice
+    ),
   });
 };
 
-export const sendMailBookError = async (
-  name,
+export const sendMailCancelBooking = async (
   email,
-  room,
+  name,
   check_in,
-  check_out,
-  phone,
-  address
+  check_out
 ) => {
   await transporter.sendMail({
     from: process.env.MAIL,
     to: email,
     subject: "Hủy đặt phòng thành công",
     text: `Chào bạn, ${name}`,
-    html: emailBookingError(name, room, check_in, check_out, phone, address),
+    html: emailCancelBooking(name, check_in, check_out),
+  });
+};
+
+export const sendMailSuccessBooking = async (email, name) => {
+  await transporter.sendMail({
+    from: process.env.MAIL,
+    to: email,
+    subject:
+      "Cảm ơn bạn đã chọn chúng tôi - Sự hài lòng của quý khách là niềm tự hào của chúng tôi!",
+    text: `Chào bạn, ${name}`,
+    html: emailSuccessBooking(name),
   });
 };

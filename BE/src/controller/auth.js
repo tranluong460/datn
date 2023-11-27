@@ -23,7 +23,12 @@ dotenv.config();
 
 export const getAll = async (req, res) => {
   try {
-    const userList = await UserModel.find().select("-password");
+    const userList = await UserModel.find()
+      .select("-password -updatedAt")
+      .populate({
+        path: "id_information",
+        select: "-createdAt -updatedAt",
+      });
 
     if (!userList || userList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách người dùng");
@@ -46,8 +51,11 @@ export const getInfoUserById = async (req, res) => {
 
   try {
     const user = await UserModel.findById(idUser)
-      .select("-password")
-      .populate("id_information");
+      .select("-password -updatedAt")
+      .populate({
+        path: "id_information",
+        select: "-createdAt -updatedAt",
+      });
 
     if (!user || user.length === 0) {
       return sendResponse(res, 404, "Không tìm thấy người dùng");
@@ -196,17 +204,7 @@ export const getUserByToken = async (req, res) => {
   try {
     const user = req.user;
 
-    if (!user) {
-      return sendResponse(res, 404, "Không tìm thấy thông tin người dùng");
-    }
-
-    const information = await InformationModel.findById(user.id_information);
-
-    return res.status(200).json({
-      message: "Thông tin người dùng",
-      data: information,
-      role: user.role,
-    });
+    return sendResponse(res, 200, "Thông tin người dùng", user);
   } catch (error) {
     console.error(error);
 
@@ -295,16 +293,20 @@ export const logout = (req, res) => {
 export const getCode = async (req, res) => {
   const { email } = req.body;
 
-  const user = await UserModel.findOne({ email }).populate("id_information");
-  if (!user) {
-    return res.status(404).json({
-      message: "Email không tồn tại",
+  const user = await UserModel.findOne({ email })
+    .select("-password -updatedAt")
+    .populate({
+      path: "id_information",
+      select: "-createdAt -updatedAt",
     });
+
+  if (!user) {
+    return sendResponse(res, 404, "Không tìm thấy email");
   }
 
-  let randomCode = generateRandomCode(6);
+  const randomCode = generateRandomCode(6);
 
-  sendRestPassword(user?.id_information.name, user.email, randomCode);
+  sendRestPassword(user.id_information.name, user.email, randomCode);
 
   const code = jwt.sign(
     { email: user.email, code: randomCode },
@@ -333,17 +335,11 @@ export const checkCode = async (req, res) => {
     return sendResponse(res, 200, "Mã bảo mật chính xác");
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);
@@ -404,17 +400,11 @@ export const changePassword = async (req, res) => {
     return sendResponse(res, 200, "Đổi mật khẩu thành công");
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);
@@ -426,15 +416,21 @@ export const changePassword = async (req, res) => {
 export const getSecurityCode = async (req, res) => {
   const { email } = req.body;
 
-  const user = await UserModel.findOne({ email }).populate("id_information");
+  const user = await UserModel.findOne({ email })
+    .select("-password -updatedAt")
+    .populate({
+      path: "id_information",
+      select: "-createdAt -updatedAt",
+    });
+
   if (!user) {
     return res.status(404).json({
       message: "Email không tồn tại",
     });
   }
 
-  let randomCode = generateRandomCode(6);
-  let randomString = uuidv4();
+  const randomCode = generateRandomCode(6);
+  const randomString = uuidv4();
 
   const resetToken = jwt.sign(
     { email, randomCode, randomString },
@@ -503,17 +499,11 @@ export const resetPassword = async (req, res) => {
     return sendResponse(res, 200, "Đổi mật khẩu thành công");
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);
