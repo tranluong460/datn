@@ -31,7 +31,11 @@ export const getOne = async (req, res) => {
     const hotel = await HotelModel.findById(req.params.id)
       .populate("id_amenities")
       .populate("id_review")
-      .populate("id_room");
+      .populate("id_room")
+      .populate({
+        path: "id_room",
+        populate: "id_roomType",
+      });
 
     if (!hotel || hotel.length === 0) {
       return sendResponse(res, 404, "Không có thông tin khách sạn");

@@ -25,8 +25,14 @@ const hotelSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "Có sẵn",
-      enum: ["Có sẵn", "Đã đóng cửa", "Đang sửa", "Hết chỗ", "Ngừng hoạt động"],
+      default: "Đang hoạt động",
+      enum: [
+        "Đang hoạt động",
+        "Đã đóng cửa",
+        "Đang sửa",
+        "Hết chỗ",
+        "Ngừng hoạt động",
+      ],
     },
     email: {
       type: String,
