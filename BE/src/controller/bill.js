@@ -13,7 +13,7 @@ export const getAll = async (req, res) => {
 
     return sendResponse(res, 200, "Danh sách hóa đơn", billList);
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi lấy danh sách hóa đơn");
   }
@@ -29,7 +29,7 @@ export const getOne = async (req, res) => {
 
     return sendResponse(res, 200, "Thông tin hóa đơn", bill);
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi lấy thông tin hóa đơn");
   }
@@ -47,7 +47,7 @@ export const create = async (req, res) => {
       return sendResponse(res, 200, "Thêm hóa đơn thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm hóa đơn");
   }
@@ -67,7 +67,7 @@ export const update = async (req, res) => {
       return sendResponse(res, 200, "Cập nhật hóa đơn thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật hóa đơn");
   }

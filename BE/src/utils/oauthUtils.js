@@ -24,7 +24,7 @@ export const getGoogleOauthToken = async (code) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     throw new Error(error);
   }
@@ -43,7 +43,7 @@ export const getGoogleUser = async (id_token, access_token) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     throw Error(error);
   }

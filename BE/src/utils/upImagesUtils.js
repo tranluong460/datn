@@ -1,9 +1,12 @@
+import dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 
+dotenv.config();
+
 cloudinary.config({
-  cloud_name: "project-alone",
-  api_key: "733913983795291",
-  api_secret: "1M3Rwo_-yZGdR4wwtlTS7pXr3rw",
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
 export const uploadImageToCloudinary = async (image) => {
@@ -13,7 +16,8 @@ export const uploadImageToCloudinary = async (image) => {
     const result = await cloudinary.uploader.upload(image.url, uploadOptions);
     return result.secure_url;
   } catch (error) {
-    console.error("Error uploading image to Cloudinary", error);
+    console.error(error);
+
     throw error;
   }
 };
