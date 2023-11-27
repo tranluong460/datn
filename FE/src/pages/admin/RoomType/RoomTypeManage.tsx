@@ -25,7 +25,7 @@ const RoomTypeManage = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [idRoomType, setIdRoomType] = useState("");
 
-  const { data, isSuccess } = useGetAllRoomTypeQuery("");
+  const { data, isLoading } = useGetAllRoomTypeQuery("");
   const { data: dataOneRoomType, isFetching } =
     useGetOneRoomTypeQuery(idRoomType);
   const [deleteRoomType] = useDeleteRoomTypeMutation();
@@ -124,8 +124,8 @@ const RoomTypeManage = () => {
         )}
         rowKey="_id"
         columns={columns}
-        dataSource={data?.data}
-        loading={!isSuccess}
+        dataSource={data?.data || []}
+        loading={isLoading}
         pagination={paginationConfig}
       />
 
