@@ -13,7 +13,7 @@ export const PrivateRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
     return <Loading />;
   }
 
-  return (isSuccess || data) && allowedRoles.includes(data?.role) ? (
+  return (isSuccess || data) && allowedRoles.includes(data?.data?.role) ? (
     <Outlet />
   ) : isSuccess && data ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
