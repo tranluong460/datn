@@ -93,7 +93,7 @@ export const create = async (req, res) => {
       return sendResponse(res, 200, "Thêm phòng thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm phòng");
   }
@@ -149,7 +149,7 @@ export const update = async (req, res) => {
       return sendResponse(res, 200, "Cập nhật phòng thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật phòng");
   }

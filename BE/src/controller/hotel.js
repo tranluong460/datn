@@ -31,7 +31,11 @@ export const getOne = async (req, res) => {
     const hotel = await HotelModel.findById(req.params.id)
       .populate("id_amenities")
       .populate("id_review")
-      .populate("id_room");
+      .populate("id_room")
+      .populate({
+        path: "id_room",
+        populate: "id_roomType",
+      });
 
     if (!hotel || hotel.length === 0) {
       return sendResponse(res, 404, "Không có thông tin khách sạn");
@@ -95,7 +99,7 @@ export const create = async (req, res) => {
       return sendResponse(res, 200, "Thêm khách sạn thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm khách sạn");
   }
@@ -151,7 +155,7 @@ export const update = async (req, res) => {
       return sendResponse(res, 200, "Cập nhật khách sạn thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật khách sạn");
   }

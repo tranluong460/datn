@@ -55,7 +55,7 @@ export const create = async (req, res) => {
       return sendResponse(res, 200, "Thêm loại phòng thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm loại phòng");
   }
@@ -79,7 +79,7 @@ export const update = async (req, res) => {
       return sendResponse(res, 200, "Cập nhật loại phòng thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật loại phòng");
   }
@@ -95,7 +95,7 @@ export const remove = async (req, res) => {
 
     return sendResponse(res, 200, "Xóa loại phòng thành công");
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa loại phòng");
   }

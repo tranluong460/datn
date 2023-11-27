@@ -1,4 +1,4 @@
-import { dotenv } from "dotenv";
+import dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
@@ -16,7 +16,8 @@ export const uploadImageToCloudinary = async (image) => {
     const result = await cloudinary.uploader.upload(image.url, uploadOptions);
     return result.secure_url;
   } catch (error) {
-    console.error("Error uploading image to Cloudinary", error);
+    console.error(error);
+
     throw error;
   }
 };

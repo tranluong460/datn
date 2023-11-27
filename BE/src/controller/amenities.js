@@ -55,7 +55,7 @@ export const create = async (req, res) => {
       return sendResponse(res, 200, "Thêm tiện nghi thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi thêm tiện nghi");
   }
@@ -79,7 +79,7 @@ export const update = async (req, res) => {
       return sendResponse(res, 200, "Cập nhật tiện nghi thành công", data);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật tiện nghi");
   }
@@ -95,7 +95,7 @@ export const remove = async (req, res) => {
 
     return sendResponse(res, 200, "Xóa tiện nghi thành công");
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa tiện nghi");
   }

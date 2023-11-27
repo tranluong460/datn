@@ -33,7 +33,7 @@ const AmenitiesManager = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [idAmenities, setIdAmenities] = useState("");
 
-  const { data, isSuccess } = useGetAllAmenitiesQuery("");
+  const { data, isLoading } = useGetAllAmenitiesQuery("");
   const { data: dataOneAmenities, isFetching } =
     useGetAmenitiesByIdQuery(idAmenities);
   const [deleteAmenities] = useDeleteAmenitiesMutation();
@@ -83,7 +83,7 @@ const AmenitiesManager = () => {
           content={() => (
             <Space direction="vertical" size={"middle"}>
               {features.map(
-                (item: { name: string; surcharge: boolean }, index) => (
+                (item: { name: string; surcharge: boolean }, index: number) => (
                   <Space key={item.name} direction="horizontal">
                     <div>
                       {index + 1}. {item.name}
@@ -156,7 +156,7 @@ const AmenitiesManager = () => {
         rowKey="_id"
         columns={columns}
         dataSource={data?.data}
-        loading={!isSuccess}
+        loading={isLoading}
         pagination={paginationConfig}
       />
 

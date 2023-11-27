@@ -168,7 +168,9 @@ const BaseAdmin = () => {
             <Dropdown menu={{ items }} className="cursor-pointer">
               <Avatar
                 size="large"
-                src={<img src={data?.data?.image} alt="avatar" />}
+                src={
+                  <img src={data?.data?.image || "/admin.png"} alt="avatar" />
+                }
               />
             </Dropdown>
           </Header>

@@ -1,6 +1,12 @@
 // Admin
 import CreateAmenitiesModal from "./admin/Amenities/CreateAmenitiesModal";
 import EditAmenitiesModal from "./admin/Amenities/EditAmenitiesModal";
+import CreateHotelModal from "./admin/Hotel/CreateHotelModal";
+import EditHotelModal from "./admin/Hotel/EditHotelModal";
+import HotelDrawn from "./admin/Hotel/HotelDrawn";
+import TwoDrawnAmenities from "./admin/Hotel/TwoDrawnAmenities";
+import TwoDrawnDescription from "./admin/Hotel/TwoDrawnDescription";
+import TwoDrawnRoom from "./admin/Hotel/TwoDrawnRoom";
 import CreateRoomTypeModal from "./admin/RoomType/CreateRoomTypeModal";
 import EditRoomTypeModal from "./admin/RoomType/EditRoomTypeModal";
 import InfoDrawn from "./admin/User/InfoDrawn";
@@ -47,6 +53,12 @@ export {
   // Admin
   CreateAmenitiesModal,
   EditAmenitiesModal,
+  CreateHotelModal,
+  EditHotelModal,
+  HotelDrawn,
+  TwoDrawnAmenities,
+  TwoDrawnDescription,
+  TwoDrawnRoom,
   CreateRoomTypeModal,
   EditRoomTypeModal,
   InfoDrawn,

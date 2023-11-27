@@ -22,7 +22,7 @@ interface DataType {
 const UserManager = () => {
   const [currentItem, setCurrentItem] = useState(5);
 
-  const { data, isSuccess } = useGetAllQuery("");
+  const { data, isLoading } = useGetAllQuery("");
   const [lockAccount] = useLockAccountMutation();
   const [infoUser, resultGetInfo] = useGetInfoUserMutation();
 
@@ -161,24 +161,26 @@ const UserManager = () => {
     showTotal: (total: number, range: number[]) =>
       `${range[0]}-${range[1]} của ${total} mục`,
   };
+
   return (
     <>
       {contextHolder}
-
       <Table
         rowKey="_id"
         columns={columns}
         dataSource={data?.data}
-        loading={!isSuccess}
+        loading={isLoading}
         pagination={paginationConfig}
       />
 
-      <InfoDrawn
-        info={info}
-        isOpen={open}
-        onClosed={onClosed}
-        loading={resultGetInfo.isLoading}
-      />
+      {info && (
+        <InfoDrawn
+          info={info}
+          isOpen={open}
+          onClosed={onClosed}
+          loading={resultGetInfo.isLoading}
+        />
+      )}
     </>
   );
 };
