@@ -124,7 +124,7 @@ const RoomTypeManage = () => {
         )}
         rowKey="_id"
         columns={columns}
-        dataSource={data?.data || []}
+        dataSource={data?.data}
         loading={isLoading}
         pagination={paginationConfig}
       />

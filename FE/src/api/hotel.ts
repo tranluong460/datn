@@ -42,9 +42,11 @@ export const hotelApi = createApi({
     }),
     updateHotel: builder.mutation({
       query: (data) => {
+        const { _id, ...newData } = data;
+
         const formData = new FormData();
 
-        Object.keys(data).forEach((key) => {
+        Object.keys(newData).forEach((key) => {
           if (key === "images" && Array.isArray(data[key])) {
             data[key].forEach((file: any, index: number) => {
               formData.append(`images[${index}]`, file.originFileObj);
@@ -55,7 +57,7 @@ export const hotelApi = createApi({
         });
 
         return {
-          url: `hotel/${data._id}`,
+          url: `hotel/${_id}`,
           method: "PATCH",
           body: formData,
           credentials: "include",
@@ -70,4 +72,5 @@ export const {
   useGetAllHotelQuery,
   useGetHotelDetailByIdQuery,
   useCreateHotelMutation,
+  useUpdateHotelMutation,
 } = hotelApi;

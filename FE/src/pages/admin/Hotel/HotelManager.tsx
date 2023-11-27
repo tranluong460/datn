@@ -105,7 +105,7 @@ const HotelManager = () => {
         )}
         rowKey="_id"
         columns={columns}
-        dataSource={allHotel?.data || []}
+        dataSource={allHotel?.data}
         loading={isLoading}
         pagination={paginationConfig}
       />
