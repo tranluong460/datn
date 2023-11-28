@@ -17,6 +17,7 @@ const EditRoomTypeModal = ({
   onCancel,
 }: EditRoomTypeModalProps) => {
   const [form] = Form.useForm();
+
   const [updateRoomType, resultUpdate] = useUpdateRoomTypeMutation();
 
   const onFinish = (data: IRoomType) => {

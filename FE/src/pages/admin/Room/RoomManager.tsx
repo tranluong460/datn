@@ -115,15 +115,13 @@ const RoomManager = () => {
         onCancel={() => setShowCreateModal(false)}
       />
 
-      {oneRoom?.data._id && (
-        <EditRoomModal
-          key={oneRoom?.data._id}
-          isOpenEdit={showEditModal}
-          data={oneRoom?.data}
-          loading={isFetching}
-          onCancel={() => setShowEditModal(false)}
-        />
-      )}
+      <EditRoomModal
+        key={oneRoom?.data._id}
+        isOpenEdit={showEditModal}
+        data={oneRoom?.data}
+        loading={isFetching}
+        onCancel={() => setShowEditModal(false)}
+      />
     </>
   );
 };

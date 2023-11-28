@@ -78,27 +78,31 @@ const EditRoomModal = ({
 }: EditRoomModalProps) => {
   const [form] = Form.useForm();
   const { Option } = Select;
-  console.log(data);
 
   const { data: allHotel } = useGetAllHotelQuery("");
   const { data: allRoomType } = useGetAllRoomTypeQuery("");
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
   const [editRoom, resultEdit] = useUpdateRoomMutation();
 
-  const transformedAmenities = data.id_amenities.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
+  const transformedAmenities =
+    data &&
+    data.id_amenities &&
+    data.id_amenities.map((item) => ({
+      value: item._id,
+      label: item.name,
+    }));
 
-  const transformedHotel = {
-    value: data.id_hotel._id,
-    label: data.id_hotel.name,
-  };
+  const transformedHotel = data &&
+    data.id_hotel && {
+      value: data.id_hotel._id,
+      label: data.id_hotel.name,
+    };
 
-  const transformedRoomType = {
-    value: data.id_roomType._id,
-    label: data.id_roomType.name,
-  };
+  const transformedRoomType = data &&
+    data.id_roomType && {
+      value: data.id_roomType._id,
+      label: data.id_roomType.name,
+    };
 
   const onFinish = (data: RoomData) => {
     editRoom(data)
