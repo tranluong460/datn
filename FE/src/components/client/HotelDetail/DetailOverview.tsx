@@ -41,7 +41,10 @@ const DetailOverview = ({ description }: DetailOverviewProps) => {
             </h6>
 
             {data.map((item) => (
-              <div className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd">
+              <div
+                key={item.span}
+                className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd"
+              >
                 {item.icon}
                 <span className="ml-2">{item.span}</span>
               </div>

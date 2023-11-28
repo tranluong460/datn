@@ -1,8 +1,12 @@
 import { Container, RoomCard } from "../..";
-import { IRoom } from "../../../interface";
+import { IRoom, IRoomType } from "../../../interface";
+
+interface IShowRoom extends Omit<IRoom, "id_roomType"> {
+  id_roomType: IRoomType;
+}
 
 type RoomListProps = {
-  listRoom: IRoom[];
+  listRoom: IShowRoom[];
 };
 
 const RoomList = ({ listRoom }: RoomListProps) => {
@@ -12,7 +16,7 @@ const RoomList = ({ listRoom }: RoomListProps) => {
         <Container>
           <div className="relative overflow-hidden transform translate-x-0 translate-y-0 translate-z-0">
             <div className="transform translate-x-0 translate-y-0 translate-z-0 transition-all duration-0 ease-in grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {listRoom?.map((room: IRoom) => (
+              {listRoom?.map((room) => (
                 <RoomCard room={room} key={room?._id} />
               ))}
             </div>
