@@ -1,86 +1,104 @@
-import { sendResponse } from "../utils";
-import { PaymentModel } from "../models";
-import { PaymentValidate } from "../validate";
-import { validateMiddleware } from "../middleware";
+import qs from "qs";
+import crypto from "crypto";
+import moment from "moment";
+import dotenv from "dotenv";
 
-export const getAll = async (req, res) => {
+import { BookingModel, PaymentModel } from "../models";
+import { sendResponse, sortObject } from "../utils";
+
+dotenv.config();
+
+export const vnPayPayment = (req, res) => {
   try {
-    const paymentList = await PaymentModel.find();
+    process.env.TZ = "Asia/Ho_Chi_Minh";
 
-    if (!paymentList || paymentList.length === 0) {
-      return sendResponse(res, 404, "Không có danh sách thanh toán");
-    }
+    const date = new Date();
+    const createDate = moment(date).format("YYYYMMDDHHmmss");
 
-    return sendResponse(res, 200, "Danh sách thanh toán", paymentList);
+    const ipAddr =
+      req.headers["x-forwarded-for"] ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress;
+
+    const orderId = req.body.orderId || moment(date).format("DDHHmmss");
+    const amount = req.body.amount;
+    const locale = req.body.language || "vn";
+
+    let vnp_Params = {};
+    vnp_Params["vnp_Version"] = "2.1.0";
+    vnp_Params["vnp_Command"] = "pay";
+    vnp_Params["vnp_TmnCode"] = process.env.VNP_TMNCODE;
+    vnp_Params["vnp_Locale"] = locale;
+    vnp_Params["vnp_CurrCode"] = "VND";
+    vnp_Params["vnp_TxnRef"] = orderId;
+    vnp_Params["vnp_OrderInfo"] = orderId;
+    vnp_Params["vnp_OrderType"] = "other";
+    vnp_Params["vnp_Amount"] = amount * 100;
+    vnp_Params["vnp_ReturnUrl"] = process.env.VNP_RETURNURL;
+    vnp_Params["vnp_IpAddr"] = ipAddr;
+    vnp_Params["vnp_CreateDate"] = createDate;
+    vnp_Params = sortObject(vnp_Params);
+
+    const signData = qs.stringify(vnp_Params, { encode: false });
+    const hmac = crypto.createHmac("sha512", process.env.VNP_HASHSECRET);
+    const signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+
+    vnp_Params["vnp_SecureHash"] = signed;
+
+    const url = `${process.env.VNP_URL}?${qs.stringify(vnp_Params, {
+      encode: false,
+    })}`;
+
+    res.redirect(url);
   } catch (error) {
     console.error(error);
 
-    return sendResponse(
-      res,
-      500,
-      "Đã có lỗi xảy ra khi lấy danh sách thanh toán"
-    );
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };
 
-export const getOne = async (req, res) => {
-  try {
-    const payment = await PaymentModel.findById(req.params.id);
+export const vnPayPaymentReturn = async (req, res) => {
+  let vnp_Params = req.query;
+  const secureHash = vnp_Params["vnp_SecureHash"];
 
-    if (!payment || payment.length === 0) {
-      return sendResponse(res, 404, "Không có thông tin thanh toán");
+  delete vnp_Params["vnp_SecureHash"];
+  delete vnp_Params["vnp_SecureHashType"];
+
+  try {
+    vnp_Params = sortObject(vnp_Params);
+
+    const signData = qs.stringify(vnp_Params, { encode: false });
+    const hmac = crypto.createHmac("sha512", process.env.VNP_HASHSECRET);
+    const signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+
+    if (secureHash !== signed) {
+      res.redirect(`${process.env.PUBLIC_URL}/error-payment-signed`);
     }
 
-    return sendResponse(res, 200, "Thông tin thanh toán", payment);
+    const date = vnp_Params["vnp_PayDate:"];
+
+    const id = vnp_Params["vnp_OrderInfo"];
+    const amount = vnp_Params["vnp_Amount"];
+    const formatDate = moment(date).format("YYYY/MM/DD");
+
+    const data = {
+      id_booking: id,
+      amount,
+      payment_date: formatDate,
+    };
+
+    const payment = await PaymentModel.create(data);
+    await BookingModel.findByIdAndUpdate(
+      { _id: id },
+      { status: "Đang xử lý", id_payment: payment._id },
+      { new: true }
+    );
+
+    res.redirect(`${process.env.PUBLIC_URL}/success-payment`);
   } catch (error) {
     console.error(error);
 
-    return sendResponse(
-      res,
-      500,
-      "Đã có lỗi xảy ra khi lấy thông tin thanh toán"
-    );
-  }
-};
-
-export const create = async (req, res) => {
-  try {
-    validateMiddleware(req, res, PaymentValidate, async () => {
-      const data = await PaymentModel.create(req.body);
-
-      if (!data) {
-        return sendResponse(res, 404, "Thanh toán thất bại");
-      }
-
-      return sendResponse(res, 200, "Thanh toán thành công", data);
-    });
-  } catch (error) {
-    console.log(error);
-
-    return sendResponse(res, 500, "Đã có lỗi xảy ra khi thanh toán");
-  }
-};
-
-export const update = async (req, res) => {
-  try {
-    validateMiddleware(req, res, PaymentValidate, async () => {
-      const data = await PaymentModel.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-        }
-      );
-
-      if (!data) {
-        return sendResponse(res, 404, "Cập nhật thanh toán thất bại");
-      }
-
-      return sendResponse(res, 200, "Cập nhật thanh toán thành công", data);
-    });
-  } catch (error) {
-    console.log(error);
-
-    return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật thanh toán");
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };

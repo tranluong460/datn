@@ -2,25 +2,26 @@ import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema(
   {
-    id_user: {
-      type: String,
-      required: true,
+    id_booking: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Booking",
     },
-    id_service: {
-      type: String,
-      required: true,
-    },
-    total_price: {
+    amount: {
       type: Number,
       required: true,
     },
-    method: {
-      type: String,
+    payment_date: {
+      type: Date,
       required: true,
+    },
+    description: {
+      type: String,
+      required: false,
     },
     status: {
       type: String,
-      required: true,
+      enum: ["Thành công", "Thất bại"],
+      default: "Thành công",
     },
   },
   { versionKey: false, timestamps: true }

@@ -15,7 +15,12 @@ export const isAdminMiddleware = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(accessToken, process.env.SECRET_KEY);
-    const user = await UserModel.findById(decoded.id);
+    const user = await UserModel.findById(decoded.id)
+      .select("-password -isLockAccount -createdAt -updatedAt")
+      .populate({
+        path: "id_information",
+        select: "-createdAt -updatedAt",
+      });
 
     if (!user || user.role !== "Admin") {
       return sendResponse(res, 403, "Bạn không có quyền truy cập");
@@ -52,7 +57,12 @@ export const loginMiddleware = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(accessToken, process.env.SECRET_KEY);
-    const user = await UserModel.findById(decoded.id);
+    const user = await UserModel.findById(decoded.id)
+      .select("-password -isLockAccount -createdAt -updatedAt")
+      .populate({
+        path: "id_information",
+        select: "-createdAt -updatedAt",
+      });
 
     if (!user) {
       return sendResponse(res, 401, "Người dùng không tồn tại");

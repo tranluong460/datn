@@ -1,151 +1,125 @@
-import bcrypt from "bcrypt";
-import nodemailer from "nodemailer";
+import moment from "moment";
 
 import { BookingModel } from "../models";
 import { BookingValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
+import {
+  sendMailBooking,
+  sendMailCancelBooking,
+  sendMailSuccessBooking,
+  sendResponse,
+} from "../utils";
+
+export const getAll = async (req, res) => {
+  try {
+    const bookingList = await BookingModel.find();
+
+    if (!bookingList || bookingList.length === 0) {
+      return sendResponse(res, 404, "Không có danh sách đặt phòng");
+    }
+
+    return sendResponse(res, 200, "Danh sách đặt phòng", bookingList);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách đặt phòng"
+    );
+  }
+};
 
 export const create = async (req, res) => {
+  const user = req.user;
+
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
-      const passport = req.body.passport.toString();
-      const hashedPassport = await bcrypt.hash(passport, 10);
+      const data = await BookingModel.create({
+        id_user: user._id,
+        ...req.body,
+      });
 
-      req.body.passport = hashedPassport;
-
-      const newBooking = await BookingModel.create(req.body);
-      if (!newBooking) {
-        return res.status(404).json({
-          message: "Không thêm được đặt phòng",
-        });
+      if (!data) {
+        return sendResponse(res, 404, "Đặt phòng thất bại");
       }
 
-      // Gửi email thông báo đặt phòng thành công
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "your_gmail_username@gmail.com",
-          pass: "your_gmail_password",
-        },
-      });
+      const check_in = moment(data.check_in).format("DD/MM/YYYY");
+      const check_out = moment(data.check_out).format("DD/MM/YYYY");
+      const room_quantity = data.list_room.length;
 
-      const emailContent = {
-        from: "your_gmail_username@gmail.com",
-        to: req.body.email,
-        subject: "Xác nhận đặt phòng thành công",
-        text: `Chúng tôi xác nhận đặt phòng của bạn từ ${req.body.checkIn} đến ${req.body.checkOut}. Cảm ơn quý khách!`,
-      };
+      sendMailBooking(
+        user.email,
+        user.id_information.name,
+        check_in,
+        check_out,
+        room_quantity,
+        data.total_price
+      );
 
-      transporter.sendMail(emailContent, (error, info) => {
-        if (error) {
-          console.log("Gửi email thất bại:", error);
-        } else {
-          console.log("Email đã được gửi thành công:", info.response);
-        }
-      });
-
-      return res.status(201).json({
-        message: "Thêm đặt phòng thành công",
-        booking: newBooking,
-      });
+      return sendResponse(res, 200, "Đặt phòng thành công", data);
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
-  }
-};
+    console.error(error);
 
-export const getAllProducts = async (req, res) => {
-  try {
-    const allProducts = await BookingModel.find();
-
-    if (allProducts.length === 0) {
-      return res.status(404).json({
-        message: "Hiện tại không có phòng nào",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Lấy danh sách phòng thành công",
-      products: allProducts,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
-  }
-};
-
-export const getProductDetails = async (req, res) => {
-  try {
-    const productId = req.params.id;
-
-    const productDetails = await BookingModel.findById(productId);
-
-    if (!productDetails) {
-      return res.status(404).json({
-        message: "Không tìm thấy phòng bạn cần tìm",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Đã lấy được phòng bạn cần",
-      product: productDetails,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
-  }
-};
-
-export const remove = async (req, res) => {
-  try {
-    const bookingId = req.params.id;
-
-    const deletedBooking = await BookingModel.findByIdAndDelete(bookingId);
-
-    if (!deletedBooking) {
-      return res.status(404).json({
-        message: "Không tìm thấy đặt phòng để xóa",
-      });
-    }
-
-    return res.status(200).json({
-      message: "Xóa đặt phòng thành công",
-      booking: deletedBooking,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };
 
 export const update = async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
   try {
-    const bookingId = req.params.id;
-
-    const updatedBooking = await BookingModel.findByIdAndUpdate(
-      bookingId,
-      req.body,
-      { new: true }
-    );
-
-    if (!updatedBooking) {
-      return res.status(404).json({
-        message: "Không tìm thấy đặt phòng để cập nhật",
-      });
+    if (!status) {
+      return sendResponse(res, 404, "Trạng thái không dược để trống");
     }
 
-    return res.status(200).json({
-      message: "Cập nhật thông tin đặt phòng thành công",
-      booking: updatedBooking,
+    const booking = await BookingModel.findById(id);
+    if (booking.status === "Đã hủy bỏ" || booking.status === "Thành công") {
+      return sendResponse(res, 404, "Không thể cập nhật trạng thái");
+    }
+    const newBooking = await BookingModel.findOneAndUpdate(
+      { _id: id },
+      { status: status },
+      { new: true }
+    ).populate({
+      path: "id_user",
+      populate: {
+        path: "id_information",
+      },
     });
+
+    if (newBooking.status === "Đã hủy bỏ") {
+      const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
+      const check_out = moment(newBooking.check_out).format("DD/MM/YYYY");
+
+      sendMailCancelBooking(
+        newBooking.id_user.email,
+        newBooking.id_user.id_information.name,
+        check_in,
+        check_out
+      );
+    }
+
+    if (newBooking.status === "Thành công") {
+      sendMailSuccessBooking(
+        newBooking.id_user.email,
+        newBooking.id_user.id_information.name
+      );
+    }
+
+    return sendResponse(
+      res,
+      200,
+      newBooking.status == "Đã hủy bỏ"
+        ? "Hủy đặt phòng thành công"
+        : "Cập nhật trạng thái thành công",
+      newBooking
+    );
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };

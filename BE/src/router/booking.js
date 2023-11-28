@@ -1,20 +1,12 @@
 import express from "express";
 
-import {
-  create,
-  update,
-  remove,
-  getAllProducts,
-  getProductDetails,
-} from "../controller/booking";
-import { isAdminMiddleware } from "../middleware";
+import { create, getAll, update } from "../controller/booking";
+import { loginMiddleware, isAdminMiddleware } from "../middleware";
 
 const router = express.Router();
 
-router.post("/", create);
-router.patch("/update/:id", update);
-router.get("/getAll", getAllProducts);
-router.get("/get/:id", getProductDetails);
-router.delete("/:id", isAdminMiddleware, remove);
+router.get("/", isAdminMiddleware, getAll);
+router.post("/", loginMiddleware, create);
+router.patch("/:id", isAdminMiddleware, update);
 
 export default router;

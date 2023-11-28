@@ -1,11 +1,10 @@
 import express from "express";
+import expressFormidable from "express-formidable";
 
 import { getAll, getOne, create, update } from "../controller/hotel";
 import { isAdminMiddleware } from "../middleware";
-import expressFormidable from 'express-formidable';
 
 const router = express.Router();
-
 
 router.get("/", getAll);
 router.get("/:id", getOne);
