@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Popconfirm, Popover, Space, Table, Tag, message } from "antd";
+import { Button, Popconfirm, Space, Table, Tag, message } from "antd";
 
 import { IAmenities } from "../../../interface";
 import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
@@ -62,28 +62,24 @@ const AmenitiesManager = () => {
       title: "Tên tiện ích",
       dataIndex: "name",
       key: "name",
-      render: (name, { features }) => (
-        <Popover
-          className="cursor-pointer"
-          placement="rightTop"
-          title="Features"
-          content={() => (
-            <Space direction="vertical" size={"middle"}>
-              {features.map(
-                (item: { name: string; surcharge: boolean }, index: number) => (
-                  <Space key={item.name} direction="horizontal">
-                    <div>
-                      {index + 1}. {item.name}
-                    </div>
-                    {item.surcharge && <Tag>Phụ phí</Tag>}
-                  </Space>
-                )
-              )}
-            </Space>
+    },
+    {
+      title: "Features",
+      dataIndex: "features",
+      key: "features",
+      render: (features) => (
+        <Space direction="vertical" size="small">
+          {features.map(
+            (item: { name: string; surcharge: boolean }, index: number) => (
+              <Space key={item.name} direction="horizontal">
+                <div>
+                  {index + 1}. {item.name}
+                </div>
+                {item.surcharge && <Tag>Phụ phí</Tag>}
+              </Space>
+            )
           )}
-        >
-          {name}
-        </Popover>
+        </Space>
       ),
     },
     {
