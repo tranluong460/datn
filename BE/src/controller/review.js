@@ -54,7 +54,7 @@ export const create = async (req, res) => {
       }
 
       await HotelModel.findByIdAndUpdate(
-        req.body.id_user,
+        req.body.id_hotel,
         { $push: { id_review: data._id } },
         { new: true }
       );
