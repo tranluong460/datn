@@ -16,6 +16,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 
 import { useGetAllAmenitiesQuery } from "../../../api/amenities";
 import { useCreateHotelMutation } from "../../../api/hotel";
+import { useGetAllProvincesQuery } from "../../../api/provinces";
 
 interface UploadData {
   name: string;
@@ -41,6 +42,8 @@ const CreateHotelModal = ({
   const { Option } = Select;
 
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
+  const { data: allProvinces } = useGetAllProvincesQuery("");
+
   const [createHotel, resultCreate] = useCreateHotelMutation();
 
   const onFinish = (data: UploadData) => {
@@ -132,7 +135,31 @@ const CreateHotelModal = ({
                 },
               ]}
             >
-              <Input />
+              <Select>
+                {allProvinces &&
+                  allProvinces.map(
+                    (
+                      item: {
+                        codename: string;
+                        name: string;
+                        division_type: string;
+                      },
+                      index: number
+                    ) => (
+                      <Option key={item.codename} value={item.name}>
+                        <p
+                          className={`${
+                            item.division_type === "thành phố trung ương"
+                              ? "font-medium"
+                              : ""
+                          }`}
+                        >
+                          {index + 1}, {item.name}
+                        </p>
+                      </Option>
+                    )
+                  )}
+              </Select>
             </Form.Item>
           </Col>
           <Col span={12}>
