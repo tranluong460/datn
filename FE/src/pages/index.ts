@@ -5,6 +5,7 @@ import AmenitiesManager from "./admin/Amenities/AmenitiesManager";
 import BookingManager from "./admin/Booking/BookingManager";
 import DashboardManage from "./admin/Dashboard/DashboardManage";
 import HotelManager from "./admin/Hotel/HotelManager";
+import RoomManager from "./admin/Room/RoomManager";
 import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
 import UserManager from "./admin/User/UserManager";
 
@@ -42,6 +43,7 @@ export {
   BookingManager,
   DashboardManage,
   HotelManager,
+  RoomManager,
   RoomTypeManage,
   UserManager,
 
