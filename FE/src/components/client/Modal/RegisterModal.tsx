@@ -3,18 +3,17 @@ import { useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-import { FcGoogle } from "react-icons/fc";
-
 import { Button, Input, Modal } from "../..";
+import { FcGoogle } from "../../../icons";
 import { getGoogleUrl } from "../../../utils";
-import { useRegisterMutation } from "../../../api/auth";
+import { useRegisterAccountMutation } from "../../../api";
 import { useLoginModal, useRegisterModal } from "../../../hooks";
 
 const RegisterModal = () => {
   const location = useLocation();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
-  const [registerUser, resultRegister] = useRegisterMutation();
+  const [registerUser, resultRegister] = useRegisterAccountMutation();
 
   const url = location.pathname || "/";
 

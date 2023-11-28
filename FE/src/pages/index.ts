@@ -36,7 +36,6 @@ import Page404 from "./error/Page404";
 import Page500 from "./error/Page500";
 
 export {
-  // Admin
   RouteAdmin,
   BaseAdmin,
   AmenitiesManager,
@@ -46,15 +45,11 @@ export {
   RoomManager,
   RoomTypeManage,
   UserManager,
-
-  // Auth
   RouteAuth,
   BaseAuth,
   BillingInformationPage,
   ProfilePage,
   SecurityPage,
-
-  // Client
   RouteClient,
   BaseClient,
   BookingPage,
@@ -66,8 +61,6 @@ export {
   GeneralRules,
   GeneralTerms,
   PrivacyPolicy,
-
-  // Error
   Loading,
   Page403,
   Page404,

@@ -1,24 +1,9 @@
 import { Button } from "../..";
-import { useGetOneRoomTypeQuery } from "../../../api/roomType";
-
-interface RoomType {
-  _id: string;
-  images: {
-    url: string;
-  }[];
-  quantity: number;
-  price: number;
-  status: string;
-  description: string;
-  id_amenities: string[];
-  id_hotel: string;
-  id_roomType: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { useGetOneRoomTypeQuery } from "../../../api";
+import { IRoom } from "../../../interface";
 
 type RoomCardProps = {
-  room: RoomType;
+  room: IRoom;
 };
 const RoomCard = ({ room }: RoomCardProps) => {
   const { data } = useGetOneRoomTypeQuery(room?.id_roomType);

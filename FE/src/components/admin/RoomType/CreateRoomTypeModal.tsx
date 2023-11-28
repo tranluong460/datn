@@ -1,7 +1,12 @@
 import { Button, Modal, Form, Input, Space, message } from "antd";
-import { useCreateRoomTypeMutation } from "../../../api/roomType";
 
-type CreateRoomTypeModalProps = { isOpenCreate: boolean; onCancel: () => void };
+import { IRoomType } from "../../../interface";
+import { useCreateRoomTypeMutation } from "../../../api";
+
+type CreateRoomTypeModalProps = {
+  isOpenCreate: boolean;
+  onCancel: () => void;
+};
 
 const CreateRoomTypeModal = ({
   isOpenCreate,
@@ -10,10 +15,7 @@ const CreateRoomTypeModal = ({
   const [form] = Form.useForm();
   const [createRoomType, resultCreate] = useCreateRoomTypeMutation();
 
-  const onFinish = (data: {
-    name: string;
-    features?: [{ name: string; surcharge: boolean }];
-  }) => {
+  const onFinish = (data: IRoomType) => {
     createRoomType(data)
       .unwrap()
       .then((response) => {

@@ -3,21 +3,13 @@ import { useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import { Button, Space, Table, Tag, Tooltip } from "antd";
 
-import {
-  useGetAllHotelQuery,
-  useGetHotelDetailByIdQuery,
-} from "../../../api/hotel";
+import { IHotel } from "../../../interface";
+import { useGetAllHotelQuery, useGetOneHotelQuery } from "../../../api";
 import {
   CreateHotelModal,
   EditHotelModal,
   HotelDrawn,
 } from "../../../components";
-
-interface DataType {
-  _id: string;
-  name: string;
-  status: string;
-}
 
 const HotelManager = () => {
   const [idHotel, setIdHotel] = useState("");
@@ -28,14 +20,13 @@ const HotelManager = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const { data: allHotel, isLoading } = useGetAllHotelQuery("");
-  const { data: oneHotel, isFetching } =
-    useGetHotelDetailByIdQuery(idHotelEdit);
+  const { data: oneHotel, isFetching } = useGetOneHotelQuery(idHotelEdit);
 
   const onClosedHotelDrawn = () => {
     setOpenHotelDrawn(false);
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IHotel> = [
     {
       title: "ID",
       dataIndex: "_id",

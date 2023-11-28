@@ -1,6 +1,5 @@
-import { CiLocationOn } from "react-icons/ci";
-import { AiOutlineStar } from "react-icons/ai";
 import { Button } from "../..";
+import { CiLocationOn, AiOutlineStar } from "../../../icons";
 
 const HotelCard = () => {
   return (

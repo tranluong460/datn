@@ -4,15 +4,15 @@ import EditAmenitiesModal from "./admin/Amenities/EditAmenitiesModal";
 import CreateHotelModal from "./admin/Hotel/CreateHotelModal";
 import EditHotelModal from "./admin/Hotel/EditHotelModal";
 import HotelDrawn from "./admin/Hotel/HotelDrawn";
-import TwoDrawnAmenities from "./admin/Hotel/TwoDrawnAmenities";
-import TwoDrawnDescription from "./admin/Hotel/TwoDrawnDescription";
-import TwoDrawnRoom from "./admin/Hotel/TwoDrawnRoom";
+import TwoDrawnHotelAmenities from "./admin/Hotel/TwoDrawnHotelAmenities";
+import TwoDrawnHotelDescription from "./admin/Hotel/TwoDrawnHotelDescription";
+import TwoDrawnHotelRoom from "./admin/Hotel/TwoDrawnHotelRoom";
 import CreateRoomModal from "./admin/Room/CreateRoomModal";
 import EditRoomModal from "./admin/Room/EditRoomModal";
 import RoomDrawn from "./admin/Room/RoomDrawn";
 import CreateRoomTypeModal from "./admin/RoomType/CreateRoomTypeModal";
 import EditRoomTypeModal from "./admin/RoomType/EditRoomTypeModal";
-import InfoDrawn from "./admin/User/InfoDrawn";
+import InfoUserDrawn from "./admin/User/InfoUserDrawn";
 
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
@@ -45,35 +45,28 @@ import Search from "./client/NavBar/Search";
 import UserMenu from "./client/NavBar/UserMenu";
 import BillInfo from "./client/Payment/BillInfo";
 import BookingInfo from "./client/Payment/BookingInfo";
-
-//
 import Avatar from "./Avatar";
 import Button from "./Button";
 import Container from "./Container";
 import Input from "./Input";
 
 export {
-  // Admin
   CreateAmenitiesModal,
   EditAmenitiesModal,
   CreateHotelModal,
   EditHotelModal,
   HotelDrawn,
-  TwoDrawnAmenities,
-  TwoDrawnDescription,
-  TwoDrawnRoom,
+  TwoDrawnHotelAmenities,
+  TwoDrawnHotelDescription,
+  TwoDrawnHotelRoom,
   CreateRoomModal,
   EditRoomModal,
   RoomDrawn,
   CreateRoomTypeModal,
   EditRoomTypeModal,
-  InfoDrawn,
-
-  // Auth
+  InfoUserDrawn,
   InfoUser,
   Sidebar,
-
-  // Client
   Footer,
   Attractive,
   AttractiveCard,
@@ -100,8 +93,6 @@ export {
   UserMenu,
   BillInfo,
   BookingInfo,
-
-  //
   Avatar,
   Button,
   Container,

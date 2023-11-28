@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { Button, Descriptions, Drawer, Image, Spin } from "antd";
+import { Button, Descriptions, Drawer, Spin } from "antd";
 import type { DescriptionsProps } from "antd";
 
 import { useGetOneRoomQuery } from "../../../api/room";

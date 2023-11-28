@@ -3,15 +3,9 @@ import { useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import { Button, Space, Table, Tag, Tooltip } from "antd";
 
-import { useGetAllRoomQuery, useGetOneRoomQuery } from "../../../api/room";
+import { useGetAllRoomQuery, useGetOneRoomQuery } from "../../../api";
 import { CreateRoomModal, EditRoomModal, RoomDrawn } from "../../../components";
-
-interface DataType {
-  _id: string;
-  name: string;
-  price: number;
-  status: string;
-}
+import { IRoom } from "../../../interface";
 
 const RoomManager = () => {
   const [idRoom, setIdRoom] = useState("");
@@ -28,7 +22,7 @@ const RoomManager = () => {
     setOpenRoomDrawn(false);
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IRoom> = [
     {
       title: "ID",
       dataIndex: "_id",

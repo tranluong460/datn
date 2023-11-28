@@ -1,17 +1,18 @@
-import { BsChat } from "react-icons/bs";
-import { CiLocationOn } from "react-icons/ci";
-import { AiOutlineLock } from "react-icons/ai";
-import { LiaWalletSolid } from "react-icons/lia";
-import { MdManageHistory } from "react-icons/md";
-
+import {
+  BsChat,
+  CiLocationOn,
+  AiOutlineLock,
+  LiaWalletSolid,
+  MdManageHistory,
+} from "../../../icons";
 import { Container } from "../..";
 
-type hotelDetail = {
+type DetailOverviewProps = {
   name: string;
   description: string;
 };
 
-const DetailOverview = ({ name, description }: hotelDetail) => {
+const DetailOverview = ({ name, description }: DetailOverviewProps) => {
   return (
     <>
       <Container>

@@ -1,5 +1,4 @@
-import { Container } from "../..";
-import ServiceCard from "./ServiceCard";
+import { Container, ServiceCard } from "../..";
 
 const serviceData = [
   {

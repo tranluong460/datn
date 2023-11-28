@@ -13,24 +13,21 @@ import {
   message,
 } from "antd";
 
-import { TbBrandBooking } from "react-icons/tb";
-import { LiaHotelSolid } from "react-icons/lia";
-import { PiLightbulbFilament } from "react-icons/pi";
-import { IoNotificationsOutline } from "react-icons/io5";
 import {
+  TbBrandBooking,
+  LiaHotelSolid,
+  PiLightbulbFilament,
+  IoNotificationsOutline,
   MdOutlineDashboardCustomize,
   MdOutlineRoomPreferences,
-} from "react-icons/md";
-import {
   AiOutlineHdd,
   AiOutlineUser,
   AiOutlineHome,
   AiOutlineLogout,
   AiOutlineSetting,
-} from "react-icons/ai";
-
+} from "../../icons";
 import { Logo } from "../../components";
-import { useLogoutMutation, useUserQuery } from "../../api/auth";
+import { useInfoAccountQuery, useLogoutAccountMutation } from "../../api";
 
 const { Header, Content, Footer, Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -39,8 +36,8 @@ const BaseAdmin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const [logoutUser] = useLogoutMutation();
-  const { data } = useUserQuery("");
+  const [logoutUser] = useLogoutAccountMutation();
+  const { data } = useInfoAccountQuery("");
 
   const logoutAccount = () => {
     logoutUser(null)

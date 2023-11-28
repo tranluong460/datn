@@ -1,16 +1,17 @@
 import { useParams } from "react-router-dom";
+
 import {
   Container,
   DetailOverview,
   InfoHotel,
   RoomList,
 } from "../../../components";
-import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
+import { useGetOneHotelQuery } from "../../../api";
 import { Loading } from "../..";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string | undefined }>();
-  const { data, isLoading } = useGetHotelDetailByIdQuery(id);
+  const { data, isLoading } = useGetOneHotelQuery(id);
 
   if (isLoading) {
     return <Loading />;

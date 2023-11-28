@@ -1,16 +1,19 @@
-import { CiLocationOn } from "react-icons/ci";
-import { AiOutlineMail, AiOutlinePhone, AiOutlineStar } from "react-icons/ai";
-
+import {
+  CiLocationOn,
+  AiOutlineMail,
+  AiOutlinePhone,
+  AiOutlineStar,
+} from "../../../icons";
 import { Button } from "../..";
 
-type HotelDetail = {
+type InfoHotelProps = {
   name: string;
   address: string;
   email: string;
   phone: string;
 };
 
-const InfoHotel = ({ name, address, email, phone }: HotelDetail) => {
+const InfoHotel = ({ name, address, email, phone }: InfoHotelProps) => {
   return (
     <>
       <div className="h-auto md:h-36 relative top-[50%] md:top-[80%] left-1/2 transform translate-x-[-50%] rounded-lg shadow-lg p-5 bg-light dark:bg-dark w-[75%]">

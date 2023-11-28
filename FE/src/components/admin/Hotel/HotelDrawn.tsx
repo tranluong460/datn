@@ -1,14 +1,16 @@
 import { useState } from "react";
 import moment from "moment";
 
-import { Button, Descriptions, Drawer, Image, Spin } from "antd";
 import type { DescriptionsProps } from "antd";
+import { Button, Descriptions, Drawer, Image, Spin } from "antd";
 
-import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
-
-import TwoDrawnAmenities from "./TwoDrawnAmenities";
-import TwoDrawnDescription from "./TwoDrawnDescription";
-import TwoDrawnRoom from "./TwoDrawnRoom";
+import { IImage } from "../../../interface";
+import { useGetOneHotelQuery } from "../../../api/hotel";
+import {
+  TwoDrawnHotelAmenities,
+  TwoDrawnHotelDescription,
+  TwoDrawnHotelRoom,
+} from "../..";
 
 type HotelDrawnProps = {
   idHotel: string;
@@ -21,14 +23,15 @@ const HotelDrawn = ({
   openHotelDrawn,
   onClosedHotelDrawn,
 }: HotelDrawnProps) => {
+  const { data, isFetching } = useGetOneHotelQuery(idHotel);
+
   const [openDrawnAmenities, setOpenDrawnAmenities] = useState(false);
   const [openDrawnDescription, setOpenDrawnDescription] = useState(false);
   const [openDrawnRoom, setOpenDrawnRoom] = useState(false);
-  const { data, isFetching } = useGetHotelDetailByIdQuery(idHotel);
-  const imgList: string[] = [];
 
+  const imgList: string[] = [];
   data?.data?.images &&
-    data.data.images.forEach((item: { url: string }) => {
+    data.data.images.forEach((item: IImage) => {
       imgList.push(item.url);
     });
 
@@ -81,7 +84,7 @@ const HotelDrawn = ({
           <Button type="link" onClick={() => setOpenDrawnAmenities(true)}>
             Xem chi tiết
           </Button>
-          <TwoDrawnAmenities
+          <TwoDrawnHotelAmenities
             dataAmenities={data?.data?.id_amenities}
             openDrawnAmenities={openDrawnAmenities}
             isClosedDrawnAmenities={() => setOpenDrawnAmenities(false)}
@@ -98,7 +101,7 @@ const HotelDrawn = ({
           <Button type="link" onClick={() => setOpenDrawnRoom(true)}>
             Xem chi tiết
           </Button>
-          <TwoDrawnRoom
+          <TwoDrawnHotelRoom
             dataRoom={data?.data?.id_room}
             openDrawnRoom={openDrawnRoom}
             isClosedDrawnRoom={() => setOpenDrawnRoom(false)}
@@ -115,7 +118,7 @@ const HotelDrawn = ({
           <Button type="link" onClick={() => setOpenDrawnDescription(true)}>
             Xem chi tiết
           </Button>
-          <TwoDrawnDescription
+          <TwoDrawnHotelDescription
             dataDescription={data?.data?.description}
             openDrawnDescription={openDrawnDescription}
             isClosedDrawnDescription={() => setOpenDrawnDescription(false)}

@@ -1,3 +1,4 @@
+import type { RcFile } from "antd/es/upload/interface";
 import {
   Button,
   Col,
@@ -10,22 +11,16 @@ import {
   Upload,
   message,
 } from "antd";
-import type { RcFile } from "antd/es/upload/interface";
 
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { IHotel } from "../../../interface";
+import { AiOutlinePlusCircle } from "../../../icons";
+import {
+  useCreateHotelMutation,
+  useGetAllAmenitiesQuery,
+  useGetAllProvincesQuery,
+} from "../../../api";
 
-import { useGetAllAmenitiesQuery } from "../../../api/amenities";
-import { useCreateHotelMutation } from "../../../api/hotel";
-import { useGetAllProvincesQuery } from "../../../api/provinces";
-
-interface UploadData {
-  name: string;
-  phone: string;
-  address: string;
-  email: string;
-  city: string;
-  id_amenities: string[];
-  description: string;
+interface ICreateHotel extends Omit<IHotel, "images"> {
   images: RcFile[];
 }
 
@@ -43,10 +38,9 @@ const CreateHotelModal = ({
 
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
   const { data: allProvinces } = useGetAllProvincesQuery("");
-
   const [createHotel, resultCreate] = useCreateHotelMutation();
 
-  const onFinish = (data: UploadData) => {
+  const onFinish = (data: ICreateHotel) => {
     createHotel(data)
       .unwrap()
       .then((response) => {

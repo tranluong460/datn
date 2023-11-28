@@ -1,8 +1,10 @@
 import { useState } from "react";
 
-import { AiOutlineDesktop } from "react-icons/ai";
-import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
-
+import {
+  AiOutlineDesktop,
+  BsFillSunFill,
+  BsFillMoonStarsFill,
+} from "../../../icons";
 import { useTheme } from "../../../hooks";
 import { MenuItem } from "../..";
 

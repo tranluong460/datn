@@ -1,28 +1,22 @@
 import { Col, Descriptions, Drawer, Image, Row } from "antd";
 
-type TwoDrawnRoomProps = {
-  dataRoom: {
-    _id: string;
-    images: { url: string }[];
-    quantity: number;
-    price: number;
-    status: string;
-    description: string;
-    id_amenities: string[];
-    id_hotel: string;
-    id_roomType: { name: string };
-    createdAt: string;
-    updatedAt: string;
-  }[];
+import { IRoom, IRoomType } from "../../../interface";
+
+interface IHotelRoom extends Omit<IRoom, "id_roomType"> {
+  id_roomType: IRoomType;
+}
+
+type TwoDrawnHotelRoomProps = {
+  dataRoom: IHotelRoom[];
   openDrawnRoom: boolean;
   isClosedDrawnRoom: () => void;
 };
 
-const TwoDrawnRoom = ({
+const TwoDrawnHotelRoom = ({
   dataRoom,
   openDrawnRoom,
   isClosedDrawnRoom,
-}: TwoDrawnRoomProps) => {
+}: TwoDrawnHotelRoomProps) => {
   return (
     <Drawer
       title="Thông tin phòng"
@@ -67,4 +61,4 @@ const TwoDrawnRoom = ({
   );
 };
 
-export default TwoDrawnRoom;
+export default TwoDrawnHotelRoom;

@@ -1,22 +1,18 @@
 import { Drawer, Space, Tag } from "antd";
 
-type TwoDrawnAmenitiesProps = {
-  dataAmenities: {
-    name: string;
-    features: {
-      name: string;
-      surcharge: boolean;
-    }[];
-  }[];
+import { IAmenities } from "../../../interface";
+
+type TwoDrawnHotelAmenitiesProps = {
+  dataAmenities: IAmenities[];
   openDrawnAmenities: boolean;
   isClosedDrawnAmenities: () => void;
 };
 
-const TwoDrawnAmenities = ({
+const TwoDrawnHotelAmenities = ({
   dataAmenities,
   openDrawnAmenities,
   isClosedDrawnAmenities,
-}: TwoDrawnAmenitiesProps) => {
+}: TwoDrawnHotelAmenitiesProps) => {
   return (
     <Drawer
       title="Thông tin tiện nghi"
@@ -33,6 +29,7 @@ const TwoDrawnAmenities = ({
               <div>
                 {index + 1}. {item.name}
               </div>
+
               <div>
                 <Space direction="vertical">
                   {item.features &&
@@ -54,4 +51,4 @@ const TwoDrawnAmenities = ({
   );
 };
 
-export default TwoDrawnAmenities;
+export default TwoDrawnHotelAmenities;

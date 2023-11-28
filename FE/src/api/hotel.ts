@@ -13,7 +13,7 @@ export const hotelApi = createApi({
       }),
       providesTags: ["Hotel"],
     }),
-    getHotelDetailById: builder.query({
+    getOneHotel: builder.query({
       query: (id: string | undefined) => `/hotel/${id}`,
       providesTags: ["Hotel"],
     }),
@@ -70,7 +70,7 @@ export const hotelApi = createApi({
 
 export const {
   useGetAllHotelQuery,
-  useGetHotelDetailByIdQuery,
+  useGetOneHotelQuery,
   useCreateHotelMutation,
   useUpdateHotelMutation,
 } = hotelApi;

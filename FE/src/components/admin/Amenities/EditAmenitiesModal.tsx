@@ -1,32 +1,27 @@
 import { Button, Form, Input, Modal, Space, Spin, Switch, message } from "antd";
 
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+import { IAmenities } from "../../../interface";
 import { useUpdateAmenitiesMutation } from "../../../api/amenities";
-
-interface DataApi {
-  _id: string;
-  name: string;
-  features: [{ name: string; surcharge: boolean }];
-}
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "../../../icons";
 
 type EditAmenitiesModalProps = {
-  isOpenEdit: boolean;
-  onCancel: () => void;
-  data: DataApi;
   loading: boolean;
+  isOpenEdit: boolean;
+  data: IAmenities;
+  onCancel: () => void;
 };
 
 const EditAmenitiesModal = ({
   isOpenEdit,
-  onCancel,
-  data: dataA,
+  data,
   loading,
+  onCancel,
 }: EditAmenitiesModalProps) => {
   const [form] = Form.useForm();
 
   const [updateAmenities, resultUpdate] = useUpdateAmenitiesMutation();
 
-  const onFinish = (data: DataApi) => {
+  const onFinish = (data: IAmenities) => {
     updateAmenities(data)
       .unwrap()
       .then((response) => {
@@ -55,7 +50,7 @@ const EditAmenitiesModal = ({
           name="edit_amenities"
           form={form}
           onFinish={onFinish}
-          initialValues={dataA}
+          initialValues={data}
         >
           <Form.Item name="_id" hidden>
             <Input />

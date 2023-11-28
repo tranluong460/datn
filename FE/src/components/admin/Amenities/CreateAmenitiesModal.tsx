@@ -1,8 +1,8 @@
 import { Button, Modal, Form, Input, Space, Switch, message } from "antd";
 
-import { useCreateAmenitiesMutation } from "../../../api/amenities";
-
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+import { IAmenities } from "../../../interface";
+import { useCreateAmenitiesMutation } from "../../../api";
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "../../../icons";
 
 type CreateAmenitiesModalProps = {
   isOpenCreate: boolean;
@@ -16,10 +16,7 @@ const CreateAmenitiesModal = ({
   const [createAmenities, resultCreate] = useCreateAmenitiesMutation();
   const [form] = Form.useForm();
 
-  const onFinish = (data: {
-    name: string;
-    features?: [{ name: string; surcharge: boolean }];
-  }) => {
+  const onFinish = (data: IAmenities) => {
     createAmenities(data)
       .unwrap()
       .then((response) => {

@@ -3,19 +3,13 @@ import { useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import { Table, Space, Button, Popconfirm, message } from "antd";
 
+import { IRoomType } from "../../../interface";
 import {
   useDeleteRoomTypeMutation,
   useGetAllRoomTypeQuery,
   useGetOneRoomTypeQuery,
-} from "../../../api/roomType";
+} from "../../../api";
 import { CreateRoomTypeModal, EditRoomTypeModal } from "../../../components";
-
-interface DataType {
-  _id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 const RoomTypeManage = () => {
   const key0 = "deleteAmenitiesMutation";
@@ -57,7 +51,7 @@ const RoomTypeManage = () => {
       });
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IRoomType> = [
     {
       title: "ID",
       dataIndex: "_id",

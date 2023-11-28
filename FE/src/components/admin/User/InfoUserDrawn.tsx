@@ -1,32 +1,23 @@
 import moment from "moment";
 
-import { Drawer, Descriptions, Image, Spin } from "antd";
 import type { DescriptionsProps } from "antd";
+import { Drawer, Descriptions, Image, Spin } from "antd";
 
-type InformationProps = {
-  name: string;
-  phone: string;
-  address: string;
-  birthday: string;
-  sex: number;
-  image: string;
-};
+import { IUser } from "../../../interface";
 
-type InfoUser = {
-  email: string;
-  role: string;
-  id_information: InformationProps;
-  createdAt: string;
-};
-
-type InfoDrawnProps = {
-  info: InfoUser | undefined;
+type InfoUserDrawnProps = {
+  info: IUser | undefined;
   isOpen: boolean;
   loading: boolean;
   onClosed: () => void;
 };
 
-const InfoDrawn = ({ info, isOpen, loading, onClosed }: InfoDrawnProps) => {
+const InfoUserDrawn = ({
+  info,
+  isOpen,
+  loading,
+  onClosed,
+}: InfoUserDrawnProps) => {
   const items: DescriptionsProps["items"] = [
     {
       key: "1",
@@ -105,4 +96,4 @@ const InfoDrawn = ({ info, isOpen, loading, onClosed }: InfoDrawnProps) => {
   );
 };
 
-export default InfoDrawn;
+export default InfoUserDrawn;

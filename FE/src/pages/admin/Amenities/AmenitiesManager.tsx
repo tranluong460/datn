@@ -3,26 +3,13 @@ import { useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import { Button, Popconfirm, Popover, Space, Table, Tag, message } from "antd";
 
+import { IAmenities } from "../../../interface";
+import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
 import {
   useDeleteAmenitiesMutation,
   useGetAllAmenitiesQuery,
-  useGetAmenitiesByIdQuery,
-} from "../../../api/amenities";
-import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
-
-interface FeaturesProps {
-  _id: string;
-  name: string;
-  surcharge: boolean;
-}
-
-interface DataType {
-  _id: string;
-  name: string;
-  features: FeaturesProps[];
-  createdAt: string;
-  updatedAt: string;
-}
+  useGetOneAmenitiesQuery,
+} from "../../../api";
 
 const AmenitiesManager = () => {
   const key0 = "deleteAmenitiesMutation";
@@ -35,7 +22,7 @@ const AmenitiesManager = () => {
 
   const { data, isLoading } = useGetAllAmenitiesQuery("");
   const { data: dataOneAmenities, isFetching } =
-    useGetAmenitiesByIdQuery(idAmenities);
+    useGetOneAmenitiesQuery(idAmenities);
   const [deleteAmenities] = useDeleteAmenitiesMutation();
 
   const onDelete = (id: string) => {
@@ -65,7 +52,7 @@ const AmenitiesManager = () => {
       });
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IAmenities> = [
     {
       title: "ID",
       dataIndex: "_id",

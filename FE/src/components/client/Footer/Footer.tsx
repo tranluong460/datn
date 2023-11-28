@@ -1,5 +1,4 @@
-import { BsFacebook, BsYoutube, BsInstagram } from "react-icons/bs";
-
+import { BsFacebook, BsYoutube, BsInstagram } from "../../../icons";
 import { Container, Logo } from "../..";
 
 const Footer = () => {
@@ -13,7 +12,7 @@ const Footer = () => {
             </div>
 
             <div className="mr-0 md:mr-32">
-              <Logo />
+              <Logo url="/" />
             </div>
 
             <div className="flex gap-5">

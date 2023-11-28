@@ -1,16 +1,16 @@
 import { Drawer } from "antd";
 
-type TwoDrawnDescriptionProps = {
+type TwoDrawnHotelDescriptionProps = {
   dataDescription: string;
   openDrawnDescription: boolean;
   isClosedDrawnDescription: () => void;
 };
 
-const TwoDrawnDescription = ({
+const TwoDrawnHotelDescription = ({
   dataDescription,
   openDrawnDescription,
   isClosedDrawnDescription,
-}: TwoDrawnDescriptionProps) => {
+}: TwoDrawnHotelDescriptionProps) => {
   return (
     <Drawer
       title="Mô tả khách sạn"
@@ -25,4 +25,4 @@ const TwoDrawnDescription = ({
   );
 };
 
-export default TwoDrawnDescription;
+export default TwoDrawnHotelDescription;
