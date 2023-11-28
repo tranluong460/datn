@@ -95,6 +95,7 @@ const HotelManager = () => {
     showTotal: (total: number, range: number[]) =>
       `${range[0]}-${range[1]} của ${total} mục`,
   };
+
   return (
     <>
       <Table

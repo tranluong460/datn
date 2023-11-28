@@ -21,29 +21,48 @@ export const roomApi = createApi({
       providesTags: ["Room"],
     }),
     createRoom: builder.mutation({
-      query: (data) => ({
-        url: `room`,
-        method: "POST",
-        body: data,
-        credentials: "include",
-      }),
-      invalidatesTags: ["Room"],
-    }),
-    deleteRoom: builder.mutation({
-      query: (id: string) => ({
-        url: `room/${id}`,
-        method: "DELETE",
-        credentials: "include",
-      }),
+      query: (data) => {
+        const formData = new FormData();
+
+        Object.keys(data).forEach((key) => {
+          if (key === "images" && Array.isArray(data[key])) {
+            data[key].forEach((file: any, index: number) => {
+              formData.append(`images[${index}]`, file.originFileObj);
+            });
+          } else {
+            formData.append(key, data[key]);
+          }
+        });
+
+        return {
+          url: `room`,
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        };
+      },
       invalidatesTags: ["Room"],
     }),
     updateRoom: builder.mutation({
       query: (data) => {
         const { _id, ...newData } = data;
+
+        const formData = new FormData();
+
+        Object.keys(newData).forEach((key) => {
+          if (key === "images" && Array.isArray(data[key])) {
+            data[key].forEach((file: any, index: number) => {
+              formData.append(`images[${index}]`, file.originFileObj);
+            });
+          } else {
+            formData.append(key, data[key]);
+          }
+        });
+
         return {
           url: `room/${_id}`,
           method: "PATCH",
-          body: newData,
+          body: formData,
           credentials: "include",
         };
       },
@@ -57,5 +76,4 @@ export const {
   useGetOneRoomQuery,
   useCreateRoomMutation,
   useUpdateRoomMutation,
-  useDeleteRoomMutation,
 } = roomApi;

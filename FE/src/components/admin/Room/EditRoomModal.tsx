@@ -3,6 +3,7 @@ import {
   Col,
   Form,
   Input,
+  InputNumber,
   Modal,
   Row,
   Select,
@@ -14,9 +15,10 @@ import {
 
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
+import { useGetAllRoomTypeQuery } from "../../../api/roomType";
+import { useGetAllHotelQuery } from "../../../api/hotel";
 import { useGetAllAmenitiesQuery } from "../../../api/amenities";
-import { useUpdateHotelMutation } from "../../../api/hotel";
-import { useGetAllProvincesQuery } from "../../../api/provinces";
+import { useUpdateRoomMutation } from "../../../api/room";
 
 interface Image {
   url: string;
@@ -35,6 +37,11 @@ interface Amenity {
   updatedAt: string;
 }
 
+interface Hotel {
+  _id: string;
+  name: string;
+}
+
 interface RoomType {
   _id: string;
   name: string;
@@ -42,64 +49,59 @@ interface RoomType {
   updatedAt: string;
 }
 
-interface Room {
+interface RoomData {
   _id: string;
   images: Image[];
   quantity: number;
   price: number;
   status: string;
   description: string;
-  id_amenities: string[];
-  id_hotel: string;
+  id_amenities: Amenity[];
+  id_hotel: Hotel;
   id_roomType: RoomType;
   createdAt: string;
   updatedAt: string;
 }
 
-interface Hotel {
-  _id: string;
-  name: string;
-  images: Image[];
-  address: string;
-  phone: string;
-  status: string;
-  email: string;
-  description: string;
-  city: string;
-  id_amenities: Amenity[];
-  id_review: [];
-  createdAt: string;
-  updatedAt: string;
-  id_room: Room[];
-}
-
-type EditHotelModalProps = {
+type EditRoomModalProps = {
   isOpenEdit: boolean;
   onCancel: () => void;
   loading: boolean;
-  data: Hotel;
+  data: RoomData;
 };
 
-const EditHotelModal = ({
+const EditRoomModal = ({
   isOpenEdit,
   onCancel,
   loading,
   data,
-}: EditHotelModalProps) => {
+}: EditRoomModalProps) => {
   const [form] = Form.useForm();
   const { Option } = Select;
+  console.log(data);
 
+  const { data: allHotel } = useGetAllHotelQuery("");
+  const { data: allRoomType } = useGetAllRoomTypeQuery("");
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
-  const { data: allProvinces } = useGetAllProvincesQuery("");
-  const [editHotel, resultEdit] = useUpdateHotelMutation();
+  const [editRoom, resultEdit] = useUpdateRoomMutation();
 
   const transformedAmenities = data.id_amenities.map((item) => ({
     value: item._id,
     label: item.name,
   }));
 
-  const onFinish = (data: Hotel) => {
-    editHotel(data)
+  const transformedHotel = {
+    value: data.id_hotel._id,
+    label: data.id_hotel.name,
+  };
+
+  const transformedRoomType = {
+    value: data.id_roomType._id,
+    label: data.id_roomType.name,
+  };
+
+  const onFinish = (data: RoomData) => {
+    editRoom(data)
       .unwrap()
       .then((response) => {
         message.success(response.message);
@@ -112,7 +114,7 @@ const EditHotelModal = ({
 
   return (
     <Modal
-      title="Chỉnh sửa khách sạn"
+      title="Chỉnh sửa phòng"
       open={isOpenEdit}
       onCancel={onCancel}
       footer={null}
@@ -125,11 +127,16 @@ const EditHotelModal = ({
         </div>
       ) : (
         <Form
-          name="edit_hotel"
+          name="edit_room"
           layout="vertical"
           form={form}
           onFinish={onFinish}
-          initialValues={{ ...data, id_amenities: transformedAmenities }}
+          initialValues={{
+            ...data,
+            id_amenities: transformedAmenities,
+            id_hotel: transformedHotel,
+            id_roomType: transformedRoomType,
+          }}
           autoComplete="off"
         >
           <Form.Item name="_id" hidden>
@@ -139,88 +146,45 @@ const EditHotelModal = ({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="name"
-                label="Tên"
-                rules={[{ required: true, message: "Vui lòng nhập tên!" }]}
+                name="quantity"
+                label="Số lượng"
+                rules={[{ required: true, message: "Vui lòng nhập số lượng!" }]}
               >
-                <Input />
+                <InputNumber className="w-full" min={1} />
               </Form.Item>
             </Col>
 
             <Col span={12}>
               <Form.Item
-                name="phone"
-                label="Số điện thoại"
+                name="price"
+                label="Giá"
+                rules={[{ required: true, message: "Vui lòng nhập giá!" }]}
+              >
+                <InputNumber
+                  className="w-full"
+                  min={1}
+                  addonAfter="VNĐ"
+                  formatter={(value) =>
+                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+                  }
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                name="id_hotel"
+                label="Khách sạn"
                 rules={[
-                  {
-                    required: true,
-                    message: "Vui lòng nhập số điện thoại!",
-                  },
-                  {
-                    pattern: new RegExp(/^(0|\+84)[3|5|7|8|9][0-9]{8}$/),
-                    message: "Số điện thoại không đúng định dạng!",
-                  },
+                  { required: true, message: "Khách sạn không được để trống!" },
                 ]}
               >
-                <Input />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item
-                name="address"
-                label="Địa chỉ"
-                rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item
-                name="email"
-                label="Email"
-                rules={[
-                  { required: true, message: "Vui lòng nhập email!" },
-                  { type: "email", message: "Email không đúng định dạng!" },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item
-                name="city"
-                label="Thành phố"
-                rules={[
-                  {
-                    required: true,
-                    message: "Vui lòng nhập thành phố!",
-                  },
-                ]}
-              >
-                <Select>
-                  {allProvinces &&
-                    allProvinces.map(
-                      (
-                        item: {
-                          codename: string;
-                          name: string;
-                          division_type: string;
-                        },
-                        index: number
-                      ) => (
-                        <Option key={item.codename} value={item.name}>
-                          <p
-                            className={`${
-                              item.division_type === "thành phố trung ương"
-                                ? "font-medium"
-                                : ""
-                            }`}
-                          >
-                            {index + 1}, {item.name}
-                          </p>
+                <Select disabled>
+                  {allHotel?.data &&
+                    allHotel?.data.map(
+                      (item: { _id: string; name: string }) => (
+                        <Option key={item._id} value={item._id}>
+                          {item.name}
                         </Option>
                       )
                     )}
@@ -230,18 +194,18 @@ const EditHotelModal = ({
 
             <Col span={12}>
               <Form.Item
-                name="id_amenities"
-                label="Tiện ích"
+                name="id_roomType"
+                label="Loại phòng"
                 rules={[
                   {
                     required: true,
-                    message: "Vui lòng nhập tiện ích!",
+                    message: "Loại phòng không được để trống!",
                   },
                 ]}
               >
-                <Select mode="multiple">
-                  {allAmenities?.data &&
-                    allAmenities?.data.map(
+                <Select>
+                  {allRoomType?.data &&
+                    allRoomType?.data.map(
                       (item: { _id: string; name: string }) => (
                         <Option key={item._id} value={item._id}>
                           {item.name}
@@ -254,6 +218,28 @@ const EditHotelModal = ({
           </Row>
 
           <Form.Item
+            name="id_amenities"
+            label="Tiện ích"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập tiện ích!",
+              },
+            ]}
+          >
+            <Select mode="multiple">
+              {allAmenities?.data &&
+                allAmenities?.data.map(
+                  (item: { _id: string; name: string }) => (
+                    <Option key={item._id} value={item._id}>
+                      {item.name}
+                    </Option>
+                  )
+                )}
+            </Select>
+          </Form.Item>
+
+          <Form.Item
             name="description"
             label="Mô tả"
             rules={[
@@ -263,7 +249,7 @@ const EditHotelModal = ({
               },
             ]}
           >
-            <Input.TextArea rows={5} />
+            <Input.TextArea />
           </Form.Item>
 
           <Form.Item
@@ -312,4 +298,4 @@ const EditHotelModal = ({
   );
 };
 
-export default EditHotelModal;
+export default EditRoomModal;

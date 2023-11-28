@@ -70,7 +70,7 @@ const CreateHotelModal = ({
     >
       <Form
         layout="vertical"
-        name="add_amenities"
+        name="add_hotel"
         form={form}
         onFinish={onFinish}
         autoComplete="off"
