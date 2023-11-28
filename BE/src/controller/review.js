@@ -47,7 +47,10 @@ export const getOne = async (req, res) => {
 export const create = async (req, res) => {
   try {
     validateMiddleware(req, res, ReviewValidate, async () => {
-      const data = await ReviewModel.create(req.body);
+      const data = await ReviewModel.create({
+        ...req.body,
+        id_user: req.user._id
+      });
 
       if (!data) {
         return sendResponse(res, 404, "Thêm bình luận thất bại");
@@ -94,13 +97,18 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const data = await ReviewModel.findByIdAndDelete(req.params.id);
-
-    if (!data) {
-      return sendResponse(res, 404, "Xóa bình luận thất bại");
+    const data = await ReviewModel.findById(req.params.id);
+    if (data.id_user == req.user._id) {
+      const deleComment = await ReviewModel.findByIdAndDelete(data._id)
+      await HotelModel.findOneAndUpdate(
+        { id_review: data._id },
+        { $pull: { id_review: data._id } },
+        { new: true }
+      )
+      return sendResponse(res, 200, 'Xóa bình luận thành công', deleComment)
     }
+    return sendResponse(res, 404, 'Không được xóa bình luận')
 
-    return sendResponse(res, 200, "Xóa bình luận thành công");
   } catch (error) {
     console.log(error);
 
