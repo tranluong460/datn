@@ -54,7 +54,6 @@ const hotelSchema = new mongoose.Schema(
       },
     ],
     id_room: [
-
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Room",
