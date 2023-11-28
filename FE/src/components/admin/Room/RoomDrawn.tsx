@@ -3,7 +3,7 @@ import moment from "moment";
 import type { DescriptionsProps } from "antd";
 import { Button, Descriptions, Drawer, Spin } from "antd";
 
-import { useGetOneRoomQuery } from "../../../api/room";
+import { useGetOneRoomQuery } from "../../../api";
 
 type RoomDrawnProps = {
   idRoom: string;

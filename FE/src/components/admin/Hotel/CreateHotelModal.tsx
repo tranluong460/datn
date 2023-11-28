@@ -1,4 +1,3 @@
-import type { RcFile } from "antd/es/upload/interface";
 import {
   Button,
   Col,
@@ -20,10 +19,6 @@ import {
   useGetAllProvincesQuery,
 } from "../../../api";
 
-interface ICreateHotel extends Omit<IHotel, "images"> {
-  images: RcFile[];
-}
-
 type CreateHotelModalProps = {
   isOpenCreate: boolean;
   onCancel: () => void;
@@ -40,7 +35,7 @@ const CreateHotelModal = ({
   const { data: allProvinces } = useGetAllProvincesQuery("");
   const [createHotel, resultCreate] = useCreateHotelMutation();
 
-  const onFinish = (data: ICreateHotel) => {
+  const onFinish = (data: IHotel) => {
     createHotel(data)
       .unwrap()
       .then((response) => {

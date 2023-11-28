@@ -13,61 +13,20 @@ import {
   message,
 } from "antd";
 
-import { AiOutlinePlusCircle } from "react-icons/ai";
-
-import { useGetAllRoomTypeQuery } from "../../../api/roomType";
-import { useGetAllHotelQuery } from "../../../api/hotel";
-import { useGetAllAmenitiesQuery } from "../../../api/amenities";
-import { useUpdateRoomMutation } from "../../../api/room";
-
-interface Image {
-  url: string;
-}
-
-interface AmenityFeature {
-  name: string;
-  surcharge: boolean;
-}
-
-interface Amenity {
-  _id: string;
-  name: string;
-  features: AmenityFeature[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Hotel {
-  _id: string;
-  name: string;
-}
-
-interface RoomType {
-  _id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface RoomData {
-  _id: string;
-  images: Image[];
-  quantity: number;
-  price: number;
-  status: string;
-  description: string;
-  id_amenities: Amenity[];
-  id_hotel: Hotel;
-  id_roomType: RoomType;
-  createdAt: string;
-  updatedAt: string;
-}
+import { AiOutlinePlusCircle } from "../../../icons";
+import { IRoom } from "../../../interface";
+import {
+  useGetAllRoomTypeQuery,
+  useGetAllHotelQuery,
+  useGetAllAmenitiesQuery,
+  useUpdateRoomMutation,
+} from "../../../api";
 
 type EditRoomModalProps = {
   isOpenEdit: boolean;
   onCancel: () => void;
   loading: boolean;
-  data: RoomData;
+  data: IRoom;
 };
 
 const EditRoomModal = ({
@@ -104,7 +63,7 @@ const EditRoomModal = ({
       label: data.id_roomType.name,
     };
 
-  const onFinish = (data: RoomData) => {
+  const onFinish = (data: IRoom) => {
     editRoom(data)
       .unwrap()
       .then((response) => {

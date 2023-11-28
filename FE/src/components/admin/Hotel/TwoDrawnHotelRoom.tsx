@@ -1,13 +1,9 @@
 import { Col, Descriptions, Drawer, Image, Row } from "antd";
 
-import { IRoom, IRoomType } from "../../../interface";
-
-interface IHotelRoom extends Omit<IRoom, "id_roomType"> {
-  id_roomType: IRoomType;
-}
+import { IRoom } from "../../../interface";
 
 type TwoDrawnHotelRoomProps = {
-  dataRoom: IHotelRoom[];
+  dataRoom: IRoom[];
   openDrawnRoom: boolean;
   isClosedDrawnRoom: () => void;
 };

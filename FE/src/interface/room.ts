@@ -1,4 +1,4 @@
-import { IImage } from ".";
+import { IAmenities, IHotel, IImage, IRoomType } from ".";
 
 export interface IRoom {
   _id: string;
@@ -7,9 +7,9 @@ export interface IRoom {
   price: number;
   status: string;
   description: string;
-  id_amenities: string[];
-  id_hotel: string;
-  id_roomType: string;
+  id_amenities: IAmenities[];
+  id_hotel: IHotel;
+  id_roomType: IRoomType;
   createdAt: string;
   updatedAt: string;
 }

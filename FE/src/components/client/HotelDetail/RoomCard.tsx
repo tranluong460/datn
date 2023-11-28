@@ -1,12 +1,8 @@
 import { Button } from "../..";
-import { IRoom, IRoomType } from "../../../interface";
-
-interface IShowRoom extends Omit<IRoom, "id_roomType"> {
-  id_roomType: IRoomType;
-}
+import { IRoom } from "../../../interface";
 
 type RoomCardProps = {
-  room: IShowRoom;
+  room: IRoom;
 };
 const RoomCard = ({ room }: RoomCardProps) => {
   return (

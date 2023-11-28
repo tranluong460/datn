@@ -11,26 +11,20 @@ import {
   Select,
   message,
 } from "antd";
-import type { RcFile } from "antd/es/upload/interface";
 
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { IRoom } from "../../../interface";
+import { AiOutlinePlusCircle } from "../../../icons";
+import {
+  useGetAllRoomTypeQuery,
+  useGetAllHotelQuery,
+  useGetAllAmenitiesQuery,
+  useCreateRoomMutation,
+} from "../../../api";
 
-import { useGetAllRoomTypeQuery } from "../../../api/roomType";
-import { useGetAllHotelQuery } from "../../../api/hotel";
-import { useGetAllAmenitiesQuery } from "../../../api/amenities";
-import { useCreateRoomMutation } from "../../../api/room";
-
-interface RoomData {
-  quantity: number;
-  price: number;
-  id_hotel: string;
-  id_roomType: string;
-  id_amenities: string[];
-  description: string;
-  images: RcFile[];
-}
-
-type CreateRoomModalProps = { isOpenCreate: boolean; onCancel: () => void };
+type CreateRoomModalProps = {
+  isOpenCreate: boolean;
+  onCancel: () => void;
+};
 
 const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
   const [form] = Form.useForm();
@@ -42,7 +36,7 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
 
   const [createRoom, resultCreate] = useCreateRoomMutation();
 
-  const onFinish = (data: RoomData) => {
+  const onFinish = (data: IRoom) => {
     createRoom(data)
       .unwrap()
       .then((response) => {

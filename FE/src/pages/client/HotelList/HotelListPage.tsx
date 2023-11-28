@@ -1,4 +1,5 @@
 import { Result } from "antd";
+
 import { Loading } from "../..";
 import { useGetAllHotelQuery } from "../../../api";
 import { Container, Filter, ListHotel } from "../../../components";

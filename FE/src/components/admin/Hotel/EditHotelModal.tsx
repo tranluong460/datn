@@ -12,7 +12,7 @@ import {
   message,
 } from "antd";
 
-import { IAmenities, IHotel } from "../../../interface";
+import { IHotel } from "../../../interface";
 import { AiOutlinePlusCircle } from "../../../icons";
 import {
   useGetAllAmenitiesQuery,
@@ -20,15 +20,11 @@ import {
   useUpdateHotelMutation,
 } from "../../../api";
 
-interface IEditHotel extends Omit<IHotel, "id_amenities"> {
-  id_amenities: IAmenities[];
-}
-
 type EditHotelModalProps = {
   isOpenEdit: boolean;
   onCancel: () => void;
   loading: boolean;
-  data: IEditHotel;
+  data: IHotel;
 };
 
 const EditHotelModal = ({
