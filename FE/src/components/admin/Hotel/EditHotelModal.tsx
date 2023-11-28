@@ -40,14 +40,6 @@ const EditHotelModal = ({
   const { data: allProvinces } = useGetAllProvincesQuery("");
   const [editHotel, resultEdit] = useUpdateHotelMutation();
 
-  const transformedAmenities =
-    data &&
-    data.id_amenities &&
-    data.id_amenities.map((item) => ({
-      value: item._id,
-      label: item.name,
-    }));
-
   const onFinish = (data: IHotel) => {
     editHotel(data)
       .unwrap()
@@ -79,7 +71,11 @@ const EditHotelModal = ({
           layout="vertical"
           form={form}
           onFinish={onFinish}
-          initialValues={{ ...data, id_amenities: transformedAmenities }}
+          initialValues={{
+            ...data,
+            id_amenities:
+              data.id_amenities && data.id_amenities.map((item) => item._id),
+          }}
           autoComplete="off"
         >
           <Form.Item name="_id" hidden>

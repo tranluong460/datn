@@ -43,26 +43,6 @@ const EditRoomModal = ({
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
   const [editRoom, resultEdit] = useUpdateRoomMutation();
 
-  const transformedAmenities =
-    data &&
-    data.id_amenities &&
-    data.id_amenities.map((item) => ({
-      value: item._id,
-      label: item.name,
-    }));
-
-  const transformedHotel = data &&
-    data.id_hotel && {
-      value: data.id_hotel._id,
-      label: data.id_hotel.name,
-    };
-
-  const transformedRoomType = data &&
-    data.id_roomType && {
-      value: data.id_roomType._id,
-      label: data.id_roomType.name,
-    };
-
   const onFinish = (data: IRoom) => {
     editRoom(data)
       .unwrap()
@@ -96,9 +76,10 @@ const EditRoomModal = ({
           onFinish={onFinish}
           initialValues={{
             ...data,
-            id_amenities: transformedAmenities,
-            id_hotel: transformedHotel,
-            id_roomType: transformedRoomType,
+            id_amenities:
+              data.id_amenities && data.id_amenities.map((item) => item._id),
+            id_hotel: data.id_hotel && data.id_hotel._id,
+            id_roomType: data.id_roomType && data.id_roomType._id,
           }}
           autoComplete="off"
         >
