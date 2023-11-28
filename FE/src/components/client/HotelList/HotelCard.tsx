@@ -1,15 +1,22 @@
-import { Button } from "../..";
-import { CiLocationOn, AiOutlineStar } from "../../../icons";
+import { Rate } from "antd";
 
-const HotelCard = () => {
+import { Button } from "../..";
+import { IHotel } from "../../../interface";
+import { CiLocationOn } from "../../../icons";
+
+type HotelCardProps = {
+  hotel: IHotel;
+};
+
+const HotelCard = ({ hotel }: HotelCardProps) => {
   return (
     <>
       <div className="grid lg:grid-cols-3 grid-cols-1 p-3 mb-4 gap-3 rounded-lg bg-light dark:bg-dark">
         <div className="relative">
-          <a href="hotel-detail/1" className="no-underline">
+          <a href={`hotel-detail/${hotel._id}`} className="no-underline">
             <img
-              src="https://booking.muongthanh.com/images/hotels/hotels/original/_hkt6859_1679810462_1691467982.jpg"
-              alt="Mường Thanh Grand Sài Gòn Centre"
+              src={hotel.images[0].url}
+              alt={hotel.name}
               className="rounded-md w-full xl:h-48 md:h-44 object-contain"
             />
           </a>
@@ -17,35 +24,24 @@ const HotelCard = () => {
 
         <div className="box-border">
           <h2 className="font-semibold text-2xl leading-normal mb-4 text-textLight dark:text-textDark">
-            <a href="#" className="no-underline">
-              Mường Thanh Grand Sài Gòn Centre
+            <a href={`hotel-detail/${hotel._id}`} className="no-underline">
+              {hotel.name}
             </a>
           </h2>
 
           <p className="flex mb-4 font-normal text-base leading-normal gap-1 text-textLight2nd dark:text-textDark2nd">
             <CiLocationOn size={25} />
-            Số 8-8A Mạc Đĩnh Chi, Phường Bến Nghé, Quận 1, Thành Phố Hồ Chí
-            Minh, Việt Nam
+            {hotel.address}
           </p>
 
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-start gap-1">
             <span className="text-textLight dark:text-textDark">Đánh giá:</span>
 
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
+            <Rate
+              disabled
+              value={3}
+              className="text-yellow-400 dark:text-yellow-500"
+            />
           </div>
         </div>
 
@@ -53,7 +49,7 @@ const HotelCard = () => {
           <div className="w-full mt-auto text-right text-textLight2nd dark:text-textDark2nd">
             <div className="box-border">
               <div className="flex lg:flex-col flex-row gap-10">
-                <div className="">
+                <div>
                   <p>Chỉ từ</p>
 
                   <p className="text-md lg:text-2xl font-bold text-textLight dark:text-textDark">

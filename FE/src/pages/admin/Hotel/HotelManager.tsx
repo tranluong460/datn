@@ -115,15 +115,13 @@ const HotelManager = () => {
         onCancel={() => setShowCreateModal(false)}
       />
 
-      {oneHotel?.data._id && (
-        <EditHotelModal
-          key={oneHotel?.data._id}
-          isOpenEdit={showEditModal}
-          data={oneHotel?.data}
-          loading={isFetching}
-          onCancel={() => setShowEditModal(false)}
-        />
-      )}
+      <EditHotelModal
+        key={oneHotel?.data._id}
+        isOpenEdit={showEditModal}
+        data={oneHotel?.data}
+        loading={isFetching}
+        onCancel={() => setShowEditModal(false)}
+      />
     </>
   );
 };

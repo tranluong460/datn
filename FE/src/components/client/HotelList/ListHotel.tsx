@@ -1,14 +1,17 @@
 import { HotelCard } from "../..";
+import { IHotel } from "../../../interface";
 
-const ListHotel = () => {
+type ListHotelProps = {
+  listHotel: IHotel[];
+};
+
+const ListHotel = ({ listHotel }: ListHotelProps) => {
   return (
     <>
       <div className="box-border">
-        <HotelCard />
-
-        <HotelCard />
-
-        <HotelCard />
+        {listHotel.map((hotel) => (
+          <HotelCard key={hotel._id} hotel={hotel} />
+        ))}
       </div>
     </>
   );

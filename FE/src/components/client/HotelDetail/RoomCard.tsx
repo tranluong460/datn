@@ -13,7 +13,7 @@ const RoomCard = ({ room }: RoomCardProps) => {
       <div className="h-auto transition duration-300 rounded-md bg-light dark:bg-dark">
         <div className="overflow-hidden h-64">
           <img
-            src="https://booking.muongthanh.com/images/hotels/rooms/original/phong-deluxe-king_1694053986.jpg"
+            src={`${room.images[0].url}`}
             alt="Room"
             className="w-full h-full object-cover"
           />

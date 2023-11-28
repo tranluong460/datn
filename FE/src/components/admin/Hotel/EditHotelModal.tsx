@@ -44,10 +44,13 @@ const EditHotelModal = ({
   const { data: allProvinces } = useGetAllProvincesQuery("");
   const [editHotel, resultEdit] = useUpdateHotelMutation();
 
-  const transformedAmenities = data.id_amenities.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
+  const transformedAmenities =
+    data &&
+    data.id_amenities &&
+    data.id_amenities.map((item) => ({
+      value: item._id,
+      label: item.name,
+    }));
 
   const onFinish = (data: IHotel) => {
     editHotel(data)
