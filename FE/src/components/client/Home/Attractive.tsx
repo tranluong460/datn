@@ -62,7 +62,7 @@ const Attractive = () => {
           <div className="grid auto-cols-auto grid-flow-row auto-rows-auto grid-cols-3 lg:gap-5 gap-2">
             {data.map((item) => (
               <AttractiveCard
-                key={item.url}
+                key={item.image}
                 url={item.url}
                 imageUrl={item.image}
                 label={item.label}
