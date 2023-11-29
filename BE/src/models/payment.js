@@ -10,9 +10,9 @@ const paymentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    payment_date: {
-      type: Date,
-      required: true,
+    code: {
+      type: String,
+      required: false,
     },
     description: {
       type: String,
@@ -20,8 +20,8 @@ const paymentSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Thành công", "Thất bại"],
-      default: "Thành công",
+      enum: ["Thành công", "Thất bại", "Chưa thanh toán"],
+      default: "Chưa thanh toán",
     },
   },
   { versionKey: false, timestamps: true }
