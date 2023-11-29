@@ -106,14 +106,7 @@ const EditRoomModal = ({
                 label="Giá"
                 rules={[{ required: true, message: "Vui lòng nhập giá!" }]}
               >
-                <InputNumber
-                  className="w-full"
-                  min={1}
-                  addonAfter="VNĐ"
-                  formatter={(value) =>
-                    `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-                  }
-                />
+                <InputNumber className="w-full" min={1} addonAfter="VNĐ" />
               </Form.Item>
             </Col>
 
