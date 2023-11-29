@@ -8,7 +8,7 @@ import { validateFormMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
-    const hotelList = await HotelModel.find();
+    const hotelList = await HotelModel.find().populate("id_room");
 
     if (!hotelList || hotelList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách khách sạn");
@@ -29,9 +29,7 @@ export const getAll = async (req, res) => {
 export const getOne = async (req, res) => {
   try {
     const hotel = await HotelModel.findById(req.params.id)
-      .populate("id_amenities")
-      .populate("id_review")
-      .populate("id_room")
+      .populate("id_amenities id_room")
       .populate({
         path: "id_room",
         populate: "id_roomType",
