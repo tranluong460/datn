@@ -33,7 +33,8 @@ const HotelDetailPage = () => {
   return (
     <>
       <div
-        className={`bg-cover bg-center bg-fixed bg-[url(${data?.data.images[0].url})] w-full h-[500px]`}
+        className={`bg-cover bg-center bg-fixed  w-full h-[500px]`}
+        style={{ backgroundImage: `url(${data.data.images[0].url})` }}
       >
         <InfoHotel
           name={data?.data?.name}

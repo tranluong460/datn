@@ -11,6 +11,8 @@ import {
   TwoDrawnHotelDescription,
   TwoDrawnHotelRoom,
 } from "../..";
+import { useGetAllProvincesQuery } from "../../../api";
+import { getCityByCode } from "../../../utils";
 
 type HotelDrawnProps = {
   idHotel: string;
@@ -24,6 +26,7 @@ const HotelDrawn = ({
   onClosedHotelDrawn,
 }: HotelDrawnProps) => {
   const { data, isFetching } = useGetOneHotelQuery(idHotel);
+  const { data: allProvinces } = useGetAllProvincesQuery("");
 
   const [openDrawnAmenities, setOpenDrawnAmenities] = useState(false);
   const [openDrawnDescription, setOpenDrawnDescription] = useState(false);
@@ -34,6 +37,8 @@ const HotelDrawn = ({
     data.data.images.forEach((item: IImage) => {
       imgList.push(item.url);
     });
+
+  const city = getCityByCode(data?.data?.city, allProvinces);
 
   const items: DescriptionsProps["items"] = [
     {
@@ -51,7 +56,7 @@ const HotelDrawn = ({
     {
       key: "3",
       label: "Thành phố",
-      children: data?.data?.city,
+      children: city?.name,
       span: { xs: 1, sm: 2, md: 3, lg: 3, xl: 2, xxl: 2 },
     },
     {

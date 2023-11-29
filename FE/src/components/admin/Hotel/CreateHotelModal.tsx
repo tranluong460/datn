@@ -129,22 +129,13 @@ const CreateHotelModal = ({
                   allProvinces.map(
                     (
                       item: {
-                        codename: string;
                         name: string;
-                        division_type: string;
+                        code: string;
                       },
                       index: number
                     ) => (
-                      <Option key={item.codename} value={item.name}>
-                        <p
-                          className={`${
-                            item.division_type === "thành phố trung ương"
-                              ? "font-medium"
-                              : ""
-                          }`}
-                        >
-                          {index + 1}, {item.name}
-                        </p>
+                      <Option key={item.code} value={item.code}>
+                        {index + 1}, {item.name}
                       </Option>
                     )
                   )}

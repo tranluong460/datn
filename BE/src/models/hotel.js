@@ -43,7 +43,7 @@ const hotelSchema = new mongoose.Schema(
       required: true,
     },
     city: {
-      type: String,
+      type: Number,
       required: true,
     },
     id_amenities: [

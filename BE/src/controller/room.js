@@ -24,10 +24,9 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const room = await RoomModel.findById(req.params.id)
-      .populate("id_amenities")
-      .populate("id_hotel")
-      .populate("id_roomType");
+    const room = await RoomModel.findById(req.params.id).populate(
+      "id_amenities id_hotel id_roomType"
+    );
 
     if (!room || room.length === 0) {
       return sendResponse(res, 404, "Không có thông tin phòng");

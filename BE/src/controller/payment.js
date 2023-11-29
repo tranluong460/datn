@@ -1,56 +1,77 @@
 import qs from "qs";
+import axios from "axios";
 import crypto from "crypto";
 import moment from "moment";
 import dotenv from "dotenv";
 
+import { PaymentValidate } from "../validate";
+import { validateMiddleware } from "../middleware";
 import { BookingModel, PaymentModel } from "../models";
-import { sendResponse, sortObject } from "../utils";
+import {
+  createOrder,
+  getStatusOrder,
+  sendResponse,
+  sortObject,
+} from "../utils";
 
 dotenv.config();
 
 export const vnPayPayment = (req, res) => {
+  const { amount, bookingId } = req.body;
+
   try {
-    process.env.TZ = "Asia/Ho_Chi_Minh";
+    validateMiddleware(req, res, PaymentValidate, async () => {
+      process.env.TZ = "Asia/Ho_Chi_Minh";
 
-    const date = new Date();
-    const createDate = moment(date).format("YYYYMMDDHHmmss");
+      const date = new Date();
+      const createDate = moment(date).format("YYYYMMDDHHmmss");
 
-    const ipAddr =
-      req.headers["x-forwarded-for"] ||
-      req.connection.remoteAddress ||
-      req.socket.remoteAddress ||
-      req.connection.socket.remoteAddress;
+      const ipAddr =
+        req.headers["x-forwarded-for"] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
 
-    const orderId = req.body.orderId || moment(date).format("DDHHmmss");
-    const amount = req.body.amount;
-    const locale = req.body.language || "vn";
+      const data = {
+        id_booking: bookingId,
+        amount,
+      };
 
-    let vnp_Params = {};
-    vnp_Params["vnp_Version"] = "2.1.0";
-    vnp_Params["vnp_Command"] = "pay";
-    vnp_Params["vnp_TmnCode"] = process.env.VNP_TMNCODE;
-    vnp_Params["vnp_Locale"] = locale;
-    vnp_Params["vnp_CurrCode"] = "VND";
-    vnp_Params["vnp_TxnRef"] = orderId;
-    vnp_Params["vnp_OrderInfo"] = orderId;
-    vnp_Params["vnp_OrderType"] = "other";
-    vnp_Params["vnp_Amount"] = amount * 100;
-    vnp_Params["vnp_ReturnUrl"] = process.env.VNP_RETURNURL;
-    vnp_Params["vnp_IpAddr"] = ipAddr;
-    vnp_Params["vnp_CreateDate"] = createDate;
-    vnp_Params = sortObject(vnp_Params);
+      const payment = await PaymentModel.create(data);
 
-    const signData = qs.stringify(vnp_Params, { encode: false });
-    const hmac = crypto.createHmac("sha512", process.env.VNP_HASHSECRET);
-    const signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+      await BookingModel.findByIdAndUpdate(
+        { _id: bookingId },
+        { id_payment: payment._id },
+        { new: true }
+      );
 
-    vnp_Params["vnp_SecureHash"] = signed;
+      let vnp_Params = {};
+      vnp_Params["vnp_Version"] = "2.1.0";
+      vnp_Params["vnp_Command"] = "pay";
+      vnp_Params["vnp_TmnCode"] = process.env.VNP_TMNCODE;
+      vnp_Params["vnp_Locale"] = "vn";
+      vnp_Params["vnp_CurrCode"] = "VND";
+      vnp_Params["vnp_TxnRef"] = payment._id;
+      vnp_Params["vnp_OrderInfo"] = "Thanh toan hoa don " + bookingId;
+      vnp_Params["vnp_OrderType"] = "other";
+      vnp_Params["vnp_Amount"] = amount * 100;
+      vnp_Params["vnp_ReturnUrl"] = process.env.VNP_RETURN_URL;
+      vnp_Params["vnp_IpAddr"] = ipAddr;
+      vnp_Params["vnp_CreateDate"] = createDate;
+      vnp_Params = sortObject(vnp_Params);
 
-    const url = `${process.env.VNP_URL}?${qs.stringify(vnp_Params, {
-      encode: false,
-    })}`;
+      const signData = qs.stringify(vnp_Params, { encode: false });
+      const hmac = crypto.createHmac("sha512", process.env.VNP_HASHSECRET);
+      const signed = hmac.update(Buffer.from(signData, "utf-8")).digest("hex");
 
-    res.redirect(url);
+      vnp_Params["vnp_SecureHash"] = signed;
+
+      const url = `${process.env.VNP_URL}?${qs.stringify(vnp_Params, {
+        encode: false,
+      })}`;
+
+      return res.redirect(url);
+    });
   } catch (error) {
     console.error(error);
 
@@ -70,32 +91,157 @@ export const vnPayPaymentReturn = async (req, res) => {
 
     const signData = qs.stringify(vnp_Params, { encode: false });
     const hmac = crypto.createHmac("sha512", process.env.VNP_HASHSECRET);
-    const signed = hmac.update(new Buffer(signData, "utf-8")).digest("hex");
+    const signed = hmac.update(Buffer.from(signData, "utf-8")).digest("hex");
 
     if (secureHash !== signed) {
       res.redirect(`${process.env.PUBLIC_URL}/error-payment-signed`);
     }
 
-    const date = vnp_Params["vnp_PayDate:"];
+    const idPayment = vnp_Params["vnp_TxnRef"];
+    const vnp_ResponseCode = vnp_Params["vnp_ResponseCode"];
 
-    const id = vnp_Params["vnp_OrderInfo"];
-    const amount = vnp_Params["vnp_Amount"];
-    const formatDate = moment(date).format("YYYY/MM/DD");
+    if (vnp_ResponseCode !== "00") {
+      const payment = await PaymentModel.findByIdAndUpdate(
+        { _id: idPayment },
+        { status: "Thất bại" },
+        { new: true }
+      );
 
-    const data = {
-      id_booking: id,
-      amount,
-      payment_date: formatDate,
-    };
+      await BookingModel.findByIdAndUpdate(
+        { _id: payment.id_booking },
+        { status: "Đã hủy bỏ" },
+        { new: true }
+      );
 
-    const payment = await PaymentModel.create(data);
-    await BookingModel.findByIdAndUpdate(
-      { _id: id },
-      { status: "Đang xử lý", id_payment: payment._id },
+      return res.redirect(`${process.env.PUBLIC_URL}/error-payment`);
+    }
+
+    const payment = await PaymentModel.findByIdAndUpdate(
+      { _id: idPayment },
+      { status: "Thành công", code: idPayment },
       { new: true }
     );
 
-    res.redirect(`${process.env.PUBLIC_URL}/success-payment`);
+    await BookingModel.findByIdAndUpdate(
+      { _id: payment.id_booking },
+      { status: "Đang xử lý" },
+      { new: true }
+    );
+
+    return res.redirect(`${process.env.PUBLIC_URL}/success-payment`);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+export const createOrderZaloPay = async (req, res) => {
+  const { amount, bookingId } = req.body;
+
+  try {
+    validateMiddleware(req, res, PaymentValidate, async () => {
+      const date = new Date();
+      const apptransid = `${moment(date).format("YYMMDD")}_${Date.now()}`;
+
+      let order = {
+        amount: amount,
+        description: "Thanh toán hóa đơn " + bookingId,
+        appid: process.env.ZALOPAY_APPID,
+        apptime: Date.now(),
+        apptransid,
+        appuser: "TranVanLuong",
+        bankcode: "zalopayapp",
+        embeddata: "embeddata",
+        item: "item",
+      };
+
+      const paymentData = {
+        id_booking: bookingId,
+        amount,
+        code: apptransid,
+      };
+
+      const payment = await PaymentModel.create(paymentData);
+
+      await BookingModel.findByIdAndUpdate(
+        { _id: bookingId },
+        { id_payment: payment._id },
+        { new: true }
+      );
+
+      const mac = createOrder(order);
+      order.mac = mac;
+
+      const { data } = await axios.post(
+        process.env.ZALOPAY_CREATE_ORDER_URL,
+        null,
+        {
+          params: order,
+        }
+      );
+
+      if (data.returncode !== 1) {
+        return res.redirect(`${process.env.PUBLIC_URL}/error-payment`);
+      }
+
+      return res.redirect(data.orderurl);
+    });
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+export const checkStatusZaloPay = async (req, res) => {
+  const { code } = req.params;
+  try {
+    let order = {
+      appid: process.env.ZALOPAY_APPID,
+      apptransid: code,
+    };
+
+    const mac = getStatusOrder(order);
+    order.mac = mac;
+
+    const { data } = await axios.post(
+      process.env.ZALOPAY_CHECK_STATUS_URL,
+      null,
+      {
+        params: order,
+      }
+    );
+
+    if (data.returncode !== 1) {
+      const payment = await PaymentModel.findOneAndUpdate(
+        { code: code },
+        { status: "Thất bại" },
+        { new: true }
+      );
+
+      await BookingModel.findByIdAndUpdate(
+        { _id: payment.id_booking },
+        { status: "Đã hủy bỏ" },
+        { new: true }
+      );
+
+      return sendResponse(res, 200, "Giao dịch thất bại");
+    }
+
+    const payment = await PaymentModel.findOneAndUpdate(
+      { code },
+      { status: "Thành công" },
+      { new: true }
+    );
+
+    await BookingModel.findByIdAndUpdate(
+      { _id: payment.id_booking },
+      { status: "Đang xử lý" },
+      { new: true }
+    );
+
+    return sendResponse(res, 200, "Giao dịch thành công");
   } catch (error) {
     console.error(error);
 

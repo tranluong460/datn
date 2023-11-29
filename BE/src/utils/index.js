@@ -13,7 +13,13 @@ import {
 import { generateRandomCode } from "./generateRandomUtils";
 import { getGoogleOauthToken, getGoogleUser } from "./oauthUtils";
 import { sendResponse } from "./responseUtils";
-import { sortObject } from "./sortUtils";
+import {
+  sortObject,
+  compute,
+  createOrderMacData,
+  createOrder,
+  getStatusOrder,
+} from "./paymentUtils";
 import { uploadImageToCloudinary } from "./upImagesUtils";
 import { validationErrors } from "./validationUtils";
 
@@ -32,6 +38,10 @@ export {
   getGoogleUser,
   sendResponse,
   sortObject,
+  compute,
+  createOrder,
+  getStatusOrder,
+  createOrderMacData,
   uploadImageToCloudinary,
   validationErrors,
 };
