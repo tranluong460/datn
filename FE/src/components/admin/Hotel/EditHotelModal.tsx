@@ -12,7 +12,7 @@ import {
   message,
 } from "antd";
 
-import { IHotel } from "../../../interface";
+import { IAmenities, IHotel } from "../../../interface";
 import { AiOutlinePlusCircle } from "../../../icons";
 import {
   useGetAllAmenitiesQuery,
@@ -41,6 +41,8 @@ const EditHotelModal = ({
   const [editHotel, resultEdit] = useUpdateHotelMutation();
 
   const onFinish = (data: IHotel) => {
+    return console.log(data);
+
     editHotel(data)
       .unwrap()
       .then((response) => {
@@ -74,7 +76,9 @@ const EditHotelModal = ({
           initialValues={{
             ...data,
             id_amenities:
-              data.id_amenities && data.id_amenities.map((item) => item._id),
+              data &&
+              data.id_amenities &&
+              data.id_amenities.map((item) => item._id),
           }}
           autoComplete="off"
         >
@@ -151,22 +155,13 @@ const EditHotelModal = ({
                     allProvinces.map(
                       (
                         item: {
-                          codename: string;
                           name: string;
-                          division_type: string;
+                          code: number;
                         },
                         index: number
                       ) => (
-                        <Option key={item.codename} value={item.name}>
-                          <p
-                            className={`${
-                              item.division_type === "thành phố trung ương"
-                                ? "font-medium"
-                                : ""
-                            }`}
-                          >
-                            {index + 1}, {item.name}
-                          </p>
+                        <Option key={item.code} value={item.code}>
+                          {index + 1}, {item.name}
                         </Option>
                       )
                     )}
@@ -187,13 +182,11 @@ const EditHotelModal = ({
               >
                 <Select mode="multiple">
                   {allAmenities?.data &&
-                    allAmenities?.data.map(
-                      (item: { _id: string; name: string }) => (
-                        <Option key={item._id} value={item._id}>
-                          {item.name}
-                        </Option>
-                      )
-                    )}
+                    allAmenities?.data.map((item: IAmenities) => (
+                      <Option key={item._id} value={item._id}>
+                        {item.name}
+                      </Option>
+                    ))}
                 </Select>
               </Form.Item>
             </Col>

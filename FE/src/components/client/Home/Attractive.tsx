@@ -2,14 +2,51 @@ import { AttractiveCard } from "../..";
 
 const Attractive = () => {
   const data = [
-    { url: "/images/client/home/ha-noi.jpg", label: "Hà Nội", secondary: "" },
-    { url: "/images/client/home/ho-chi-minh.jpg", label: "Hồ Chí Minh" },
-    { url: "/images/client/home/da-lat.jpeg", label: "Đà Lạt", row: true },
-    { url: "/images/client/home/sapa.jpg", label: "Sapa", col: true },
-    { url: "/images/client/home/nha-trang.jpg", label: "Nha Trang", row: true },
-    { url: "/images/client/home/hai-phong.jpg", label: "Hải Phòng" },
-    { url: "/images/client/home/da-nang.jpg", label: "Đà Nẵng" },
-    { url: "/images/client/home/vung-tau.jpg", label: "Vũng Tàu", col: true },
+    {
+      url: "hanoi",
+      image: "/images/client/home/ha-noi.jpg",
+      label: "Hà Nội",
+      secondary: "",
+    },
+    {
+      url: "",
+      image: "/images/client/home/ho-chi-minh.jpg",
+      label: "Hồ Chí Minh",
+    },
+    {
+      url: "",
+      image: "/images/client/home/da-lat.jpeg",
+      label: "Đà Lạt",
+      row: true,
+    },
+    {
+      url: "",
+      image: "/images/client/home/sapa.jpg",
+      label: "Sapa",
+      col: true,
+    },
+    {
+      url: "",
+      image: "/images/client/home/nha-trang.jpg",
+      label: "Nha Trang",
+      row: true,
+    },
+    {
+      url: "",
+      image: "/images/client/home/hai-phong.jpg",
+      label: "Hải Phòng",
+    },
+    {
+      url: "",
+      image: "/images/client/home/da-nang.jpg",
+      label: "Đà Nẵng",
+    },
+    {
+      url: "",
+      image: "/images/client/home/vung-tau.jpg",
+      label: "Vũng Tàu",
+      col: true,
+    },
   ];
 
   return (
@@ -26,7 +63,8 @@ const Attractive = () => {
             {data.map((item) => (
               <AttractiveCard
                 key={item.url}
-                imageUrl={item.url}
+                url={item.url}
+                imageUrl={item.image}
                 label={item.label}
                 secondary={item.secondary}
                 col={item.col}

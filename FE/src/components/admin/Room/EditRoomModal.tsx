@@ -77,9 +77,11 @@ const EditRoomModal = ({
           initialValues={{
             ...data,
             id_amenities:
-              data.id_amenities && data.id_amenities.map((item) => item._id),
-            id_hotel: data.id_hotel && data.id_hotel._id,
-            id_roomType: data.id_roomType && data.id_roomType._id,
+              data &&
+              data.id_amenities &&
+              data.id_amenities.map((item) => item._id),
+            id_hotel: data && data.id_hotel && data.id_hotel._id,
+            id_roomType: data && data.id_roomType && data.id_roomType._id,
           }}
           autoComplete="off"
         >
