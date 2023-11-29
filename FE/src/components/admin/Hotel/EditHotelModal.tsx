@@ -41,8 +41,6 @@ const EditHotelModal = ({
   const [editHotel, resultEdit] = useUpdateHotelMutation();
 
   const onFinish = (data: IHotel) => {
-    return console.log(data);
-
     editHotel(data)
       .unwrap()
       .then((response) => {
