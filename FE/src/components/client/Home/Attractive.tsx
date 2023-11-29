@@ -3,13 +3,13 @@ import { AttractiveCard } from "../..";
 const Attractive = () => {
   const data = [
     {
-      url: "hanoi",
+      url: "1",
       image: "/images/client/home/ha-noi.jpg",
       label: "Hà Nội",
       secondary: "",
     },
     {
-      url: "",
+      url: "79",
       image: "/images/client/home/ho-chi-minh.jpg",
       label: "Hồ Chí Minh",
     },
