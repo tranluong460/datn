@@ -34,26 +34,34 @@ import InfoHotel from "./client/HotelDetail/InfoHotel";
 import RoomCard from "./client/HotelDetail/RoomCard";
 import RoomList from "./client/HotelDetail/RoomList";
 import Filter from "./client/HotelList/Filter";
-import FilterCard from "./client/HotelList/FilterCard";
+import FilterTop from "./client/HotelList/FilterTop";
 import HotelCard from "./client/HotelList/HotelCard";
 import ListHotel from "./client/HotelList/ListHotel";
 import LoginModal from "./client/Modal/LoginModal";
 import Modal from "./client/Modal/Modal";
 import RegisterModal from "./client/Modal/RegisterModal";
+import SearchModal from "./client/Modal/SearchModal";
 import DarkMode from "./client/NavBar/DarkMode";
 import Logo from "./client/NavBar/Logo";
 import MenuItem from "./client/NavBar/MenuItem";
 import NavBar from "./client/NavBar/NavBar";
 import Search from "./client/NavBar/Search";
 import UserMenu from "./client/NavBar/UserMenu";
+import Counter from "./client/Input/Counter";
 import BillInfo from "./client/Payment/BillInfo";
 import BookingInfo from "./client/Payment/BookingInfo";
 import Avatar from "./Avatar";
-import Button from "./Button";
-import Container from "./Container";
-import Input from "./Input";
+import FilterDialog from "./client/HotelList/FilterDialog";
+import CountrySelect from "./client/Input/CountrySelect";
+import Button from "./client/Button";
+import Calendar from "./client/Input/Calendar";
+import Container from "./client/Container";
+import Input from "./client/Input/Input";
 
 export {
+  Counter,
+  FilterDialog,
+  CountrySelect,
   CreateAmenitiesModal,
   EditAmenitiesModal,
   CreateHotelModal,
@@ -85,12 +93,13 @@ export {
   RoomCard,
   RoomList,
   Filter,
-  FilterCard,
+  FilterTop,
   HotelCard,
   ListHotel,
   LoginModal,
   Modal,
   RegisterModal,
+  SearchModal,
   DarkMode,
   Logo,
   MenuItem,
@@ -101,6 +110,7 @@ export {
   BookingInfo,
   Avatar,
   Button,
+  Calendar,
   Container,
   Input,
 };
