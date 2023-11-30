@@ -1,3 +1,4 @@
+import { bookingApi } from "./booking";
 // Amenities API
 import {
   amenitiesApi,
@@ -16,6 +17,9 @@ import {
   useInfoAccountQuery,
   useLogoutAccountMutation,
 } from "./auth";
+
+// Booking API
+import { useCreateBookingMutation, useVnPayPaymentMutation } from "./booking";
 
 // Hotel API
 import {
@@ -68,6 +72,9 @@ export {
   useRegisterAccountMutation,
   useInfoAccountQuery,
   useLogoutAccountMutation,
+  bookingApi,
+  useCreateBookingMutation,
+  useVnPayPaymentMutation,
   hotelApi,
   useGetAllHotelQuery,
   useGetOneHotelQuery,

@@ -5,21 +5,29 @@ type CounterProps = {
   title: string;
   subtitle?: string;
   value: number;
+  min?: number;
   onChange: (value: number) => void;
 };
 
-const Counter = ({ title, subtitle, value, onChange }: CounterProps) => {
+const Counter = ({
+  title,
+  subtitle,
+  value,
+  onChange,
+  min = 1,
+}: CounterProps) => {
   const onAdd = useCallback(() => {
     onChange(value + 1);
   }, [onChange, value]);
 
   const onReduce = useCallback(() => {
-    if (value === 1) {
+    const mini = min;
+    if (value === mini) {
       return;
     }
 
     onChange(value - 1);
-  }, [onChange, value]);
+  }, [onChange, value, min]);
 
   return (
     <div className="flex flex-row items-center justify-between w-full">

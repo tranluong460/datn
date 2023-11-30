@@ -58,8 +58,12 @@ import Calendar from "./client/Input/Calendar";
 import Container from "./client/Container";
 import HotelBooking from "./client/Booking/HotelBooking";
 import Input from "./client/Input/Input";
+import RoomBooking from "./client/Booking/RoomBooking";
+import DetailBooking from "./client/Booking/DetailBooking";
 
 export {
+  DetailBooking,
+  RoomBooking,
   HotelBooking,
   Counter,
   FilterDialog,
