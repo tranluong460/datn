@@ -49,6 +49,7 @@ const Calendar = ({ dateRange, onChange }: CalendarProps) => {
             Ngày trả
           </label>
           <input
+            min={dateRange.startDate}
             type="date"
             name="endDate"
             id="endDate"
