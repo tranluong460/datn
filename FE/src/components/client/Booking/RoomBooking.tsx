@@ -39,29 +39,37 @@ const RoomBooking = ({
   };
 
   return (
-    <div className="flex p-3 mt-5 mb-4 gap-3 rounded-lg bg-light dark:bg-dark">
-      <div className="no-underline p-3">
+    <div className="mx-3 flex p-3 mt-5 mb-4 gap-3 rounded-lg bg-backgroundLight dark:bg-backgroundDark">
+      <div className="no-underline">
         <img
           src={room?.images[0].url}
           alt={room._id}
-          className="rounded-md w-full xl:h-48 md:h-44 object-contain"
+          className="rounded-md w-80 object-contain"
         />
       </div>
 
-      <div>{room.id_roomType.name}</div>
-      <div>
-        {room.price.toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        })}
-        /đêm
-      </div>
-      <div>
+      <div className="flex flex-col gap-5">
+        <div className="text-textLight dark:text-textDark text-3xl">
+          {room.id_roomType.name}
+        </div>
+
+        <div className="text-textLight2nd dark:text-textDark2nd flex gap-1 items-center text-xl">
+          <span>
+            {room.price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </span>
+
+          <span>/đêm</span>
+        </div>
+
         <Counter
           title="Số lượng"
           value={value}
           onChange={handleQuantityChange}
           min={0}
+          max={room.quantity}
         />
       </div>
     </div>
