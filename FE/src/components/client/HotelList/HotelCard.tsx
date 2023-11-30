@@ -1,10 +1,10 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import qs from "query-string";
 import { Rate } from "antd";
 
 import { Button } from "../..";
 import { IHotel } from "../../../interface";
 import { CiLocationOn } from "../../../icons";
-import { useLocation, useNavigate } from "react-router-dom";
 
 type HotelCardProps = {
   hotel: IHotel;

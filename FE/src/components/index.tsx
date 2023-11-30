@@ -56,9 +56,11 @@ import CountrySelect from "./client/Input/CountrySelect";
 import Button from "./client/Button";
 import Calendar from "./client/Input/Calendar";
 import Container from "./client/Container";
+import HotelBooking from "./client/Booking/HotelBooking";
 import Input from "./client/Input/Input";
 
 export {
+  HotelBooking,
   Counter,
   FilterDialog,
   CountrySelect,
