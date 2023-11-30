@@ -30,6 +30,7 @@ const SearchModal = () => {
     const updatedQuery: any = {
       ...currentQuery,
       location: city?.code,
+      hotel: null,
     };
 
     if (dateRange.startDate) {

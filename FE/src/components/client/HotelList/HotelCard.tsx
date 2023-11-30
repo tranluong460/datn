@@ -1,18 +1,46 @@
+import qs from "query-string";
 import { Rate } from "antd";
 
 import { Button } from "../..";
 import { IHotel } from "../../../interface";
 import { CiLocationOn } from "../../../icons";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type HotelCardProps = {
   hotel: IHotel;
 };
 
 const HotelCard = ({ hotel }: HotelCardProps) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const prices =
     hotel && hotel.id_room ? hotel.id_room.map((room) => room.price) : [];
 
   const lowestPrice = prices.length > 0 ? Math.min(...prices) : null;
+
+  const toggleBooking = (id: string) => {
+    let currentQuery = {};
+
+    if (location.search) {
+      currentQuery = qs.parse(location.search.toString());
+    }
+
+    const updatedQuery: any = {
+      ...currentQuery,
+      hotel: id,
+    };
+
+    const url = qs.stringifyUrl(
+      {
+        url: "/booking",
+        query: updatedQuery,
+      },
+      { skipNull: true }
+    );
+
+    navigate(url);
+  };
 
   return (
     <>
@@ -77,7 +105,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
                 <Button
                   label={lowestPrice ? "Đặt phòng" : "Hết phòng"}
                   disabled={lowestPrice ? false : true}
-                  onClick={() => alert("Đặt phòng")}
+                  onClick={() => toggleBooking(hotel._id)}
                 />
               </div>
             </div>
