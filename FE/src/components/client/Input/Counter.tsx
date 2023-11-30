@@ -6,6 +6,7 @@ type CounterProps = {
   subtitle?: string;
   value: number;
   min?: number;
+  max?: number;
   onChange: (value: number) => void;
 };
 
@@ -15,22 +16,22 @@ const Counter = ({
   value,
   onChange,
   min = 1,
+  max,
 }: CounterProps) => {
   const onAdd = useCallback(() => {
+    if (value === max) return;
+
     onChange(value + 1);
-  }, [onChange, value]);
+  }, [onChange, value, max]);
 
   const onReduce = useCallback(() => {
-    const mini = min;
-    if (value === mini) {
-      return;
-    }
+    if (value === min) return;
 
     onChange(value - 1);
   }, [onChange, value, min]);
 
   return (
-    <div className="flex flex-row items-center justify-between w-full">
+    <div className="flex flex-row items-center justify-between w-full gap-3">
       <div className="flex flex-col">
         <div className="font-medium text-textLight dark:text-textDark">
           {title}
@@ -39,19 +40,20 @@ const Counter = ({
           {subtitle}
         </div>
       </div>
-      <div className="flex flex-row items-center gap-4">
+
+      <div className="flex flex-row items-center gap-2">
         <button
           onClick={onReduce}
-          className="w-10 h-10 rounded-full border-[1px] border-divideLight dark:border-divideDark flex items-center justify-center text-textLight2nd dark:text-textDark2nd cursor-pointer hover:opacity-80 transition"
+          className="w-8 h-8 rounded-full border-[1px] border-divideLight dark:border-divideDark flex items-center justify-center text-textLight2nd dark:text-textDark2nd cursor-pointer hover:opacity-80 transition"
         >
           <AiOutlineMinus />
         </button>
 
-        <div className="font-light text-xl text-neutral-600">{value}</div>
+        <div className="font-light text-xl text-neutral-600 -mt-1">{value}</div>
 
         <button
           onClick={onAdd}
-          className="w-10 h-10 rounded-full border-[1px] border-divideLight dark:border-divideDark flex items-center justify-center text-textLight2nd dark:text-textDark2nd cursor-pointer hover:opacity-80 transition"
+          className="w-8 h-8 rounded-full border-[1px] border-divideLight dark:border-divideDark flex items-center justify-center text-textLight2nd dark:text-textDark2nd cursor-pointer hover:opacity-80 transition"
         >
           <AiOutlinePlus />
         </button>

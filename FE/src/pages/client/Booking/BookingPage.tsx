@@ -94,7 +94,7 @@ const BookingPage = () => {
       <HotelBooking oneHotel={data?.data} />
 
       <div className="grid grid-cols-4 gap-5">
-        <div className="col-span-3 bg-light">
+        <div className="col-span-3 bg-light dark:bg-dark">
           {data?.data?.id_room.map((room: IRoom) => (
             <RoomBooking
               key={room._id}
