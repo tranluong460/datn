@@ -1,6 +1,27 @@
+import { Result } from "antd";
+import { Loading } from "../..";
+import { useInfoAccountQuery } from "../../../api";
 import { InfoUser } from "../../../components";
 
 const ProfilePage = () => {
+  const { data, isLoading, isSuccess } = useInfoAccountQuery("");
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Result title="Không tìm thấy người dùng" status={404} />
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="rounded-xl bg-light dark:bg-dark p-3 w-full">
@@ -18,7 +39,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <InfoUser />
+        <InfoUser user={data?.data} />
       </div>
     </>
   );

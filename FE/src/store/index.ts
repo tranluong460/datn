@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   amenitiesApi,
   authApi,
+  bookingApi,
   hotelApi,
   provincesApi,
   roomApi,
@@ -19,6 +20,7 @@ export const store = configureStore({
     [roomTypeApi.reducerPath]: roomTypeApi.reducer,
     [roomApi.reducerPath]: roomApi.reducer,
     [provincesApi.reducerPath]: provincesApi.reducer,
+    [bookingApi.reducerPath]: bookingApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({})
@@ -28,5 +30,6 @@ export const store = configureStore({
       .concat(amenitiesApi.middleware)
       .concat(roomTypeApi.middleware)
       .concat(roomApi.middleware)
-      .concat(provincesApi.middleware),
+      .concat(provincesApi.middleware)
+      .concat(bookingApi.middleware),
 });

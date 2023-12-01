@@ -1,11 +1,7 @@
 import { IFeatures, IAmenities } from "./amenities";
-
-import { IImage, IHotel } from "./hotel";
-
+import { IImage, IHotel, ICountry } from "./hotel";
 import { IRoom } from "./room";
-
 import { IRoomType } from "./roomType";
-
 import { IInformation, IUser } from "./user";
 
 export type {
@@ -17,4 +13,5 @@ export type {
   IRoomType,
   IInformation,
   IUser,
+  ICountry,
 };

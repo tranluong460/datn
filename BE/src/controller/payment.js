@@ -70,7 +70,7 @@ export const vnPayPayment = (req, res) => {
         encode: false,
       })}`;
 
-      return res.redirect(url);
+      return sendResponse(res, 200, "Thanh toán", url);
     });
   } catch (error) {
     console.error(error);
@@ -113,7 +113,7 @@ export const vnPayPaymentReturn = async (req, res) => {
         { new: true }
       );
 
-      return res.redirect(`${process.env.PUBLIC_URL}/error-payment`);
+      return res.redirect(`${process.env.PUBLIC_URL}/close-payment`);
     }
 
     const payment = await PaymentModel.findByIdAndUpdate(
@@ -185,7 +185,7 @@ export const createOrderZaloPay = async (req, res) => {
         return res.redirect(`${process.env.PUBLIC_URL}/error-payment`);
       }
 
-      return res.redirect(data.orderurl);
+      return sendResponse(res, 200, "Thanh toán", data.orderurl);
     });
   } catch (error) {
     console.error(error);

@@ -1,3 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom";
+import qs from "query-string";
 import { Rate } from "antd";
 
 import { Button } from "../..";
@@ -9,32 +11,83 @@ type HotelCardProps = {
 };
 
 const HotelCard = ({ hotel }: HotelCardProps) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const prices =
     hotel && hotel.id_room ? hotel.id_room.map((room) => room.price) : [];
 
   const lowestPrice = prices.length > 0 ? Math.min(...prices) : null;
 
+  const toggleBooking = (id: string) => {
+    let currentQuery = {};
+
+    if (location.search) {
+      currentQuery = qs.parse(location.search.toString());
+    }
+
+    const updatedQuery: any = {
+      ...currentQuery,
+      hotel: id,
+    };
+
+    const url = qs.stringifyUrl(
+      {
+        url: "/booking",
+        query: updatedQuery,
+      },
+      { skipNull: true }
+    );
+
+    navigate(url);
+  };
+
+  const toggleDetail = (id: string) => {
+    let currentQuery = {};
+
+    if (location.search) {
+      currentQuery = qs.parse(location.search.toString());
+    }
+
+    const updatedQuery: any = {
+      ...currentQuery,
+    };
+
+    const url = qs.stringifyUrl(
+      {
+        url: `/hotel-detail/${id}`,
+        query: updatedQuery,
+      },
+      { skipNull: true }
+    );
+
+    navigate(url);
+  };
+
   return (
     <>
       <div className="grid lg:grid-cols-3 grid-cols-1 p-3 mb-4 gap-3 rounded-lg bg-light dark:bg-dark">
         <div className="relative">
-          <a href={`hotel-detail/${hotel._id}`} className="no-underline">
+          <div
+            onClick={() => toggleDetail(hotel._id)}
+            className="no-underline cursor-pointer"
+          >
             <img
               src={hotel.images[0].url}
               alt={hotel.name}
               className="rounded-md w-full xl:h-48 md:h-44 object-contain"
             />
-          </a>
+          </div>
         </div>
 
         <div className="box-border">
           <h2 className="font-semibold text-2xl leading-normal mb-4 text-textLight dark:text-textDark">
-            <a
-              href={`hotel-detail/${hotel._id}`}
-              className="no-underline hover:text-blue-500"
+            <div
+              onClick={() => toggleDetail(hotel._id)}
+              className="no-underline hover:text-blue-500 cursor-pointer"
             >
               {hotel.name}
-            </a>
+            </div>
           </h2>
 
           <p className="flex mb-4 font-normal text-base leading-normal gap-1 text-textLight2nd dark:text-textDark2nd">
@@ -77,7 +130,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
                 <Button
                   label={lowestPrice ? "Đặt phòng" : "Hết phòng"}
                   disabled={lowestPrice ? false : true}
-                  onClick={() => alert("Đặt phòng")}
+                  onClick={() => toggleBooking(hotel._id)}
                 />
               </div>
             </div>

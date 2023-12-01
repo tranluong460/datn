@@ -1,7 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { PrivateRoute } from "./utils";
-import { Page403, Page500, RouteAdmin, RouteAuth, RouteClient } from "./pages";
+import {
+  Page403,
+  Page500,
+  RouteAdmin,
+  RouteAuth,
+  RouteClient,
+  Success,
+} from "./pages";
 
 function App() {
   return (
@@ -17,6 +24,7 @@ function App() {
           </Route>
           <Route path="/unauthorized" element={<Page403 />} />
           <Route path="/oauth-error" element={<Page500 />} />
+          <Route path="/success-payment" element={<Success />} />
         </Routes>
       </BrowserRouter>
     </>

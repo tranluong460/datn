@@ -34,6 +34,7 @@ import Loading from "./error/Loading";
 import Page403 from "./error/Page403";
 import Page404 from "./error/Page404";
 import Page500 from "./error/Page500";
+import Success from "./error/Success";
 
 export {
   RouteAdmin,
@@ -65,4 +66,5 @@ export {
   Page403,
   Page404,
   Page500,
+  Success,
 };

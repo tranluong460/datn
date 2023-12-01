@@ -23,7 +23,7 @@ const AttractiveCard = ({
         ${row ? "md:row-span-2 h-full" : "h-36 sm:h-48"}
         ${col ? "md:col-span-2 h-full" : ""}
         `}
-        href={`http://localhost:5173/hotel-list?city=${url}`}
+        href={`http://localhost:5173/hotel-list?location=${url}`}
       >
         <span className="box-border block overflow-hidden w-auto h-auto absolute opacity-100 border-0 m-0 p-0 inset-0 bg-none">
           <img
