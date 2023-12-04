@@ -31,17 +31,11 @@ export const isAdminMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);
@@ -73,17 +67,11 @@ export const loginMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);

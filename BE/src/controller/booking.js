@@ -1,4 +1,5 @@
 import moment from "moment";
+import mongoose from "mongoose";
 
 import { BookingModel } from "../models";
 import { BookingValidate } from "../validate";
@@ -71,6 +72,10 @@ export const update = async (req, res) => {
   const { status } = req.body;
 
   try {
+    if (!mongoose.isValidObjectId(id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     if (!status) {
       return sendResponse(res, 404, "Trạng thái không dược để trống");
     }
