@@ -76,6 +76,7 @@ const BaseAdmin = () => {
     getItem("Người dùng", "/admin/user-manager", <AiOutlineUser />),
   ];
 
+  // eslint-disable-next-line
   const selectedMenuItem: any = menuItems.find(
     (item) => item?.key === location.pathname
   );

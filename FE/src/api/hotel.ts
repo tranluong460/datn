@@ -23,6 +23,7 @@ export const hotelApi = createApi({
 
         Object.keys(data).forEach((key) => {
           if (key === "images" && Array.isArray(data[key])) {
+            // eslint-disable-next-line
             data[key].forEach((file: any, index: number) => {
               formData.append(`images[${index}]`, file.originFileObj);
             });
@@ -48,6 +49,7 @@ export const hotelApi = createApi({
 
         Object.keys(newData).forEach((key) => {
           if (key === "images" && Array.isArray(data[key])) {
+            // eslint-disable-next-line
             data[key].forEach((file: any, index: number) => {
               formData.append(`images[${index}]`, file.originFileObj);
             });

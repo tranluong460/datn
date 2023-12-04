@@ -26,6 +26,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       currentQuery = qs.parse(location.search.toString());
     }
 
+    // eslint-disable-next-line
     const updatedQuery: any = {
       ...currentQuery,
       hotel: id,
@@ -49,6 +50,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       currentQuery = qs.parse(location.search.toString());
     }
 
+    // eslint-disable-next-line
     const updatedQuery: any = {
       ...currentQuery,
     };
