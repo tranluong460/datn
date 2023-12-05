@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 
 import { validateMiddleware } from "../middleware";
@@ -24,7 +25,7 @@ dotenv.config();
 export const getAll = async (req, res) => {
   try {
     const userList = await UserModel.find()
-      .select("-password -updatedAt")
+      .select("-password -createdAt -updatedAt")
       .populate({
         path: "id_information",
         select: "-createdAt -updatedAt",
@@ -47,11 +48,13 @@ export const getAll = async (req, res) => {
 };
 
 export const getInfoUserById = async (req, res) => {
-  const idUser = req.params.id;
-
   try {
-    const user = await UserModel.findById(idUser)
-      .select("-password -updatedAt")
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
+    const user = await UserModel.findById(req.params.id)
+      .select("-password -createdAt -updatedAt")
       .populate({
         path: "id_information",
         select: "-createdAt -updatedAt",
@@ -144,6 +147,10 @@ export const login = async (req, res) => {
 
 export const lockAccount = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     const user = await UserModel.findById(req.params.id);
     if (!user) {
       return sendResponse(res, 404, "Không tìm thấy người dùng");
@@ -182,17 +189,11 @@ export const refreshToken = (req, res) => {
     return sendResponse(res, 200, "Làm mới token thành công");
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);
@@ -246,6 +247,10 @@ export const googleOauth = async (req, res) => {
         { new: true, upsert: true }
       );
 
+      if (user.isLockAccount) {
+        return sendResponse(res, 403, "Tài khoản đã bị khóa");
+      }
+
       await loginToken(res, user);
     } else {
       const information = await InformationModel.create({
@@ -294,7 +299,7 @@ export const getCode = async (req, res) => {
   const { email } = req.body;
 
   const user = await UserModel.findOne({ email })
-    .select("-password -updatedAt")
+    .select("-password -createdAt -updatedAt")
     .populate({
       path: "id_information",
       select: "-createdAt -updatedAt",
@@ -417,7 +422,7 @@ export const getSecurityCode = async (req, res) => {
   const { email } = req.body;
 
   const user = await UserModel.findOne({ email })
-    .select("-password -updatedAt")
+    .select("-password -createdAt -updatedAt")
     .populate({
       path: "id_information",
       select: "-createdAt -updatedAt",
@@ -493,7 +498,7 @@ export const resetPassword = async (req, res) => {
       { new: true }
     ).populate("id_information");
 
-    res.cookie("changeCode", "", { maxAge: 1 });
+    res.cookie("resetToken", "", { maxAge: 1 });
     sendChangedPassword(userNew?.id_information.name, userNew.email);
 
     return sendResponse(res, 200, "Đổi mật khẩu thành công");

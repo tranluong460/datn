@@ -27,6 +27,7 @@ const SearchModal = () => {
       currentQuery = qs.parse(location.search.toString());
     }
 
+    // eslint-disable-next-line
     const updatedQuery: any = {
       ...currentQuery,
       location: city?.code,

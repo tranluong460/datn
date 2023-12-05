@@ -2,17 +2,17 @@ import { Container, ServiceCard } from "../..";
 
 const serviceData = [
   {
-    url: "/images/client/home/weather.png",
+    url: "/images/weather.png",
     title: "Weather",
     desc: "While you are writing css, you can split the code editor to make ",
   },
   {
-    url: "/images/client/home/guide.png",
+    url: "/images/guide.png",
     title: "Guide",
     desc: "While you are writing css, you can split the code editor to make ",
   },
   {
-    url: "/images/client/home/customization.png",
+    url: "/images/customization.png",
     title: "Customization",
     desc: "While you are writing css, you can split the code editor to make ",
   },
