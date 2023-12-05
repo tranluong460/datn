@@ -30,6 +30,15 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    updateInfor: builder.mutation({
+      query: (user: any) => ({
+        url: `auth/update-user/${user.id}`,
+        method: "POST",
+        body: user.data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -37,4 +46,5 @@ export const {
   useGetAllUserQuery,
   useLockUserMutation,
   useGetOneUserMutation,
+  useUpdateInforMutation,
 } = userApi;

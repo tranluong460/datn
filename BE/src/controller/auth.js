@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { validateMiddleware } from "../middleware";
 import { InformationModel, UserModel } from "../models";
-import { RegisterValidate, LoginValidate } from "../validate";
+import { RegisterValidate, LoginValidate, infomationUser } from "../validate";
 import {
   loginToken,
   sendMailRegister,
@@ -510,3 +510,22 @@ export const resetPassword = async (req, res) => {
     return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };
+export const updateInfo = async (req, res) => {
+  try {
+    validateMiddleware(req, res, infomationUser, async () => {
+      const info = await InformationModel.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body },
+        { new: true }
+      )
+      if (!info) {
+        return sendResponse(res, 404, 'Không cập nhật được thông tin cá nhân')
+      }
+      return sendResponse(res, 200, 'Cập nhật được thông tin cá nhân thành công', info)
+
+    })
+  } catch (error) {
+    console.log(error);
+    return sendResponse(res, 500, "Đã có lỗi xảy ra")
+  }
+}

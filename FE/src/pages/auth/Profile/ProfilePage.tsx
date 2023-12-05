@@ -5,7 +5,6 @@ import { InfoUser } from "../../../components";
 
 const ProfilePage = () => {
   const { data, isLoading, isSuccess } = useInfoAccountQuery("");
-
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">
@@ -40,6 +39,9 @@ const ProfilePage = () => {
         </div>
 
         <InfoUser user={data?.data} />
+      </div>
+      <div>
+
       </div>
     </>
   );
