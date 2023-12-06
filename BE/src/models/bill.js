@@ -2,13 +2,9 @@ import mongoose from "mongoose";
 
 const billSchema = new mongoose.Schema(
   {
-    id_booking: {
+    id_payment: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Booking"
-    },
-    description: {
-      type: String,
-      required: true,
+      ref: "Payment",
     },
   },
   { timestamps: true, versionKey: false }
