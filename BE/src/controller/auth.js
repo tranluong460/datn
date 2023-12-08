@@ -24,12 +24,17 @@ dotenv.config();
 
 export const getAll = async (req, res) => {
   try {
+    const page = (req.query.page || 1) - 1;
+    const limit = req.query.limit || 5;
+
     const userList = await UserModel.find()
       .select("-password -createdAt -updatedAt")
       .populate({
         path: "id_information",
         select: "-createdAt -updatedAt",
-      });
+      })
+      .skip(page * limit)
+      .limit(limit);
 
     if (!userList || userList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách người dùng");

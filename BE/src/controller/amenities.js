@@ -7,7 +7,12 @@ import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
-    const amenitiesList = await AmenitiesModel.find();
+    const page = (req.query.page || 1) - 1;
+    const limit = req.query.limit || 5;
+
+    const amenitiesList = await AmenitiesModel.find()
+      .skip(page * limit)
+      .limit(limit);
 
     if (!amenitiesList || amenitiesList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách tiện nghi");

@@ -5,7 +5,12 @@ import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
-    const billList = await BillModel.find();
+    const page = (req.query.page || 1) - 1;
+    const limit = req.query.limit || 5;
+
+    const billList = await BillModel.find()
+      .skip(page * limit)
+      .limit(limit);
 
     if (!billList || billList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách hóa đơn");
