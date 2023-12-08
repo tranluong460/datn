@@ -13,7 +13,7 @@ const HotelBooking = ({ oneHotel }: HotelBookingProps) => {
           <img
             src={oneHotel.images[0].url}
             alt={oneHotel.name}
-            className="rounded-md w-full xl:h-48 md:h-44 object-contain"
+            className="rounded-md w-full object-contain"
           />
         </div>
       </div>
