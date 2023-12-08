@@ -7,12 +7,7 @@ import { sendResponse, uploadImageToCloudinary } from "../utils";
 
 export const getAll = async (req, res) => {
   try {
-    const page = (req.query.page || 1) - 1;
-    const limit = req.query.limit || 5;
-
-    const roomList = await RoomModel.find()
-      .skip(page * limit)
-      .limit(limit);
+    const roomList = await RoomModel.find();
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");

@@ -7,13 +7,7 @@ import { sendResponse, uploadImageToCloudinary } from "../utils";
 
 export const getAll = async (req, res) => {
   try {
-    const page = (req.query.page || 1) - 1;
-    const limit = req.query.limit || 5;
-
-    const hotelList = await HotelModel.find()
-      .populate("id_room")
-      .skip(page * limit)
-      .limit(limit);
+    const hotelList = await HotelModel.find().populate("id_room");
 
     if (!hotelList || hotelList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách khách sạn");
