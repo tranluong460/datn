@@ -1,4 +1,3 @@
-import { Button } from "../..";
 import { IRoom } from "../../../interface";
 
 type RoomCardProps = {

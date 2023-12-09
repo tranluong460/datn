@@ -62,6 +62,7 @@ import RoomBooking from "./client/Booking/RoomBooking";
 import DetailBooking from "./client/Booking/DetailBooking";
 import FooterBottom from "./client/Footer/FooterBottom";
 import FooterTop from "./client/Footer/FooterTop";
+import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
 
 export {
   DetailBooking,
@@ -102,6 +103,7 @@ export {
   RoomList,
   Filter,
   FilterTop,
+  CalendarRangerModal,
   HotelCard,
   ListHotel,
   LoginModal,

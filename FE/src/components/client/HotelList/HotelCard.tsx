@@ -76,7 +76,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       { skipNull: true }
     );
 
-    navigate(url);
+    window.open(url, "_blank");
   };
 
   return (
