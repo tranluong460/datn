@@ -17,6 +17,13 @@ export const hotelApi = createApi({
       query: (id: string | undefined) => `/hotel/${id}`,
       providesTags: ["Hotel"],
     }),
+    getHotelByCity: builder.query({
+      query: (location) => ({
+        url: `hotel/hotel-by-city/${location}`,
+        method: "GET",
+      }),
+      providesTags: ["Hotel"],
+    }),
     createHotel: builder.mutation({
       query: (data) => {
         const formData = new FormData();
@@ -73,6 +80,7 @@ export const hotelApi = createApi({
 export const {
   useGetAllHotelQuery,
   useGetOneHotelQuery,
+  useGetHotelByCityQuery,
   useCreateHotelMutation,
   useUpdateHotelMutation,
 } = hotelApi;

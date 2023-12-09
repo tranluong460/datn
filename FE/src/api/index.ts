@@ -26,6 +26,7 @@ import {
   hotelApi,
   useGetAllHotelQuery,
   useGetOneHotelQuery,
+  useGetHotelByCityQuery,
   useCreateHotelMutation,
   useUpdateHotelMutation,
 } from "./hotel";
@@ -78,6 +79,7 @@ export {
   hotelApi,
   useGetAllHotelQuery,
   useGetOneHotelQuery,
+  useGetHotelByCityQuery,
   useCreateHotelMutation,
   useUpdateHotelMutation,
   provincesApi,
