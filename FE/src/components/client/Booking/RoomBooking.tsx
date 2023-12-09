@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Counter } from "../..";
-import { IRoom } from "../../../interface";
+import { IBooking, IRoom } from "../../../interface";
 
 type RoomBookingProps = {
   room: IRoom;
   total: number;
-  selectRoom: string[];
+  selectRoom: IBooking[];
   setTotal: (value: number) => void;
-  setSelectRoom: (value: string[]) => void;
+  setSelectRoom: (value: IBooking[]) => void;
 };
 
 const RoomBooking = ({
@@ -25,10 +25,21 @@ const RoomBooking = ({
     setValue(newValue);
 
     if (newValue === 0) {
-      setSelectRoom(selectRoom.filter((id) => id !== room._id));
+      setSelectRoom(selectRoom.filter((item) => item.idRoom !== room._id));
     } else {
-      if (!selectRoom.includes(room._id)) {
-        setSelectRoom([...selectRoom, room._id]);
+      const existingRoom = selectRoom.find((item) => item.idRoom === room._id);
+
+      if (existingRoom) {
+        const newSelectRoom = selectRoom.map((item) =>
+          item.idRoom === room._id ? { ...item, quantity: newValue } : item
+        );
+
+        setSelectRoom(newSelectRoom);
+      } else {
+        setSelectRoom([
+          ...selectRoom,
+          { idRoom: room._id, quantity: newValue },
+        ]);
       }
     }
 

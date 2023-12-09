@@ -1,7 +1,7 @@
 import moment from "moment";
 import mongoose from "mongoose";
 
-import { BookingModel } from "../models";
+import { BookingModel, RoomModel } from "../models";
 import { BookingValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
 import {
@@ -33,9 +33,22 @@ export const getAll = async (req, res) => {
 
 export const create = async (req, res) => {
   const user = req.user;
+  const { list_room } = req.body;
 
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
+      await Promise.all(
+        list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity -= item.quantity;
+
+            await room.save();
+          }
+        })
+      );
+
       const data = await BookingModel.create({
         id_user: user._id,
         ...req.body,
@@ -47,14 +60,12 @@ export const create = async (req, res) => {
 
       const check_in = moment(data.check_in).format("DD/MM/YYYY");
       const check_out = moment(data.check_out).format("DD/MM/YYYY");
-      const room_quantity = data.list_room.length;
 
       sendMailBooking(
         user.email,
         user.id_information.name,
         check_in,
         check_out,
-        room_quantity,
         data.total_price
       );
 
