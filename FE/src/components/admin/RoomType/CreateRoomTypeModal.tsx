@@ -36,6 +36,7 @@ const CreateRoomTypeModal = ({
       footer={null}
     >
       <Form
+        disabled={resultCreate.isLoading}
         name="add_room_type"
         form={form}
         onFinish={onFinish}

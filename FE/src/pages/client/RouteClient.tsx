@@ -12,6 +12,7 @@ import {
   Page404,
   PaymentPage,
   PrivacyPolicy,
+  RegulationsBookingInformation,
 } from "..";
 
 const RouteClient = () => {
@@ -27,6 +28,10 @@ const RouteClient = () => {
           <Route
             path="/complaint-resolution-policy"
             element={<ComplaintResolutionPolicy />}
+          />
+          <Route
+            path="/regulations-booking-information"
+            element={<RegulationsBookingInformation />}
           />
           <Route path="/general-rules" element={<GeneralRules />} />
           <Route path="/general-terms" element={<GeneralTerms />} />

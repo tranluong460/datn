@@ -25,6 +25,7 @@ import HotelDetailPage from "./client/HotelDetail/HotelDetailPage";
 import HotelListPage from "./client/HotelList/HotelListPage";
 import PaymentPage from "./client/Payment/PaymentPage";
 import ComplaintResolutionPolicy from "./client/Policy/ComplaintResolutionPolicy";
+import RegulationsBookingInformation from "./client/Policy/RegulationsBookingInformation";
 import GeneralRules from "./client/Policy/GeneralRules";
 import GeneralTerms from "./client/Policy/GeneralTerms";
 import PrivacyPolicy from "./client/Policy/PrivacyPolicy";
@@ -59,6 +60,7 @@ export {
   HotelListPage,
   PaymentPage,
   ComplaintResolutionPolicy,
+  RegulationsBookingInformation,
   GeneralRules,
   GeneralTerms,
   PrivacyPolicy,

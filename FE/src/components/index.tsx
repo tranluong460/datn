@@ -60,6 +60,8 @@ import HotelBooking from "./client/Booking/HotelBooking";
 import Input from "./client/Input/Input";
 import RoomBooking from "./client/Booking/RoomBooking";
 import DetailBooking from "./client/Booking/DetailBooking";
+import FooterBottom from "./client/Footer/FooterBottom";
+import FooterTop from "./client/Footer/FooterTop";
 
 export {
   DetailBooking,
@@ -119,4 +121,6 @@ export {
   Calendar,
   Container,
   Input,
+  FooterBottom,
+  FooterTop,
 };

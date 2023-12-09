@@ -67,6 +67,7 @@ const EditHotelModal = ({
         </div>
       ) : (
         <Form
+          disabled={resultEdit.isLoading}
           name="edit_hotel"
           layout="vertical"
           form={form}

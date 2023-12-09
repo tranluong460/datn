@@ -7,7 +7,7 @@ import { sendResponse, uploadImageToCloudinary } from "../utils";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find();
+    const roomList = await RoomModel.find().populate("id_roomType");
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
