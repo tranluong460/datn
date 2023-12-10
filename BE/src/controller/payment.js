@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 import { PaymentValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
-import { BookingModel, PaymentModel } from "../models";
+import { BookingModel, PaymentModel, RoomModel } from "../models";
 import {
   createOrder,
   getStatusOrder,
@@ -107,10 +107,22 @@ export const vnPayPaymentReturn = async (req, res) => {
         { new: true }
       );
 
-      await BookingModel.findByIdAndUpdate(
+      const booking = await BookingModel.findByIdAndUpdate(
         { _id: payment.id_booking },
         { status: "Đã hủy bỏ" },
         { new: true }
+      );
+
+      await Promise.all(
+        booking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
       );
 
       return res.redirect(`${process.env.PUBLIC_URL}/close-payment`);
@@ -221,10 +233,22 @@ export const checkStatusZaloPay = async (req, res) => {
         { new: true }
       );
 
-      await BookingModel.findByIdAndUpdate(
+      const booking = await BookingModel.findByIdAndUpdate(
         { _id: payment.id_booking },
         { status: "Đã hủy bỏ" },
         { new: true }
+      );
+
+      await Promise.all(
+        booking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
       );
 
       return sendResponse(res, 200, "Giao dịch thất bại");

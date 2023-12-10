@@ -19,7 +19,11 @@ import {
 } from "./auth";
 
 // Booking API
-import { useCreateBookingMutation, useVnPayPaymentMutation } from "./booking";
+import {
+  useCreateBookingMutation,
+  useVnPayPaymentMutation,
+  useZaloPayPaymentMutation,
+} from "./booking";
 
 // Hotel API
 import {
@@ -76,6 +80,7 @@ export {
   bookingApi,
   useCreateBookingMutation,
   useVnPayPaymentMutation,
+  useZaloPayPaymentMutation,
   hotelApi,
   useGetAllHotelQuery,
   useGetOneHotelQuery,

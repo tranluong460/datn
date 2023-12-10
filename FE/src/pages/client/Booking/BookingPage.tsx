@@ -9,6 +9,7 @@ import {
   useCreateBookingMutation,
   useGetOneHotelQuery,
   useVnPayPaymentMutation,
+  useZaloPayPaymentMutation,
 } from "../../../api";
 
 import {
@@ -36,6 +37,7 @@ const BookingPage = () => {
   const { data, isSuccess, isLoading } = useGetOneHotelQuery(idHotel);
   const [booking] = useCreateBookingMutation();
   const [paymentVnPay] = useVnPayPaymentMutation();
+  const [paymentZaloPay] = useZaloPayPaymentMutation();
 
   if (isLoading) {
     return (
@@ -68,13 +70,15 @@ const BookingPage = () => {
       .unwrap()
       .then((response) => {
         toast.success(response.message);
-        const data = {
-          amount: response.data.total_price,
-          bookingId: response.data._id,
+        const { _id, total_price, payment_method } = response.data;
+
+        const dataPayment = {
+          amount: total_price,
+          bookingId: _id,
         };
 
-        if (response.data.payment_method === "VN Pay") {
-          paymentVnPay(data)
+        payment_method === "VN Pay" &&
+          paymentVnPay(dataPayment)
             .unwrap()
             .then((res) => {
               window.location.href = res.data;
@@ -82,7 +86,16 @@ const BookingPage = () => {
             .catch((error) => {
               console.log(error);
             });
-        }
+
+        payment_method === "Zalo Pay" &&
+          paymentZaloPay(dataPayment)
+            .unwrap()
+            .then((res) => {
+              window.location.href = res.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
       })
       .catch((error) => {
         toast.error(error.data.message);

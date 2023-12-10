@@ -84,7 +84,7 @@ const DetailBooking = ({
             className="relative w-full cursor-pointer rounded-md bg-light dark:bg-dark py-2 pl-1 pr-10 text-left text-textLight2nd dark:text-textDark2nd shadow-sm sm:text-md sm:leading-6 border border-divideLight dark:border-divideDark"
           >
             <span className="flex items-center">
-              <span className="ml-3 block truncate">
+              <span className="ml-3 block truncate" onClick={onToggle}>
                 {method ? method : "Phương thức thanh toán"}
               </span>
             </span>
