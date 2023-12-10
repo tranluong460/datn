@@ -31,6 +31,38 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getBookingByUser = async (req, res) => {
+  const user = req.user;
+
+  try {
+    const bookingList = await BookingModel.find({ id_user: user._id }).populate(
+      {
+        path: "list_room",
+        populate: "idRoom",
+      }
+    );
+
+    if (!bookingList || bookingList.length === 0) {
+      return sendResponse(res, 404, "Người dùng chưa đặt phòng");
+    }
+
+    return sendResponse(
+      res,
+      200,
+      "Danh sách đặt phòng của người dùng",
+      bookingList
+    );
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách đặt phòng của người dùng"
+    );
+  }
+};
+
 export const create = async (req, res) => {
   const user = req.user;
   const { list_room } = req.body;
@@ -95,6 +127,7 @@ export const update = async (req, res) => {
     if (booking.status === "Đã hủy bỏ" || booking.status === "Thành công") {
       return sendResponse(res, 404, "Không thể cập nhật trạng thái");
     }
+
     const newBooking = await BookingModel.findOneAndUpdate(
       { _id: id },
       { status: status },

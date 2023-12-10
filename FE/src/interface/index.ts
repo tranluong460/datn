@@ -1,5 +1,5 @@
 import { IFeatures, IAmenities } from "./amenities";
-import { IBooking } from "./booking";
+import { IBooking, IRoomBooking } from "./booking";
 import { IImage, IHotel, ICountry } from "./hotel";
 import { IRoom } from "./room";
 import { IRoomType } from "./roomType";
@@ -9,6 +9,7 @@ export type {
   IFeatures,
   IAmenities,
   IBooking,
+  IRoomBooking,
   IImage,
   IHotel,
   IRoom,

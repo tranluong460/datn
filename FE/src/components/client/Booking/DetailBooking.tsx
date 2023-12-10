@@ -98,29 +98,31 @@ const DetailBooking = ({
                   onClick={() => handleMethodChange(item.name)}
                   className="text-textLight2nd dark:text-textDark2nd relative cursor-pointer select-none py-3 pl-3 pr-9 hover:bg-divideLight dark:hover:bg-divideDark rounded-md"
                 >
-                  <div className="flex items-center" onClick={onToggle}>
-                    {index + 1}.
-                    <span className="font-normal ml-3 block truncate">
-                      {item.name}
-                    </span>
-                  </div>
+                  <div onClick={onToggle}>
+                    <div className="flex items-center">
+                      {index + 1}.
+                      <span className="font-normal ml-3 block truncate">
+                        {item.name}
+                      </span>
+                    </div>
 
-                  {method && method === item.name && (
-                    <span className="text-primary absolute inset-y-0 right-0 flex items-center pr-4">
-                      <svg
-                        className="h-5 w-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </span>
-                  )}
+                    {method && method === item.name && (
+                      <span className="text-primary absolute inset-y-0 right-0 flex items-center pr-4">
+                        <svg
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>

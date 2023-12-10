@@ -33,6 +33,14 @@ export const bookingApi = createApi({
       }),
       invalidatesTags: ["Booking"],
     }),
+    getBookingByUser: builder.query({
+      query: () => ({
+        url: "/booking/booking-user",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Booking"],
+    }),
   }),
 });
 
@@ -40,4 +48,5 @@ export const {
   useCreateBookingMutation,
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
+  useGetBookingByUserQuery,
 } = bookingApi;

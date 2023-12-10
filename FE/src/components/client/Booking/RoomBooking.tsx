@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Counter } from "../..";
-import { IBooking, IRoom } from "../../../interface";
+import { IRoomBooking, IRoom } from "../../../interface";
 
 type RoomBookingProps = {
   room: IRoom;
   total: number;
-  selectRoom: IBooking[];
+  selectRoom: IRoomBooking[];
   setTotal: (value: number) => void;
-  setSelectRoom: (value: IBooking[]) => void;
+  setSelectRoom: (value: IRoomBooking[]) => void;
 };
 
 const RoomBooking = ({

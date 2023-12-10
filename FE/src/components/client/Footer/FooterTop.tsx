@@ -2,21 +2,21 @@ import { Logo } from "../..";
 
 const FooterTop = () => {
   const rules = [
-    { url: "general-terms", label: "Điều khoản chung" },
+    { url: "/general-terms", label: "Điều khoản chung" },
     {
-      url: "privacy-policy",
+      url: "/privacy-policy",
       label: "Chính sách quyền riêng tư",
     },
     {
-      url: "complaint-resolution-policy",
+      url: "/complaint-resolution-policy",
       label: "Chính sách giải quyết khiếu nại",
     },
   ];
 
   const regulations = [
-    { url: "general-rules", label: "Quy định chung" },
+    { url: "/general-rules", label: "Quy định chung" },
     {
-      url: "regulations-booking-information",
+      url: "/regulations-booking-information",
       label: "Quy định về xác nhận thông tin đặt phòng",
     },
   ];

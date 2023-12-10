@@ -18,13 +18,13 @@ import {
   HotelBooking,
   RoomBooking,
 } from "../../../components";
-import { IBooking, IRoom } from "../../../interface";
+import { IRoomBooking, IRoom } from "../../../interface";
 import toast from "react-hot-toast";
 
 const BookingPage = () => {
   const { search } = useLocation();
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [selectedRoom, setSelectedRoom] = useState<IBooking[]>([]);
+  const [selectedRoom, setSelectedRoom] = useState<IRoomBooking[]>([]);
 
   const params = new URLSearchParams(search);
 
