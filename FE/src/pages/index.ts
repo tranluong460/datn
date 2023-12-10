@@ -31,7 +31,8 @@ import GeneralTerms from "./client/Policy/GeneralTerms";
 import PrivacyPolicy from "./client/Policy/PrivacyPolicy";
 
 // Error
-import Loading from "./error/Loading";
+import Loading from "./error/LoadingAll";
+import LoadingAll from "./error/LoadingAll";
 import Page403 from "./error/Page403";
 import Page404 from "./error/Page404";
 import Page500 from "./error/Page500";
@@ -47,6 +48,7 @@ export {
   RoomManager,
   RoomTypeManage,
   UserManager,
+  LoadingAll,
   RouteAuth,
   BaseAuth,
   InfoBookingPage,
