@@ -1,21 +1,20 @@
-import {
-  FieldValues,
-  //  SubmitHandler,
-  useForm,
-} from "react-hook-form";
-import { Button, Input } from "../..";
+import { useParams } from "react-router-dom";
+import moment from "moment";
 
-const BookingInfo = () => {
-  const {
-    register,
-    // handleSubmit,
-    // reset,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: {
-      voucher: "",
-    },
-  });
+import { IBooking, IRoom } from "../../../interface";
+import { useGetOneHotelQuery } from "../../../api";
+
+type BookingInfoProps = {
+  booking: IBooking;
+};
+
+const BookingInfo = ({ booking }: BookingInfoProps) => {
+  const { id } = useParams<{ id: string | undefined }>();
+  const { data } = useGetOneHotelQuery(id);
+
+  const filteredRooms = data?.data.id_room.filter((room: IRoom) =>
+    booking.list_room.some((rm) => room._id === rm.idRoom)
+  );
 
   return (
     <>
@@ -26,16 +25,16 @@ const BookingInfo = () => {
 
         <div className="mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
           <div className="mb-1 font-bold text-base text-textLight dark:text-textDark">
-            <a href="#">Mường Thanh Grand Xa La</a>
+            <a href="#">{data?.data.name}</a>
           </div>
 
           <div className="text-base leading-normal text-textLight2nd dark:text-textDark2nd">
             <p className="font-medium">
-              Nhận phòng: Thứ 3, 26/09/2023 từ 14:00
+              Nhận phòng: {moment(booking.check_in).format("DD/MM/YYYY")}
             </p>
 
             <p className="font-medium">
-              Trả phòng: Thứ 7, 30/09/2023 cho đến 12:00
+              Trả phòng: {moment(booking.check_out).format("DD/MM/YYYY")}
             </p>
           </div>
         </div>
@@ -44,35 +43,46 @@ const BookingInfo = () => {
           <p className="mb-0 font-bold text-base leading-normal text-textLight dark:text-textDark">
             Thông tin phòng
           </p>
-        </div>
 
-        <div className="flex items-center justify-between font-semibold text-base mt-5 mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
-          <span className="text-textLight dark:text-textDark">Giá</span>
-          <span className="text-textLight2nd dark:text-textDark2nd">
-            5,202,000 VNĐ
-          </span>
-        </div>
+          <div className="pt-3 grid grid-cols-1 gap-5">
+            {filteredRooms?.map((room: IRoom, index: number) => {
+              const bk = booking.list_room?.find(
+                (bookingRoom) => bookingRoom.idRoom === room._id
+              );
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-1 mb-5 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
-          <div className="lg:col-span-3">
-            <Input
-              id="voucher"
-              label="Mã khuyến mãi"
-              placeholder="Nhập mã khuyến mãi"
-              register={register}
-              errors={errors}
-              required
-            />
-          </div>
+              return (
+                <div key={room._id} className="grid grid-cols-1 gap-1 text-sm">
+                  <div className="flex gap-1">
+                    <span className="font-semibold">Phòng {index + 1}:</span>
+                    <p>{room.id_roomType.name}</p>
+                  </div>
 
-          <div className="lg:mt-4">
-            <Button label="Áp dụng" onClick={() => alert("Áp dụng")} />
+                  <span>Số lượng: {bk && bk.quantity}</span>
+
+                  <div className="flex gap-1">
+                    <span>Giá:</span>
+                    <p>
+                      {bk &&
+                        (bk.quantity * room.price).toLocaleString("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <div className="flex items-center justify-between text-base mb-4 font-bold">
           <span>Tổng giá:</span>
-          <span className="text-xl text-yellow-600">5,202,000 VNĐ</span>
+          <span className="text-xl text-yellow-600">
+            {booking.total_price.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </span>
         </div>
 
         <p>Bao gồm tất cả các loại thuế và phí dịch vụ</p>

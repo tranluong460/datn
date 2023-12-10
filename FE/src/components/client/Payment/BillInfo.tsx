@@ -1,85 +1,164 @@
-import {
-  FieldValues,
-  // SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
-import { Input } from "../..";
+type BillInfoProps = {
+  onToggleBooking: (value: string) => void;
+};
 
-const BillInfo = () => {
-  const {
-    register,
-    // handleSubmit,
-    // reset,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: {
-      name: "",
-      password: "",
-    },
-  });
+const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
+  const [show, setShow] = useState(false);
+  const [method, setMethod] = useState("");
+  const [agree, setAgree] = useState(false);
+
+  const handleMethodChange = (name: string) => {
+    setMethod(name);
+  };
+
+  const onToggle = () => {
+    setShow(!show);
+  };
+
+  const toggleBooking = () => {
+    if (!method) {
+      return toast.error("Bạn chưa chọn phương thức thanh toán!");
+    }
+
+    if (!agree) {
+      return toast.error("Bạn chưa đồng ý với điều khoản!");
+    }
+
+    onToggleBooking(method);
+  };
+
+  const data = [
+    { url: "/images/vn-pay.svg", label: "VN Pay" },
+    { url: "/images/zalo-pay.svg", label: "Zalo Pay" },
+  ];
+
+  const paymentMethod = data?.find((item) => item.label === method);
 
   return (
-    <>
-      <div className="box-border col-span-2">
-        <div className="rounded-md p-6 mb-5 bg-light dark:bg-dark">
-          <h6 className="font-bold text-xl mb-5 pb-3 border-b border-divideLight dark:border-divideDark text-textLight dark:text-textDark">
-            Thông tin người đặt phòng
-          </h6>
+    <div className="box-border col-span-2">
+      <div className="rounded-md p-6 mb-5 bg-light dark:bg-dark">
+        <h6 className="font-bold text-xl mb-5 pb-3 border-b border-divideLight dark:border-divideDark text-textLight dark:text-textDark">
+          Chính sách đặt phòng
+        </h6>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <Input
-              id="name"
-              label="Họ và tên"
-              placeholder="Mời nhập họ và tên"
-              register={register}
-              errors={errors}
-              required
-            />
-
-            <Input
-              id="email"
-              label="Email"
-              placeholder="Mời nhập email"
-              register={register}
-              errors={errors}
-              required
-            />
-
-            <Input
-              id="phone"
-              label="Số điện thoại"
-              placeholder="Mời nhập số điện thoại"
-              register={register}
-              errors={errors}
-              required
-            />
-
-            <div className="md:col-span-2">
-              <label
-                htmlFor="content"
-                className="font-bold text-base block text-textLight dark:text-textDark"
-              >
-                Yêu cầu thêm
-              </label>
-              <textarea
-                className="mt-2 outline-none px-4 py-3 rounded-lg text-base min-h-[calc(1.5em + 0.75rem + 2px)] block w-full py-2 px-4 text-base font-normal leading-relaxed bg-clip-padding-box border rounded-md transition duration-150 ease-in-out text-textLight dark:text-textDark bg-light dark:bg-dark border-divideLight dark:border-divideDark"
-                name="content"
-                id="content"
-                rows={4}
-                placeholder="Ví dụ: Sở thích về giường, địa điểm đón hoặc trả khách"
-              />
-            </div>
-          </div>
+        <div className="flex items-center gap-1">
+          <span className="font-semibold">Hủy:</span>
+          <p>
+            Nếu hủy, thay đổi hoặc không đến, khách sẽ không được hoàn lại tiền.
+          </p>
         </div>
 
-        <div className="rounded-md p-6 mb-5 bg-light dark:bg-dark">
-          <h6 className="font-bold text-xl mb-5 pb-3 border-b border-divideLight dark:border-divideDark text-textLight dark:text-textDark">
-            Phương thức thanh toán
-          </h6>
+        <div className="flex items-center gap-1">
+          <span className="font-semibold">Thanh toán:</span>
+          <p>Bạn phải thanh toán toàn bộ số tiền</p>
         </div>
+
+        <span className="font-semibold">Đã bao gồm ăn sáng</span>
       </div>
-    </>
+
+      <div className="rounded-md p-6 mb-5 bg-light dark:bg-dark">
+        <h6 className="font-bold text-xl mb-5 pb-3 border-b border-divideLight dark:border-divideDark text-textLight dark:text-textDark">
+          Phương thức thanh toán
+        </h6>
+
+        <div className="relative mt-2">
+          <button
+            className="relative w-full cursor-pointer rounded-md bg-white py-3 pl-3 pr-10 text-left text-textLight shadow-sm outline-none sm:text-sm sm:leading-6 border"
+            onClick={() => setShow(!show)}
+          >
+            {paymentMethod ? (
+              <span className="flex items-center">
+                <img
+                  src={paymentMethod?.url}
+                  alt={paymentMethod?.label}
+                  className="h-5 w-5 flex-shrink-0 rounded-full"
+                />
+                <span className="ml-3 block truncate">
+                  {paymentMethod?.label}
+                </span>
+              </span>
+            ) : (
+              "Chọn phương thức thanh toán"
+            )}
+          </button>
+
+          {show && (
+            <ul className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {data.map((item) => (
+                <li
+                  key={item.label}
+                  className="text-gray-900 relative select-none py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-300"
+                  onClick={() => {
+                    handleMethodChange(item.label);
+                    onToggle();
+                  }}
+                >
+                  <div className="flex items-center">
+                    <img
+                      src={item.url}
+                      alt={item.label}
+                      className="h-5 w-5 flex-shrink-0 rounded-full"
+                    />
+
+                    <span className="font-normal ml-3 block truncate">
+                      {item.label}
+                    </span>
+                  </div>
+
+                  <span className="text-indigo-600 absolute inset-y-0 right-0 flex items-center pr-4">
+                    {paymentMethod?.label === item.label && (
+                      <svg
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="py-5 flex items-center gap-1">
+          <input
+            type="checkbox"
+            checked={agree}
+            onChange={() => setAgree(!agree)}
+            className="mt-0.5 w-3.5 h-5"
+          />
+          <p>
+            Đánh dấu vào ô này đồng nghĩa với việc bạn đã chấp nhận mọi&nbsp;
+            <Link
+              to="/regulations-booking-information"
+              target="_blank"
+              className="text-blue-400 hover:text-blue-600"
+            >
+              điều khoản đặt phòng
+            </Link>
+            &nbsp;của chúng tôi.
+          </p>
+        </div>
+
+        <button
+          onClick={toggleBooking}
+          className="text-textDark bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-3 mb-2"
+        >
+          Đặt phòng
+        </button>
+      </div>
+    </div>
   );
 };
 

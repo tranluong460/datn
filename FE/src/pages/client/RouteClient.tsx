@@ -24,7 +24,7 @@ const RouteClient = () => {
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/hotel-list" element={<HotelListPage />} />
           <Route path="/hotel-detail/:id" element={<HotelDetailPage />} />
-          <Route path="/booking/payment" element={<PaymentPage />} />
+          <Route path="/payment/:id" element={<PaymentPage />} />
           <Route
             path="/complaint-resolution-policy"
             element={<ComplaintResolutionPolicy />}
