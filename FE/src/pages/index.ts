@@ -12,7 +12,7 @@ import UserManager from "./admin/User/UserManager";
 // Auth
 import RouteAuth from "./auth/RouteAuth";
 import BaseAuth from "./auth/BaseAuth";
-import BillingInformationPage from "./auth/BillingInformation/BillingInformationPage";
+import InfoBookingPage from "./auth/InfoBooking/InfoBookingPage";
 import ProfilePage from "./auth/Profile/ProfilePage";
 import SecurityPage from "./auth/Security/SecurityPage";
 
@@ -49,7 +49,7 @@ export {
   UserManager,
   RouteAuth,
   BaseAuth,
-  BillingInformationPage,
+  InfoBookingPage,
   ProfilePage,
   SecurityPage,
   RouteClient,
