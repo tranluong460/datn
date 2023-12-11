@@ -51,7 +51,10 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
               );
 
               return (
-                <div key={room._id} className="grid grid-cols-1 gap-1 text-sm">
+                <div
+                  key={room._id}
+                  className="grid grid-cols-1 gap-1 text-sm text-textLight2nd dark:text-textDark2nd"
+                >
                   <div className="flex gap-1">
                     <span className="font-semibold">Phòng {index + 1}:</span>
                     <p>{room.id_roomType.name}</p>
@@ -76,7 +79,7 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
         </div>
 
         <div className="flex items-center justify-between text-base mb-4 font-bold">
-          <span>Tổng giá:</span>
+          <span className="text-textLight dark:text-textDark">Tổng giá:</span>
           <span className="text-xl text-yellow-600">
             {booking.total_price.toLocaleString("vi-VN", {
               style: "currency",
@@ -85,7 +88,9 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
           </span>
         </div>
 
-        <p>Bao gồm tất cả các loại thuế và phí dịch vụ</p>
+        <p className="text-textLight2nd dark:text-textDark2nd">
+          Bao gồm tất cả các loại thuế và phí dịch vụ
+        </p>
         <p className="text-red-500">
           (Theo quy định của Ngân hàng Nhà nước Việt Nam, Quý khách vui lòng
           thanh toán bằng VNĐ)

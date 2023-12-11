@@ -14,6 +14,7 @@ import {
   RoomBooking,
 } from "../../../components";
 import { IRoomBooking, IRoom } from "../../../interface";
+import toast from "react-hot-toast";
 
 const BookingPage = () => {
   const navigate = useNavigate();
@@ -57,6 +58,10 @@ const BookingPage = () => {
       total_price: totalPriceEnd,
       list_room: selectedRoom,
     };
+
+    if (!selectedRoom || selectedRoom.length === 0) {
+      return toast.error("Bạn chưa chọn phòng!");
+    }
 
     setCookie("booking", data, { path: "/" });
 

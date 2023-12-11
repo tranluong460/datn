@@ -45,19 +45,21 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
           Chính sách đặt phòng
         </h6>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-textLight2nd dark:text-textDark2nd">
           <span className="font-semibold">Hủy:</span>
           <p>
             Nếu hủy, thay đổi hoặc không đến, khách sẽ không được hoàn lại tiền.
           </p>
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-textLight2nd dark:text-textDark2nd">
           <span className="font-semibold">Thanh toán:</span>
           <p>Bạn phải thanh toán toàn bộ số tiền</p>
         </div>
 
-        <span className="font-semibold">Đã bao gồm ăn sáng</span>
+        <span className="font-semibold text-textLight2nd dark:text-textDark2nd">
+          Đã bao gồm ăn sáng
+        </span>
       </div>
 
       <div className="rounded-md p-6 mb-5 bg-light dark:bg-dark">
@@ -67,15 +69,15 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
 
         <div className="relative mt-2">
           <button
-            className="relative w-full cursor-pointer rounded-md bg-white py-3 pl-3 pr-10 text-left text-textLight shadow-sm outline-none sm:text-sm sm:leading-6 border"
+            className="relative w-full cursor-pointer rounded-md bg-light py-3 pl-3 pr-10 text-left text-textLight dark:text-textDark dark:bg-dark shadow-sm outline-none sm:text-sm sm:leading-6 border border-divideLight dark:border-divideDark"
             onClick={() => setShow(!show)}
           >
             {paymentMethod ? (
-              <span className="flex items-center">
+              <span className="flex items-center text-textLight dark:text-textDark">
                 <img
                   src={paymentMethod?.url}
                   alt={paymentMethod?.label}
-                  className="h-5 w-5 flex-shrink-0 rounded-full"
+                  className="h-10 w-10 flex-shrink-0 rounded-full"
                 />
                 <span className="ml-3 block truncate">
                   {paymentMethod?.label}
@@ -87,11 +89,11 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
           </button>
 
           {show && (
-            <ul className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <ul className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-light dark:bg-dark py-1 text-base shadow-lg focus:outline-none sm:text-sm">
               {data.map((item) => (
                 <li
                   key={item.label}
-                  className="text-gray-900 relative select-none py-2 pl-3 pr-9 cursor-pointer hover:bg-gray-300"
+                  className="text-textLight dark:text-textDark relative select-none py-2 pl-3 pr-9 cursor-pointer hover:bg-backgroundLight dark:hover:bg-backgroundDark"
                   onClick={() => {
                     handleMethodChange(item.label);
                     onToggle();
@@ -101,7 +103,7 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
                     <img
                       src={item.url}
                       alt={item.label}
-                      className="h-5 w-5 flex-shrink-0 rounded-full"
+                      className="h-10 w-10 flex-shrink-0 rounded-full"
                     />
 
                     <span className="font-normal ml-3 block truncate">
@@ -131,7 +133,7 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
           )}
         </div>
 
-        <div className="py-5 flex items-center gap-1">
+        <div className="py-5 flex items-center gap-1 text-textLight2nd dark:text-textDark2nd">
           <input
             type="checkbox"
             checked={agree}

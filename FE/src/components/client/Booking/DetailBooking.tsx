@@ -52,7 +52,7 @@ const DetailBooking = ({
 
       <div
         onClick={onBooking}
-        className="mt-10 flex justify-center items-center border border-divideLight dark:border-divideDark hover:bg-blue-500 cursor-pointer"
+        className="mt-10 flex justify-center items-center border border-divideLight dark:border-divideDark hover:bg-blue-500 cursor-pointer text-textLight dark:text-textDark"
       >
         <span className="p-3">Đặt phòng</span>
       </div>
