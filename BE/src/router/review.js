@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAll, getOne, create, update, remove } from "../controller/review";
+import { getAll, getOne, create, remove } from "../controller/review";
 import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
 const router = express.Router();
