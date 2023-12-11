@@ -15,6 +15,9 @@ import {
   useRegisterAccountMutation,
   useInfoAccountQuery,
   useLogoutAccountMutation,
+  useGetCodeChangePasswordMutation,
+  useCheckCodeChangePasswordMutation,
+  useChangePasswordMutation,
 } from "./auth";
 
 // Booking API
@@ -78,6 +81,9 @@ export {
   useRegisterAccountMutation,
   useInfoAccountQuery,
   useLogoutAccountMutation,
+  useGetCodeChangePasswordMutation,
+  useCheckCodeChangePasswordMutation,
+  useChangePasswordMutation,
   bookingApi,
   useCreateBookingMutation,
   useVnPayPaymentMutation,
