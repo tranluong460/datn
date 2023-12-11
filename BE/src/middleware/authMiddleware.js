@@ -15,7 +15,12 @@ export const isAdminMiddleware = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(accessToken, process.env.SECRET_KEY);
-    const user = await UserModel.findById(decoded.id);
+    const user = await UserModel.findById(decoded.id)
+      .select("-password -isLockAccount -createdAt -updatedAt")
+      .populate({
+        path: "id_information",
+        select: "-createdAt -updatedAt",
+      });
 
     if (!user || user.role !== "Admin") {
       return sendResponse(res, 403, "Bạn không có quyền truy cập");
@@ -26,17 +31,11 @@ export const isAdminMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);
@@ -52,7 +51,12 @@ export const loginMiddleware = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(accessToken, process.env.SECRET_KEY);
-    const user = await UserModel.findById(decoded.id);
+    const user = await UserModel.findById(decoded.id)
+      .select("-password -isLockAccount -createdAt -updatedAt")
+      .populate({
+        path: "id_information",
+        select: "-createdAt -updatedAt",
+      });
 
     if (!user) {
       return sendResponse(res, 401, "Người dùng không tồn tại");
@@ -63,17 +67,11 @@ export const loginMiddleware = async (req, res, next) => {
     next();
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({
-        message: "Token đã hết hạn!",
-      });
+      return sendResponse(res, 401, "Token đã hết hạn!");
     } else if (error instanceof jwt.NotBeforeError) {
-      return res.status(401).json({
-        message: "Token chưa có hiệu lực!",
-      });
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
     } else if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({
-        message: "Token không hợp lệ!",
-      });
+      return sendResponse(res, 401, "Token không hợp lệ!");
     }
 
     console.error(error);

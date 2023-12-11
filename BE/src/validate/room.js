@@ -13,12 +13,12 @@ const roomValidate = joi.object({
         url: joi.string().required().messages(validationErrors("Đường dẫn")),
       })
     )
-    .messages(validationErrors("Ảnh")),
+    .messages(validationErrors("Ảnh phòng")),
   quantity: joi
     .number()
     .min(1)
     .required()
-    .messages(validationErrors("Số lượng")),
+    .messages(validationErrors("Số lượng phòng")),
   price: joi.number().min(0).required().messages(validationErrors("Giá phòng")),
   status: joi
     .string()
@@ -32,7 +32,7 @@ const roomValidate = joi.object({
     .array()
     .min(1)
     .required()
-    .messages(validationErrors("Tiện nghi phòng")),
+    .messages(validationErrors("Id tiện nghi phòng")),
   id_hotel: joi.string().required().messages(validationErrors("Id khách sạn")),
   id_roomType: joi
     .string()

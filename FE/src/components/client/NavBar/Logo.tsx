@@ -8,16 +8,14 @@ const Logo = ({ url }: LogoProps) => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <img
-        alt="Logo"
-        src="/logo.png"
-        width={100}
-        height={100}
-        onClick={() => navigate(url)}
-        className="hidden md:block cursor-pointer"
-      />
-    </>
+    <div
+      onClick={() => navigate(url)}
+      className="hidden md:block cursor-pointer p-3"
+    >
+      <span className="text-2xl italic text-textLight dark:text-textDark">
+        Seventeen
+      </span>
+    </div>
   );
 };
 

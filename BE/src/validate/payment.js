@@ -3,17 +3,12 @@ import joi from "joi";
 import { validationErrors } from "../utils";
 
 const paymentValidate = joi.object({
-  id_user: joi.string().optional(),
-  id_service: joi.string().messages(),
-  total_price: joi.number().required().messages(validationErrors("Tổng giá")),
-  method: joi
-    .string()
-    .required()
-    .messages(validationErrors("Phương thức thanh toán")),
-  status: joi
+  amount: joi
     .number()
+    .min(1)
     .required()
-    .messages(validationErrors("Trạng thái thanh toán")),
+    .messages(validationErrors("Tổng tiền")),
+  bookingId: joi.string().required().messages(validationErrors("Id đơn hàng")),
 });
 
 export default paymentValidate;

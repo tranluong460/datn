@@ -1,24 +1,41 @@
 import { useParams } from "react-router-dom";
+import { Result } from "antd";
+
 import {
   Container,
   DetailOverview,
   InfoHotel,
   RoomList,
 } from "../../../components";
-import { useGetHotelDetailByIdQuery } from "../../../api/hotel";
+import { useGetOneHotelQuery } from "../../../api";
 import { Loading } from "../..";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string | undefined }>();
-  const { data, isLoading } = useGetHotelDetailByIdQuery(id);
+  const { data, isLoading, isSuccess } = useGetOneHotelQuery(id);
 
   if (isLoading) {
     return <Loading />;
   }
 
+  if (!isSuccess) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <Result
+          status="error"
+          title="404"
+          subTitle="Không tìm thấy thông tin khách sạn!"
+        />
+      </div>
+    );
+  }
+
   return (
     <>
-      <div className="bg-cover bg-center bg-fixed bg-[url(https://booking.muongthanh.com/images/hotels/hotels/original/_hkt6859_1679810462_1691467982.jpg)] w-full h-[500px]">
+      <div
+        className={`bg-cover bg-center bg-fixed  w-full h-[500px]`}
+        style={{ backgroundImage: `url(${data.data.images[0].url})` }}
+      >
         <InfoHotel
           name={data?.data?.name}
           address={data?.data?.address}
@@ -28,10 +45,7 @@ const HotelDetailPage = () => {
       </div>
 
       <div className="mt-20 p-5">
-        <DetailOverview
-          name={data?.data?.name}
-          description={data?.data?.description}
-        />
+        <DetailOverview description={data?.data?.description} />
       </div>
 
       <div className="p-5 bg-divideLight dark:bg-divideDark">

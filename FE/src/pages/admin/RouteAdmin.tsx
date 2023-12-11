@@ -7,6 +7,7 @@ import {
   DashboardManage,
   HotelManager,
   Page404,
+  RoomManager,
   RoomTypeManage,
   UserManager,
 } from "..";
@@ -20,6 +21,7 @@ const RouteAdmin = () => {
           <Route path="/amenities-manager" element={<AmenitiesManager />} />
           <Route path="/booking-manager" element={<BookingManager />} />
           <Route path="/hotel-manager" element={<HotelManager />} />
+          <Route path="/room-manager" element={<RoomManager />} />
           <Route path="/user-manager" element={<UserManager />} />
           <Route path="/roomType-manager" element={<RoomTypeManage />} />
         </Route>

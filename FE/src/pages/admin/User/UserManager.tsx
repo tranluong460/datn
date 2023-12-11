@@ -4,27 +4,17 @@ import type { ColumnsType } from "antd/es/table";
 import { Button, Table, Tag, Popconfirm, message, Tooltip } from "antd";
 
 import {
-  useGetAllQuery,
-  useGetInfoUserMutation,
-  useLockAccountMutation,
-} from "../../../api/user";
-import { InfoDrawn } from "../../../components";
-
-interface DataType {
-  _id: string;
-  email: string;
-  role: string;
-  isLockAccount: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+  useGetAllUserQuery,
+  useGetOneUserMutation,
+  useLockUserMutation,
+} from "../../../api";
+import { InfoUserDrawn } from "../../../components";
+import { IUser } from "../../../interface";
 
 const UserManager = () => {
-  const [currentItem, setCurrentItem] = useState(5);
-
-  const { data, isLoading } = useGetAllQuery("");
-  const [lockAccount] = useLockAccountMutation();
-  const [infoUser, resultGetInfo] = useGetInfoUserMutation();
+  const { data, isLoading } = useGetAllUserQuery("");
+  const [lockAccount] = useLockUserMutation();
+  const [infoUser, resultGetInfo] = useGetOneUserMutation();
 
   const key0 = "lockAccountMutation";
   const key1 = "getInfoMutation";
@@ -82,7 +72,7 @@ const UserManager = () => {
     setOpen(false);
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IUser> = [
     {
       title: "ID",
       dataIndex: "_id",
@@ -150,10 +140,11 @@ const UserManager = () => {
     },
   ];
 
+  const [currentItem, setCurrentItem] = useState(10);
   const paginationConfig = {
     pageSize: currentItem,
     showSizeChanger: true,
-    pageSizeOptions: ["5", "10", "20", "50"],
+    pageSizeOptions: ["10", "20", "30", "50"],
     onShowSizeChange: (_current: number, size: number) => {
       setCurrentItem(size);
     },
@@ -166,6 +157,7 @@ const UserManager = () => {
     <>
       {contextHolder}
       <Table
+        bordered
         rowKey="_id"
         columns={columns}
         dataSource={data?.data}
@@ -174,7 +166,7 @@ const UserManager = () => {
       />
 
       {info && (
-        <InfoDrawn
+        <InfoUserDrawn
           info={info}
           isOpen={open}
           onClosed={onClosed}

@@ -3,24 +3,17 @@ import { useState } from "react";
 import type { ColumnsType } from "antd/es/table";
 import { Table, Space, Button, Popconfirm, message } from "antd";
 
+import { IRoomType } from "../../../interface";
 import {
   useDeleteRoomTypeMutation,
   useGetAllRoomTypeQuery,
   useGetOneRoomTypeQuery,
-} from "../../../api/roomType";
+} from "../../../api";
 import { CreateRoomTypeModal, EditRoomTypeModal } from "../../../components";
-
-interface DataType {
-  _id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 const RoomTypeManage = () => {
   const key0 = "deleteAmenitiesMutation";
   const [messageApi, contextHolder] = message.useMessage();
-  const [currentItem, setCurrentItem] = useState(5);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [idRoomType, setIdRoomType] = useState("");
@@ -57,7 +50,7 @@ const RoomTypeManage = () => {
       });
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IRoomType> = [
     {
       title: "ID",
       dataIndex: "_id",
@@ -100,10 +93,11 @@ const RoomTypeManage = () => {
     },
   ];
 
+  const [currentItem, setCurrentItem] = useState(10);
   const paginationConfig = {
     pageSize: currentItem,
     showSizeChanger: true,
-    pageSizeOptions: ["5", "10", "20", "50"],
+    pageSizeOptions: ["10", "20", "30", "50"],
     onShowSizeChange: (_current: number, size: number) => {
       setCurrentItem(size);
     },
@@ -118,10 +112,11 @@ const RoomTypeManage = () => {
 
       <Table
         title={() => (
-          <>
+          <div className="flex items-center justify-end">
             <Button onClick={() => setShowCreateModal(true)}>Thêm mới</Button>
-          </>
+          </div>
         )}
+        bordered
         rowKey="_id"
         columns={columns}
         dataSource={data?.data}

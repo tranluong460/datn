@@ -6,7 +6,7 @@ export const authApi = createApi({
   tagTypes: ["Auth"],
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
-    login: builder.mutation({
+    loginAccount: builder.mutation({
       query: (data) => ({
         url: "/auth/login",
         method: "POST",
@@ -15,7 +15,7 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
-    register: builder.mutation({
+    registerAccount: builder.mutation({
       query: (data) => ({
         url: "/auth/register",
         method: "POST",
@@ -23,7 +23,7 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
-    user: builder.query({
+    infoAccount: builder.query({
       query: () => ({
         url: "auth/get-user",
         method: "GET",
@@ -31,25 +31,9 @@ export const authApi = createApi({
       }),
       providesTags: ["Auth"],
     }),
-    logout: builder.mutation({
+    logoutAccount: builder.mutation({
       query: () => ({
         url: "auth/logout",
-        method: "POST",
-        credentials: "include",
-      }),
-      invalidatesTags: ["Auth"],
-    }),
-    getAll: builder.query({
-      query: () => ({
-        url: "auth/",
-        method: "GET",
-        credentials: "include",
-      }),
-      providesTags: ["Auth"],
-    }),
-    lockAccount: builder.mutation({
-      query: (id: string) => ({
-        url: `auth/lock-account/${id}`,
         method: "POST",
         credentials: "include",
       }),
@@ -59,10 +43,8 @@ export const authApi = createApi({
 });
 
 export const {
-  useLoginMutation,
-  useRegisterMutation,
-  useUserQuery,
-  useLogoutMutation,
-  useGetAllQuery,
-  useLockAccountMutation,
+  useLoginAccountMutation,
+  useRegisterAccountMutation,
+  useInfoAccountQuery,
+  useLogoutAccountMutation,
 } = authApi;

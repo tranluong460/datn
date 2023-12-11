@@ -1,17 +1,28 @@
-import { BsChat } from "react-icons/bs";
-import { CiLocationOn } from "react-icons/ci";
-import { AiOutlineLock } from "react-icons/ai";
-import { LiaWalletSolid } from "react-icons/lia";
-import { MdManageHistory } from "react-icons/md";
-
+import {
+  BsChat,
+  CiLocationOn,
+  AiOutlineLock,
+  LiaWalletSolid,
+  MdManageHistory,
+} from "../../../icons";
 import { Container } from "../..";
 
-type hotelDetail = {
-  name: string;
+type DetailOverviewProps = {
   description: string;
 };
 
-const DetailOverview = ({ name, description }: hotelDetail) => {
+const DetailOverview = ({ description }: DetailOverviewProps) => {
+  const data = [
+    { icon: <LiaWalletSolid size={20} />, span: "Giá không thể tốt hơn" },
+    { icon: <AiOutlineLock size={20} />, span: "Đặt phòng an toàn" },
+    {
+      icon: <MdManageHistory size={20} />,
+      span: "Quản lý đặt phòng trực tuyến",
+    },
+    { icon: <CiLocationOn size={20} />, span: "Tiện nghi và vị trí tuyệt vời" },
+    { icon: <BsChat size={20} />, span: "Nhân viên nói tiếng Việt & Anh" },
+  ];
+
   return (
     <>
       <Container>
@@ -19,43 +30,25 @@ const DetailOverview = ({ name, description }: hotelDetail) => {
           <div className="w-auto md:w-[70%] text-justify">
             <div className="box-border">
               <p className="text-textLight2nd dark:text-textDark2nd">
-                <strong className="text-textLight dark:text-textDark pr-1">
-                  {name}
-                </strong>
                 {description}
               </p>
             </div>
           </div>
 
-          <div className="w-30 p-8 xl:h-64 lg:h-80 md:h-96 h-auto rounded-md bg-divideLight dark:bg-divideDark">
+          <div className="w-30 p-8 rounded-md bg-divideLight dark:bg-divideDark">
             <h6 className="text-uppercase text-base font-bold text-textLight dark:text-textDark">
-              Vì sao nên chọn Mường Thanh?
+              Vì sao nên chọn Seven Teen?
             </h6>
 
-            <div className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd">
-              <LiaWalletSolid size={20} />
-              <span className="ml-2">Giá không thể tốt hơn</span>
-            </div>
-
-            <div className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd">
-              <AiOutlineLock size={20} />
-              <span className="ml-2">Đặt phòng an toàn</span>
-            </div>
-
-            <div className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd">
-              <MdManageHistory size={20} />
-              <span className="ml-2">Quản lý đặt phòng trực tuyến</span>
-            </div>
-
-            <div className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd">
-              <CiLocationOn size={20} />
-              <span className="ml-2">Tiện nghi và vị trí tuyệt vời</span>
-            </div>
-
-            <div className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd">
-              <BsChat size={20} />
-              <span className="ml-2">Nhân viên nói tiếng Việt & Anh</span>
-            </div>
+            {data.map((item) => (
+              <div
+                key={item.span}
+                className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd"
+              >
+                {item.icon}
+                <span className="ml-2">{item.span}</span>
+              </div>
+            ))}
           </div>
         </div>
       </Container>

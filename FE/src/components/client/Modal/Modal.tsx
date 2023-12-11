@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { AiOutlineClose } from "react-icons/ai";
-
 import { Button } from "../..";
+import { AiOutlineClose } from "../../../icons";
 
 type ModalProps = {
   isOpen?: boolean;

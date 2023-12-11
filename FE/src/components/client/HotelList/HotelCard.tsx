@@ -1,52 +1,123 @@
-import { CiLocationOn } from "react-icons/ci";
-import { AiOutlineStar } from "react-icons/ai";
-import { Button } from "../..";
+import { useLocation, useNavigate } from "react-router-dom";
+import qs from "query-string";
+import { Rate } from "antd";
+import moment from "moment";
 
-const HotelCard = () => {
+import { Button } from "../..";
+import { IHotel } from "../../../interface";
+import { CiLocationOn } from "../../../icons";
+
+type HotelCardProps = {
+  hotel: IHotel;
+};
+
+const HotelCard = ({ hotel }: HotelCardProps) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const params = new URLSearchParams(location.search);
+  const checkin = params.get("checkin");
+  const checkout = params.get("checkout");
+
+  const prices =
+    hotel && hotel.id_room ? hotel.id_room.map((room) => room.price) : [];
+
+  const lowestPrice = prices.length > 0 ? Math.min(...prices) : null;
+
+  const toggleBooking = (id: string) => {
+    let currentQuery = {};
+
+    if (location.search) {
+      currentQuery = qs.parse(location.search.toString());
+    }
+
+    // eslint-disable-next-line
+    const updatedQuery: any = {
+      ...currentQuery,
+      hotel: id,
+    };
+
+    if (!checkin) {
+      updatedQuery.checkin = moment().format("YYYY-MM-DD");
+    }
+
+    if (!checkout) {
+      updatedQuery.checkout = moment().add(1, "days").format("YYYY-MM-DD");
+    }
+
+    const url = qs.stringifyUrl(
+      {
+        url: "/booking",
+        query: updatedQuery,
+      },
+      { skipNull: true }
+    );
+
+    navigate(url);
+  };
+
+  const toggleDetail = (id: string) => {
+    let currentQuery = {};
+
+    if (location.search) {
+      currentQuery = qs.parse(location.search.toString());
+    }
+
+    // eslint-disable-next-line
+    const updatedQuery: any = {
+      ...currentQuery,
+    };
+
+    const url = qs.stringifyUrl(
+      {
+        url: `/hotel-detail/${id}`,
+        query: updatedQuery,
+      },
+      { skipNull: true }
+    );
+
+    window.open(url, "_blank");
+  };
+
   return (
     <>
       <div className="grid lg:grid-cols-3 grid-cols-1 p-3 mb-4 gap-3 rounded-lg bg-light dark:bg-dark">
         <div className="relative">
-          <a href="hotel-detail/1" className="no-underline">
+          <div
+            onClick={() => toggleDetail(hotel._id)}
+            className="no-underline cursor-pointer"
+          >
             <img
-              src="https://booking.muongthanh.com/images/hotels/hotels/original/_hkt6859_1679810462_1691467982.jpg"
-              alt="Mường Thanh Grand Sài Gòn Centre"
+              src={hotel.images[0].url}
+              alt={hotel.name}
               className="rounded-md w-full xl:h-48 md:h-44 object-contain"
             />
-          </a>
+          </div>
         </div>
 
         <div className="box-border">
           <h2 className="font-semibold text-2xl leading-normal mb-4 text-textLight dark:text-textDark">
-            <a href="#" className="no-underline">
-              Mường Thanh Grand Sài Gòn Centre
-            </a>
+            <div
+              onClick={() => toggleDetail(hotel._id)}
+              className="no-underline hover:text-blue-500 cursor-pointer"
+            >
+              {hotel.name}
+            </div>
           </h2>
 
           <p className="flex mb-4 font-normal text-base leading-normal gap-1 text-textLight2nd dark:text-textDark2nd">
             <CiLocationOn size={25} />
-            Số 8-8A Mạc Đĩnh Chi, Phường Bến Nghé, Quận 1, Thành Phố Hồ Chí
-            Minh, Việt Nam
+            {hotel.address}
           </p>
 
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-start gap-1">
             <span className="text-textLight dark:text-textDark">Đánh giá:</span>
 
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
-            <span className="inline-block w-4 h-4 rounded-full relative mt-0.5 ml-1 text-textLight dark:text-textDark">
-              <AiOutlineStar />
-            </span>
+            <Rate
+              disabled
+              value={3}
+              className="text-yellow-400 dark:text-yellow-500"
+            />
           </div>
         </div>
 
@@ -54,18 +125,28 @@ const HotelCard = () => {
           <div className="w-full mt-auto text-right text-textLight2nd dark:text-textDark2nd">
             <div className="box-border">
               <div className="flex lg:flex-col flex-row gap-10">
-                <div className="">
-                  <p>Chỉ từ</p>
+                {lowestPrice ? (
+                  <div>
+                    <p>Chỉ từ</p>
 
-                  <p className="text-md lg:text-2xl font-bold text-textLight dark:text-textDark">
-                    2,025,000
-                    <span>VNĐ</span>
-                  </p>
+                    <p className="text-md lg:text-2xl font-bold text-textLight dark:text-textDark">
+                      {lowestPrice.toLocaleString("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
+                    </p>
 
-                  <p>phòng/đêm</p>
-                </div>
+                    <p>phòng/đêm</p>
+                  </div>
+                ) : (
+                  ""
+                )}
 
-                <Button label="Đặt phòng" onClick={() => alert("Đặt phòng")} />
+                <Button
+                  label={lowestPrice ? "Đặt phòng" : "Hết phòng"}
+                  disabled={lowestPrice ? false : true}
+                  onClick={() => toggleBooking(hotel._id)}
+                />
               </div>
             </div>
           </div>

@@ -1,23 +1,26 @@
 import { Button, Form, Input, Modal, Space, Spin, message } from "antd";
-import { useUpdateRoomTypeMutation } from "../../../api/roomType";
+
+import { IRoomType } from "../../../interface";
+import { useUpdateRoomTypeMutation } from "../../../api";
 
 type EditRoomTypeModalProps = {
   isOpenEdit: boolean;
-  onCancel: () => void;
-  data: { _id: string; name: string };
   loading: boolean;
+  data: IRoomType;
+  onCancel: () => void;
 };
 
 const EditRoomTypeModal = ({
   isOpenEdit,
-  onCancel,
-  data,
   loading,
+  data,
+  onCancel,
 }: EditRoomTypeModalProps) => {
   const [form] = Form.useForm();
-  const [updateRoomType, resultUpdate] = useUpdateRoomTypeMutation();
 
-  const onFinish = (data: { _id: string; name: string }) => {
+  const [updateRoomType, resultEdit] = useUpdateRoomTypeMutation();
+
+  const onFinish = (data: IRoomType) => {
     updateRoomType(data)
       .unwrap()
       .then((response) => {
@@ -42,6 +45,7 @@ const EditRoomTypeModal = ({
         </div>
       ) : (
         <Form
+          disabled={resultEdit.isLoading}
           name="edit_room_type"
           form={form}
           onFinish={onFinish}
@@ -63,14 +67,14 @@ const EditRoomTypeModal = ({
 
           <Form.Item>
             <Space>
-              <Button htmlType="submit" loading={resultUpdate.isLoading}>
+              <Button htmlType="submit" loading={resultEdit.isLoading}>
                 Sửa
               </Button>
 
               <Button
                 htmlType="reset"
                 onClick={onCancel}
-                disabled={resultUpdate.isLoading}
+                disabled={resultEdit.isLoading}
               >
                 Hủy
               </Button>
