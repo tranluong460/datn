@@ -1,12 +1,17 @@
 import express from "express";
 
-import { getAll, getOne, create, update } from "../controller/payment";
+import {
+  vnPayPayment,
+  vnPayPaymentReturn,
+  createOrderZaloPay,
+  checkStatusZaloPay,
+} from "../controller/payment";
 
 const router = express.Router();
 
-router.get("/", getAll);
-router.get("/:id", getOne);
-router.post("/", create);
-router.patch("/:id", update);
+router.post("/vnPay", vnPayPayment);
+router.get("/vnPay-return", vnPayPaymentReturn);
+router.post("/create-order-zaloPay", createOrderZaloPay);
+router.get("/check-status-zaloPay/:code", checkStatusZaloPay);
 
 export default router;

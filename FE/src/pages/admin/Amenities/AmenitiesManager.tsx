@@ -1,41 +1,27 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Popconfirm, Popover, Space, Table, Tag, message } from "antd";
+import { Button, Popconfirm, Space, Table, Tag, message } from "antd";
 
+import { IAmenities } from "../../../interface";
+import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
 import {
   useDeleteAmenitiesMutation,
   useGetAllAmenitiesQuery,
-  useGetAmenitiesByIdQuery,
-} from "../../../api/amenities";
-import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
-
-interface FeaturesProps {
-  _id: string;
-  name: string;
-  surcharge: boolean;
-}
-
-interface DataType {
-  _id: string;
-  name: string;
-  features: FeaturesProps[];
-  createdAt: string;
-  updatedAt: string;
-}
+  useGetOneAmenitiesQuery,
+} from "../../../api";
 
 const AmenitiesManager = () => {
   const key0 = "deleteAmenitiesMutation";
   const [messageApi, contextHolder] = message.useMessage();
 
-  const [currentItem, setCurrentItem] = useState(5);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [idAmenities, setIdAmenities] = useState("");
 
   const { data, isLoading } = useGetAllAmenitiesQuery("");
   const { data: dataOneAmenities, isFetching } =
-    useGetAmenitiesByIdQuery(idAmenities);
+    useGetOneAmenitiesQuery(idAmenities);
   const [deleteAmenities] = useDeleteAmenitiesMutation();
 
   const onDelete = (id: string) => {
@@ -65,7 +51,7 @@ const AmenitiesManager = () => {
       });
   };
 
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<IAmenities> = [
     {
       title: "ID",
       dataIndex: "_id",
@@ -75,28 +61,24 @@ const AmenitiesManager = () => {
       title: "Tên tiện ích",
       dataIndex: "name",
       key: "name",
-      render: (name, { features }) => (
-        <Popover
-          className="cursor-pointer"
-          placement="rightTop"
-          title="Features"
-          content={() => (
-            <Space direction="vertical" size={"middle"}>
-              {features.map(
-                (item: { name: string; surcharge: boolean }, index: number) => (
-                  <Space key={item.name} direction="horizontal">
-                    <div>
-                      {index + 1}. {item.name}
-                    </div>
-                    {item.surcharge && <Tag>Phụ phí</Tag>}
-                  </Space>
-                )
-              )}
-            </Space>
+    },
+    {
+      title: "Features",
+      dataIndex: "features",
+      key: "features",
+      render: (features) => (
+        <Space direction="vertical" size="small">
+          {features.map(
+            (item: { name: string; surcharge: boolean }, index: number) => (
+              <Space key={item.name} direction="horizontal">
+                <div>
+                  {index + 1}. {item.name}
+                </div>
+                {item.surcharge && <Tag>Phụ phí</Tag>}
+              </Space>
+            )
           )}
-        >
-          {name}
-        </Popover>
+        </Space>
       ),
     },
     {
@@ -131,10 +113,11 @@ const AmenitiesManager = () => {
     },
   ];
 
+  const [currentItem, setCurrentItem] = useState(10);
   const paginationConfig = {
     pageSize: currentItem,
     showSizeChanger: true,
-    pageSizeOptions: ["5", "10", "20", "50"],
+    pageSizeOptions: ["10", "20", "30", "50"],
     onShowSizeChange: (_current: number, size: number) => {
       setCurrentItem(size);
     },
@@ -149,10 +132,11 @@ const AmenitiesManager = () => {
 
       <Table
         title={() => (
-          <>
+          <div className="flex items-center justify-end">
             <Button onClick={() => setShowCreateModal(true)}>Thêm mới</Button>
-          </>
+          </div>
         )}
+        bordered
         rowKey="_id"
         columns={columns}
         dataSource={data?.data}

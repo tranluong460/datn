@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
 
-import { RoomModel, HotelModel } from "../models";
-import { sendResponse } from "../utils";
 import { RoomValidate } from "../validate";
-import { uploadImageToCloudinary } from "../utils";
+import { RoomModel, HotelModel } from "../models";
 import { validateFormMiddleware } from "../middleware";
+import { sendResponse, uploadImageToCloudinary } from "../utils";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find();
+    const roomList = await RoomModel.find().populate("id_roomType id_hotel");
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
@@ -24,10 +23,13 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const room = await RoomModel.findById(req.params.id)
-      .populate("id_amenities")
-      .populate("id_hotel")
-      .populate("id_roomType");
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
+    const room = await RoomModel.findById(req.params.id).populate(
+      "id_amenities id_hotel id_roomType"
+    );
 
     if (!room || room.length === 0) {
       return sendResponse(res, 404, "Không có thông tin phòng");
@@ -43,7 +45,6 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   const imagesArray = [];
-
   for (const field in req.files) {
     if (req.files.hasOwnProperty(field)) {
       const file = req.files[field];
@@ -53,7 +54,6 @@ export const create = async (req, res) => {
       });
     }
   }
-
   req.fields.images = imagesArray;
 
   if (req.fields.id_amenities) {
@@ -100,6 +100,10 @@ export const create = async (req, res) => {
 };
 
 export const update = async (req, res) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return sendResponse(res, 400, "ID không hợp lệ");
+  }
+
   const imagesArray = [];
 
   for (const field in req.files) {

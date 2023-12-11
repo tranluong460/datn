@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 import { sendResponse } from "../utils";
 import { AmenitiesModel } from "../models";
 import { AmenitiesValidate } from "../validate";
@@ -25,6 +27,10 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     const amenities = await AmenitiesModel.findById(req.params.id);
 
     if (!amenities || amenities.length === 0) {
@@ -63,6 +69,10 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     validateMiddleware(req, res, AmenitiesValidate, async () => {
       const data = await AmenitiesModel.findByIdAndUpdate(
         req.params.id,
@@ -87,6 +97,10 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     const data = await AmenitiesModel.findByIdAndDelete(req.params.id);
 
     if (!data) {

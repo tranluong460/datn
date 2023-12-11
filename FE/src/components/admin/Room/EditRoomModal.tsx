@@ -1,0 +1,241 @@
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Row,
+  Select,
+  Space,
+  Spin,
+  Upload,
+  message,
+} from "antd";
+
+import { AiOutlinePlusCircle } from "../../../icons";
+import { IRoom } from "../../../interface";
+import {
+  useGetAllRoomTypeQuery,
+  useGetAllHotelQuery,
+  useGetAllAmenitiesQuery,
+  useUpdateRoomMutation,
+} from "../../../api";
+
+type EditRoomModalProps = {
+  isOpenEdit: boolean;
+  onCancel: () => void;
+  loading: boolean;
+  data: IRoom;
+};
+
+const EditRoomModal = ({
+  isOpenEdit,
+  onCancel,
+  loading,
+  data,
+}: EditRoomModalProps) => {
+  const [form] = Form.useForm();
+  const { Option } = Select;
+
+  const { data: allHotel } = useGetAllHotelQuery("");
+  const { data: allRoomType } = useGetAllRoomTypeQuery("");
+  const { data: allAmenities } = useGetAllAmenitiesQuery("");
+  const [editRoom, resultEdit] = useUpdateRoomMutation();
+
+  const onFinish = (data: IRoom) => {
+    editRoom(data)
+      .unwrap()
+      .then((response) => {
+        message.success(response.message);
+        onCancel();
+      })
+      .catch((error) => {
+        message.error(error.data.message);
+      });
+  };
+
+  return (
+    <Modal
+      title="Chỉnh sửa phòng"
+      open={isOpenEdit}
+      onCancel={onCancel}
+      footer={null}
+      width={1000}
+      style={{ top: 20 }}
+    >
+      {loading ? (
+        <div className="flex items-center justify-center h-[100px]">
+          <Spin spinning={loading} />
+        </div>
+      ) : (
+        <Form
+          disabled={resultEdit.isLoading}
+          name="edit_room"
+          layout="vertical"
+          form={form}
+          onFinish={onFinish}
+          initialValues={{
+            ...data,
+            id_amenities:
+              data &&
+              data.id_amenities &&
+              data.id_amenities.map((item) => item._id),
+            id_hotel: data && data.id_hotel && data.id_hotel._id,
+            id_roomType: data && data.id_roomType && data.id_roomType._id,
+          }}
+          autoComplete="off"
+        >
+          <Form.Item name="_id" hidden>
+            <Input />
+          </Form.Item>
+
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="quantity"
+                label="Số lượng"
+                rules={[{ required: true, message: "Vui lòng nhập số lượng!" }]}
+              >
+                <InputNumber className="w-full" min={1} />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                name="price"
+                label="Giá"
+                rules={[{ required: true, message: "Vui lòng nhập giá!" }]}
+              >
+                <InputNumber className="w-full" min={1} addonAfter="VNĐ" />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                name="id_hotel"
+                label="Khách sạn"
+                rules={[
+                  { required: true, message: "Khách sạn không được để trống!" },
+                ]}
+              >
+                <Select disabled>
+                  {allHotel?.data &&
+                    allHotel?.data.map(
+                      (item: { _id: string; name: string }) => (
+                        <Option key={item._id} value={item._id}>
+                          {item.name}
+                        </Option>
+                      )
+                    )}
+                </Select>
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                name="id_roomType"
+                label="Loại phòng"
+                rules={[
+                  {
+                    required: true,
+                    message: "Loại phòng không được để trống!",
+                  },
+                ]}
+              >
+                <Select>
+                  {allRoomType?.data &&
+                    allRoomType?.data.map(
+                      (item: { _id: string; name: string }) => (
+                        <Option key={item._id} value={item._id}>
+                          {item.name}
+                        </Option>
+                      )
+                    )}
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Form.Item
+            name="id_amenities"
+            label="Tiện ích"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập tiện ích!",
+              },
+            ]}
+          >
+            <Select mode="multiple">
+              {allAmenities?.data &&
+                allAmenities?.data.map(
+                  (item: { _id: string; name: string }) => (
+                    <Option key={item._id} value={item._id}>
+                      {item.name}
+                    </Option>
+                  )
+                )}
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            name="description"
+            label="Mô tả"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập mô tả!",
+              },
+            ]}
+          >
+            <Input.TextArea />
+          </Form.Item>
+
+          <Form.Item
+            name="images"
+            label="Hình ảnh"
+            rules={[
+              {
+                required: true,
+                message: "Hình ảnh không được để trống!",
+              },
+            ]}
+            valuePropName="fileList"
+            getValueFromEvent={(e) => {
+              if (Array.isArray(e)) {
+                return e;
+              }
+              return e && e.fileList;
+            }}
+          >
+            <Upload listType="picture-card" beforeUpload={() => false}>
+              <div className="flex flex-col justify-center items-center">
+                <AiOutlinePlusCircle size={20} />
+                <div className="mt-2">Tải lên</div>
+              </div>
+            </Upload>
+          </Form.Item>
+
+          <Form.Item>
+            <Space>
+              <Button htmlType="submit" loading={resultEdit.isLoading}>
+                Sửa
+              </Button>
+
+              <Button
+                htmlType="reset"
+                onClick={onCancel}
+                disabled={resultEdit.isLoading}
+              >
+                Hủy
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      )}
+    </Modal>
+  );
+};
+
+export default EditRoomModal;

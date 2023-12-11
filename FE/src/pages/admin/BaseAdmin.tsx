@@ -13,21 +13,21 @@ import {
   message,
 } from "antd";
 
-import { TbBrandBooking } from "react-icons/tb";
-import { LiaHotelSolid } from "react-icons/lia";
-import { PiLightbulbFilament } from "react-icons/pi";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { MdOutlineDashboardCustomize } from "react-icons/md";
 import {
+  TbBrandBooking,
+  LiaHotelSolid,
+  PiLightbulbFilament,
+  IoNotificationsOutline,
+  MdOutlineDashboardCustomize,
+  MdOutlineRoomPreferences,
   AiOutlineHdd,
   AiOutlineUser,
   AiOutlineHome,
   AiOutlineLogout,
   AiOutlineSetting,
-} from "react-icons/ai";
-
+} from "../../icons";
 import { Logo } from "../../components";
-import { useLogoutMutation, useUserQuery } from "../../api/auth";
+import { useInfoAccountQuery, useLogoutAccountMutation } from "../../api";
 
 const { Header, Content, Footer, Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -36,8 +36,8 @@ const BaseAdmin = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const [logoutUser] = useLogoutMutation();
-  const { data } = useUserQuery("");
+  const [logoutUser] = useLogoutAccountMutation();
+  const { data } = useInfoAccountQuery("");
 
   const logoutAccount = () => {
     logoutUser(null)
@@ -70,11 +70,13 @@ const BaseAdmin = () => {
     getItem("Dashboard", "/admin", <MdOutlineDashboardCustomize />),
     getItem("Đặt Phòng", "/admin/booking-manager", <TbBrandBooking />),
     getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />),
+    getItem("Phòng", "/admin/room-manager", <MdOutlineRoomPreferences />),
     getItem("Loại phòng", "/admin/roomType-manager", <AiOutlineHdd />),
     getItem("Tiện ích", "/admin/amenities-manager", <PiLightbulbFilament />),
     getItem("Người dùng", "/admin/user-manager", <AiOutlineUser />),
   ];
 
+  // eslint-disable-next-line
   const selectedMenuItem: any = menuItems.find(
     (item) => item?.key === location.pathname
   );
@@ -126,6 +128,13 @@ const BaseAdmin = () => {
     <>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
+          style={{
+            overflow: "auto",
+            height: "100vh",
+            position: "sticky",
+            top: 0,
+            left: 0,
+          }}
           theme="light"
           collapsible={true}
           collapsed={collapsed}

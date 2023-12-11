@@ -4,6 +4,9 @@ import {
   formChangePassword,
   formPasswordChanged,
   formResetPassword,
+  emailBooking,
+  emailCancelBooking,
+  emailSuccessBooking,
 } from "./formEmail";
 
 export {
@@ -12,4 +15,7 @@ export {
   formChangePassword,
   formPasswordChanged,
   formResetPassword,
+  emailBooking,
+  emailCancelBooking,
+  emailSuccessBooking,
 };

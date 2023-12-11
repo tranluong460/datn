@@ -10,23 +10,14 @@ import {
   Upload,
   message,
 } from "antd";
-import type { RcFile } from "antd/es/upload/interface";
 
-import { AiOutlinePlusCircle } from "react-icons/ai";
-
-import { useGetAllAmenitiesQuery } from "../../../api/amenities";
-import { useCreateHotelMutation } from "../../../api/hotel";
-
-interface UploadData {
-  name: string;
-  phone: string;
-  address: string;
-  email: string;
-  city: string;
-  id_amenities: string[];
-  description: string;
-  images: RcFile[];
-}
+import { IHotel } from "../../../interface";
+import { AiOutlinePlusCircle } from "../../../icons";
+import {
+  useCreateHotelMutation,
+  useGetAllAmenitiesQuery,
+  useGetAllProvincesQuery,
+} from "../../../api";
 
 type CreateHotelModalProps = {
   isOpenCreate: boolean;
@@ -41,9 +32,10 @@ const CreateHotelModal = ({
   const { Option } = Select;
 
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
+  const { data: allProvinces } = useGetAllProvincesQuery("");
   const [createHotel, resultCreate] = useCreateHotelMutation();
 
-  const onFinish = (data: UploadData) => {
+  const onFinish = (data: IHotel) => {
     createHotel(data)
       .unwrap()
       .then((response) => {
@@ -66,8 +58,9 @@ const CreateHotelModal = ({
       style={{ top: 20 }}
     >
       <Form
+        disabled={resultCreate.isLoading}
         layout="vertical"
-        name="add_amenities"
+        name="add_hotel"
         form={form}
         onFinish={onFinish}
         autoComplete="off"
@@ -132,7 +125,22 @@ const CreateHotelModal = ({
                 },
               ]}
             >
-              <Input />
+              <Select>
+                {allProvinces &&
+                  allProvinces.map(
+                    (
+                      item: {
+                        name: string;
+                        code: string;
+                      },
+                      index: number
+                    ) => (
+                      <Option key={item.code} value={item.code}>
+                        {index + 1}, {item.name}
+                      </Option>
+                    )
+                  )}
+              </Select>
             </Form.Item>
           </Col>
           <Col span={12}>

@@ -12,71 +12,19 @@ import {
   message,
 } from "antd";
 
-import { AiOutlinePlusCircle } from "react-icons/ai";
-
-import { useGetAllAmenitiesQuery } from "../../../api/amenities";
-import { useUpdateHotelMutation } from "../../../api/hotel";
-
-interface Image {
-  url: string;
-}
-
-interface AmenityFeature {
-  name: string;
-  surcharge: boolean;
-}
-
-interface Amenity {
-  _id: string;
-  name: string;
-  features: AmenityFeature[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface RoomType {
-  _id: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Room {
-  _id: string;
-  images: Image[];
-  quantity: number;
-  price: number;
-  status: string;
-  description: string;
-  id_amenities: string[];
-  id_hotel: string;
-  id_roomType: RoomType;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Hotel {
-  _id: string;
-  name: string;
-  images: Image[];
-  address: string;
-  phone: string;
-  status: string;
-  email: string;
-  description: string;
-  city: string;
-  id_amenities: Amenity[];
-  id_review: [];
-  createdAt: string;
-  updatedAt: string;
-  id_room: Room[];
-}
+import { IAmenities, IHotel } from "../../../interface";
+import { AiOutlinePlusCircle } from "../../../icons";
+import {
+  useGetAllAmenitiesQuery,
+  useGetAllProvincesQuery,
+  useUpdateHotelMutation,
+} from "../../../api";
 
 type EditHotelModalProps = {
   isOpenEdit: boolean;
   onCancel: () => void;
   loading: boolean;
-  data: Hotel;
+  data: IHotel;
 };
 
 const EditHotelModal = ({
@@ -89,14 +37,10 @@ const EditHotelModal = ({
   const { Option } = Select;
 
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
+  const { data: allProvinces } = useGetAllProvincesQuery("");
   const [editHotel, resultEdit] = useUpdateHotelMutation();
 
-  const transformedAmenities = data.id_amenities.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
-
-  const onFinish = (data: Hotel) => {
+  const onFinish = (data: IHotel) => {
     editHotel(data)
       .unwrap()
       .then((response) => {
@@ -123,11 +67,18 @@ const EditHotelModal = ({
         </div>
       ) : (
         <Form
+          disabled={resultEdit.isLoading}
           name="edit_hotel"
           layout="vertical"
           form={form}
           onFinish={onFinish}
-          initialValues={{ ...data, id_amenities: transformedAmenities }}
+          initialValues={{
+            ...data,
+            id_amenities:
+              data &&
+              data.id_amenities &&
+              data.id_amenities.map((item) => item._id),
+          }}
           autoComplete="off"
         >
           <Form.Item name="_id" hidden>
@@ -198,7 +149,22 @@ const EditHotelModal = ({
                   },
                 ]}
               >
-                <Input />
+                <Select>
+                  {allProvinces &&
+                    allProvinces.map(
+                      (
+                        item: {
+                          name: string;
+                          code: number;
+                        },
+                        index: number
+                      ) => (
+                        <Option key={item.code} value={item.code}>
+                          {index + 1}, {item.name}
+                        </Option>
+                      )
+                    )}
+                </Select>
               </Form.Item>
             </Col>
 
@@ -215,13 +181,11 @@ const EditHotelModal = ({
               >
                 <Select mode="multiple">
                   {allAmenities?.data &&
-                    allAmenities?.data.map(
-                      (item: { _id: string; name: string }) => (
-                        <Option key={item._id} value={item._id}>
-                          {item.name}
-                        </Option>
-                      )
-                    )}
+                    allAmenities?.data.map((item: IAmenities) => (
+                      <Option key={item._id} value={item._id}>
+                        {item.name}
+                      </Option>
+                    ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -268,7 +232,7 @@ const EditHotelModal = ({
           <Form.Item>
             <Space>
               <Button htmlType="submit" loading={resultEdit.isLoading}>
-                Thêm
+                Sửa
               </Button>
 
               <Button

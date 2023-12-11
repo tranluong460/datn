@@ -4,12 +4,18 @@ import EditAmenitiesModal from "./admin/Amenities/EditAmenitiesModal";
 import CreateHotelModal from "./admin/Hotel/CreateHotelModal";
 import EditHotelModal from "./admin/Hotel/EditHotelModal";
 import HotelDrawn from "./admin/Hotel/HotelDrawn";
-import TwoDrawnAmenities from "./admin/Hotel/TwoDrawnAmenities";
-import TwoDrawnDescription from "./admin/Hotel/TwoDrawnDescription";
-import TwoDrawnRoom from "./admin/Hotel/TwoDrawnRoom";
+import TwoDrawnHotelAmenities from "./admin/Hotel/TwoDrawnHotelAmenities";
+import TwoDrawnHotelDescription from "./admin/Hotel/TwoDrawnHotelDescription";
+import TwoDrawnHotelRoom from "./admin/Hotel/TwoDrawnHotelRoom";
+import CreateRoomModal from "./admin/Room/CreateRoomModal";
+import EditRoomModal from "./admin/Room/EditRoomModal";
+import RoomDrawn from "./admin/Room/RoomDrawn";
+import TwoDrawnRoomAmenities from "./admin/Room/TwoDrawnRoomAmenities";
+import TwoDrawnRoomDescription from "./admin/Room/TwoDrawnRoomDescription";
+import TwoDrawnRoomHotel from "./admin/Room/TwoDrawnRoomHotel";
 import CreateRoomTypeModal from "./admin/RoomType/CreateRoomTypeModal";
 import EditRoomTypeModal from "./admin/RoomType/EditRoomTypeModal";
-import InfoDrawn from "./admin/User/InfoDrawn";
+import InfoUserDrawn from "./admin/User/InfoUserDrawn";
 
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
@@ -28,46 +34,66 @@ import InfoHotel from "./client/HotelDetail/InfoHotel";
 import RoomCard from "./client/HotelDetail/RoomCard";
 import RoomList from "./client/HotelDetail/RoomList";
 import Filter from "./client/HotelList/Filter";
-import FilterCard from "./client/HotelList/FilterCard";
+import FilterTop from "./client/HotelList/FilterTop";
 import HotelCard from "./client/HotelList/HotelCard";
 import ListHotel from "./client/HotelList/ListHotel";
 import LoginModal from "./client/Modal/LoginModal";
 import Modal from "./client/Modal/Modal";
 import RegisterModal from "./client/Modal/RegisterModal";
+import SearchModal from "./client/Modal/SearchModal";
 import DarkMode from "./client/NavBar/DarkMode";
 import Logo from "./client/NavBar/Logo";
 import MenuItem from "./client/NavBar/MenuItem";
 import NavBar from "./client/NavBar/NavBar";
 import Search from "./client/NavBar/Search";
 import UserMenu from "./client/NavBar/UserMenu";
+import Counter from "./client/Input/Counter";
 import BillInfo from "./client/Payment/BillInfo";
 import BookingInfo from "./client/Payment/BookingInfo";
-
-//
 import Avatar from "./Avatar";
-import Button from "./Button";
-import Container from "./Container";
-import Input from "./Input";
+import InfoBooking from "./auth/Booking/InfoBooking";
+import FilterDialog from "./client/HotelList/FilterDialog";
+import CountrySelect from "./client/Input/CountrySelect";
+import Button from "./client/Button";
+import Calendar from "./client/Input/Calendar";
+import Container from "./client/Container";
+import HotelBooking from "./client/Booking/HotelBooking";
+import Input from "./client/Input/Input";
+import RoomBooking from "./client/Booking/RoomBooking";
+import DetailBooking from "./client/Booking/DetailBooking";
+import FooterBottom from "./client/Footer/FooterBottom";
+import FooterTop from "./client/Footer/FooterTop";
+import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
+import InfoBookingCard from "./auth/Booking/InfoBookingCard";
 
 export {
-  // Admin
+  InfoBookingCard,
+  DetailBooking,
+  RoomBooking,
+  InfoBooking,
+  HotelBooking,
+  Counter,
+  FilterDialog,
+  CountrySelect,
   CreateAmenitiesModal,
   EditAmenitiesModal,
   CreateHotelModal,
   EditHotelModal,
   HotelDrawn,
-  TwoDrawnAmenities,
-  TwoDrawnDescription,
-  TwoDrawnRoom,
+  TwoDrawnHotelAmenities,
+  TwoDrawnHotelDescription,
+  TwoDrawnHotelRoom,
+  CreateRoomModal,
+  EditRoomModal,
+  RoomDrawn,
+  TwoDrawnRoomAmenities,
+  TwoDrawnRoomDescription,
+  TwoDrawnRoomHotel,
   CreateRoomTypeModal,
   EditRoomTypeModal,
-  InfoDrawn,
-
-  // Auth
+  InfoUserDrawn,
   InfoUser,
   Sidebar,
-
-  // Client
   Footer,
   Attractive,
   AttractiveCard,
@@ -80,12 +106,14 @@ export {
   RoomCard,
   RoomList,
   Filter,
-  FilterCard,
+  FilterTop,
+  CalendarRangerModal,
   HotelCard,
   ListHotel,
   LoginModal,
   Modal,
   RegisterModal,
+  SearchModal,
   DarkMode,
   Logo,
   MenuItem,
@@ -94,10 +122,11 @@ export {
   UserMenu,
   BillInfo,
   BookingInfo,
-
-  //
   Avatar,
   Button,
+  Calendar,
   Container,
   Input,
+  FooterBottom,
+  FooterTop,
 };

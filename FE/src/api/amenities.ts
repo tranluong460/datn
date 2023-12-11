@@ -14,7 +14,7 @@ export const amenitiesApi = createApi({
       }),
       providesTags: ["Amenities"],
     }),
-    getAmenitiesById: builder.query({
+    getOneAmenities: builder.query({
       query: (id: string) => ({
         url: `amenities/${id}`,
         method: "GET",
@@ -56,7 +56,7 @@ export const amenitiesApi = createApi({
 
 export const {
   useGetAllAmenitiesQuery,
-  useGetAmenitiesByIdQuery,
+  useGetOneAmenitiesQuery,
   useCreateAmenitiesMutation,
   useDeleteAmenitiesMutation,
   useUpdateAmenitiesMutation,

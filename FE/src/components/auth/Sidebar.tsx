@@ -1,10 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-// import { IoNotificationsOutline } from "react-icons/io5";
-import {
-  MdPayment,
-  //  MdOutlinePrivacyTip
-} from "react-icons/md";
+import { MdPayment } from "react-icons/md";
 import { AiOutlineUserAdd, AiOutlineLock } from "react-icons/ai";
 
 import { MenuItem } from "..";
@@ -22,25 +18,15 @@ const Sidebar = () => {
             icon={AiOutlineUserAdd}
           />
           <MenuItem
-            label="An toàn và bảo mật"
+            label="Mật khẩu"
             onClick={() => navigate("/auth/security")}
             icon={AiOutlineLock}
           />
           <MenuItem
-            label="Thông tin thanh toán"
-            onClick={() => navigate("/auth/billing-information")}
+            label="Đặt phòng"
+            onClick={() => navigate("/auth/booking")}
             icon={MdPayment}
           />
-          {/* <MenuItem
-            label="Quyền riêng tư"
-            onClick={() => navigate("/auth/privacy")}
-            icon={MdOutlinePrivacyTip}
-          /> */}
-          {/* <MenuItem
-            label="Thông báo email"
-            onClick={() => navigate("/auth/notifications")}
-            icon={IoNotificationsOutline}
-          /> */}
         </div>
       </div>
     </>

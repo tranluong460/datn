@@ -1,11 +1,10 @@
-import toast from "react-hot-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-import { AiOutlineMenu } from "react-icons/ai";
-
+import { AiOutlineMenu } from "../../../icons";
 import { Avatar, MenuItem } from "../..";
-import { useLogoutMutation, useUserQuery } from "../../../api/auth";
+import { useLogoutAccountMutation, useInfoAccountQuery } from "../../../api";
 import { useLoginModal, useRegisterModal } from "../../../hooks";
 
 const UserMenu = () => {
@@ -13,8 +12,8 @@ const UserMenu = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = useState(false);
-  const { data, isSuccess } = useUserQuery("");
-  const [logoutUser] = useLogoutMutation();
+  const { data, isSuccess } = useInfoAccountQuery("");
+  const [logoutUser] = useLogoutAccountMutation();
 
   const onToggle = () => {
     setIsOpen(!isOpen);
@@ -35,7 +34,10 @@ const UserMenu = () => {
     <>
       <div className="relative z-10">
         <div onClick={onToggle} className="hidden md:block cursor-pointer">
-          <Avatar key={data?.data.image} imageUser={data?.data.image} />
+          <Avatar
+            key={data?.data.id_information.image}
+            imageUser={data?.data.id_information.image}
+          />
         </div>
 
         <div onClick={onToggle} className="block md:hidden cursor-pointer">
@@ -50,7 +52,7 @@ const UserMenu = () => {
                   label="Thông tin cá nhân"
                   onClick={() => navigate("/auth")}
                 />
-                {data?.role === "Admin" && (
+                {data?.data.role === "Admin" && (
                   <MenuItem label="Admin" onClick={() => navigate("/admin")} />
                 )}
 
