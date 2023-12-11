@@ -1,5 +1,4 @@
-import { HotelModel } from "../models";
-import { ReviewModel } from "../models";
+import { HotelModel, ReviewModel } from "../models";
 import { sendResponse } from "../utils";
 import { ReviewValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
@@ -49,7 +48,7 @@ export const create = async (req, res) => {
     validateMiddleware(req, res, ReviewValidate, async () => {
       const data = await ReviewModel.create({
         ...req.body,
-        id_user: req.user._id
+        id_user: req.user._id,
       });
 
       if (!data) {
@@ -99,16 +98,15 @@ export const remove = async (req, res) => {
   try {
     const data = await ReviewModel.findById(req.params.id);
     if (data.id_user == req.user._id) {
-      const deleComment = await ReviewModel.findByIdAndDelete(data._id)
+      const deleComment = await ReviewModel.findByIdAndDelete(data._id);
       await HotelModel.findOneAndUpdate(
         { id_review: data._id },
         { $pull: { id_review: data._id } },
         { new: true }
-      )
-      return sendResponse(res, 200, 'Xóa bình luận thành công', deleComment)
+      );
+      return sendResponse(res, 200, "Xóa bình luận thành công", deleComment);
     }
-    return sendResponse(res, 404, 'Không được xóa bình luận')
-
+    return sendResponse(res, 404, "Không được xóa bình luận");
   } catch (error) {
     console.log(error);
 
