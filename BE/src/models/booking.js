@@ -26,7 +26,7 @@ const BookingSchema = new mongoose.Schema(
     },
     id_payment: {
       type: mongoose.Schema.Types.ObjectId,
-      required: false,
+      ref: "Payment",
     },
     list_room: [
       {

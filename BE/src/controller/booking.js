@@ -35,12 +35,12 @@ export const getBookingByUser = async (req, res) => {
   const user = req.user;
 
   try {
-    const bookingList = await BookingModel.find({ id_user: user._id }).populate(
-      {
+    const bookingList = await BookingModel.find({ id_user: user._id })
+      .populate("id_payment")
+      .populate({
         path: "list_room",
         populate: "idRoom",
-      }
-    );
+      });
 
     if (!bookingList || bookingList.length === 0) {
       return sendResponse(res, 404, "Người dùng chưa đặt phòng");
@@ -143,6 +143,18 @@ export const update = async (req, res) => {
       const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
       const check_out = moment(newBooking.check_out).format("DD/MM/YYYY");
 
+      await Promise.all(
+        newBooking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
+      );
+
       sendMailCancelBooking(
         newBooking.id_user.email,
         newBooking.id_user.id_information.name,
@@ -152,6 +164,18 @@ export const update = async (req, res) => {
     }
 
     if (newBooking.status === "Thành công") {
+      await Promise.all(
+        newBooking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
+      );
+
       sendMailSuccessBooking(
         newBooking.id_user.email,
         newBooking.id_user.id_information.name

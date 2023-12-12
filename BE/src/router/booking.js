@@ -13,6 +13,6 @@ const router = express.Router();
 router.get("/", isAdminMiddleware, getAll);
 router.get("/booking-user", loginMiddleware, getBookingByUser);
 router.post("/", loginMiddleware, create);
-router.patch("/:id", isAdminMiddleware, update);
+router.patch("/:id", loginMiddleware, update);
 
 export default router;

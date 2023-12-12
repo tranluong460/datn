@@ -15,6 +15,19 @@ export const bookingApi = createApi({
       }),
       invalidatesTags: ["Booking"],
     }),
+    updateBooking: builder.mutation({
+      query: (data) => {
+        const { _id, ...newData } = data;
+
+        return {
+          url: `/booking/${_id}`,
+          method: "PATCH",
+          body: newData,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Booking"],
+    }),
     vnPayPayment: builder.mutation({
       query: (data) => ({
         url: "/payment/vnPay",
@@ -33,6 +46,13 @@ export const bookingApi = createApi({
       }),
       invalidatesTags: ["Booking"],
     }),
+    checkStatusZaloPay: builder.mutation({
+      query: (code) => ({
+        url: `payment/check-status-zaloPay/${code}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Booking"],
+    }),
     getBookingByUser: builder.query({
       query: () => ({
         url: "/booking/booking-user",
@@ -46,7 +66,9 @@ export const bookingApi = createApi({
 
 export const {
   useCreateBookingMutation,
+  useUpdateBookingMutation,
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
+  useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
 } = bookingApi;

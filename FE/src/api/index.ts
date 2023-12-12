@@ -24,8 +24,10 @@ import {
 import {
   bookingApi,
   useCreateBookingMutation,
+  useUpdateBookingMutation,
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
+  useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
 } from "./booking";
 
@@ -86,8 +88,10 @@ export {
   useChangePasswordMutation,
   bookingApi,
   useCreateBookingMutation,
+  useUpdateBookingMutation,
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
+  useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
   hotelApi,
   useGetAllHotelQuery,

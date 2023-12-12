@@ -9,7 +9,11 @@ export interface IBooking {
   status: string;
   createdAt: string;
   updatedAt: string;
-  id_payment: string;
+  id_payment: IPaymentBooking;
+}
+
+export interface IPaymentBooking {
+  code: string;
 }
 
 export interface IRoomBooking {
