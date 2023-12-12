@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 import { PaymentValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
-import { BookingModel, PaymentModel } from "../models";
+import { BookingModel, PaymentModel, RoomModel } from "../models";
 import {
   createOrder,
   getStatusOrder,
@@ -70,7 +70,7 @@ export const vnPayPayment = (req, res) => {
         encode: false,
       })}`;
 
-      return sendResponse(res, 200, "Thanh toán", url);
+      return sendResponse(res, 200, "Thanh toán VN Pay", url);
     });
   } catch (error) {
     console.error(error);
@@ -107,10 +107,22 @@ export const vnPayPaymentReturn = async (req, res) => {
         { new: true }
       );
 
-      await BookingModel.findByIdAndUpdate(
+      const booking = await BookingModel.findByIdAndUpdate(
         { _id: payment.id_booking },
         { status: "Đã hủy bỏ" },
         { new: true }
+      );
+
+      await Promise.all(
+        booking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
       );
 
       return res.redirect(`${process.env.PUBLIC_URL}/close-payment`);
@@ -182,10 +194,10 @@ export const createOrderZaloPay = async (req, res) => {
       );
 
       if (data.returncode !== 1) {
-        return res.redirect(`${process.env.PUBLIC_URL}/error-payment`);
+        return res.redirect(`${process.env.PUBLIC_URL}/error-create-payment`);
       }
 
-      return sendResponse(res, 200, "Thanh toán", data.orderurl);
+      return sendResponse(res, 200, "Thanh toán Zalo Pay", data.orderurl);
     });
   } catch (error) {
     console.error(error);
@@ -196,6 +208,7 @@ export const createOrderZaloPay = async (req, res) => {
 
 export const checkStatusZaloPay = async (req, res) => {
   const { code } = req.params;
+
   try {
     let order = {
       appid: process.env.ZALOPAY_APPID,
@@ -220,10 +233,22 @@ export const checkStatusZaloPay = async (req, res) => {
         { new: true }
       );
 
-      await BookingModel.findByIdAndUpdate(
+      const booking = await BookingModel.findByIdAndUpdate(
         { _id: payment.id_booking },
         { status: "Đã hủy bỏ" },
         { new: true }
+      );
+
+      await Promise.all(
+        booking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
       );
 
       return sendResponse(res, 200, "Giao dịch thất bại");

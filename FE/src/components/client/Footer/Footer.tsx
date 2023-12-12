@@ -1,38 +1,14 @@
-import { BsFacebook, BsYoutube, BsInstagram } from "../../../icons";
-import { Container, Logo } from "../..";
+import { FooterBottom, FooterTop } from "../..";
 
 const Footer = () => {
   return (
-    <>
-      <div className="py-6 md:py-0 border-t-2 border-divideLight dark:border-divideDark">
-        <Container>
-          <div className="flex flex-col-reverse md:flex-row gap-3 md:gap-32 justify-between items-center">
-            <div className="text-center text-textLight2nd dark:text-textDark2nd">
-              © 2018 Royal Hospitality. All Rights Reserved.
-            </div>
-
-            <div className="mr-0 md:mr-32">
-              <Logo url="/" />
-            </div>
-
-            <div className="flex gap-5">
-              <BsFacebook
-                size={25}
-                className="cursor-pointer text-textLight2nd dark:text-textDark2nd"
-              />
-              <BsInstagram
-                size={25}
-                className="cursor-pointer text-textLight2nd dark:text-textDark2nd"
-              />
-              <BsYoutube
-                size={25}
-                className="cursor-pointer text-textLight2nd dark:text-textDark2nd"
-              />
-            </div>
-          </div>
-        </Container>
+    <div className="bg-light dark:bg-dark">
+      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+        <FooterTop />
+        <hr className="my-6 border-divideLight sm:mx-auto dark:border-divideDark lg:my-8" />
+        <FooterBottom />
       </div>
-    </>
+    </div>
   );
 };
 

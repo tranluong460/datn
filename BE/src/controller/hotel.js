@@ -54,6 +54,35 @@ export const getOne = async (req, res) => {
   }
 };
 
+export const getHotelByLocation = async (req, res) => {
+  const location = req.params.location;
+
+  try {
+    if (!location) {
+      return sendResponse(res, 404, "Chưa có vị trí");
+    }
+
+    const hotelByLocation = await HotelModel.find({
+      city: location,
+    }).populate("id_room");
+
+    if (!hotelByLocation || hotelByLocation.length === 0) {
+      return sendResponse(res, 200, "Không có thông tin khách sạn tại đây");
+    }
+
+    return sendResponse(
+      res,
+      200,
+      "Thông tin khách sạn theo vị trí",
+      hotelByLocation
+    );
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
 export const create = async (req, res) => {
   const imagesArray = [];
 

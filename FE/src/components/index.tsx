@@ -51,6 +51,7 @@ import Counter from "./client/Input/Counter";
 import BillInfo from "./client/Payment/BillInfo";
 import BookingInfo from "./client/Payment/BookingInfo";
 import Avatar from "./Avatar";
+import InfoBooking from "./auth/Booking/InfoBooking";
 import FilterDialog from "./client/HotelList/FilterDialog";
 import CountrySelect from "./client/Input/CountrySelect";
 import Button from "./client/Button";
@@ -60,10 +61,16 @@ import HotelBooking from "./client/Booking/HotelBooking";
 import Input from "./client/Input/Input";
 import RoomBooking from "./client/Booking/RoomBooking";
 import DetailBooking from "./client/Booking/DetailBooking";
+import FooterBottom from "./client/Footer/FooterBottom";
+import FooterTop from "./client/Footer/FooterTop";
+import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
+import InfoBookingCard from "./auth/Booking/InfoBookingCard";
 
 export {
+  InfoBookingCard,
   DetailBooking,
   RoomBooking,
+  InfoBooking,
   HotelBooking,
   Counter,
   FilterDialog,
@@ -100,6 +107,7 @@ export {
   RoomList,
   Filter,
   FilterTop,
+  CalendarRangerModal,
   HotelCard,
   ListHotel,
   LoginModal,
@@ -119,4 +127,6 @@ export {
   Calendar,
   Container,
   Input,
+  FooterBottom,
+  FooterTop,
 };

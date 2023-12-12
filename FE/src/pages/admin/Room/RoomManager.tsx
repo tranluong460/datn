@@ -11,7 +11,6 @@ const RoomManager = () => {
   const [idRoom, setIdRoom] = useState("");
   const [idRoomEdit, setIdRoomEdit] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
-  const [currentItem, setCurrentItem] = useState(5);
   const [openRoomDrawn, setOpenRoomDrawn] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -23,11 +22,28 @@ const RoomManager = () => {
   };
 
   const columns: ColumnsType<IRoom> = [
+    // {
+    //   title: "ID",
+    //   dataIndex: "_id",
+    //   key: "_id",
+    //   render: (_id) => (
+    //     <Tooltip placement="right" title="Click để xem thông tin chi tiết">
+    //       <button
+    //         onClick={() => {
+    //           setOpenRoomDrawn(true);
+    //           setIdRoom(_id);
+    //         }}
+    //       >
+    //         {_id}
+    //       </button>
+    //     </Tooltip>
+    //   ),
+    // },
     {
-      title: "ID",
-      dataIndex: "_id",
-      key: "_id",
-      render: (_id) => (
+      title: "Loại phòng",
+      dataIndex: "id_roomType",
+      key: "id_roomType",
+      render: (id_roomType, { _id }) => (
         <Tooltip placement="right" title="Click để xem thông tin chi tiết">
           <button
             onClick={() => {
@@ -35,10 +51,16 @@ const RoomManager = () => {
               setIdRoom(_id);
             }}
           >
-            {_id}
+            {id_roomType.name}
           </button>
         </Tooltip>
       ),
+    },
+    {
+      title: "Khách sạn",
+      dataIndex: "id_hotel",
+      key: "id_hotel",
+      render: (id_hotel) => id_hotel.name,
     },
     {
       title: "Giá",
@@ -50,12 +72,15 @@ const RoomManager = () => {
           currency: "VND",
         });
       },
+      sorter: (a, b) => a.price - b.price,
     },
     {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      render: (status) => <Tag color="#87d068">{status}</Tag>,
+      render: (status, { quantity }) => (
+        <Tag color={quantity > 0 ? "#87d068" : "#f70000"}>{status}</Tag>
+      ),
     },
     {
       title: "Hành động",
@@ -75,10 +100,11 @@ const RoomManager = () => {
     },
   ];
 
+  const [currentItem, setCurrentItem] = useState(10);
   const paginationConfig = {
     pageSize: currentItem,
     showSizeChanger: true,
-    pageSizeOptions: ["5", "10", "20", "50"],
+    pageSizeOptions: ["10", "20", "30", "50"],
     onShowSizeChange: (_current: number, size: number) => {
       setCurrentItem(size);
     },
@@ -91,10 +117,11 @@ const RoomManager = () => {
     <>
       <Table
         title={() => (
-          <>
+          <div className="flex items-center justify-end">
             <Button onClick={() => setShowCreateModal(true)}>Thêm mới</Button>
-          </>
+          </div>
         )}
+        bordered
         rowKey="_id"
         columns={columns}
         dataSource={allRoom?.data}

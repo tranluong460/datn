@@ -30,9 +30,9 @@ router.get("/refresh-token", refreshToken);
 router.get("/get-user", loginMiddleware, getUserByToken);
 router.get("/google", googleOauth);
 router.post("/logout", logout);
-router.post("/send-code", getCode);
-router.post("/check-code", checkCode);
-router.post("/change-password", changePassword);
+router.post("/send-code", loginMiddleware, getCode);
+router.post("/check-code", loginMiddleware, checkCode);
+router.post("/change-password", loginMiddleware, changePassword);
 router.post("/forgot-password", getSecurityCode);
 router.post("/reset-password", resetPassword);
 router.post('/update-user/:id', loginMiddleware, updateInfo)

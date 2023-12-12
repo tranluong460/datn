@@ -30,8 +30,15 @@ const BookingSchema = new mongoose.Schema(
     },
     list_room: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Room",
+        _id: false,
+        idRoom: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Room",
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
       },
     ],
     status: {

@@ -14,15 +14,17 @@ const bookingValidate = joi.object({
     .messages(validationErrors("Phương thức thanh toán")),
   list_room: joi
     .array()
-    .items(
-      joi
-        .string()
-        .hex()
-        .length(24)
-        .required()
-        .messages(validationErrors("Item", { limit: 24 }))
-    )
+    .min(1)
     .required()
+    .items(
+      joi.object({
+        idRoom: joi.string().required().messages(validationErrors("ID phòng")),
+        quantity: joi
+          .number()
+          .required()
+          .messages(validationErrors("Số lượng")),
+      })
+    )
     .messages(validationErrors("Danh sách phòng")),
   status: joi
     .string()

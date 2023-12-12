@@ -18,13 +18,13 @@ const Sidebar = () => {
             icon={AiOutlineUserAdd}
           />
           <MenuItem
-            label="An toàn và bảo mật"
+            label="Mật khẩu"
             onClick={() => navigate("/auth/security")}
             icon={AiOutlineLock}
           />
           <MenuItem
-            label="Thông tin thanh toán"
-            onClick={() => navigate("/auth/billing-information")}
+            label="Đặt phòng"
+            onClick={() => navigate("/auth/booking")}
             icon={MdPayment}
           />
         </div>

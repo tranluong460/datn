@@ -39,6 +39,7 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+
     updateInfor: builder.mutation({
       query: (user: any) => ({
         url: `auth/update-user/${user.id}`,
@@ -47,6 +48,29 @@ export const authApi = createApi({
         credentials: "include",
       }),
       invalidatesTags: ["Auth"],
+    }),
+    getCodeChangePassword: builder.mutation({
+      query: () => ({
+        url: "auth/send-code",
+        method: "POST",
+        credentials: "include",
+      }),
+    }),
+    checkCodeChangePassword: builder.mutation({
+      query: (data) => ({
+        url: "auth/check-code",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "auth/change-password",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
     }),
   }),
 });
@@ -57,4 +81,7 @@ export const {
   useInfoAccountQuery,
   useLogoutAccountMutation,
   useUpdateInforMutation,
+  useGetCodeChangePasswordMutation,
+  useCheckCodeChangePasswordMutation,
+  useChangePasswordMutation,
 } = authApi;

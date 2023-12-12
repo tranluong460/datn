@@ -1,4 +1,3 @@
-import { bookingApi } from "./booking";
 // Amenities API
 import {
   amenitiesApi,
@@ -16,16 +15,26 @@ import {
   useRegisterAccountMutation,
   useInfoAccountQuery,
   useLogoutAccountMutation,
+  useGetCodeChangePasswordMutation,
+  useCheckCodeChangePasswordMutation,
+  useChangePasswordMutation,
 } from "./auth";
 
 // Booking API
-import { useCreateBookingMutation, useVnPayPaymentMutation } from "./booking";
+import {
+  bookingApi,
+  useCreateBookingMutation,
+  useVnPayPaymentMutation,
+  useZaloPayPaymentMutation,
+  useGetBookingByUserQuery,
+} from "./booking";
 
 // Hotel API
 import {
   hotelApi,
   useGetAllHotelQuery,
   useGetOneHotelQuery,
+  useGetHotelByCityQuery,
   useCreateHotelMutation,
   useUpdateHotelMutation,
 } from "./hotel";
@@ -72,12 +81,18 @@ export {
   useRegisterAccountMutation,
   useInfoAccountQuery,
   useLogoutAccountMutation,
+  useGetCodeChangePasswordMutation,
+  useCheckCodeChangePasswordMutation,
+  useChangePasswordMutation,
   bookingApi,
   useCreateBookingMutation,
   useVnPayPaymentMutation,
+  useZaloPayPaymentMutation,
+  useGetBookingByUserQuery,
   hotelApi,
   useGetAllHotelQuery,
   useGetOneHotelQuery,
+  useGetHotelByCityQuery,
   useCreateHotelMutation,
   useUpdateHotelMutation,
   provincesApi,

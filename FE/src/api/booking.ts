@@ -24,7 +24,29 @@ export const bookingApi = createApi({
       }),
       invalidatesTags: ["Booking"],
     }),
+    zaloPayPayment: builder.mutation({
+      query: (data) => ({
+        url: "/payment/create-order-zaloPay",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["Booking"],
+    }),
+    getBookingByUser: builder.query({
+      query: () => ({
+        url: "/booking/booking-user",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Booking"],
+    }),
   }),
 });
 
-export const { useCreateBookingMutation, useVnPayPaymentMutation } = bookingApi;
+export const {
+  useCreateBookingMutation,
+  useVnPayPaymentMutation,
+  useZaloPayPaymentMutation,
+  useGetBookingByUserQuery,
+} = bookingApi;

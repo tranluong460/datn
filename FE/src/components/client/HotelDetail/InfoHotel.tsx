@@ -2,6 +2,7 @@ import { Rate } from "antd";
 
 import { CiLocationOn, AiOutlineMail, AiOutlinePhone } from "../../../icons";
 import { Button } from "../..";
+import { useCalendarRangerModal } from "../../../hooks";
 
 type InfoHotelProps = {
   name: string;
@@ -11,6 +12,8 @@ type InfoHotelProps = {
 };
 
 const InfoHotel = ({ name, address, email, phone }: InfoHotelProps) => {
+  const calendarRangerModal = useCalendarRangerModal();
+
   return (
     <>
       <div className="h-auto md:h-36 relative top-[50%] md:top-[80%] left-1/2 transform translate-x-[-50%] rounded-lg shadow-lg p-5 bg-light dark:bg-dark w-[75%]">
@@ -57,7 +60,7 @@ const InfoHotel = ({ name, address, email, phone }: InfoHotelProps) => {
               />
             </div>
 
-            <Button label="Đặt phòng" onClick={() => alert("Đặt phòng")} />
+            <Button label="Đặt phòng" onClick={calendarRangerModal.onOpen} />
           </div>
         </div>
       </div>

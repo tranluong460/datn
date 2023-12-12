@@ -38,6 +38,7 @@ const CreateAmenitiesModal = ({
       width={1000}
     >
       <Form
+        disabled={resultCreate.isLoading}
         name="add_amenities"
         form={form}
         onFinish={onFinish}

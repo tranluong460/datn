@@ -12,6 +12,7 @@ import {
   Page404,
   PaymentPage,
   PrivacyPolicy,
+  RegulationsBookingInformation,
 } from "..";
 
 const RouteClient = () => {
@@ -23,10 +24,14 @@ const RouteClient = () => {
           <Route path="/booking" element={<BookingPage />} />
           <Route path="/hotel-list" element={<HotelListPage />} />
           <Route path="/hotel-detail/:id" element={<HotelDetailPage />} />
-          <Route path="/booking/payment" element={<PaymentPage />} />
+          <Route path="/payment/:id" element={<PaymentPage />} />
           <Route
             path="/complaint-resolution-policy"
             element={<ComplaintResolutionPolicy />}
+          />
+          <Route
+            path="/regulations-booking-information"
+            element={<RegulationsBookingInformation />}
           />
           <Route path="/general-rules" element={<GeneralRules />} />
           <Route path="/general-terms" element={<GeneralTerms />} />
