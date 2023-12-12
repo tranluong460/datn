@@ -39,6 +39,15 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+    updateInfor: builder.mutation({
+      query: (user: any) => ({
+        url: `auth/update-user/${user.id}`,
+        method: "POST",
+        body: user.data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
@@ -47,4 +56,5 @@ export const {
   useRegisterAccountMutation,
   useInfoAccountQuery,
   useLogoutAccountMutation,
+  useUpdateInforMutation,
 } = authApi;

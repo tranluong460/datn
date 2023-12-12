@@ -1,7 +1,7 @@
 import { Button, Col, Input, Modal, Row, Space, message } from 'antd';
 import React from 'react'
 import { Form } from 'antd';
-import { useUpdateInforMutation } from '../../../api/user';
+import { useUpdateInforMutation } from '../../../api/auth';
 
 type UpdateInfoProps = {
     isOpenUpdate: boolean;
