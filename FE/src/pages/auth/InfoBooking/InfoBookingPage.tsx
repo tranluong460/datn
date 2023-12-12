@@ -1,10 +1,9 @@
-import { Result } from "antd";
 import { Loading } from "../..";
 import { useGetBookingByUserQuery } from "../../../api";
 import { InfoBooking } from "../../../components";
 
 const InfoBookingPage = () => {
-  const { data, isLoading, isSuccess } = useGetBookingByUserQuery("");
+  const { data, isLoading } = useGetBookingByUserQuery("");
 
   return (
     <div className="rounded-xl bg-light dark:bg-dark p-3 w-full">

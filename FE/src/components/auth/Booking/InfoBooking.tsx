@@ -8,11 +8,15 @@ type InfoBookingProps = {
 const InfoBooking = ({ booking }: InfoBookingProps) => {
   return (
     <div className="grid grid-cols-1 gap-3 py-5">
-      {booking.map((item, index) => (
-        <div key={index}>
-          <InfoBookingCard info={item} />
-        </div>
-      ))}
+      {booking ? (
+        booking.map((item, index) => (
+          <div key={index}>
+            <InfoBookingCard info={item} />
+          </div>
+        ))
+      ) : (
+        <span>Không có thông tin đặt phòng</span>
+      )}
     </div>
   );
 };
