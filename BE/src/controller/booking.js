@@ -13,7 +13,7 @@ import {
 
 export const getAll = async (req, res) => {
   try {
-    const bookingList = await BookingModel.find();
+    const bookingList = await BookingModel.find().populate("id_user");
 
     if (!bookingList || bookingList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách đặt phòng");

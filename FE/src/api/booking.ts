@@ -6,6 +6,14 @@ export const bookingApi = createApi({
   tagTypes: ["Booking"],
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
+    getAllBooking: builder.query({
+      query: () => ({
+        url: "booking",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Booking"],
+    }),
     createBooking: builder.mutation({
       query: (data) => ({
         url: "/booking",
@@ -65,6 +73,7 @@ export const bookingApi = createApi({
 });
 
 export const {
+  useGetAllBookingQuery,
   useCreateBookingMutation,
   useUpdateBookingMutation,
   useVnPayPaymentMutation,

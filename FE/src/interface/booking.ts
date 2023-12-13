@@ -1,6 +1,6 @@
 export interface IBooking {
   _id: string;
-  id_user: string;
+  id_user: IUseBooking;
   check_in: string;
   check_out: string;
   total_price: number;
@@ -10,6 +10,10 @@ export interface IBooking {
   createdAt: string;
   updatedAt: string;
   id_payment: IPaymentBooking;
+}
+
+export interface IUseBooking {
+  email: string;
 }
 
 export interface IPaymentBooking {
