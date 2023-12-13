@@ -14,6 +14,14 @@ export const bookingApi = createApi({
       }),
       providesTags: ["Booking"],
     }),
+    getOneBooking: builder.query({
+      query: (id: string) => ({
+        url: `booking/get-one/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Booking"],
+    }),
     createBooking: builder.mutation({
       query: (data) => ({
         url: "/booking",
@@ -74,6 +82,7 @@ export const bookingApi = createApi({
 
 export const {
   useGetAllBookingQuery,
+  useGetOneBookingQuery,
   useCreateBookingMutation,
   useUpdateBookingMutation,
   useVnPayPaymentMutation,

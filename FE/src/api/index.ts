@@ -24,6 +24,7 @@ import {
 import {
   bookingApi,
   useGetAllBookingQuery,
+  useGetOneBookingQuery,
   useCreateBookingMutation,
   useUpdateBookingMutation,
   useVnPayPaymentMutation,
@@ -89,6 +90,7 @@ export {
   useChangePasswordMutation,
   bookingApi,
   useGetAllBookingQuery,
+  useGetOneBookingQuery,
   useCreateBookingMutation,
   useUpdateBookingMutation,
   useVnPayPaymentMutation,

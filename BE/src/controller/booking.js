@@ -31,18 +31,47 @@ export const getAll = async (req, res) => {
   }
 };
 
-export const getBookingByUser = async (req, res) => {
-  const user = req.user;
-
+export const getOne = async (req, res) => {
   try {
-    const bookingList = await BookingModel.find({ id_user: user._id })
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
+    const booking = await BookingModel.findById(req.params.id)
       .populate("id_payment")
       .populate({
         path: "list_room",
         populate: "idRoom",
       });
 
-    if (!bookingList || bookingList.length === 0) {
+    if (!booking || booking.length === 0) {
+      return sendResponse(res, 404, "Không có thông tin đặt phòng");
+    }
+
+    return sendResponse(res, 200, "Thông tin đặt phòng", booking);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách đặt phòng"
+    );
+  }
+};
+
+export const getBookingByUser = async (req, res) => {
+  const user = req.user;
+
+  try {
+    const bookingUser = await BookingModel.find({ id_user: user._id })
+      .populate("id_payment")
+      .populate({
+        path: "list_room",
+        populate: "idRoom",
+      });
+
+    if (!bookingUser || bookingUser.length === 0) {
       return sendResponse(res, 404, "Người dùng chưa đặt phòng");
     }
 
@@ -50,7 +79,7 @@ export const getBookingByUser = async (req, res) => {
       res,
       200,
       "Danh sách đặt phòng của người dùng",
-      bookingList
+      bookingUser
     );
   } catch (error) {
     console.error(error);
