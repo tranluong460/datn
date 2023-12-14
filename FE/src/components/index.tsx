@@ -65,7 +65,10 @@ import FooterBottom from "./client/Footer/FooterBottom";
 import FooterTop from "./client/Footer/FooterTop";
 import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
 import InfoBookingCard from "./auth/Booking/InfoBookingCard";
-
+import Trademark from "./client/Home/Trademark"
+import TrademarkCard from "./client/Home/TrademarkCard";
+import Feedback from "./client/Home/Feedback"
+// import FeedbackCard from "./client/Home/FeedbackCard"
 export {
   InfoBookingCard,
   DetailBooking,
@@ -129,4 +132,8 @@ export {
   Input,
   FooterBottom,
   FooterTop,
+  Trademark,
+  TrademarkCard,
+  Feedback,
+  // FeedbackCard
 };

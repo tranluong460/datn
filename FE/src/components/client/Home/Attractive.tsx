@@ -54,7 +54,7 @@ const Attractive = () => {
       <div className="py-8 md:py-10">
         <div className="mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-8">
           <div className="mb-5 text-center md:mb-8">
-            <h2 className="text-2xl font-bold lg:text-3xl text-texLight dark:text-textDark">
+            <h2 className="text-2xl select-none font-bold lg:text-3xl text-texLight dark:text-textDark">
               Điểm đến nổi bật
             </h2>
           </div>

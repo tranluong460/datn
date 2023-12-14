@@ -1,4 +1,4 @@
-import { Attractive, Service, Top } from "../../../components";
+import { Attractive, Feedback, Service, Top, Trademark } from "../../../components";
 
 const HomePage = () => {
   return (
@@ -7,6 +7,8 @@ const HomePage = () => {
         <Top />
         <Service />
         <Attractive />
+        <Trademark/>
+        <Feedback/>
       </div>
     </>
   );

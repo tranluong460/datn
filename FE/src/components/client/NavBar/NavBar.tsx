@@ -7,9 +7,10 @@ const NavBar = () => {
         <div className="flex flex-row items-center justify-between gap-5 py-4">
           <Logo url="/" />
 
+          <div className="flex flex-row gap-5 justify-center items-center">
+            
           <Search />
 
-          <div className="flex flex-row gap-5 justify-center items-center">
             <DarkMode />
 
             <UserMenu />
