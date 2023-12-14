@@ -83,7 +83,6 @@ export const sendMailBooking = async (
   name,
   checkInDate,
   checkOutDate,
-  roomQuantity,
   totalPrice
 ) => {
   await transporter.sendMail({
@@ -91,13 +90,7 @@ export const sendMailBooking = async (
     to: email,
     subject: "Đặt phòng thành công",
     text: `Chào bạn, ${name}`,
-    html: emailBooking(
-      name,
-      checkInDate,
-      checkOutDate,
-      roomQuantity,
-      totalPrice
-    ),
+    html: emailBooking(name, checkInDate, checkOutDate, totalPrice),
   });
 };
 

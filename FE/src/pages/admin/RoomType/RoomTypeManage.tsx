@@ -14,7 +14,6 @@ import { CreateRoomTypeModal, EditRoomTypeModal } from "../../../components";
 const RoomTypeManage = () => {
   const key0 = "deleteAmenitiesMutation";
   const [messageApi, contextHolder] = message.useMessage();
-  const [currentItem, setCurrentItem] = useState(5);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [idRoomType, setIdRoomType] = useState("");
@@ -94,10 +93,11 @@ const RoomTypeManage = () => {
     },
   ];
 
+  const [currentItem, setCurrentItem] = useState(10);
   const paginationConfig = {
     pageSize: currentItem,
     showSizeChanger: true,
-    pageSizeOptions: ["5", "10", "20", "50"],
+    pageSizeOptions: ["10", "20", "30", "50"],
     onShowSizeChange: (_current: number, size: number) => {
       setCurrentItem(size);
     },
@@ -112,10 +112,11 @@ const RoomTypeManage = () => {
 
       <Table
         title={() => (
-          <>
+          <div className="flex items-center justify-end">
             <Button onClick={() => setShowCreateModal(true)}>Thêm mới</Button>
-          </>
+          </div>
         )}
+        bordered
         rowKey="_id"
         columns={columns}
         dataSource={data?.data}

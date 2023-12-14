@@ -18,7 +18,7 @@ const EditRoomTypeModal = ({
 }: EditRoomTypeModalProps) => {
   const [form] = Form.useForm();
 
-  const [updateRoomType, resultUpdate] = useUpdateRoomTypeMutation();
+  const [updateRoomType, resultEdit] = useUpdateRoomTypeMutation();
 
   const onFinish = (data: IRoomType) => {
     updateRoomType(data)
@@ -45,6 +45,7 @@ const EditRoomTypeModal = ({
         </div>
       ) : (
         <Form
+          disabled={resultEdit.isLoading}
           name="edit_room_type"
           form={form}
           onFinish={onFinish}
@@ -66,14 +67,14 @@ const EditRoomTypeModal = ({
 
           <Form.Item>
             <Space>
-              <Button htmlType="submit" loading={resultUpdate.isLoading}>
+              <Button htmlType="submit" loading={resultEdit.isLoading}>
                 Sửa
               </Button>
 
               <Button
                 htmlType="reset"
                 onClick={onCancel}
-                disabled={resultUpdate.isLoading}
+                disabled={resultEdit.isLoading}
               >
                 Hủy
               </Button>

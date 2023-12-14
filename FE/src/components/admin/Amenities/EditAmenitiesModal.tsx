@@ -19,7 +19,7 @@ const EditAmenitiesModal = ({
 }: EditAmenitiesModalProps) => {
   const [form] = Form.useForm();
 
-  const [updateAmenities, resultUpdate] = useUpdateAmenitiesMutation();
+  const [updateAmenities, resultEdit] = useUpdateAmenitiesMutation();
 
   const onFinish = (data: IAmenities) => {
     updateAmenities(data)
@@ -47,6 +47,7 @@ const EditAmenitiesModal = ({
         </div>
       ) : (
         <Form
+          disabled={resultEdit.isLoading}
           name="edit_amenities"
           form={form}
           onFinish={onFinish}
@@ -133,14 +134,14 @@ const EditAmenitiesModal = ({
 
           <Form.Item>
             <Space>
-              <Button htmlType="submit" loading={resultUpdate.isLoading}>
+              <Button htmlType="submit" loading={resultEdit.isLoading}>
                 Sửa
               </Button>
 
               <Button
                 htmlType="reset"
                 onClick={onCancel}
-                disabled={resultUpdate.isLoading}
+                disabled={resultEdit.isLoading}
               >
                 Hủy
               </Button>

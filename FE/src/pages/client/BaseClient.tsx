@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import {
+  CalendarRangerModal,
   Footer,
   LoginModal,
   NavBar,
@@ -15,6 +16,7 @@ const BaseClient = () => {
       <div className="bg-backgroundLight dark:bg-backgroundDark">
         <Toaster />
         <NavBar />
+        <CalendarRangerModal />
         <SearchModal />
         <LoginModal />
         <RegisterModal />

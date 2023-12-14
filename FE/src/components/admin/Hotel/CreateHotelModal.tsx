@@ -58,6 +58,7 @@ const CreateHotelModal = ({
       style={{ top: 20 }}
     >
       <Form
+        disabled={resultCreate.isLoading}
         layout="vertical"
         name="add_hotel"
         form={form}

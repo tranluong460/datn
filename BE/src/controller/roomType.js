@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 import { sendResponse } from "../utils";
 import { RoomTypeModel } from "../models";
 import { RoomTypeValidate } from "../validate";
@@ -25,6 +27,10 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     const roomType = await RoomTypeModel.findById(req.params.id);
 
     if (!roomType || roomType.length === 0) {
@@ -63,6 +69,10 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     validateMiddleware(req, res, RoomTypeValidate, async () => {
       const data = await RoomTypeModel.findByIdAndUpdate(
         req.params.id,
@@ -87,6 +97,10 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     const data = await RoomTypeModel.findByIdAndDelete(req.params.id);
 
     if (!data) {

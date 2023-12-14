@@ -17,12 +17,20 @@ export const hotelApi = createApi({
       query: (id: string | undefined) => `/hotel/${id}`,
       providesTags: ["Hotel"],
     }),
+    getHotelByCity: builder.query({
+      query: (location) => ({
+        url: `hotel/hotel-by-city/${location}`,
+        method: "GET",
+      }),
+      providesTags: ["Hotel"],
+    }),
     createHotel: builder.mutation({
       query: (data) => {
         const formData = new FormData();
 
         Object.keys(data).forEach((key) => {
           if (key === "images" && Array.isArray(data[key])) {
+            // eslint-disable-next-line
             data[key].forEach((file: any, index: number) => {
               formData.append(`images[${index}]`, file.originFileObj);
             });
@@ -48,6 +56,7 @@ export const hotelApi = createApi({
 
         Object.keys(newData).forEach((key) => {
           if (key === "images" && Array.isArray(data[key])) {
+            // eslint-disable-next-line
             data[key].forEach((file: any, index: number) => {
               formData.append(`images[${index}]`, file.originFileObj);
             });
@@ -71,6 +80,7 @@ export const hotelApi = createApi({
 export const {
   useGetAllHotelQuery,
   useGetOneHotelQuery,
+  useGetHotelByCityQuery,
   useCreateHotelMutation,
   useUpdateHotelMutation,
 } = hotelApi;

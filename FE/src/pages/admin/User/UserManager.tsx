@@ -12,8 +12,6 @@ import { InfoUserDrawn } from "../../../components";
 import { IUser } from "../../../interface";
 
 const UserManager = () => {
-  const [currentItem, setCurrentItem] = useState(5);
-
   const { data, isLoading } = useGetAllUserQuery("");
   const [lockAccount] = useLockUserMutation();
   const [infoUser, resultGetInfo] = useGetOneUserMutation();
@@ -142,10 +140,11 @@ const UserManager = () => {
     },
   ];
 
+  const [currentItem, setCurrentItem] = useState(10);
   const paginationConfig = {
     pageSize: currentItem,
     showSizeChanger: true,
-    pageSizeOptions: ["5", "10", "20", "50"],
+    pageSizeOptions: ["10", "20", "30", "50"],
     onShowSizeChange: (_current: number, size: number) => {
       setCurrentItem(size);
     },
@@ -158,6 +157,7 @@ const UserManager = () => {
     <>
       {contextHolder}
       <Table
+        bordered
         rowKey="_id"
         columns={columns}
         dataSource={data?.data}

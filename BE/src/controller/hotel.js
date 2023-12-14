@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
 import { HotelModel } from "../models";
-import { sendResponse } from "../utils";
 import { HotelValidate } from "../validate";
-import { uploadImageToCloudinary } from "../utils";
 import { validateFormMiddleware } from "../middleware";
+import { sendResponse, uploadImageToCloudinary } from "../utils";
 
 export const getAll = async (req, res) => {
   try {
@@ -28,6 +27,10 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
     const hotel = await HotelModel.findById(req.params.id)
       .populate("id_amenities id_room")
       .populate({
@@ -48,6 +51,35 @@ export const getOne = async (req, res) => {
       500,
       "Đã có lỗi xảy ra khi lấy thông tin khách sạn"
     );
+  }
+};
+
+export const getHotelByLocation = async (req, res) => {
+  const location = req.params.location;
+
+  try {
+    if (!location) {
+      return sendResponse(res, 404, "Chưa có vị trí");
+    }
+
+    const hotelByLocation = await HotelModel.find({
+      city: location,
+    }).populate("id_room");
+
+    if (!hotelByLocation || hotelByLocation.length === 0) {
+      return sendResponse(res, 200, "Không có thông tin khách sạn tại đây");
+    }
+
+    return sendResponse(
+      res,
+      200,
+      "Thông tin khách sạn theo vị trí",
+      hotelByLocation
+    );
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };
 
@@ -104,6 +136,31 @@ export const create = async (req, res) => {
 };
 
 export const update = async (req, res) => {
+  if (!mongoose.isValidObjectId(req.params.id)) {
+    return sendResponse(res, 400, "ID không hợp lệ");
+  }
+
+  const imagesArray = [];
+  for (const field in req.files) {
+    if (req.files.hasOwnProperty(field)) {
+      const file = req.files[field];
+      imagesArray.push({
+        name: field,
+        url: file.path,
+      });
+    }
+  }
+  req.fields.images = imagesArray;
+
+  if (req.fields.id_amenities) {
+    const id_amenities = req.fields.id_amenities.split(",");
+
+    const amenities = id_amenities.map(
+      (item) => new mongoose.Types.ObjectId(item)
+    );
+    req.fields.id_amenities = amenities;
+  }
+
   try {
     // Lấy dữ liệu hiện tại của khách sạn từ cơ sở dữ liệu
     const currentData = await HotelModel.findById(req.params.id);

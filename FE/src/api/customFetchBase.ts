@@ -21,6 +21,7 @@ const customFetchBase: BaseQueryFn<
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
 
+  // eslint-disable-next-line
   if ((result.error?.data as any)?.message === "Token đã hết hạn!") {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
@@ -40,6 +41,16 @@ const customFetchBase: BaseQueryFn<
           result = await baseQuery(args, api, extraOptions);
         } else {
           toast.error("Phiên đăng nhập đã hết hạn");
+
+          await baseQuery(
+            {
+              url: "auth/logout",
+              method: "POST",
+              credentials: "include",
+            },
+            api,
+            extraOptions
+          );
         }
       } finally {
         release();

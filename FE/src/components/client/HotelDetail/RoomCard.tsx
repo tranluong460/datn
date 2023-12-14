@@ -1,4 +1,3 @@
-import { Button } from "../..";
 import { IRoom } from "../../../interface";
 
 type RoomCardProps = {
@@ -24,19 +23,22 @@ const RoomCard = ({ room }: RoomCardProps) => {
               <span className="mr-1 text-xs">Chỉ từ</span>
 
               <span className="text-md text-yellow-500 font-bold capitalize">
-                {room?.price}
+                {room?.price.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}
               </span>
 
               <span className="ml-1 text-xs">/đêm</span>
             </div>
 
-            <div className="w-[40%]">
+            {/* <div className="w-[40%]">
               <Button
                 label="Đặt ngay"
                 onClick={() => alert("Đặt phòng")}
                 disabled={room.quantity === 0}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
