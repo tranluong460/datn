@@ -70,6 +70,7 @@ const EditRoomModal = ({
         </div>
       ) : (
         <Form
+          disabled={resultEdit.isLoading}
           name="edit_room"
           layout="vertical"
           form={form}

@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import {
   BaseAuth,
-  BillingInformationPage,
+  InfoBookingPage,
   Page404,
   ProfilePage,
   SecurityPage,
@@ -15,10 +15,7 @@ const RouteClient = () => {
         <Route path="/" element={<BaseAuth />}>
           <Route index element={<ProfilePage />} />
           <Route path="/security" element={<SecurityPage />} />
-          <Route
-            path="/billing-information"
-            element={<BillingInformationPage />}
-          />
+          <Route path="/booking" element={<InfoBookingPage />} />
         </Route>
 
         <Route path="/*" element={<Page404 />} />

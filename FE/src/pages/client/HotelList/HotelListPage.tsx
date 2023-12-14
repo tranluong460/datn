@@ -1,8 +1,7 @@
-import { useState } from "react";
-import { Result } from "antd";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { Loading } from "../..";
-import { useGetAllHotelQuery } from "../../../api";
+import { useGetHotelByCityQuery } from "../../../api";
 import {
   Container,
   Filter,
@@ -10,28 +9,32 @@ import {
   FilterTop,
   ListHotel,
 } from "../../../components";
+import { useSearchModal } from "../../../hooks";
 
 const HotelListPage = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const navigate = useNavigate();
+  const searchModal = useSearchModal();
   const [showDialog, setShowDialog] = useState(false);
   const [showRate, setShowRate] = useState(true);
+  const [locationValue, setLocationValue] = useState(params.get("location"));
 
-  const { data, isLoading, isSuccess } = useGetAllHotelQuery("");
+  const { data, isFetching } = useGetHotelByCityQuery(locationValue);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    setLocationValue(params.get("location"));
+    // eslint-disable-next-line
+  }, [location]);
 
-  if (!isSuccess) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <Result
-          title="500"
-          status="error"
-          subTitle="Đã có lỗi xảy ra khi lấy danh sách khách sạn"
-        />
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!locationValue) {
+      navigate("/");
+      searchModal.onOpen();
+    }
+
+    // eslint-disable-next-line
+  }, [locationValue]);
 
   return (
     <>
@@ -60,7 +63,7 @@ const HotelListPage = () => {
               />
 
               <div className="lg:col-span-3">
-                <ListHotel listHotel={data?.data} />
+                <ListHotel listHotel={data?.data} isLoading={isFetching} />
               </div>
             </div>
           </div>

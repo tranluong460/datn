@@ -128,6 +128,13 @@ const BaseAdmin = () => {
     <>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider
+          style={{
+            overflow: "auto",
+            height: "100vh",
+            position: "sticky",
+            top: 0,
+            left: 0,
+          }}
           theme="light"
           collapsible={true}
           collapsed={collapsed}

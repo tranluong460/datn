@@ -296,18 +296,7 @@ export const logout = (req, res) => {
 
 // Đổi mật khẩu
 export const getCode = async (req, res) => {
-  const { email } = req.body;
-
-  const user = await UserModel.findOne({ email })
-    .select("-password -createdAt -updatedAt")
-    .populate({
-      path: "id_information",
-      select: "-createdAt -updatedAt",
-    });
-
-  if (!user) {
-    return sendResponse(res, 404, "Không tìm thấy email");
-  }
+  const user = req.user;
 
   const randomCode = generateRandomCode(6);
 

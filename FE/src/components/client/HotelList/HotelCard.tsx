@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import qs from "query-string";
 import { Rate } from "antd";
+import moment from "moment";
 
 import { Button } from "../..";
 import { IHotel } from "../../../interface";
@@ -13,6 +14,10 @@ type HotelCardProps = {
 const HotelCard = ({ hotel }: HotelCardProps) => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const params = new URLSearchParams(location.search);
+  const checkin = params.get("checkin");
+  const checkout = params.get("checkout");
 
   const prices =
     hotel && hotel.id_room ? hotel.id_room.map((room) => room.price) : [];
@@ -31,6 +36,14 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       ...currentQuery,
       hotel: id,
     };
+
+    if (!checkin) {
+      updatedQuery.checkin = moment().format("YYYY-MM-DD");
+    }
+
+    if (!checkout) {
+      updatedQuery.checkout = moment().add(1, "days").format("YYYY-MM-DD");
+    }
 
     const url = qs.stringifyUrl(
       {
@@ -63,7 +76,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       { skipNull: true }
     );
 
-    navigate(url);
+    window.open(url, "_blank");
   };
 
   return (

@@ -16,7 +16,7 @@ const SearchModal = () => {
   const [city, setCity] = useState<ICountry>();
   const [dateRange, setDateRange] = useState({
     startDate: moment().format("YYYY-MM-DD"),
-    endDate: moment().format("YYYY-MM-DD"),
+    endDate: moment().add(1, "days").format("YYYY-MM-DD"),
   });
   const [room, setRoom] = useState(1);
 

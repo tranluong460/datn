@@ -1,15 +1,11 @@
 import moment from "moment";
-
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Result } from "antd";
+import { useCookies } from "react-cookie";
 
 import { Loading } from "../..";
-import {
-  useCreateBookingMutation,
-  useGetOneHotelQuery,
-  useVnPayPaymentMutation,
-} from "../../../api";
+import { useGetOneHotelQuery } from "../../../api";
 
 import {
   Container,
@@ -17,13 +13,15 @@ import {
   HotelBooking,
   RoomBooking,
 } from "../../../components";
-import { IRoom } from "../../../interface";
+import { IRoomBooking, IRoom } from "../../../interface";
 import toast from "react-hot-toast";
 
 const BookingPage = () => {
+  const navigate = useNavigate();
   const { search } = useLocation();
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [selectedRoom, setSelectedRoom] = useState<string[]>([]);
+  const [selectedRoom, setSelectedRoom] = useState<IRoomBooking[]>([]);
+  const [, setCookie] = useCookies<string>();
 
   const params = new URLSearchParams(search);
 
@@ -34,8 +32,6 @@ const BookingPage = () => {
   const idHotel = params.get("hotel") || "";
 
   const { data, isSuccess, isLoading } = useGetOneHotelQuery(idHotel);
-  const [booking] = useCreateBookingMutation();
-  const [paymentVnPay] = useVnPayPaymentMutation();
 
   if (isLoading) {
     return (
@@ -53,40 +49,23 @@ const BookingPage = () => {
     );
   }
 
-  const onBooking = (method: string) => {
+  const onBooking = () => {
     const totalPriceEnd = numberOfDays * totalPrice;
 
     const data = {
       check_in: checkIn,
       check_out: checkOut,
       total_price: totalPriceEnd,
-      payment_method: method,
       list_room: selectedRoom,
     };
 
-    booking(data)
-      .unwrap()
-      .then((response) => {
-        toast.success(response.message);
-        const data = {
-          amount: response.data.total_price,
-          bookingId: response.data._id,
-        };
+    if (!selectedRoom || selectedRoom.length === 0) {
+      return toast.error("Bạn chưa chọn phòng!");
+    }
 
-        if (response.data.payment_method === "VN Pay") {
-          paymentVnPay(data)
-            .unwrap()
-            .then((res) => {
-              window.location.href = res.data;
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      })
-      .catch((error) => {
-        toast.error(error.data.message);
-      });
+    setCookie("booking", data, { path: "/" });
+
+    navigate(`/payment/${idHotel}`);
   };
 
   return (
@@ -113,7 +92,7 @@ const BookingPage = () => {
           checkIn={checkIn}
           checkOut={checkOut}
           numberOfDays={numberOfDays}
-          onBooking={(value) => onBooking(value)}
+          onBooking={onBooking}
         />
       </div>
     </Container>

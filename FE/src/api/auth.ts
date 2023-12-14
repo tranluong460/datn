@@ -39,6 +39,29 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+    getCodeChangePassword: builder.mutation({
+      query: () => ({
+        url: "auth/send-code",
+        method: "POST",
+        credentials: "include",
+      }),
+    }),
+    checkCodeChangePassword: builder.mutation({
+      query: (data) => ({
+        url: "auth/check-code",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "auth/change-password",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -47,4 +70,7 @@ export const {
   useRegisterAccountMutation,
   useInfoAccountQuery,
   useLogoutAccountMutation,
+  useGetCodeChangePasswordMutation,
+  useCheckCodeChangePasswordMutation,
+  useChangePasswordMutation,
 } = authApi;
