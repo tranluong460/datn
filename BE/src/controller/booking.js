@@ -13,7 +13,7 @@ import {
 
 export const getAll = async (req, res) => {
   try {
-    const bookingList = await BookingModel.find();
+    const bookingList = await BookingModel.find().populate("id_user");
 
     if (!bookingList || bookingList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách đặt phòng");
@@ -31,18 +31,47 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getOne = async (req, res) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
+    const booking = await BookingModel.findById(req.params.id)
+      .populate("id_payment")
+      .populate({
+        path: "list_room",
+        populate: "idRoom",
+      });
+
+    if (!booking || booking.length === 0) {
+      return sendResponse(res, 404, "Không có thông tin đặt phòng");
+    }
+
+    return sendResponse(res, 200, "Thông tin đặt phòng", booking);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách đặt phòng"
+    );
+  }
+};
+
 export const getBookingByUser = async (req, res) => {
   const user = req.user;
 
   try {
-    const bookingList = await BookingModel.find({ id_user: user._id }).populate(
-      {
+    const bookingUser = await BookingModel.find({ id_user: user._id })
+      .populate("id_payment")
+      .populate({
         path: "list_room",
         populate: "idRoom",
-      }
-    );
+      });
 
-    if (!bookingList || bookingList.length === 0) {
+    if (!bookingUser || bookingUser.length === 0) {
       return sendResponse(res, 404, "Người dùng chưa đặt phòng");
     }
 
@@ -50,7 +79,7 @@ export const getBookingByUser = async (req, res) => {
       res,
       200,
       "Danh sách đặt phòng của người dùng",
-      bookingList
+      bookingUser
     );
   } catch (error) {
     console.error(error);
@@ -143,6 +172,18 @@ export const update = async (req, res) => {
       const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
       const check_out = moment(newBooking.check_out).format("DD/MM/YYYY");
 
+      await Promise.all(
+        newBooking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
+      );
+
       sendMailCancelBooking(
         newBooking.id_user.email,
         newBooking.id_user.id_information.name,
@@ -152,6 +193,18 @@ export const update = async (req, res) => {
     }
 
     if (newBooking.status === "Thành công") {
+      await Promise.all(
+        newBooking.list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room) {
+            room.quantity += item.quantity;
+
+            await room.save();
+          }
+        })
+      );
+
       sendMailSuccessBooking(
         newBooking.id_user.email,
         newBooking.id_user.id_information.name

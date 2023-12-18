@@ -16,6 +16,7 @@ import TwoDrawnRoomHotel from "./admin/Room/TwoDrawnRoomHotel";
 import CreateRoomTypeModal from "./admin/RoomType/CreateRoomTypeModal";
 import EditRoomTypeModal from "./admin/RoomType/EditRoomTypeModal";
 import InfoUserDrawn from "./admin/User/InfoUserDrawn";
+import InfoBookingDrawn from "./admin/Booking/InfoBookingDrawn";
 
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
@@ -65,9 +66,12 @@ import FooterBottom from "./client/Footer/FooterBottom";
 import FooterTop from "./client/Footer/FooterTop";
 import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
 import InfoBookingCard from "./auth/Booking/InfoBookingCard";
+import TwoDrawnBookingRoom from "./admin/Booking/TwoDrawnBookingRoom";
 
 export {
   InfoBookingCard,
+  TwoDrawnBookingRoom,
+  InfoBookingDrawn,
   DetailBooking,
   RoomBooking,
   InfoBooking,

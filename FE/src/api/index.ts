@@ -23,9 +23,13 @@ import {
 // Booking API
 import {
   bookingApi,
+  useGetAllBookingQuery,
+  useGetOneBookingQuery,
   useCreateBookingMutation,
+  useUpdateBookingMutation,
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
+  useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
 } from "./booking";
 
@@ -85,9 +89,13 @@ export {
   useCheckCodeChangePasswordMutation,
   useChangePasswordMutation,
   bookingApi,
+  useGetAllBookingQuery,
+  useGetOneBookingQuery,
   useCreateBookingMutation,
+  useUpdateBookingMutation,
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
+  useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
   hotelApi,
   useGetAllHotelQuery,

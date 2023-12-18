@@ -31,7 +31,7 @@ import GeneralTerms from "./client/Policy/GeneralTerms";
 import PrivacyPolicy from "./client/Policy/PrivacyPolicy";
 
 // Error
-import Loading from "./error/LoadingAll";
+import Loading from "./error/Loading";
 import LoadingAll from "./error/LoadingAll";
 import Page403 from "./error/Page403";
 import Page404 from "./error/Page404";

@@ -140,7 +140,7 @@ export const vnPayPaymentReturn = async (req, res) => {
       { new: true }
     );
 
-    return res.redirect(`${process.env.PUBLIC_URL}/success-payment`);
+    return res.redirect(`${process.env.PUBLIC_URL}/auth/booking`);
   } catch (error) {
     console.error(error);
 
