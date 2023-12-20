@@ -67,6 +67,8 @@ import FooterTop from "./client/Footer/FooterTop";
 import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
 import InfoBookingCard from "./auth/Booking/InfoBookingCard";
 import TwoDrawnBookingRoom from "./admin/Booking/TwoDrawnBookingRoom";
+import Map from "./client/HotelDetail/Map";
+import Amenities from "./client/HotelDetail/Amenities";
 
 export {
   InfoBookingCard,
@@ -133,4 +135,6 @@ export {
   Input,
   FooterBottom,
   FooterTop,
+  Map,
+  Amenities,
 };
