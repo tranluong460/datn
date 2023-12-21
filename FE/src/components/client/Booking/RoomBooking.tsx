@@ -25,21 +25,20 @@ const RoomBooking = ({
     setValue(newValue);
 
     if (newValue === 0) {
-      setSelectRoom(selectRoom.filter((item) => item.idRoom !== room._id));
+      setSelectRoom(selectRoom.filter((item) => item.idRoom._id !== room._id));
     } else {
-      const existingRoom = selectRoom.find((item) => item.idRoom === room._id);
+      const existingRoom = selectRoom.find(
+        (item) => item.idRoom._id === room._id
+      );
 
       if (existingRoom) {
         const newSelectRoom = selectRoom.map((item) =>
-          item.idRoom === room._id ? { ...item, quantity: newValue } : item
+          item.idRoom._id === room._id ? { ...item, quantity: newValue } : item
         );
 
         setSelectRoom(newSelectRoom);
       } else {
-        setSelectRoom([
-          ...selectRoom,
-          { idRoom: room._id, quantity: newValue },
-        ]);
+        setSelectRoom([...selectRoom, { idRoom: room, quantity: newValue }]);
       }
     }
 

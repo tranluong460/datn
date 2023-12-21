@@ -28,6 +28,10 @@ const BookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Payment",
     },
+    id_hotel: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Hotel",
+    },
     list_room: [
       {
         _id: false,
