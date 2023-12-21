@@ -1,5 +1,3 @@
-import React from "react";
-
 const Map = () => {
   return (
     <div className=" mx-auto xl:px-20 md:px-10 sm:px-2 p-5 bg-white dark:bg-[#111315]">
@@ -11,7 +9,6 @@ const Map = () => {
         width="100%"
         height="450"
         loading="lazy"
-        // className="max-w-[1540px] sm:w-full"
       ></iframe>
     </div>
   );
