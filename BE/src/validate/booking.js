@@ -6,6 +6,7 @@ const bookingValidate = joi.object({
   check_in: joi.date().required().messages(validationErrors("Ngày nhận phòng")),
   check_out: joi.date().required().messages(validationErrors("Ngày trả phòng")),
   total_price: joi.number().required().messages(validationErrors("Tổng giá")),
+  city: joi.number().required().messages(validationErrors("Vị trí")),
   payment_method: joi
     .string()
     .optional()
