@@ -9,12 +9,12 @@ import {
 } from "../controller/amenities";
 import { isAdminMiddleware } from "../middleware";
 
-const AmenitiesRouter = express.Router();
+const router = express();
 
-AmenitiesRouter.get("/", getAll);
-AmenitiesRouter.get("/:id", getOne);
-AmenitiesRouter.post("/", isAdminMiddleware, create);
-AmenitiesRouter.patch("/:id", isAdminMiddleware, update);
-AmenitiesRouter.delete("/:id", isAdminMiddleware, remove);
+router.get("/", getAll);
+router.get("/:id", getOne);
+router.post("/", isAdminMiddleware, create);
+router.patch("/:id", isAdminMiddleware, update);
+router.delete("/:id", isAdminMiddleware, remove);
 
-export default AmenitiesRouter;
+export default router;
