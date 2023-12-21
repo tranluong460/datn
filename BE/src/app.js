@@ -4,17 +4,15 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
-import {
-  AmenitiesRouter,
-  AuthRouter,
-  BillRouter,
-  BookingRouter,
-  HotelRouter,
-  PaymentRouter,
-  ReviewRouter,
-  RoomRouter,
-  RoomTypeRouter,
-} from "./router";
+import AmenitiesRouter from "./router/amenities";
+import AuthRouter from "./router/auth";
+import BillRouter from "./router/bill";
+import BookingRouter from "./router/booking";
+import HotelRouter from "./router/hotel";
+import PaymentRouter from "./router/payment";
+import ReviewRouter from "./router/review";
+import RoomRouter from "./router/room";
+import RoomTypeRouter from "./router/roomType";
 
 dotenv.config();
 
@@ -22,7 +20,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.PUBLIC_URL || "http://localhost:5173",
+  })
+);
 
 app.use("/amenities", AmenitiesRouter);
 app.use("/auth", AuthRouter);
