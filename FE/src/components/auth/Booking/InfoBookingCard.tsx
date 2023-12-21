@@ -68,14 +68,15 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
 
       <div>Trạng thái: {info.status}</div>
 
-      {info.status === "Chờ thanh toán" && (
-        <button
-          onClick={toggleCheckStatusZaloPay}
-          className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
-        >
-          Kiểm tra
-        </button>
-      )}
+      {info.payment_method === "Zalo Pay" &&
+        info.status === "Chờ thanh toán" && (
+          <button
+            onClick={toggleCheckStatusZaloPay}
+            className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
+          >
+            Kiểm tra
+          </button>
+        )}
 
       <button
         disabled={info.status === "Đã hủy bỏ"}

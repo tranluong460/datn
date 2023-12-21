@@ -16,6 +16,7 @@ import TwoDrawnRoomHotel from "./admin/Room/TwoDrawnRoomHotel";
 import CreateRoomTypeModal from "./admin/RoomType/CreateRoomTypeModal";
 import EditRoomTypeModal from "./admin/RoomType/EditRoomTypeModal";
 import InfoUserDrawn from "./admin/User/InfoUserDrawn";
+import InfoBookingDrawn from "./admin/Booking/InfoBookingDrawn";
 
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
@@ -65,12 +66,17 @@ import FooterBottom from "./client/Footer/FooterBottom";
 import FooterTop from "./client/Footer/FooterTop";
 import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
 import InfoBookingCard from "./auth/Booking/InfoBookingCard";
-import Trademark from "./client/Home/Trademark"
+import Trademark from "./client/Home/Trademark";
 import TrademarkCard from "./client/Home/TrademarkCard";
-import Feedback from "./client/Home/Feedback"
-// import FeedbackCard from "./client/Home/FeedbackCard"
+import Feedback from "./client/Home/Feedback";
+import TwoDrawnBookingRoom from "./admin/Booking/TwoDrawnBookingRoom";
+import Map from "./client/HotelDetail/Map";
+import Amenities from "./client/HotelDetail/Amenities";
+
 export {
   InfoBookingCard,
+  TwoDrawnBookingRoom,
+  InfoBookingDrawn,
   DetailBooking,
   RoomBooking,
   InfoBooking,
@@ -135,5 +141,6 @@ export {
   Trademark,
   TrademarkCard,
   Feedback,
-  // FeedbackCard
+  Amenities,
+  Map,
 };

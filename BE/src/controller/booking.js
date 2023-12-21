@@ -13,13 +13,56 @@ import {
 
 export const getAll = async (req, res) => {
   try {
-    const bookingList = await BookingModel.find();
+    let query = {};
+
+    if (req.query.check_in) {
+      query.check_in = req.query.check_in;
+    }
+
+    if (req.query.check_out) {
+      query.check_out = req.query.check_out;
+    }
+
+    if (req.query.id_hotel) {
+      query.id_hotel = req.query.id_hotel;
+    }
+
+    const bookingList = await BookingModel.find(query).populate("id_user");
 
     if (!bookingList || bookingList.length === 0) {
-      return sendResponse(res, 404, "Không có danh sách đặt phòng");
+      return sendResponse(res, 200, "Không có danh sách đặt phòng", []);
     }
 
     return sendResponse(res, 200, "Danh sách đặt phòng", bookingList);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(
+      res,
+      500,
+      "Đã có lỗi xảy ra khi lấy danh sách đặt phòng"
+    );
+  }
+};
+
+export const getOne = async (req, res) => {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
+    const booking = await BookingModel.findById(req.params.id)
+      .populate("id_payment")
+      .populate({
+        path: "list_room",
+        populate: "idRoom",
+      });
+
+    if (!booking || booking.length === 0) {
+      return sendResponse(res, 404, "Không có thông tin đặt phòng");
+    }
+
+    return sendResponse(res, 200, "Thông tin đặt phòng", booking);
   } catch (error) {
     console.error(error);
 
@@ -35,14 +78,14 @@ export const getBookingByUser = async (req, res) => {
   const user = req.user;
 
   try {
-    const bookingList = await BookingModel.find({ id_user: user._id })
+    const bookingUser = await BookingModel.find({ id_user: user._id })
       .populate("id_payment")
       .populate({
         path: "list_room",
         populate: "idRoom",
       });
 
-    if (!bookingList || bookingList.length === 0) {
+    if (!bookingUser || bookingUser.length === 0) {
       return sendResponse(res, 404, "Người dùng chưa đặt phòng");
     }
 
@@ -50,7 +93,7 @@ export const getBookingByUser = async (req, res) => {
       res,
       200,
       "Danh sách đặt phòng của người dùng",
-      bookingList
+      bookingUser
     );
   } catch (error) {
     console.error(error);
@@ -69,9 +112,12 @@ export const create = async (req, res) => {
 
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
+      let id_hotel;
+
       await Promise.all(
         list_room.map(async (item) => {
           const room = await RoomModel.findById(item.idRoom);
+          id_hotel = room.id_hotel;
 
           if (room) {
             room.quantity -= item.quantity;
@@ -83,6 +129,7 @@ export const create = async (req, res) => {
 
       const data = await BookingModel.create({
         id_user: user._id,
+        id_hotel: id_hotel,
         ...req.body,
       });
 

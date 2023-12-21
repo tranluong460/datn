@@ -56,7 +56,10 @@ const BookingPage = () => {
       check_in: checkIn,
       check_out: checkOut,
       total_price: totalPriceEnd,
-      list_room: selectedRoom,
+      list_room: selectedRoom.map((item) => ({
+        idRoom: item.idRoom._id,
+        quantity: item.quantity,
+      })),
     };
 
     if (!selectedRoom || selectedRoom.length === 0) {

@@ -1,6 +1,8 @@
+import { IRoom, IUser } from ".";
+
 export interface IBooking {
   _id: string;
-  id_user: string;
+  id_user: IUser;
   check_in: string;
   check_out: string;
   total_price: number;
@@ -12,11 +14,17 @@ export interface IBooking {
   id_payment: IPaymentBooking;
 }
 
-export interface IPaymentBooking {
-  code: string;
+export interface IRoomBooking {
+  idRoom: IRoom;
+  quantity: number;
 }
 
-export interface IRoomBooking {
-  idRoom: string;
-  quantity: number;
+export interface IPaymentBooking {
+  _id: string;
+  id_booking: string;
+  amount: number;
+  code: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
 }
