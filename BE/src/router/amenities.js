@@ -9,7 +9,7 @@ import {
 } from "../controller/amenities";
 import { isAdminMiddleware } from "../middleware";
 
-const router = express();
+const router = express.Router();
 
 router.get("/", getAll);
 router.get("/:id", getOne);
