@@ -9,7 +9,7 @@ import {
 } from "../controller/amenities";
 import { isAdminMiddleware } from "../middleware";
 
-const router = express.Router();
+const AmenitiesRouter = express.Router();
 
 router.get("/", getAll);
 router.get("/:id", getOne);
@@ -17,4 +17,4 @@ router.post("/", isAdminMiddleware, create);
 router.patch("/:id", isAdminMiddleware, update);
 router.delete("/:id", isAdminMiddleware, remove);
 
-export default router;
+export default AmenitiesRouter;

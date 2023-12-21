@@ -4,7 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
-import AmenitiesRouter from "../src/router/amenities";
+import AmenitiesRouter from "./router/amenities";
 import AuthRouter from "./router/auth";
 import BillRouter from "./router/bill";
 import BookingRouter from "./router/booking";
