@@ -1,7 +1,6 @@
 export const getGoogleUrl = (from: string) => {
   const ROOT_URL = `https://accounts.google.com/o/oauth2/v2/auth`;
-  const REACT_APP_GOOGLE_OAUTH_REDIRECT =
-    "https://datn-server.vercel.app/auth/google";
+  const REACT_APP_GOOGLE_OAUTH_REDIRECT = "http://localhost:8080/auth/google";
   const REACT_APP_GOOGLE_OAUTH_CLIENT_ID =
     "938631773415-r9uopg4ntg16akko0m4uluja3cl9hm3g.apps.googleusercontent.com";
 

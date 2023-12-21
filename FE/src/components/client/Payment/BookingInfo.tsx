@@ -1,11 +1,21 @@
 import { useParams } from "react-router-dom";
 import moment from "moment";
 
-import { IBooking, IRoom } from "../../../interface";
+import { IRoom } from "../../../interface";
 import { useGetOneHotelQuery } from "../../../api";
 
+interface ListRoom {
+  idRoom: string;
+  quantity: number;
+}
+
 type BookingInfoProps = {
-  booking: IBooking;
+  booking: {
+    check_in: string;
+    check_out: string;
+    total_price: number;
+    list_room: ListRoom[];
+  };
 };
 
 const BookingInfo = ({ booking }: BookingInfoProps) => {
@@ -13,7 +23,7 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
   const { data } = useGetOneHotelQuery(id);
 
   const filteredRooms = data?.data.id_room.filter((room: IRoom) =>
-    booking.list_room.some((rm) => room._id === rm.idRoom._id)
+    booking.list_room.some((rm) => room._id === rm.idRoom)
   );
 
   return (
@@ -47,7 +57,7 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
           <div className="pt-3 grid grid-cols-1 gap-5">
             {filteredRooms?.map((room: IRoom, index: number) => {
               const bk = booking.list_room?.find(
-                (bookingRoom) => bookingRoom.idRoom._id === room._id
+                (bookingRoom) => bookingRoom.idRoom === room._id
               );
 
               return (
