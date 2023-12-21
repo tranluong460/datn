@@ -4,7 +4,6 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
-import AmenitiesRouter from "./router/amenities";
 import AuthRouter from "./router/auth";
 import BillRouter from "./router/bill";
 import BookingRouter from "./router/booking";
@@ -13,6 +12,7 @@ import PaymentRouter from "./router/payment";
 import ReviewRouter from "./router/review";
 import RoomRouter from "./router/room";
 import RoomTypeRouter from "./router/roomType";
+import { router } from "./router/amenities";
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-app.use("/amenities", AmenitiesRouter);
+app.use("/amenities", router);
 app.use("/auth", AuthRouter);
 app.use("/bill", BillRouter);
 app.use("/booking", BookingRouter);
