@@ -13,7 +13,7 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
   const { data } = useGetOneHotelQuery(id);
 
   const filteredRooms = data?.data.id_room.filter((room: IRoom) =>
-    booking.list_room.some((rm) => room._id === rm.idRoom)
+    booking.list_room.some((rm) => room._id === rm.idRoom._id)
   );
 
   return (
@@ -47,7 +47,7 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
           <div className="pt-3 grid grid-cols-1 gap-5">
             {filteredRooms?.map((room: IRoom, index: number) => {
               const bk = booking.list_room?.find(
-                (bookingRoom) => bookingRoom.idRoom === room._id
+                (bookingRoom) => bookingRoom.idRoom._id === room._id
               );
 
               return (
