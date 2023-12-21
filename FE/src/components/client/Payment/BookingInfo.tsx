@@ -1,11 +1,21 @@
 import { useParams } from "react-router-dom";
 import moment from "moment";
 
-import { IBooking, IRoom } from "../../../interface";
+import { IRoom } from "../../../interface";
 import { useGetOneHotelQuery } from "../../../api";
 
+interface ListRoom {
+  idRoom: string;
+  quantity: number;
+}
+
 type BookingInfoProps = {
-  booking: IBooking;
+  booking: {
+    check_in: string;
+    check_out: string;
+    total_price: number;
+    list_room: ListRoom[];
+  };
 };
 
 const BookingInfo = ({ booking }: BookingInfoProps) => {
