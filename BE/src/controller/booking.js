@@ -13,10 +13,20 @@ import {
 
 export const getAll = async (req, res) => {
   try {
-    const bookingList = await BookingModel.find().populate("id_user");
+    let query = {};
+
+    if (req.query.id_hotel) {
+      query.id_hotel = req.query.id_hotel;
+    }
+
+    if (req.query.status) {
+      query.status = req.query.status;
+    }
+
+    const bookingList = await BookingModel.find(query).populate("id_user");
 
     if (!bookingList || bookingList.length === 0) {
-      return sendResponse(res, 404, "Không có danh sách đặt phòng");
+      return sendResponse(res, 200, "Không có danh sách đặt phòng", []);
     }
 
     return sendResponse(res, 200, "Danh sách đặt phòng", bookingList);
@@ -98,9 +108,12 @@ export const create = async (req, res) => {
 
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
+      let id_hotel;
+
       await Promise.all(
         list_room.map(async (item) => {
           const room = await RoomModel.findById(item.idRoom);
+          id_hotel = room.id_hotel;
 
           if (room) {
             room.quantity -= item.quantity;
@@ -112,6 +125,7 @@ export const create = async (req, res) => {
 
       const data = await BookingModel.create({
         id_user: user._id,
+        id_hotel: id_hotel,
         ...req.body,
       });
 

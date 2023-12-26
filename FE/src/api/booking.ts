@@ -7,11 +7,13 @@ export const bookingApi = createApi({
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
     getAllBooking: builder.query({
-      query: () => ({
-        url: "booking",
-        method: "GET",
-        credentials: "include",
-      }),
+      query: (query) => {
+        return {
+          url: `booking?${query}`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
       providesTags: ["Booking"],
     }),
     getOneBooking: builder.query({

@@ -45,7 +45,8 @@ const DetailOverview = ({ description }: DetailOverviewProps) => {
                 key={item.span}
                 className="flex items-center mt-3 text-textLight2nd dark:text-textDark2nd"
               >
-                {item.icon}
+                <span className="text-[#002864]">{item.icon}</span>
+
                 <span className="ml-2">{item.span}</span>
               </div>
             ))}
