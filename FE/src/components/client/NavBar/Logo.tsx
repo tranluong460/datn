@@ -10,7 +10,7 @@ const Logo = ({ url }: LogoProps) => {
   return (
     <div
       onClick={() => navigate(url)}
-      className="hidden md:block cursor-pointer p-3"
+      className="cursor-pointer p-3 text-center md:text-left" // Added text-center for centering on small screens
     >
       <span className="text-2xl italic text-textLight dark:text-textDark">
         Seventeen
