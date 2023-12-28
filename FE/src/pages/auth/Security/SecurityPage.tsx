@@ -213,7 +213,7 @@ const SecurityPage = () => {
   }
 
   return (
-    <div className="rounded-xl bg-light dark:bg-dark p-3 w-full">
+    <div className="rounded-xl bg-light dark:bg-dark p-3 w-full lg:min-h-[385px] ">
       <div className="border-b p-1 border-divideLight dark:border-divideDark">
         <div className="flex items-center gap-10">
           <div>

@@ -6,9 +6,9 @@ const ProfilePage = () => {
   const { data, isLoading } = useInfoAccountQuery("");
 
   return (
-    <div className="rounded-xl bg-light dark:bg-dark p-3 w-full">
-      <div className="border-b p-1 border-divideLight dark:border-divideDark">
-        <div className="flex items-center gap-10">
+    <div className="rounded-xl bg-light dark:bg-dark p-6 w-full">
+      <div className="border-b p-4 border-divideLight dark:border-divideDark ">
+        <div className="flex items-center gap-10 justify-between">
           <div>
             <h2 className="text-2xl font-bold text-textLight dark:text-textDark">
               Thông tin cá nhân
@@ -17,6 +17,12 @@ const ProfilePage = () => {
               Cập nhật thông tin của bạn và tìm hiểu các thông tin này được sử
               dụng ra sao
             </p>
+          </div>
+
+          <div>
+            <button className="bg-blue-500 py-2 px-4 text-white rounded-sm">
+              Chỉnh sửa thông tin
+            </button>
           </div>
         </div>
       </div>

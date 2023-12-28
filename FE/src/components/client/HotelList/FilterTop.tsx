@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { AiOutlineColumnHeight } from "react-icons/ai";
 type FilterTopProps = {
   onShowDialog: () => void;
 };
@@ -12,87 +12,24 @@ const FilterTop = ({ onShowDialog }: FilterTopProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between border-b border-divideLight dark:border-divideDark p-5 bg-light dark:bg-dark rounded-md">
-      <h1 className="text-2xl font-bold tracking-tight text-textLight dark:text-textDark">
-        <p className="hidden sm:block">Danh sách khách sạn</p>
-      </h1>
-
+    <div className="flex items-center justify-between border-b border-divideLight dark:border-divideDark p-2 bg-light dark:bg-dark rounded-md">
       <div className="flex items-center">
         <div className="relative inline-block text-left">
-          <button
-            onClick={onToggle}
-            className="group inline-flex justify-center text-sm font-medium text-textLight dark:text-textDark hover:text-primary dark:hover:text-primary"
+          <span
+            className="group inline-flex justify-center text-sm font-medium text-textLight dark:text-textDark items-center gap-1 mr-2"
             id="menu-button"
             aria-expanded="false"
             aria-haspopup="true"
           >
-            Sắp xếp
-            <svg
-              className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-textLight dark:text-textDark group-hover:text-primary dark:hover:text-primary"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
+            <AiOutlineColumnHeight />
+            Sắp xếp:
+          </span>
 
-          <div
-            className={`absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-light dark:bg-dark shadow-2xl ring-1 ring-divideLight dark:ring-divideDark ring-opacity-5 focus:outline-none
-            ${show ? "" : "hidden"}`}
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
-          >
-            <div className="py-1" role="none">
-              <span
-                onClick={onToggle}
-                className="text-textLight2nd dark:text-textDark2nd block px-4 py-2 text-sm hover:bg-backgroundLight dark:hover:bg-backgroundDark rounded-md cursor-pointer"
-                role="menuitem"
-                id="menu-item-1"
-              >
-                Đánh giá cao
-              </span>
-              <span
-                onClick={onToggle}
-                className="text-textLight2nd dark:text-textDark2nd block px-4 py-2 text-sm hover:bg-backgroundLight dark:hover:bg-backgroundDark rounded-md cursor-pointer"
-                role="menuitem"
-                id="menu-item-3"
-              >
-                Giá từ thấp đến cao
-              </span>
-              <span
-                onClick={onToggle}
-                className="text-textLight2nd dark:text-textDark2nd block px-4 py-2 text-sm hover:bg-backgroundLight dark:hover:bg-backgroundDark rounded-md cursor-pointer"
-                role="menuitem"
-                id="menu-item-4"
-              >
-                Giá từ cao đến thấp
-              </span>
-            </div>
-          </div>
+          <select name="" id="" className="border border-black">
+            <option value="1">Giá tăng dần</option>
+            <option value="2">Giá giảm dần</option>
+          </select>
         </div>
-
-        <button className="-m-2 ml-5 p-2 text-textLight dark:text-textDark hover:text-primary dark:hover:text-primary sm:ml-7">
-          <span className="sr-only">Lưới</span>
-
-          <svg
-            className="h-5 w-5"
-            aria-hidden="true"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
 
         <button
           onClick={onShowDialog}
