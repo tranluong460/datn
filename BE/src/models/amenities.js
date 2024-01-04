@@ -20,6 +20,11 @@ const amenitiesSchema = new mongoose.Schema(
         },
       },
     ],
+    status: {
+      type: String,
+      enum: ['Đang áp dụng', 'Không được áp dụng'],
+      default: 'Đang áp dụng'
+    }
   },
   { versionKey: false, timestamps: true }
 );
