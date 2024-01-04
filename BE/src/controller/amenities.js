@@ -95,22 +95,22 @@ export const update = async (req, res) => {
   }
 };
 
-export const remove = async (req, res) => {
-  try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
-      return sendResponse(res, 400, "ID không hợp lệ");
-    }
+// export const remove = async (req, res) => {
+//   try {
+//     if (!mongoose.isValidObjectId(req.params.id)) {
+//       return sendResponse(res, 400, "ID không hợp lệ");
+//     }
 
-    const data = await AmenitiesModel.findByIdAndDelete(req.params.id);
+//     const data = await AmenitiesModel.findByIdAndDelete(req.params.id);
 
-    if (!data) {
-      return sendResponse(res, 404, "Xóa tiện nghi thất bại");
-    }
+//     if (!data) {
+//       return sendResponse(res, 404, "Xóa tiện nghi thất bại");
+//     }
 
-    return sendResponse(res, 200, "Xóa tiện nghi thành công");
-  } catch (error) {
-    console.error(error);
+//     return sendResponse(res, 200, "Xóa tiện nghi thành công");
+//   } catch (error) {
+//     console.error(error);
 
-    return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa tiện nghi");
-  }
-};
+//     return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa tiện nghi");
+//   }
+// };

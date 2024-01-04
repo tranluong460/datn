@@ -22,34 +22,34 @@ const AmenitiesManager = () => {
   const { data, isLoading } = useGetAllAmenitiesQuery("");
   const { data: dataOneAmenities, isFetching } =
     useGetOneAmenitiesQuery(idAmenities);
-  const [deleteAmenities] = useDeleteAmenitiesMutation();
+  // const [deleteAmenities] = useDeleteAmenitiesMutation();
 
-  const onDelete = (id: string) => {
-    messageApi.open({
-      key: key0,
-      type: "loading",
-      content: "Loading...",
-    });
+  // const onDelete = (id: string) => {
+  //   messageApi.open({
+  //     key: key0,
+  //     type: "loading",
+  //     content: "Loading...",
+  //   });
 
-    deleteAmenities(id)
-      .unwrap()
-      .then((response) => {
-        messageApi.open({
-          key: key0,
-          type: "success",
-          content: response.message,
-          duration: 2,
-        });
-      })
-      .catch((error) => {
-        messageApi.open({
-          key: key0,
-          type: "error",
-          content: error.data.message,
-          duration: 2,
-        });
-      });
-  };
+  //   deleteAmenities(id)
+  //     .unwrap()
+  //     .then((response) => {
+  //       messageApi.open({
+  //         key: key0,
+  //         type: "success",
+  //         content: response.message,
+  //         duration: 2,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       messageApi.open({
+  //         key: key0,
+  //         type: "error",
+  //         content: error.data.message,
+  //         duration: 2,
+  //       });
+  //     });
+  // };
 
   const columns: ColumnsType<IAmenities> = [
     {
@@ -82,6 +82,16 @@ const AmenitiesManager = () => {
       ),
     },
     {
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => (
+        <Space direction="vertical" size="small">
+          {status}
+        </Space>
+      ),
+    },
+    {
       title: "Hành động",
       key: "action",
       render: (_, { _id }) => (
@@ -96,7 +106,7 @@ const AmenitiesManager = () => {
               Sửa
             </Button>
 
-            <Popconfirm
+            {/* <Popconfirm
               placement="left"
               title="Bạn có chắc chắn muốn xóa tiện ích này không?"
               description="Hành động này không thể hoàn tác."
@@ -106,7 +116,7 @@ const AmenitiesManager = () => {
               cancelText="Hủy"
             >
               <Button danger>Xóa</Button>
-            </Popconfirm>
+            </Popconfirm> */}
           </Space>
         </>
       ),

@@ -95,22 +95,22 @@ export const update = async (req, res) => {
   }
 };
 
-export const remove = async (req, res) => {
-  try {
-    if (!mongoose.isValidObjectId(req.params.id)) {
-      return sendResponse(res, 400, "ID không hợp lệ");
-    }
+// export const remove = async (req, res) => {
+//   try {
+//     if (!mongoose.isValidObjectId(req.params.id)) {
+//       return sendResponse(res, 400, "ID không hợp lệ");
+//     }
 
-    const data = await RoomTypeModel.findByIdAndDelete(req.params.id);
+//     const data = await RoomTypeModel.findByIdAndDelete(req.params.id);
 
-    if (!data) {
-      return sendResponse(res, 404, "Xóa loại phòng thất bại");
-    }
+//     if (!data) {
+//       return sendResponse(res, 404, "Xóa loại phòng thất bại");
+//     }
 
-    return sendResponse(res, 200, "Xóa loại phòng thành công");
-  } catch (error) {
-    console.error(error);
+//     return sendResponse(res, 200, "Xóa loại phòng thành công");
+//   } catch (error) {
+//     console.error(error);
 
-    return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa loại phòng");
-  }
-};
+//     return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa loại phòng");
+//   }
+// };

@@ -51,7 +51,7 @@ const RoomManager = () => {
               setIdRoom(_id);
             }}
           >
-            {id_roomType.name}
+            {id_roomType?.name}
           </button>
         </Tooltip>
       ),
