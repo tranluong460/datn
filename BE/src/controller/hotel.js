@@ -183,7 +183,6 @@ export const update = async (req, res) => {
     const newData = {
       ...req.fields,
     };
-    // console.log(newData);
     // Cập nhật dữ liệu trong cơ sở dữ liệu
     const data = await HotelModel.findByIdAndUpdate(req.params.id, newData, {
       new: true,
