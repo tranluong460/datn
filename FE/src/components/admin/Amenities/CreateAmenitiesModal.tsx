@@ -78,7 +78,7 @@ const CreateAmenitiesModal = ({
                         <Input />
                       </Form.Item>
 
-                      <Form.Item
+                      {/* <Form.Item
                         key={`features-${key}-surcharge-${index}`}
                         label="Phụ phí"
                         name={[name, "surcharge"]}
@@ -87,7 +87,7 @@ const CreateAmenitiesModal = ({
                         initialValue={false}
                       >
                         <Switch />
-                      </Form.Item>
+                      </Form.Item> */}
 
                       <Form.Item>
                         {fields.length > 0 ? (

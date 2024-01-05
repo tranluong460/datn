@@ -73,21 +73,21 @@ export const update = async (req, res) => {
       return sendResponse(res, 400, "ID không hợp lệ");
     }
 
-    validateMiddleware(req, res, AmenitiesValidate, async () => {
-      const data = await AmenitiesModel.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-        }
-      );
-
-      if (!data) {
-        return sendResponse(res, 404, "Cập nhật tiện nghi thất bại");
+    // validateMiddleware(req, res, AmenitiesValidate, async () => {
+    const data = await AmenitiesModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
       }
+    );
 
-      return sendResponse(res, 200, "Cập nhật tiện nghi thành công", data);
-    });
+    if (!data) {
+      return sendResponse(res, 404, "Cập nhật tiện nghi thất bại");
+    }
+
+    return sendResponse(res, 200, "Cập nhật tiện nghi thành công", data);
+    // });
   } catch (error) {
     console.error(error);
 

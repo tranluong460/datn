@@ -94,7 +94,7 @@ const EditAmenitiesModal = ({
                           <Input />
                         </Form.Item>
 
-                        <Form.Item
+                        {/* <Form.Item
                           key={`features-${key}-surcharge-${index}`}
                           label="Phụ phí"
                           name={[name, "surcharge"]}
@@ -102,7 +102,7 @@ const EditAmenitiesModal = ({
                           rules={[{ required: false }]}
                         >
                           <Switch className="bg-[#efefef]" />
-                        </Form.Item>
+                        </Form.Item> */}
 
                         <Form.Item className="cursor-pointer">
                           {fields.length > 0 ? (

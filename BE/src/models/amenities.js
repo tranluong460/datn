@@ -13,11 +13,7 @@ const amenitiesSchema = new mongoose.Schema(
           type: String,
           required: false,
         },
-        surcharge: {
-          type: Boolean,
-          default: false,
-          required: false,
-        },
+
       },
     ],
     status: {

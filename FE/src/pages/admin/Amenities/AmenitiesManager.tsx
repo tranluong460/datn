@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Popconfirm, Space, Table, Tag, message } from "antd";
+import { Button, Popconfirm, Select, Space, Table, Tag, message } from "antd";
 
 import { IAmenities } from "../../../interface";
 import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
@@ -9,6 +9,7 @@ import {
   useDeleteAmenitiesMutation,
   useGetAllAmenitiesQuery,
   useGetOneAmenitiesQuery,
+  useUpdateAmenitiesMutation,
 } from "../../../api";
 
 const AmenitiesManager = () => {
@@ -22,6 +23,7 @@ const AmenitiesManager = () => {
   const { data, isLoading } = useGetAllAmenitiesQuery("");
   const { data: dataOneAmenities, isFetching } =
     useGetOneAmenitiesQuery(idAmenities);
+  const [editAmenities] = useUpdateAmenitiesMutation()
   // const [deleteAmenities] = useDeleteAmenitiesMutation();
 
   // const onDelete = (id: string) => {
@@ -50,7 +52,16 @@ const AmenitiesManager = () => {
   //       });
   //     });
   // };
-
+  const handleChange = (value: string) => {
+    editAmenities({ status: value, _id: idAmenities, })
+      .unwrap()
+      .then(() => {
+        message.success('Cập nhật trạng thái thành công');
+      })
+      .catch((error) => {
+        message.error(error.data.message);
+      });
+  };
   const columns: ColumnsType<IAmenities> = [
     {
       title: "ID",
@@ -74,7 +85,7 @@ const AmenitiesManager = () => {
                 <div>
                   {index + 1}. {item.name}
                 </div>
-                {item.surcharge && <Tag>Phụ phí</Tag>}
+                {/* {item.surcharge && <Tag>Phụ phí</Tag>} */}
               </Space>
             )
           )}
@@ -83,11 +94,19 @@ const AmenitiesManager = () => {
     },
     {
       title: "Trạng thái",
-      dataIndex: "status",
       key: "status",
-      render: (status) => (
-        <Space direction="vertical" size="small">
-          {status}
+      render: ({ _id, status }) => (
+        <Space wrap>
+          <Select
+            defaultValue={status}
+            style={{ width: 120 }}
+            onChange={(value) => handleChange(value)}
+            onClick={() => setIdAmenities(_id)}
+            options={[
+              { value: 'Đang áp dụng', label: 'Đang áp dụng' },
+              { value: 'Không được áp dụng', label: 'Không được áp dụng' },
+            ]}
+          />
         </Space>
       ),
     },
