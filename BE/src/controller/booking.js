@@ -15,16 +15,12 @@ export const getAll = async (req, res) => {
   try {
     let query = {};
 
-    if (req.query.check_in) {
-      query.check_in = req.query.check_in;
-    }
-
-    if (req.query.check_out) {
-      query.check_out = req.query.check_out;
-    }
-
     if (req.query.id_hotel) {
       query.id_hotel = req.query.id_hotel;
+    }
+
+    if (req.query.status) {
+      query.status = req.query.status;
     }
 
     const bookingList = await BookingModel.find(query).populate("id_user");

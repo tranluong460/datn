@@ -52,7 +52,7 @@ const BookingPage = () => {
   const onBooking = () => {
     const totalPriceEnd = numberOfDays * totalPrice;
 
-    const data = {
+    const dataBooking = {
       check_in: checkIn,
       check_out: checkOut,
       total_price: totalPriceEnd,
@@ -60,13 +60,14 @@ const BookingPage = () => {
         idRoom: item.idRoom._id,
         quantity: item.quantity,
       })),
+      city: data?.data.city,
     };
 
     if (!selectedRoom || selectedRoom.length === 0) {
       return toast.error("Bạn chưa chọn phòng!");
     }
 
-    setCookie("booking", data, { path: "/" });
+    setCookie("booking", dataBooking, { path: "/" });
 
     navigate(`/payment/${idHotel}`);
   };

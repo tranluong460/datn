@@ -32,6 +32,10 @@ const BookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Hotel",
     },
+    city: {
+      type: Number,
+      required: true,
+    },
     list_room: [
       {
         _id: false,
