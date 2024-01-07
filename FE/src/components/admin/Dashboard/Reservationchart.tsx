@@ -12,71 +12,73 @@ import {
 
 const data = [
   {
-    name: "Jan",
-    Expense: 4000,
-    Income: 2400,
+    name: "Tháng 1",
+    RoomisBooked: 4000,
+    EmptyRoom: 2400,
   },
   {
-    name: "Feb",
-    Expense: 3000,
-    Income: 1398,
+    name: "Tháng 2",
+    RoomisBooked: 3000,
+    EmptyRoom: 1398,
   },
   {
-    name: "Mar",
-    Expense: 2000,
-    Income: 9800,
+    name: "Tháng 3",
+    RoomisBooked: 2000,
+    EmptyRoom: 9800,
   },
   {
-    name: "Apr",
-    Expense: 2780,
-    Income: 3908,
+    name: "Tháng 4",
+    RoomisBooked: 2780,
+    EmptyRoom: 3908,
   },
   {
-    name: "May",
-    Expense: 1890,
-    Income: 4800,
+    name: "Tháng 5",
+    RoomisBooked: 1890,
+    EmptyRoom: 4800,
   },
   {
-    name: "Jun",
-    Expense: 2780,
-    Income: 3908,
+    name: "Tháng 6",
+    RoomisBooked: 2780,
+    EmptyRoom: 3908,
   },
   {
-    name: "July",
-    Expense: 3490,
-    Income: 4300,
+    name: "Tháng 7",
+    RoomisBooked: 3490,
+    EmptyRoom: 4300,
   },
   {
-    name: "Aug",
-    Expense: 2000,
-    Income: 9800,
+    name: "Tháng 8",
+    RoomisBooked: 2000,
+    EmptyRoom: 9800,
   },
   {
-    name: "Jan",
-    Expense: 4000,
-    Income: 2400,
+    name: "Tháng 9",
+    RoomisBooked: 4000,
+    EmptyRoom: 2400,
   },
   {
-    name: "Jan",
-    Expense: 4000,
-    Income: 2400,
+    name: "Tháng 10",
+    RoomisBooked: 4000,
+    EmptyRoom: 2400,
   },
   {
-    name: "Jan",
-    Expense: 4000,
-    Income: 2400,
+    name: "Tháng 11",
+    RoomisBooked: 4000,
+    EmptyRoom: 2400,
   },
   {
-    name: "Dec",
-    Expense: 3490,
-    Income: 4300,
+    name: "Tháng 12",
+    RoomisBooked: 3490,
+    EmptyRoom: 4300,
   },
 ];
 
 function TransactionChart() {
   return (
     <div className="h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
-      <strong className="text-gray-700 font-medium">Transactions</strong>
+      <strong className="text-gray-700 font-medium">
+        Phòng được đặt trong 12 tháng
+      </strong>
       <div className="w-full mt-3 flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -95,8 +97,8 @@ function TransactionChart() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Income" fill="#0ea5e9" />
-            <Bar dataKey="Expense" fill="#ea580c" />
+            <Bar dataKey="RoomisBooked" fill="#0ea5e9" />
+            <Bar dataKey="EmptyRoom" fill="#ea580c" />
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -17,7 +17,11 @@ import CreateRoomTypeModal from "./admin/RoomType/CreateRoomTypeModal";
 import EditRoomTypeModal from "./admin/RoomType/EditRoomTypeModal";
 import InfoUserDrawn from "./admin/User/InfoUserDrawn";
 import InfoBookingDrawn from "./admin/Booking/InfoBookingDrawn";
-
+import RecentRooms from "./admin/Dashboard/Recentlybookedrooms";
+import Roomsheavilybooked from "./admin/Dashboard/Roomsheavilybooked";
+import TransactionChart from "./admin/Dashboard/Reservationchart";
+import BuyerProfileChart from "./admin/Dashboard/Bookerprofilechart";
+import DashboardStatsGrid from "./admin/Dashboard/DashboardStatsGrid";
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
 import Sidebar from "./auth/Sidebar";
@@ -69,11 +73,10 @@ import InfoBookingCard from "./auth/Booking/InfoBookingCard";
 import TwoDrawnBookingRoom from "./admin/Booking/TwoDrawnBookingRoom";
 import Map from "./client/HotelDetail/Map";
 import Amenities from "./client/HotelDetail/Amenities";
-import TransactionChart from "./admin/Dashboard/Reservationchart";
-import BuyerProfileChart from "./admin/Dashboard/Bookerprofilechart";
-import DashboardStatsGrid from "./admin/Dashboard/DashboardStatsGrid";
 
 export {
+  Roomsheavilybooked,
+  RecentRooms,
   DashboardStatsGrid,
   TransactionChart,
   BuyerProfileChart,
