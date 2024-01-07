@@ -9,7 +9,7 @@ const RoomCard = ({ room }: RoomCardProps) => {
       <div className="h-auto transition duration-300 rounded-md bg-light dark:bg-dark">
         <div className="overflow-hidden h-64">
           <img
-            src={`${room.images[0].url}`}
+            src={`${room?.images[0]?.url}`}
             alt="Room"
             className="w-full h-full object-cover"
           />
