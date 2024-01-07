@@ -1,5 +1,16 @@
+import DashboardDrawn from "../../../components/admin/Dashboard/DashboardDrawn";
+
 const DashboardManage = () => {
-  return <div>DashboardManage</div>;
+  return <>
+    <div>
+      <h3>Thông tin thống kê</h3>
+
+    </div>
+    <div>
+      <DashboardDrawn />
+    </div>
+
+  </>;
 };
 
 export default DashboardManage;
