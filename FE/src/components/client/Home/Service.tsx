@@ -1,5 +1,5 @@
-import { Container } from "../..";
-// ServiceCard
+import { Container} from "../..";
+
 // const serviceData = [
 //   {
 //     url: "/images/weather.png",
@@ -22,6 +22,7 @@ const Service = () => {
   return (
     <>
       <Container>
+      
       {/* grid grid-cols-4 gap-4 items-center text-center mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-8 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center text-center mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-8">
        
@@ -63,7 +64,7 @@ const Service = () => {
               <line x1="15" y1="15" x2="15" y2="20" />
             </svg>
             <a className="font-normal select-none	not-italic text-xl text-center group-hover:text-yellow-500" >
-              Đa dạng điểm đến lựa chọn tốt nhất
+              Đa dạng các phòng lựa chọn tốt nhất
             </a>
           </div>
 
@@ -117,7 +118,9 @@ const Service = () => {
               Hỗ trợ khách hàng nhanh nhất
             </a>
           </div>
+         
         </div>
+       
       </Container>
     </>
   );

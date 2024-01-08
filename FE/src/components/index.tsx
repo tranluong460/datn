@@ -24,8 +24,8 @@ import Sidebar from "./auth/Sidebar";
 
 // Client
 import Footer from "./client/Footer/Footer";
-import Attractive from "./client/Home/Attractive";
-import AttractiveCard from "./client/Home/AttractiveCard";
+// import Attractive from "./client/Home/Attractive";
+// import AttractiveCard from "./client/Home/AttractiveCard";
 import Experience from "./client/Home/Experience";
 import Service from "./client/Home/Service";
 // import ServiceCard from "./client/Home/ServiceCard";
@@ -108,8 +108,8 @@ export {
   InfoUser,
   Sidebar,
   Footer,
-  Attractive,
-  AttractiveCard,
+  // Attractive,
+  // AttractiveCard,
   Experience,
   Service,
   // ServiceCard,

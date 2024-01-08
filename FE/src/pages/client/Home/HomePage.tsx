@@ -1,4 +1,5 @@
-import { Attractive, Service, Top, ComboPrice,  } from "../../../components";
+import {  Service, Top, ComboPrice,  } from "../../../components";
+// Attractive,
 // Preferential 
 // News
 const HomePage = () => {
@@ -10,7 +11,7 @@ const HomePage = () => {
         <Service />
         <ComboPrice />
         {/* <Preferential/> */}
-        <Attractive />
+        {/* <Attractive /> */}
         {/* <News/> */}
       </div>
     </>
