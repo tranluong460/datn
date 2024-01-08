@@ -2,28 +2,28 @@ import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 
-import { AiOutlineSearch } from "../../../icons";
-import { getCityByCode } from "../../../utils";
-import { useGetAllProvincesQuery } from "../../../api";
+// import { AiOutlineSearch } from "../../../icons";
+// import { getCityByCode } from "../../../utils";
+// import { useGetAllProvincesQuery } from "../../../api";
 import { useSearchModal } from "../../../hooks";
 
 const Search = () => {
   const searchModal = useSearchModal();
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-  const { data: dataProvinces } = useGetAllProvincesQuery("");
+  // const { data: dataProvinces } = useGetAllProvincesQuery("");
 
-  const locationValue = params.get("location");
+  // const locationValue = params.get("location");
   const checkinValue = params.get("checkin");
   const checkoutValue = params.get("checkout");
   const roomValue = params.get("room");
 
-  const locationLabel = useMemo(() => {
-    const data = dataProvinces || [];
-    return locationValue
-      ? getCityByCode(Number(locationValue), data)
-      : { name: "Nhập khách sạn / Điểm đến" };
-  }, [locationValue, dataProvinces]);
+  // const locationLabel = useMemo(() => {
+  //   const data = dataProvinces || [];
+  //   return locationValue
+  //     ? getCityByCode(Number(locationValue), data)
+  //     : { name: "Nhập khách sạn / Điểm đến" };
+  // }, [locationValue, dataProvinces]);
 
   const durationLabel = useMemo(() => {
     if (checkinValue && checkoutValue) {

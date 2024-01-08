@@ -1,5 +1,5 @@
 import { ComboPriceCard, Container } from "../..";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ComboPrice = () => {
   const data = [

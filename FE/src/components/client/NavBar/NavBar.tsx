@@ -1,4 +1,4 @@
-import { Container, DarkMode, Logo, Search, UserMenu, NavBarIcon } from "../..";
+import { Container, DarkMode, Logo, UserMenu, NavBarIcon } from "../..";
 
 const NavBar = () => {
   return (
