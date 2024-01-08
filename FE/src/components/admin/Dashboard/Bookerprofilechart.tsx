@@ -1,5 +1,6 @@
 import React from "react";
 import { ResponsiveContainer, PieChart, Legend, Pie, Cell } from "recharts";
+import { useGetAllUserQuery } from "../../../api";
 const data = [
   { name: "Male", value: 540 },
   { name: "Female", value: 620 },
@@ -35,6 +36,7 @@ const renderCustomizedLabel = ({
 };
 
 function BuyerProfileChart() {
+
   return (
     <div className="w-[20rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
       <strong className="text-gray-700 font-medium">Giới tính</strong>

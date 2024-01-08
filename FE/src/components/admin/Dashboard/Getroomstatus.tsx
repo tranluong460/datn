@@ -2,6 +2,7 @@ export function getRoomStatus(status: any) {
   switch (status) {
     case "PLACED":
       return (
+
         <span className="capitalize py-1 px-2 rounded-md text-xs text-sky-600 bg-sky-100">
           {status.replaceAll("_", " ").toLowerCase()}
         </span>

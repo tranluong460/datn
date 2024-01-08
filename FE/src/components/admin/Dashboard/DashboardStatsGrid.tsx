@@ -1,7 +1,25 @@
 import React from "react";
 import { IoBagHandle } from "react-icons/io5";
+import { useGetAllBookingQuery, useGetAllRoomQuery, useGetAllUserQuery } from "../../../api";
+import { useGetAllPaymentQuery } from "../../../api/payment";
 
 const DashboardStatsGrid = () => {
+  const { data: rooms } = useGetAllRoomQuery('')
+  const { data: bookings } = useGetAllBookingQuery('')
+  const { data: user } = useGetAllUserQuery('')
+  // Phòng trống
+  const emtyRoom = rooms?.data?.filter((room: any) => room.status == 'Có sẵn')
+  const totalEmptyRoomQuantity = emtyRoom?.reduce((acc: number, room: any) => {
+    return acc + (room.quantity || 0);
+  }, 0);
+  // Phòng đã được đặt
+  const bookedRoom = bookings?.data?.filter((booking: any) => booking.status == 'Thành Công')
+  const totalBookRoomQuantity = bookedRoom?.reduce((acc: number, room: any) => {
+    return acc + (room.quantity || 0);
+  }, 0);
+  // doanh thu
+  const manager = user?.data?.filter((use: any) => use.role == 'Manager');
+
   return (
     <div className="flex gap-4 w-full">
       <BoxWrapper>
@@ -13,9 +31,9 @@ const DashboardStatsGrid = () => {
           <span className="text-sm text-gray-500 font-light">Phòng trống</span>
           <div className="flex  items-center ">
             <strong className="text-xl text-gray-700 font-semibold">
-              $3425.60
+              {totalEmptyRoomQuantity}
             </strong>
-            <span className="text-sm text-green-500 pl-2">+234</span>
+            {/* <span className="text-sm text-green-500 pl-2">+234</span> */}
           </div>
         </div>
       </BoxWrapper>
@@ -31,9 +49,8 @@ const DashboardStatsGrid = () => {
           </span>
           <div className="flex  items-center ">
             <strong className="text-xl text-gray-700 font-semibold">
-              $3425.60
+              {totalBookRoomQuantity}
             </strong>
-            <span className="text-sm text-green-500 pl-2">+234</span>
           </div>
         </div>
       </BoxWrapper>
@@ -48,9 +65,9 @@ const DashboardStatsGrid = () => {
           </span>
           <div className="flex  items-center ">
             <strong className="text-xl text-gray-700 font-semibold">
-              $3425.60
+              {bookings?.data?.length}
             </strong>
-            <span className="text-sm text-green-500 pl-2">+234</span>
+            {/* <span className="text-sm text-green-500 pl-2">+234</span> */}
           </div>
         </div>
       </BoxWrapper>
@@ -60,12 +77,12 @@ const DashboardStatsGrid = () => {
         </div>
 
         <div className="pl-4">
-          <span className="text-sm text-gray-500 font-light">Khoản thu</span>
+          <span className="text-sm text-gray-500 font-light">Nhân viên</span>
           <div className="flex  items-center ">
             <strong className="text-xl text-gray-700 font-semibold">
-              $3425.60
+              {manager?.length}
             </strong>
-            <span className="text-sm text-green-500 pl-2">+234</span>
+            {/* <span className="text-sm text-green-500 pl-2">+234</span> */}
           </div>
         </div>
       </BoxWrapper>
