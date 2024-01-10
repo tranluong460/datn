@@ -28,11 +28,11 @@ import Sidebar from "./auth/Sidebar";
 
 // Client
 import Footer from "./client/Footer/Footer";
-import Attractive from "./client/Home/Attractive";
-import AttractiveCard from "./client/Home/AttractiveCard";
+// import Attractive from "./client/Home/Attractive";
+// import AttractiveCard from "./client/Home/AttractiveCard";
 import Experience from "./client/Home/Experience";
 import Service from "./client/Home/Service";
-import ServiceCard from "./client/Home/ServiceCard";
+// import ServiceCard from "./client/Home/ServiceCard";
 import Top from "./client/Home/Top";
 import DetailOverview from "./client/HotelDetail/DetailOverview";
 import InfoHotel from "./client/HotelDetail/InfoHotel";
@@ -70,9 +70,16 @@ import FooterBottom from "./client/Footer/FooterBottom";
 import FooterTop from "./client/Footer/FooterTop";
 import CalendarRangerModal from "./client/Modal/CalendarRangerModal";
 import InfoBookingCard from "./auth/Booking/InfoBookingCard";
+import ComboPrice from "./client/Home/ComboPrice";
+import ComboPriceCard from "./client/Home/ComboPriceCard";
 import TwoDrawnBookingRoom from "./admin/Booking/TwoDrawnBookingRoom";
 import Map from "./client/HotelDetail/Map";
 import Amenities from "./client/HotelDetail/Amenities";
+import NavBarIcon from "./client/NavBar/NavBarIcon";
+// import Preferential from "./client/Home/Preferential";
+// import PreferentialCard from "./client/Home/PreferentialCard";
+// import News from "./client/Home/News";
+// import NewsCard from "./client/Home/NewsCard";
 
 export {
   Roomsheavilybooked,
@@ -110,11 +117,11 @@ export {
   InfoUser,
   Sidebar,
   Footer,
-  Attractive,
-  AttractiveCard,
+  // Attractive,
+  // AttractiveCard,
   Experience,
   Service,
-  ServiceCard,
+  // ServiceCard,
   Top,
   DetailOverview,
   InfoHotel,
@@ -144,6 +151,13 @@ export {
   Input,
   FooterBottom,
   FooterTop,
-  Map,
+  ComboPrice,
+  ComboPriceCard,
   Amenities,
+  Map,
+  NavBarIcon,
+  // Preferential,
+  // PreferentialCard,
+  // News,
+  // NewsCard
 };
