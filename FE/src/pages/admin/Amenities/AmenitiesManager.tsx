@@ -1,20 +1,20 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Popconfirm, Select, Space, Table, Tag, message } from "antd";
+import { Button, Select, Space, Table, message } from "antd";
 
 import { IAmenities } from "../../../interface";
 import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
 import {
-  useDeleteAmenitiesMutation,
+  // useDeleteAmenitiesMutation,
   useGetAllAmenitiesQuery,
   useGetOneAmenitiesQuery,
   useUpdateAmenitiesMutation,
 } from "../../../api";
 
 const AmenitiesManager = () => {
-  const key0 = "deleteAmenitiesMutation";
-  const [messageApi, contextHolder] = message.useMessage();
+  // const key0 = "deleteAmenitiesMutation";
+  const [contextHolder] = message.useMessage();
 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
