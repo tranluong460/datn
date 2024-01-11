@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Select, Space, Table, Tag, Tooltip, message } from "antd";
+import { Button, Select, Space, Table, Tooltip, message } from "antd";
 
 import { IHotel } from "../../../interface";
 import { useGetAllHotelQuery, useGetOneHotelQuery, useUpdateHotelMutation } from "../../../api";
@@ -21,7 +21,7 @@ const HotelManager = () => {
 
   const { data: allHotel, isLoading } = useGetAllHotelQuery("");
   const { data: oneHotel, isFetching } = useGetOneHotelQuery(idHotelEdit);
-  const [editHotel, resultEdit] = useUpdateHotelMutation();
+  const [editHotel] = useUpdateHotelMutation();
 
   const onClosedHotelDrawn = () => {
     setOpenHotelDrawn(false);

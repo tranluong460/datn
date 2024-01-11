@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal, Space, Spin, Switch, message } from "antd";
+import { Button, Form, Input, Modal, Space, Spin, message } from "antd";
 
 import { IAmenities } from "../../../interface";
 import { useUpdateAmenitiesMutation } from "../../../api/amenities";

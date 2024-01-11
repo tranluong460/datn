@@ -78,7 +78,7 @@ const RoomManager = () => {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      render: (status, { quantity }) => (
+      render: ({ quantity }) => (
         <Tag color={quantity > 0 ? "#87d068" : "#f70000"}>{quantity > 0 ? 'Có sẵn' : 'Đã hết phòng'}</Tag>
       ),
     },
