@@ -6,7 +6,6 @@ import { useGetAllPaymentQuery } from "../../../api/payment";
 const DashboardStatsGrid = () => {
   const { data: rooms } = useGetAllRoomQuery('')
   const { data: bookings } = useGetAllBookingQuery('')
-  const { data: user } = useGetAllUserQuery('')
   // Phòng trống
   const emtyRoom = rooms?.data?.filter((room: any) => room.status == 'Có sẵn')
   const totalEmptyRoomQuantity = emtyRoom?.reduce((acc: number, room: any) => {
@@ -18,8 +17,10 @@ const DashboardStatsGrid = () => {
     return acc + (room.quantity || 0);
   }, 0);
   // doanh thu
-  const manager = user?.data?.filter((use: any) => use.role == 'Manager');
-
+  // const paymentRoom = payment?.data?.filter((booking: any) => booking?.status == 'Thành công')
+  const totaPayment = bookedRoom?.reduce((acc: number, room: any) => {
+    return acc + (room.total_price || 0);
+  }, 0);
   return (
     <div className="flex gap-4 w-full">
       <BoxWrapper>
@@ -77,10 +78,13 @@ const DashboardStatsGrid = () => {
         </div>
 
         <div className="pl-4">
-          <span className="text-sm text-gray-500 font-light">Nhân viên</span>
+          <span className="text-sm text-gray-500 font-light">Doanh thu</span>
           <div className="flex  items-center ">
             <strong className="text-xl text-gray-700 font-semibold">
-              {manager?.length}
+              {totaPayment?.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
             </strong>
             {/* <span className="text-sm text-green-500 pl-2">+234</span> */}
           </div>

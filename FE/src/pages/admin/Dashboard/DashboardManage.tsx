@@ -1,5 +1,5 @@
 import {
-  BuyerProfileChart,
+  // BuyerProfileChart,
   DashboardStatsGrid,
   TransactionChart,
   RecentRooms,
@@ -12,7 +12,7 @@ const DashboardManage = () => {
       <DashboardStatsGrid />
       <div className="flex gap-10">
         <TransactionChart />
-        <BuyerProfileChart />
+        {/* <BuyerProfileChart /> */}
       </div>
 
       <div className="flex gap-10">

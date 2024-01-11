@@ -20,7 +20,7 @@ import InfoBookingDrawn from "./admin/Booking/InfoBookingDrawn";
 import RecentRooms from "./admin/Dashboard/Recentlybookedrooms";
 import Roomsheavilybooked from "./admin/Dashboard/Roomsheavilybooked";
 import TransactionChart from "./admin/Dashboard/Reservationchart";
-import BuyerProfileChart from "./admin/Dashboard/Bookerprofilechart";
+// import BuyerProfileChart from "./admin/Dashboard/Bookerprofilechart";
 import DashboardStatsGrid from "./admin/Dashboard/DashboardStatsGrid";
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
@@ -86,7 +86,7 @@ export {
   RecentRooms,
   DashboardStatsGrid,
   TransactionChart,
-  BuyerProfileChart,
+  // BuyerProfileChart,
   InfoBookingCard,
   TwoDrawnBookingRoom,
   InfoBookingDrawn,

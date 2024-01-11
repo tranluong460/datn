@@ -1,93 +1,60 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useGetAllBookingQuery, useGetAllUserQuery } from "../../../api";
 
 const rooms = [
-  {
-    id: "3432",
-    product_name: 'Phòng đôi"',
-    product_thumbnail: "https://source.unsplash.com/100x100?macbook",
-    product_price: "$1499.00",
-    product_stock: 341,
-  },
-  {
-    id: "7633",
-    product_name: "Phòng đơn",
-    product_thumbnail: "https://source.unsplash.com/100x100?earbuds",
-    product_price: "$399.00",
-    product_stock: 24,
-  },
-  {
-    id: "6534",
-    product_name: "Phòng vip",
-    product_thumbnail: "https://source.unsplash.com/100x100?laptop",
-    product_price: "$899.00",
-    product_stock: 56,
-  },
-  {
-    id: "9234",
-    product_name: "Phòng 102",
-    product_thumbnail: "https://source.unsplash.com/100x100?smartphone",
-    product_price: "$499.00",
-    product_stock: 98,
-  },
-  {
-    id: "4314",
-    product_name: "Phòng 999",
-    product_thumbnail: "https://source.unsplash.com/100x100?touchpad",
-    product_price: "$699.00",
-    product_stock: 0,
-  },
-  {
-    id: "4342",
-    product_name: "Phòng 182",
-    product_thumbnail: "https://source.unsplash.com/100x100?earphone",
-    product_price: "$399.00",
-    product_stock: 453,
-  },
+  // ... (Dữ liệu phòng của bạn ở đây)
 ];
 
 function Roomsheavilybooked() {
+  const { data: bookings } = useGetAllBookingQuery('');
+  const [topCustomers, setTopCustomers] = useState([]);
+
+  useEffect(() => {
+    if (bookings && bookings.data) {
+      // Tính tổng số lượng phòng của từng khách hàng
+      const customerBookings = bookings.data.reduce((acc, booking) => {
+        const customerId = booking.id_user?._id; // Thay thế bằng thuộc tính thực tế đại diện cho ID khách hàng
+        const customerName = booking.id_user?.id_information?.name; // Thêm thông tin tên khách hàng
+
+        // Tính tổng số lượng phòng trong đặt hàng
+        const totalRoomsInBooking = booking.list_room.reduce((sum, room) => sum + room.quantity, 0);
+
+        if (!acc[customerId]) {
+          acc[customerId] = {
+            name: customerName,
+            totalRooms: 0,
+          };
+        }
+
+        acc[customerId].totalRooms += totalRoomsInBooking; // Thêm số lượng phòng đặt vào tổng số phòng
+        return acc;
+      }, {});
+
+      // Sắp xếp khách hàng theo số lượng phòng đặt giảm dần
+      const sortedCustomers = Object.keys(customerBookings).sort(
+        (a, b) => customerBookings[b].totalRooms - customerBookings[a].totalRooms
+      );
+
+      // Lấy top 5 khách hàng
+      const top5Customers = sortedCustomers.slice(0, 5);
+
+      setTopCustomers(top5Customers);
+    }
+  }, [bookings]);
+
   return (
     <div className="w-[20rem] bg-white p-4 rounded-sm border border-gray-200">
       <strong className="text-gray-700 font-medium">
-        Phòng được đặt nhiều nhất trong 24 giờ qua
+        Top 5 khách hàng đặt phòng nhiều nhất
       </strong>
       <div className="mt-4 flex flex-col gap-3">
-        {rooms.map((product) => (
-          <Link
-            key={product.id}
-            to={`/product/${product.id}`}
-            className="flex items-start hover:no-underline"
-          >
-            <div className="w-10 h-10 min-w-[2.5rem] bg-gray-200 rounded-sm">
-              <img
-                className="w-full h-full object-cover rounded-sm"
-                src={product.product_thumbnail}
-                alt={product.product_name}
-              />
-            </div>
-            <div className="ml-4 flex-1">
-              <p className="text-sm text-gray-800">{product.product_name}</p>
-              <span
-                className={classNames(
-                  product.product_stock === 0
-                    ? "text-red-500"
-                    : product.product_stock > 50
-                    ? "text-green-500"
-                    : "text-orange-500",
-                  "text-xs font-medium"
-                )}
-              >
-                {product.product_stock === 0
-                  ? "Out of Stock"
-                  : product.product_stock + " in Stock"}
-              </span>
-            </div>
-            <div className="text-xs text-gray-400 pl-1.5">
-              {product.product_price}
-            </div>
-          </Link>
+        {topCustomers.map((customerId) => (
+          <div key={customerId}>
+            <p className="text-sm text-gray-800">{`Khách hàng ${customerId}`}</p>
+            <span className="text-xs font-medium">{`${customerBookings[customerId].totalRooms} phòng đã đặt`}</span>
+          </div>
         ))}
       </div>
     </div>
