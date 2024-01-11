@@ -72,12 +72,15 @@ import TwoDrawnBookingRoom from "./admin/Booking/TwoDrawnBookingRoom";
 import Map from "./client/HotelDetail/Map";
 import Amenities from "./client/HotelDetail/Amenities";
 import NavBarIcon from "./client/NavBar/NavBarIcon";
+import RoomDetailCardProps from "./client/HotelDetail/RoomDetailCardProps";
+
 // import Preferential from "./client/Home/Preferential";
 // import PreferentialCard from "./client/Home/PreferentialCard";
 // import News from "./client/Home/News";
 // import NewsCard from "./client/Home/NewsCard";
 
 export {
+  RoomDetailCardProps,
   InfoBookingCard,
   TwoDrawnBookingRoom,
   InfoBookingDrawn,
