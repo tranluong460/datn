@@ -10,11 +10,12 @@ const rooms = [
 function Roomsheavilybooked() {
   const { data: bookings } = useGetAllBookingQuery('');
   const [topCustomers, setTopCustomers] = useState([]);
+  const bookedRoom = bookings?.data?.filter((booking: any) => booking.status == 'Thành Công')
 
   useEffect(() => {
     if (bookings && bookings.data) {
       // Tính tổng số lượng phòng của từng khách hàng
-      const customerBookings = bookings.data.reduce((acc, booking) => {
+      const customerBookings = bookedRoom.reduce((acc, booking) => {
         const customerId = booking.id_user?._id; // Thay thế bằng thuộc tính thực tế đại diện cho ID khách hàng
         const customerName = booking.id_user?.id_information?.name; // Thêm thông tin tên khách hàng
 
@@ -23,6 +24,7 @@ function Roomsheavilybooked() {
 
         if (!acc[customerId]) {
           acc[customerId] = {
+            id: customerId,
             name: customerName,
             totalRooms: 0,
           };
@@ -33,8 +35,8 @@ function Roomsheavilybooked() {
       }, {});
 
       // Sắp xếp khách hàng theo số lượng phòng đặt giảm dần
-      const sortedCustomers = Object.keys(customerBookings).sort(
-        (a, b) => customerBookings[b].totalRooms - customerBookings[a].totalRooms
+      const sortedCustomers = Object.values(customerBookings).sort(
+        (a: any, b: any) => b.totalRooms - a.totalRooms
       );
 
       // Lấy top 5 khách hàng
@@ -43,7 +45,7 @@ function Roomsheavilybooked() {
       setTopCustomers(top5Customers);
     }
   }, [bookings]);
-
+  console.log(topCustomers);
   return (
     <div className="w-[20rem] bg-white p-4 rounded-sm border border-gray-200">
       <strong className="text-gray-700 font-medium">
@@ -52,8 +54,8 @@ function Roomsheavilybooked() {
       <div className="mt-4 flex flex-col gap-3">
         {topCustomers.map((customerId) => (
           <div key={customerId}>
-            <p className="text-sm text-gray-800">{`Khách hàng ${customerId}`}</p>
-            <span className="text-xs font-medium">{`${customerBookings[customerId].totalRooms} phòng đã đặt`}</span>
+            <p className="text-sm text-gray-800">{`Khách hàng ${customerId?.name}`}</p>
+            <span className="text-xs font-medium">{`${customerId?.totalRooms} phòng đã đặt`}</span>
           </div>
         ))}
       </div>
