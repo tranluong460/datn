@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Bar,
   BarChart,
@@ -9,13 +9,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useGetAllPaymentQuery } from "../../../api/payment";
 import { useGetAllBookingQuery } from "../../../api";
 
-// const { data: payment } = useGetAllPaymentQuery('')
-
-
-// const data = [
 //   {
 //     name: "Tháng 1",
 //     DoanhThu: 4000,
@@ -98,7 +93,7 @@ function TransactionChart() {
         return acc;
       }, {});
 
-      const newChartData = Object.keys(totalRevenueByMonth).map((month) => ({
+      const newChartData: any = Object.keys(totalRevenueByMonth).map((month) => ({
         name: `Tháng ${month}`,
         DoanhThu: totalRevenueByMonth[month],
       }));
@@ -141,7 +136,7 @@ function TransactionChart() {
               bottom: 0,
             }}
           >
-            <CartesianGrid strokeDashrray="3 3 0 0" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />

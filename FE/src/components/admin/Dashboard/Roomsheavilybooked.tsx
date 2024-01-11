@@ -1,11 +1,7 @@
-import classNames from "classnames";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useGetAllBookingQuery, useGetAllUserQuery } from "../../../api";
+import { useEffect, useState } from "react";
+import { useGetAllBookingQuery } from "../../../api";
 
-const rooms = [
-  // ... (Dữ liệu phòng của bạn ở đây)
-];
+
 
 function Roomsheavilybooked() {
   const { data: bookings } = useGetAllBookingQuery('');
@@ -15,12 +11,12 @@ function Roomsheavilybooked() {
   useEffect(() => {
     if (bookings && bookings.data) {
       // Tính tổng số lượng phòng của từng khách hàng
-      const customerBookings = bookedRoom.reduce((acc, booking) => {
+      const customerBookings = bookedRoom.reduce((acc: any, booking: any) => {
         const customerId = booking.id_user?._id; // Thay thế bằng thuộc tính thực tế đại diện cho ID khách hàng
         const customerName = booking.id_user?.id_information?.name; // Thêm thông tin tên khách hàng
 
         // Tính tổng số lượng phòng trong đặt hàng
-        const totalRoomsInBooking = booking.list_room.reduce((sum, room) => sum + room.quantity, 0);
+        const totalRoomsInBooking = booking.list_room.reduce((sum: any, room: any) => sum + room.quantity, 0);
 
         if (!acc[customerId]) {
           acc[customerId] = {
@@ -35,7 +31,7 @@ function Roomsheavilybooked() {
       }, {});
 
       // Sắp xếp khách hàng theo số lượng phòng đặt giảm dần
-      const sortedCustomers = Object.values(customerBookings).sort(
+      const sortedCustomers: any = Object.values(customerBookings).sort(
         (a: any, b: any) => b.totalRooms - a.totalRooms
       );
 
@@ -52,10 +48,14 @@ function Roomsheavilybooked() {
         Top 5 khách hàng đặt phòng nhiều nhất
       </strong>
       <div className="mt-4 flex flex-col gap-3">
-        {topCustomers.map((customerId) => (
-          <div key={customerId}>
-            <p className="text-sm text-gray-800">{`Khách hàng ${customerId?.name}`}</p>
-            <span className="text-xs font-medium">{`${customerId?.totalRooms} phòng đã đặt`}</span>
+        {topCustomers.map((product: any) => (
+          <div key={product.id} className="customer-info-border">
+            <div className="flex">
+              <p className="text-sm text-gray-800">Tên khách hàng: {product.name}</p>
+              <div className="text-gray-800 ml-6">
+                Số lượng: {product.totalRooms}
+              </div>
+            </div>
           </div>
         ))}
       </div>

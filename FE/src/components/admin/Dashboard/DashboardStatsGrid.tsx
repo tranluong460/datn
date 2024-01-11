@@ -1,7 +1,5 @@
-import React from "react";
 import { IoBagHandle } from "react-icons/io5";
-import { useGetAllBookingQuery, useGetAllRoomQuery, useGetAllUserQuery } from "../../../api";
-import { useGetAllPaymentQuery } from "../../../api/payment";
+import { useGetAllBookingQuery, useGetAllRoomQuery } from "../../../api";
 
 const DashboardStatsGrid = () => {
   const { data: rooms } = useGetAllRoomQuery('')
