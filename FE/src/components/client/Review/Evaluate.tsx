@@ -25,9 +25,13 @@ const Evaluate = (props: Props) => {
     setShowForm(false);
   };
 
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
   return (
     <div className="relative">
-      <div className="mt-10 max-w-[300px] py-[10px] px-[58px] text-center rounded-md text-[#ffffff]  bg-[#1982f9]">
+      <div className="mt-10 max-w-[300px] py-4 px-8 text-center rounded-md text-white bg-[#1982f9]">
         <button
           className="flex gap-2 items-center"
           onClick={handleReviewButtonClick}
@@ -37,40 +41,50 @@ const Evaluate = (props: Props) => {
       </div>
 
       {showForm && (
-        <div className=" top-40 left-1/2 fixed z-40">
-          <button className="relative right-0 top-0 z-50">
-            <AiOutlineClose />
-          </button>
-          <form className="   transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-md shadow-md">
-            <span className="flex  gap-2">
-              Đánh giá của bạn về: <p className="font-bold">Khách sạn Hà Nội</p>
-            </span>
-            <span>
-              <p className="font-bold">
-                Mức độ đánh giá:
-                <Space>
-                  <Rate tooltips={desc} onChange={setValue} value={value} />
-                  {value ? <span>{desc[value - 1]}</span> : ""}
-                </Space>
-              </p>
-            </span>
-
-            <div className="flex flex-col">
-              <span>Đánh giá</span>
-              <input
-                type="text"
-                placeholder="Ví dụ: Khách sạn có dịch vụ rất tốt và đẹp"
-                className="py-3 bg-blue-400"
-              />
-            </div>
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-black opacity-50"
+            onClick={handleCloseForm}
+          ></div>
+          <div className="relative bg-white p-8 rounded-md shadow-md">
             <button
-              type="button"
-              onClick={handleSubmitReview}
-              className="float-right text-[#ffffff]  bg-[#e30019] px-[18px] py-[12px] rounded-[4px] text-[14px] font-[500]"
+              className="absolute top-0 right-0 p-2 text-gray-600"
+              onClick={handleCloseForm}
             >
-              Gửi đánh giá
+              <AiOutlineClose />
             </button>
-          </form>
+            <form className="w-80 mx-auto">
+              <span className="flex gap-2">
+                Đánh giá của bạn về:
+                <p className="font-bold">Khách sạn Hà Nội</p>
+              </span>
+              <span>
+                <p className="font-bold flex flex-col">
+                  Mức độ đánh giá:
+                  <Space>
+                    <Rate tooltips={desc} onChange={setValue} value={value} />
+                    {value ? <span>{desc[value - 1]}</span> : ""}
+                  </Space>
+                </p>
+              </span>
+
+              <div className="flex flex-col mt-4">
+                <span>Đánh giá</span>
+                <textarea
+                  placeholder="Ví dụ: Khách sạn có dịch vụ rất tốt và đẹp"
+                  className="py-3 px-4 bg-gray-100 rounded-md w-full"
+                  rows={4}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={handleSubmitReview}
+                className="mt-4 w-full bg-[#e30019] text-white px-4 py-2 rounded-md font-bold"
+              >
+                Gửi đánh giá
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
