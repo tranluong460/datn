@@ -21,27 +21,12 @@ export const reviewApi = createApi({
       providesTags: ["Review"],
     }),
     createReview: builder.mutation({
-      query: (data) => {
-        const formData = new FormData();
-
-        Object.keys(data).forEach((key) => {
-          if (key === "images" && Array.isArray(data[key])) {
-            // eslint-disable-next-line
-            data[key].forEach((file: any, index: number) => {
-              formData.append(`images[${index}]`, file.originFileObj);
-            });
-          } else {
-            formData.append(key, data[key]);
-          }
-        });
-
-        return {
-          url: `review`,
-          method: "POST",
-          body: formData,
-          credentials: "include",
-        };
-      },
+      query: (data) => ({
+        url: `review`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
       invalidatesTags: ["Review"],
     }),
     updateReview: builder.mutation({

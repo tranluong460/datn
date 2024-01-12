@@ -1,8 +1,7 @@
 import { Rate, Space } from "antd";
 import React, { useState } from "react";
 import { AiOutlineClose, AiTwotoneStar } from "react-icons/ai";
-
-type Props = {};
+import { useCreateReviewMutation } from "../../../api";
 
 const desc = [
   "Rất không hài lòng",
@@ -12,7 +11,7 @@ const desc = [
   "Xuất sắc",
 ];
 
-const Evaluate = (props: Props) => {
+const Evaluate = () => {
   const [value, setValue] = useState(3);
   const [showForm, setShowForm] = useState(false);
 
