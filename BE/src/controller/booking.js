@@ -23,7 +23,22 @@ export const getAll = async (req, res) => {
       query.status = req.query.status;
     }
 
-    const bookingList = await BookingModel.find(query).populate("id_user");
+    const bookingList = await BookingModel.find(query).populate({
+      path: "id_user",
+      populate: {
+        path: 'id_information',
+        model: 'Information',
+      },
+    }).populate({
+      path: "list_room",
+      populate: {
+        path: "idRoom",
+        populate: {
+          path: "id_roomType",
+          model: "RoomType" // Thay "RoomTypeModel" bằng tên của model RoomType
+        }
+      }
+    });
 
     if (!bookingList || bookingList.length === 0) {
       return sendResponse(res, 200, "Không có danh sách đặt phòng", []);
