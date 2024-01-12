@@ -1,19 +1,20 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Popconfirm, Space, Table, Tag, message } from "antd";
+import { Button, Select, Space, Table, message } from "antd";
 
 import { IAmenities } from "../../../interface";
 import { CreateAmenitiesModal, EditAmenitiesModal } from "../../../components";
 import {
-  useDeleteAmenitiesMutation,
+  // useDeleteAmenitiesMutation,
   useGetAllAmenitiesQuery,
   useGetOneAmenitiesQuery,
+  useUpdateAmenitiesMutation,
 } from "../../../api";
 
 const AmenitiesManager = () => {
-  const key0 = "deleteAmenitiesMutation";
-  const [messageApi, contextHolder] = message.useMessage();
+  // const key0 = "deleteAmenitiesMutation";
+  const [contextHolder] = message.useMessage();
 
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -22,35 +23,45 @@ const AmenitiesManager = () => {
   const { data, isLoading } = useGetAllAmenitiesQuery("");
   const { data: dataOneAmenities, isFetching } =
     useGetOneAmenitiesQuery(idAmenities);
-  const [deleteAmenities] = useDeleteAmenitiesMutation();
+  const [editAmenities] = useUpdateAmenitiesMutation()
+  // const [deleteAmenities] = useDeleteAmenitiesMutation();
 
-  const onDelete = (id: string) => {
-    messageApi.open({
-      key: key0,
-      type: "loading",
-      content: "Loading...",
-    });
+  // const onDelete = (id: string) => {
+  //   messageApi.open({
+  //     key: key0,
+  //     type: "loading",
+  //     content: "Loading...",
+  //   });
 
-    deleteAmenities(id)
+  //   deleteAmenities(id)
+  //     .unwrap()
+  //     .then((response) => {
+  //       messageApi.open({
+  //         key: key0,
+  //         type: "success",
+  //         content: response.message,
+  //         duration: 2,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       messageApi.open({
+  //         key: key0,
+  //         type: "error",
+  //         content: error.data.message,
+  //         duration: 2,
+  //       });
+  //     });
+  // };
+  const handleChange = (value: string) => {
+    editAmenities({ status: value, _id: idAmenities, })
       .unwrap()
-      .then((response) => {
-        messageApi.open({
-          key: key0,
-          type: "success",
-          content: response.message,
-          duration: 2,
-        });
+      .then(() => {
+        message.success('Cập nhật trạng thái thành công');
       })
       .catch((error) => {
-        messageApi.open({
-          key: key0,
-          type: "error",
-          content: error.data.message,
-          duration: 2,
-        });
+        message.error(error.data.message);
       });
   };
-
   const columns: ColumnsType<IAmenities> = [
     {
       title: "ID",
@@ -74,10 +85,28 @@ const AmenitiesManager = () => {
                 <div>
                   {index + 1}. {item.name}
                 </div>
-                {item.surcharge && <Tag>Phụ phí</Tag>}
+                {/* {item.surcharge && <Tag>Phụ phí</Tag>} */}
               </Space>
             )
           )}
+        </Space>
+      ),
+    },
+    {
+      title: "Trạng thái",
+      key: "status",
+      render: ({ _id, status }) => (
+        <Space wrap>
+          <Select
+            defaultValue={status}
+            style={{ width: 120 }}
+            onChange={(value) => handleChange(value)}
+            onClick={() => setIdAmenities(_id)}
+            options={[
+              { value: 'Đang áp dụng', label: 'Đang áp dụng' },
+              { value: 'Không được áp dụng', label: 'Không được áp dụng' },
+            ]}
+          />
         </Space>
       ),
     },
@@ -96,7 +125,7 @@ const AmenitiesManager = () => {
               Sửa
             </Button>
 
-            <Popconfirm
+            {/* <Popconfirm
               placement="left"
               title="Bạn có chắc chắn muốn xóa tiện ích này không?"
               description="Hành động này không thể hoàn tác."
@@ -106,7 +135,7 @@ const AmenitiesManager = () => {
               cancelText="Hủy"
             >
               <Button danger>Xóa</Button>
-            </Popconfirm>
+            </Popconfirm> */}
           </Space>
         </>
       ),

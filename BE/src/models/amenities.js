@@ -13,13 +13,14 @@ const amenitiesSchema = new mongoose.Schema(
           type: String,
           required: false,
         },
-        surcharge: {
-          type: Boolean,
-          default: false,
-          required: false,
-        },
+
       },
     ],
+    status: {
+      type: String,
+      enum: ['Đang áp dụng', 'Không được áp dụng'],
+      default: 'Đang áp dụng'
+    }
   },
   { versionKey: false, timestamps: true }
 );

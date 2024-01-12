@@ -51,9 +51,7 @@ export const hotelApi = createApi({
     updateHotel: builder.mutation({
       query: (data) => {
         const { _id, ...newData } = data;
-
         const formData = new FormData();
-
         Object.keys(newData).forEach((key) => {
           if (key === "images" && Array.isArray(data[key])) {
             // eslint-disable-next-line
