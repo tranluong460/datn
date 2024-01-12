@@ -5,10 +5,13 @@ import {
   vnPayPaymentReturn,
   createOrderZaloPay,
   checkStatusZaloPay,
+  getAll,
 } from "../controller/payment";
+import { isAdminMiddleware } from "../middleware";
 
 const router = express.Router();
 
+router.get('/', isAdminMiddleware, getAll)
 router.post("/vnPay", vnPayPayment);
 router.get("/vnPay-return", vnPayPaymentReturn);
 router.post("/create-order-zaloPay", createOrderZaloPay);

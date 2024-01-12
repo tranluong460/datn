@@ -273,3 +273,16 @@ export const checkStatusZaloPay = async (req, res) => {
     return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };
+
+export const getAll = async (req, res) => {
+  try {
+    const data = await PaymentModel.find()
+      .populate('id_booking')
+    if (data.length < 0) {
+      return sendResponse(res, 404, 'Không lấy được dữ liệu')
+    }
+    return sendResponse(res, 200, 'Lấy dữ liệu thành công', data)
+  } catch (error) {
+    return sendResponse(res, 500, 'Lỗi server')
+  }
+}

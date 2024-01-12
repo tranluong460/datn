@@ -10,6 +10,7 @@ import {
   roomTypeApi,
   userApi,
 } from "../api";
+import { paymentApi } from "../api/payment";
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     [roomApi.reducerPath]: roomApi.reducer,
     [provincesApi.reducerPath]: provincesApi.reducer,
     [bookingApi.reducerPath]: bookingApi.reducer,
+    [paymentApi.reducerPath]: paymentApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({})
@@ -31,5 +33,6 @@ export const store = configureStore({
       .concat(roomTypeApi.middleware)
       .concat(roomApi.middleware)
       .concat(provincesApi.middleware)
-      .concat(bookingApi.middleware),
+      .concat(bookingApi.middleware)
+      .concat(paymentApi.middleware),
 });
