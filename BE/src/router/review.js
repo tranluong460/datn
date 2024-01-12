@@ -5,9 +5,9 @@ import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
 const router = express.Router();
 
-router.get("/", isAdminMiddleware, getAll);
-router.get("/:id", isAdminMiddleware, getOne);
-router.post("/", loginMiddleware, create);
+router.get("/", getAll);
+router.get("/:id", getOne);
+router.post("/", create); // loginMiddleware
 router.delete("/:id", loginMiddleware, remove);
 
 export default router;

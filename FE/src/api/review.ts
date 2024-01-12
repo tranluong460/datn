@@ -2,25 +2,25 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
 
 export const reviewApi = createApi({
-  reducerPath: "roomApi",
-  tagTypes: ["Room"],
+  reducerPath: "reviewApi",
+  tagTypes: ["Review"],
   baseQuery: customFetchBase,
   endpoints: (builder) => ({
-    getAllRoom: builder.query({
+    getAllReview: builder.query({
       query: () => ({
-        url: "room",
+        url: "review",
         method: "GET",
       }),
-      providesTags: ["Room"],
+      providesTags: ["Review"],
     }),
-    getOneRoom: builder.query({
+    getOneReview: builder.query({
       query: (id: string) => ({
-        url: `room/${id}`,
+        url: `review/${id}`,
         method: "GET",
       }),
-      providesTags: ["Room"],
+      providesTags: ["Review"],
     }),
-    createRoom: builder.mutation({
+    createReview: builder.mutation({
       query: (data) => {
         const formData = new FormData();
 
@@ -36,15 +36,15 @@ export const reviewApi = createApi({
         });
 
         return {
-          url: `room`,
+          url: `review`,
           method: "POST",
           body: formData,
           credentials: "include",
         };
       },
-      invalidatesTags: ["Room"],
+      invalidatesTags: ["Review"],
     }),
-    updateRoom: builder.mutation({
+    updateReview: builder.mutation({
       query: (data) => {
         const { _id, ...newData } = data;
 
@@ -62,20 +62,29 @@ export const reviewApi = createApi({
         });
 
         return {
-          url: `room/${_id}`,
+          url: `review/${_id}`,
           method: "PATCH",
           body: formData,
           credentials: "include",
         };
       },
-      invalidatesTags: ["Room"],
+      invalidatesTags: ["Review"],
+    }),
+    deleteReview: builder.mutation({
+      query: (id: string) => ({
+        url: `review/${id}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+      invalidatesTags: ["Review"],
     }),
   }),
 });
 
 export const {
-  useGetAllRoomQuery,
-  useGetOneRoomQuery,
-  useCreateRoomMutation,
-  useUpdateRoomMutation,
-} = roomApi;
+  useGetAllReviewQuery,
+  useGetOneReviewQuery,
+  useCreateReviewMutation,
+  useUpdateReviewMutation,
+  useDeleteReviewMutation,
+} = reviewApi;
