@@ -4,12 +4,14 @@ import {
   RoomList,
   Map,
   Amenities,
+  RoomDetailCardProps,
 } from "../../../components";
 import { useGetOneHotelQuery } from "../../../api";
 import { Loading } from "../..";
 import { useParams } from "react-router-dom";
 import { Result } from "antd";
 import Review from "../Review/Review";
+import { useState } from "react";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string | undefined }>();
@@ -51,7 +53,7 @@ const HotelDetailPage = () => {
       <div className="p-5 bg-divideLight dark:bg-divideDark py-10">
         <div className="max-w-[2520px] mx-auto xl:px-6 md:px-10 sm:px-2 px-4">
           <div className="flex flex-col mb-4">
-            <h2 className="font-lato translate-x-10 uppercase font-semibold text-2xl leading-7 pl-10 text-textLight dark:text-textDark">
+            <h2 className="font-lato uppercase font-semibold text-2xl leading-7 text-textLight dark:text-textDark">
               Các loại phòng
             </h2>
             <RoomList listRoom={data?.data?.id_room} />

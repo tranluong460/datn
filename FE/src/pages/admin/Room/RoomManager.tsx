@@ -51,7 +51,7 @@ const RoomManager = () => {
               setIdRoom(_id);
             }}
           >
-            {id_roomType.name}
+            {id_roomType?.name}
           </button>
         </Tooltip>
       ),
@@ -78,8 +78,8 @@ const RoomManager = () => {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      render: (status, { quantity }) => (
-        <Tag color={quantity > 0 ? "#87d068" : "#f70000"}>{status}</Tag>
+      render: ({ quantity }) => (
+        <Tag color={quantity > 0 ? "#87d068" : "#f70000"}>{quantity > 0 ? 'Có sẵn' : 'Đã hết phòng'}</Tag>
       ),
     },
     {

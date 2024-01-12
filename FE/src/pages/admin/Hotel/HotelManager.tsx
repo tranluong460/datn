@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Space, Table, Tag, Tooltip } from "antd";
+import { Button, Select, Space, Table, Tooltip, message } from "antd";
 
 import { IHotel } from "../../../interface";
-import { useGetAllHotelQuery, useGetOneHotelQuery } from "../../../api";
+import { useGetAllHotelQuery, useGetOneHotelQuery, useUpdateHotelMutation } from "../../../api";
 import {
   CreateHotelModal,
   EditHotelModal,
@@ -21,9 +21,20 @@ const HotelManager = () => {
 
   const { data: allHotel, isLoading } = useGetAllHotelQuery("");
   const { data: oneHotel, isFetching } = useGetOneHotelQuery(idHotelEdit);
+  const [editHotel] = useUpdateHotelMutation();
 
   const onClosedHotelDrawn = () => {
     setOpenHotelDrawn(false);
+  };
+  const handleChange = (value: string) => {
+    editHotel({ status: value, _id: idHotelEdit, })
+      .unwrap()
+      .then(() => {
+        message.success('Cập nhật trạng thái thành công');
+      })
+      .catch((error) => {
+        message.error(error.data.message);
+      });
   };
 
   const columns: ColumnsType<IHotel> = [
@@ -53,10 +64,25 @@ const HotelManager = () => {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      render: (status) => (
-        <Tag color={status === "Đang hoạt động" ? "#87d068" : "#f70000"}>
-          {status}
-        </Tag>
+      render: (_, { _id, status }) => (
+        // <Tag color={status === "Đang hoạt động" ? "#87d068" : "#f70000"}>
+        //   {status}
+        // </Tag>
+        <Space wrap>
+          <Select
+            defaultValue={status}
+            style={{ width: 120 }}
+            onChange={(value) => handleChange(value)}
+            onClick={() => setIdHotelEdit(_id)}
+            options={[
+              { value: 'Đang hoạt động', label: 'Đang hoạt động' },
+              { value: 'Đã đóng cửa', label: 'Đã đóng cửa' },
+              { value: 'Đang sửa', label: 'Đang sửa' },
+              { value: 'Hết chỗ', label: 'Hết chỗ' },
+              { value: 'Ngừng hoạt động', label: 'Ngừng hoạt động' },
+            ]}
+          />
+        </Space>
       ),
     },
     {
