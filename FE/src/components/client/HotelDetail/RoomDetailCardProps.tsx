@@ -1,0 +1,52 @@
+import { IRoom } from "../../../interface";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import RoomAmenities from "./RoomAmenities";
+
+type RoomDetailCardProps = {
+  room: IRoom;
+  onCloseDetail: () => void;
+};
+
+const RoomDetailCard = ({ room, onCloseDetail }: RoomDetailCardProps) => {
+  console.log("🚀 ~ RoomDetailCard ~ room:", room);
+  return (
+    <>
+      <div className="flex w-[1000px]">
+        <div className="flex flex-col bg-[#98999b]">
+          <div className="w-[590px] relative">
+            <img src={`${room?.images[0].url}`} />
+            <span className="bottom-0 pl-3 py-2 bg-[black] absolute opacity-40 w-full text-[white] font-bold">
+              {room?.id_roomType?.name}
+            </span>
+          </div>
+          <div className="flex w-[140px] p-3 gap-3 border-none">
+            {room?.images.map((img) => (
+              <img src={img.url} alt="" />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2 ml-3 pb-22">
+          <h1 className="border-b font-[500] mt-4 pb-3">
+            Phòng {room?.id_roomType?.name}
+          </h1>
+          <span className="text-[13px] mt-3">{room?.description}</span>
+          <div className="mt-10">
+            <span className="font-[500]">Tiện nghi của phòng</span>
+            <div>
+              <RoomAmenities amenities={room?.id_amenities} />
+            </div>
+          </div>
+        </div>
+
+        <button onClick={onCloseDetail}>
+          <AiOutlineCloseCircle
+            className={`text-[30px] absolute top-3 right-4 bg-white`}
+          />
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default RoomDetailCard;

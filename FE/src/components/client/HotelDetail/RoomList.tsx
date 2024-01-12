@@ -2,12 +2,23 @@ import { Container, RoomCard } from "../..";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { IRoom } from "../../../interface";
 import { useState } from "react";
+import RoomDetailCard from "./RoomDetailCardProps";
 
 type RoomListProps = {
   listRoom: IRoom[];
 };
 
 const RoomList = ({ listRoom }: RoomListProps) => {
+  const [selectedRoom, setSelectedRoom] = useState<IRoom | null>(null);
+
+  const openRoomDetail = (room: IRoom) => {
+    setSelectedRoom(room);
+  };
+
+  const closeRoomDetail = () => {
+    setSelectedRoom(null);
+  };
+
   const [startIndex, setStartIndex] = useState(0);
 
   const nextRooms = () => {
@@ -28,8 +39,8 @@ const RoomList = ({ listRoom }: RoomListProps) => {
     <>
       <div className="w-full mt-5 relative">
         <Container>
-          <div className="relative ">
-            <div className="grid grid-cols-3 gap-4 transition-transform duration-500 ease-in-out overflow-hidden">
+          <div className="relative">
+            <div className="grid grid-cols-1 gap-4 transition-transform duration-500 ease-in-out overflow-hidden md:grid-cols-3">
               {listRoom.length > 0 ? (
                 listRoom
                   .slice(startIndex, startIndex + 3)
@@ -38,15 +49,18 @@ const RoomList = ({ listRoom }: RoomListProps) => {
                       key={room?._id}
                       className={`relative ${index === 1 ? "z-10" : ""}`}
                     >
-                      <RoomCard room={room} />
+                      <RoomCard
+                        room={room}
+                        onOpenDetail={() => openRoomDetail(room)}
+                      />
                     </div>
                   ))
               ) : (
                 <p>Chưa có thông tin phòng</p>
               )}
               {showArrows && (
-                <div>
-                  <div className="absolute top-1/2 transform -translate-y-1/2 flex items-center ">
+                <div className="hidden md:block">
+                  <div className="absolute top-1/2 transform -translate-y-1/2 flex items-center">
                     <button
                       onClick={prevRooms}
                       disabled={startIndex === 0}
@@ -76,6 +90,17 @@ const RoomList = ({ listRoom }: RoomListProps) => {
           </div>
         </Container>
       </div>
+
+      {selectedRoom && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-md">
+            <RoomDetailCard
+              room={selectedRoom}
+              onCloseDetail={closeRoomDetail}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
