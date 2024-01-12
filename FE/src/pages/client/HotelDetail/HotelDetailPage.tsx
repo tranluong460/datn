@@ -9,6 +9,7 @@ import { useGetOneHotelQuery } from "../../../api";
 import { Loading } from "../..";
 import { useParams } from "react-router-dom";
 import { Result } from "antd";
+import Review from "../Review/Review";
 
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string | undefined }>();
@@ -53,11 +54,11 @@ const HotelDetailPage = () => {
             <h2 className="font-lato translate-x-10 uppercase font-semibold text-2xl leading-7 pl-10 text-textLight dark:text-textDark">
               Các loại phòng
             </h2>
-
             <RoomList listRoom={data?.data?.id_room} />
           </div>
         </div>
       </div>
+      <Review />
       <Amenities amenities={data?.data?.id_amenities} />
       <Map />
     </>

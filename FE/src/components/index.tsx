@@ -24,6 +24,8 @@ import Sidebar from "./auth/Sidebar";
 
 // Client
 import Footer from "./client/Footer/Footer";
+import ReviewInput from "./client/Review/ReviewInput";
+import Comment from "./client/Review/Comment";
 // import Attractive from "./client/Home/Attractive";
 // import AttractiveCard from "./client/Home/AttractiveCard";
 import Experience from "./client/Home/Experience";
@@ -78,6 +80,8 @@ import NavBarIcon from "./client/NavBar/NavBarIcon";
 // import NewsCard from "./client/Home/NewsCard";
 
 export {
+  ReviewInput,
+  Comment,
   InfoBookingCard,
   TwoDrawnBookingRoom,
   InfoBookingDrawn,
