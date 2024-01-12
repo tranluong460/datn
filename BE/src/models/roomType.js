@@ -6,6 +6,11 @@ const roomTypeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ['Đang áp dụng', 'Không được áp dụng'],
+      default: 'Đang áp dụng'
+    }
   },
   { timestamps: true, versionKey: false }
 );

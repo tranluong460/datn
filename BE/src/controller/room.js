@@ -128,30 +128,30 @@ export const update = async (req, res) => {
   }
 
   try {
-    validateFormMiddleware(req, res, RoomValidate, async () => {
-      const newImages = await Promise.all(
-        req.fields.images.map(uploadImageToCloudinary)
-      );
+    // validateFormMiddleware(req, res, RoomValidate, async () => {
+    const newImages = await Promise.all(
+      req.fields.images.map(uploadImageToCloudinary)
+    );
 
-      const images = newImages.map((imageUrl, index) => ({
-        url: imageUrl,
-      }));
+    const images = newImages.map((imageUrl, index) => ({
+      url: imageUrl,
+    }));
 
-      const newData = {
-        ...req.fields,
-        images,
-      };
+    const newData = {
+      ...req.fields,
+      images,
+    };
 
-      const data = await RoomModel.findByIdAndUpdate(req.params.id, newData, {
-        new: true,
-      });
-
-      if (!data) {
-        return sendResponse(res, 404, "Cập nhật phòng thất bại");
-      }
-
-      return sendResponse(res, 200, "Cập nhật phòng thành công", data);
+    const data = await RoomModel.findByIdAndUpdate(req.params.id, newData, {
+      new: true,
     });
+
+    if (!data) {
+      return sendResponse(res, 404, "Cập nhật phòng thất bại");
+    }
+
+    return sendResponse(res, 200, "Cập nhật phòng thành công", data);
+    // });
   } catch (error) {
     console.error(error);
 
