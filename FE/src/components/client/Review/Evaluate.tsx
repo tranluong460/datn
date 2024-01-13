@@ -12,17 +12,23 @@ const desc = [
 ];
 
 const Evaluate = (datahotel: any) => {
-  const [createReview, { isLoading }] = useCreateReviewMutation();
-  const [value, setValue] = useState(3);
+  const [createReview] = useCreateReviewMutation();
+  const [value, setValue] = useState(5);
   const [showForm, setShowForm] = useState(false);
   const [reviewText, setReviewText] = useState("");
+  const [error, setError] = useState("");
   const handleReviewButtonClick = () => {
     setShowForm(true);
   };
 
-  const handleSubmitReview = async (event: any) => {
+  const handleSubmitReview = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
-    console.log("test thêm commment", event);
+    if (!reviewText || value < 1) {
+      setError("Vui lòng nhập đánh giá và chọn mức độ đánh giá.");
+      return;
+    }
     try {
       await createReview({
         rating: value,
@@ -30,8 +36,11 @@ const Evaluate = (datahotel: any) => {
         id_hotel: datahotel?.id_hotel?._id,
       }).unwrap();
       setShowForm(false);
+      setValue(0);
+      setReviewText("");
+      setError("");
     } catch (error) {
-      console.error(error);
+      setError("Đã có lỗi xảy ra khi gửi đánh giá.");
     }
   };
 
@@ -51,7 +60,7 @@ const Evaluate = (datahotel: any) => {
       </div>
 
       {showForm && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+        <div className=" fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 shadow-xl">
           <div
             className="fixed top-0 left-0 w-full h-full bg-black opacity-50"
             onClick={handleCloseForm}
@@ -63,10 +72,10 @@ const Evaluate = (datahotel: any) => {
             >
               <AiOutlineClose />
             </button>
-            <form className="w-80 mx-auto " onSubmit={handleSubmitReview}>
+            <form className="w-80 mx-auto ">
               <span className="flex gap-2">
                 Đánh giá của bạn về:
-                <p className="font-bold">Khách sạn Hà Nội</p>
+                <p className="font-bold">{datahotel.id_hotel.name}</p>
               </span>
               <span>
                 <p className="font-bold flex flex-col">
@@ -87,6 +96,7 @@ const Evaluate = (datahotel: any) => {
                   value={reviewText}
                   onChange={(e) => setReviewText(e.target.value)}
                 />
+                {error && <p className="text-red-500">{error}</p>}
               </div>
               <button
                 type="button"
