@@ -13,6 +13,7 @@ type InfoHotelProps = {
 
 const InfoHotel = ({ name, address, email, phone }: InfoHotelProps) => {
   const calendarRangerModal = useCalendarRangerModal();
+  const hi = 5;
 
   return (
     <>
@@ -55,7 +56,7 @@ const InfoHotel = ({ name, address, email, phone }: InfoHotelProps) => {
 
               <Rate
                 disabled
-                value={3}
+                value={hi}
                 className="text-yellow-400 dark:text-yellow-500"
               />
             </div>

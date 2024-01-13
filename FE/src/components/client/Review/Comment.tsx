@@ -1,4 +1,4 @@
-import { AiOutlineStar } from "react-icons/ai";
+import { Rate } from "antd";
 
 const Comment = (Data: any) => {
   const totalRating = Data?.data.reduce(
@@ -15,8 +15,8 @@ const Comment = (Data: any) => {
       <div className="flex flex-col items-center gap-2">
         <p className="text-[#e30019] text-4xl font-semibold leading-[56px] text-left flex items-center gap-1">
           {averageRating}/5
-          <AiOutlineStar className="text-[#ffd700]" />
         </p>
+        <Rate allowHalf disabled value={averageRating} />
         <span className="flex gap-1 justify-between">
           <p
             className="flex gap-1 items-center text-[

@@ -2,7 +2,7 @@ import { Rate, Space } from "antd";
 import React, { useState } from "react";
 import { AiOutlineClose, AiTwotoneStar } from "react-icons/ai";
 import { useCreateReviewMutation } from "../../../api";
-
+import { Button, Result } from "antd";
 const desc = [
   "Rất không hài lòng",
   "Không hài lòng",
@@ -39,8 +39,8 @@ const Evaluate = (datahotel: any) => {
       setValue(0);
       setReviewText("");
       setError("");
-    } catch (error) {
-      setError("Đã có lỗi xảy ra khi gửi đánh giá.");
+    } catch (error: any) {
+      setError(error?.data.message);
     }
   };
 
