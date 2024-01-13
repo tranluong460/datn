@@ -7,7 +7,10 @@ import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
-    const reviewList = await ReviewModel.find();
+    const reviewList = await ReviewModel.find().populate({
+      path: "id_user",
+      select: "_id email",
+    });
 
     if (!reviewList || reviewList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách bình luận");

@@ -4,8 +4,8 @@ import Evaluate from "../../../components/client/Review/Evaluate";
 import { useGetAllReviewQuery } from "../../../api";
 
 const Review = ({ dataHotel }: any) => {
-  console.log("🚀 ~ Review ~ dataHotel:", dataHotel.name);
   const { data } = useGetAllReviewQuery();
+  console.log("🚀 ~ Review ~ data:", data);
   const [Data, setData] = useState([]);
 
   useEffect(() => {
