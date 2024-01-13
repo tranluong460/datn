@@ -38,7 +38,7 @@ export const roomTypeApi = createApi({
       invalidatesTags: ["RoomType"],
     }),
     updateRoomType: builder.mutation({
-      query: (data) => {
+      query: (data: any) => {
         const { _id, ...newData } = data;
         return {
           url: `room-type/${_id}`,
