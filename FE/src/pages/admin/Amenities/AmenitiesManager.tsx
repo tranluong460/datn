@@ -157,7 +157,7 @@ const AmenitiesManager = () => {
 
   return (
     <>
-      {contextHolder}
+      {/* {contextHolder} */}
 
       <Table
         title={() => (
