@@ -13,10 +13,9 @@ type Comment = {
 const ReviewInput = ({ data }: any) => {
   return (
     <>
-      {data?.map((comment: any) => {
-        console.log("ddd", comment);
+      {data?.map((comment: any, index: number) => {
         return (
-          <div className="border-b py-4">
+          <div className="border-b py-4" key={index}>
             <div className="flex gap-4">
               <span className="font-bold">{comment?.id_user}</span>
               <span>{moment(comment?.createdAt).format("DD-MM-YYYY")}</span>

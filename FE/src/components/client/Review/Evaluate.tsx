@@ -11,17 +11,28 @@ const desc = [
   "Xuất sắc",
 ];
 
-const Evaluate = () => {
+const Evaluate = (datahotel: any) => {
+  const [createReview, { isLoading }] = useCreateReviewMutation();
   const [value, setValue] = useState(3);
   const [showForm, setShowForm] = useState(false);
-
+  const [reviewText, setReviewText] = useState("");
   const handleReviewButtonClick = () => {
     setShowForm(true);
   };
 
-  const handleSubmitReview = (text: any) => {
-    console.log(text);
-    setShowForm(false);
+  const handleSubmitReview = async (event: any) => {
+    event.preventDefault();
+    console.log("test thêm commment", event);
+    try {
+      await createReview({
+        rating: value,
+        comment: reviewText,
+        id_hotel: datahotel?.id_hotel?._id,
+      }).unwrap();
+      setShowForm(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleCloseForm = () => {
@@ -52,7 +63,7 @@ const Evaluate = () => {
             >
               <AiOutlineClose />
             </button>
-            <form className="w-80 mx-auto">
+            <form className="w-80 mx-auto " onSubmit={handleSubmitReview}>
               <span className="flex gap-2">
                 Đánh giá của bạn về:
                 <p className="font-bold">Khách sạn Hà Nội</p>
@@ -73,6 +84,8 @@ const Evaluate = () => {
                   placeholder="Ví dụ: Khách sạn có dịch vụ rất tốt và đẹp"
                   className="py-3 px-4 bg-gray-100 rounded-md w-full"
                   rows={4}
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
                 />
               </div>
               <button

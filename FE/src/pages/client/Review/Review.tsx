@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ReviewInput, Comment } from "../../../components";
 import Evaluate from "../../../components/client/Review/Evaluate";
-import { useGetAllReviewQuer } from "../../../api";
+import { useGetAllReviewQuery } from "../../../api";
 
-const Review = () => {
+const Review = ({ dataHotel }: any) => {
   const { data } = useGetAllReviewQuery();
-
   const [Data, setData] = useState([]);
-  console.log("🚀 ~ ReviewInput ~ Data:", Data);
-
   useEffect(() => {
     if (data?.data) {
       setData(data?.data);
@@ -23,7 +20,7 @@ const Review = () => {
 
       <Comment />
       <ReviewInput data={Data} />
-      <Evaluate />
+      <Evaluate id_hotel={dataHotel} />
     </div>
   );
 };

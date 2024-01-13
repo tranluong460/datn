@@ -60,7 +60,7 @@ const HotelDetailPage = () => {
           </div>
         </div>
       </div>
-      <Review />
+      <Review dataHotel={data?.data} />
       <Amenities amenities={data?.data?.id_amenities} />
       <Map />
     </>
