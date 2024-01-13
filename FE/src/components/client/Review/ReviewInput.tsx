@@ -21,8 +21,8 @@ const ReviewInput = ({ data }: any) => {
               <span>{moment(comment?.createdAt).format("DD-MM-YYYY")}</span>
             </div>
 
-            <div className="flex gap-32">
-              <Rate disabled defaultValue={comment?.rating} />
+            <div className="flex gap-24">
+              <Rate disabled defaultValue={comment?.rating} className="flex" />
               {comment?.comment}
             </div>
           </div>

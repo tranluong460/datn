@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import { Progress, Rate } from "antd";
 
-type Props = {};
-
-const Comment = (props: Props) => {
+const Comment = (Data: any) => {
+  // console.log("🚀 ~ Comment ~ Data:", Data.data);
+  const totalRating = Data?.data.reduce(
+    (sum: number, review: any) => sum + review.rating,
+    0
+  );
+  const averageRating =
+    Data?.data.length > 0
+      ? Number((totalRating / Data?.data.length).toFixed(1))
+      : 0;
+  console.log("🚀 ~ Comment ~ Data:", averageRating);
   return (
     <div className="flex mt-3 ml-32">
       <div className="flex flex-col items-center gap-2">
         <p className="text-[#e30019] text-4xl font-semibold leading-[56px] text-left">
-          0/5
+          {averageRating}/5
         </p>
         <span>
-          <Rate disabled defaultValue={5} />
+          <Rate allowHalf disabled defaultValue={3.8} />
         </span>
         <span className="flex gap-1 justify-between">
           <p
             className="flex gap-1 items-center text-[
 #111111] font-bold leading-5 text-left text-[14px]"
           >
-            (3)
+            ({Data?.data.length})
           </p>
           đánh giá & nhận xét
         </span>

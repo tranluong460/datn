@@ -6,6 +6,8 @@ import { useGetAllReviewQuery } from "../../../api";
 const Review = ({ dataHotel }: any) => {
   const { data } = useGetAllReviewQuery();
   const [Data, setData] = useState([]);
+  const [RatingReview, setReview] = useState([]);
+
   useEffect(() => {
     if (data?.data) {
       setData(data?.data);
@@ -18,7 +20,7 @@ const Review = ({ dataHotel }: any) => {
         <span>Đánh giá & Nhận xét Khách sạn</span>
       </div>
 
-      <Comment />
+      <Comment data={Data} />
       <ReviewInput data={Data} />
       <Evaluate id_hotel={dataHotel} />
     </div>
