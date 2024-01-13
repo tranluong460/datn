@@ -14,7 +14,7 @@ import { CreateRoomTypeModal, EditRoomTypeModal } from "../../../components";
 
 const RoomTypeManage = () => {
   // const key0 = "deleteAmenitiesMutation";
-  const [contextHolder] = message.useMessage();
+  // const [contextHolder] = message.useMessage();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [idRoomType, setIdRoomType] = useState("");
@@ -140,7 +140,7 @@ const RoomTypeManage = () => {
 
   return (
     <>
-      {contextHolder}
+      {/* {contextHolder} */}
 
       <Table
         title={() => (
