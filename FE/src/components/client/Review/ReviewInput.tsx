@@ -2,7 +2,7 @@ import { Rate } from "antd";
 import React, { useEffect, useState } from "react";
 import { useGetAllReviewQuery } from "../../../api";
 import moment from "moment";
-
+import { useDeleteReviewMutation } from "../../../api";
 type Comment = {
   id_user: string;
   createdAt: Date;
@@ -12,6 +12,15 @@ type Comment = {
 
 const ReviewInput = ({ data }: any) => {
   console.log("🚀 ~ ReviewInput ~ data:", data);
+  const [deleteReview] = useDeleteReviewMutation();
+
+  const removeReview = async (id: string) => {
+    try {
+      await deleteReview(id);
+    } catch (error) {
+      console.error("Lỗi khi xóa bình luận", error);
+    }
+  };
   return (
     <>
       {data?.map((comment: any, index: number) => {
@@ -24,8 +33,15 @@ const ReviewInput = ({ data }: any) => {
 
             <div className="flex gap-24">
               <Rate disabled defaultValue={comment?.rating} className="flex" />
-              {comment?.comment}
+              {comment?.comment}1
             </div>
+
+            <button
+              className="bg-blue-500 p-1 px-2 text-[white] rounded-md mt-2"
+              onClick={() => removeReview(comment?._id)}
+            >
+              xóa bình luận
+            </button>
           </div>
         );
       })}

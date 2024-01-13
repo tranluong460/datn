@@ -87,8 +87,9 @@ export const remove = async (req, res) => {
 
     const data = await ReviewModel.findById(req.params.id);
 
-    if (data.id_user !== req.user._id) {
-      return sendResponse(res, 404, "Không được xóa bình luận");
+
+    if (data.id_user._id !== req.user._id) {
+      return sendResponse(res, 404, "Không được xóa bình luận vì comment không phải của bạn");
     }
 
     await ReviewModel.findByIdAndDelete(data._id);
