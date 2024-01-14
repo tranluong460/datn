@@ -8,7 +8,6 @@ type RoomDetailCardProps = {
 };
 
 const RoomDetailCard = ({ room, onCloseDetail }: RoomDetailCardProps) => {
-  console.log("🚀 ~ RoomDetailCard ~ room:", room);
   return (
     <>
       <div className="flex w-[1000px]">

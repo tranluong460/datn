@@ -1,16 +1,7 @@
 import { Rate, message } from "antd";
-
-import React, { useEffect, useState } from "react";
-import { useGetAllReviewQuery } from "../../../api";
 import moment from "moment";
 import { useDeleteReviewMutation } from "../../../api";
 import toast from "react-hot-toast";
-type Comment = {
-  id_user: string;
-  createdAt: Date;
-  rating: string;
-  comment: string;
-};
 
 const ReviewInput = ({ data }: any) => {
   const [deleteReview] = useDeleteReviewMutation();
