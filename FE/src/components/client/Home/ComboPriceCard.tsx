@@ -7,22 +7,22 @@ type ComboPriceCardProps = {
   style?: React.CSSProperties; // Add this line
 };
 
-const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
+const ComboPriceCard = ({
   image,
   title,
   price,
-  style,
-}) => {
+}: // style,
+ComboPriceCardProps) => {
   return (
     <div
       className="group overflow-hidden relative rounded-[5px] border hover:shadow-lg transform transition-transform duration-300 ease-in-out "
-      style={style}
+      // style={style}
     >
       <a href="">
         <img
           src={image}
           alt="Service"
-          className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110"
+          className="w-full transition-transform duration-300 ease-in-out transform group-hover:scale-110 h-[250px]"
         />
         <div className="p-4">
           <h5 className="text-xl font-semibold text-gray-700 dark:text-textDark">
