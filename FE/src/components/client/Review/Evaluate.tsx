@@ -11,9 +11,10 @@ const desc = [
   "Xuất sắc",
 ];
 
-const Evaluate = (datahotel: any) => {
+const Evaluate = (datahotel: any, data: any) => {
+  console.log("🚀 ~ Evaluate ~ userData:", data);
   const [createReview] = useCreateReviewMutation();
-  const [value, setValue] = useState(5);
+  const [value, setValue] = useState(1);
   const [showForm, setShowForm] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [error, setError] = useState("");

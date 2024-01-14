@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { ReviewInput, Comment } from "../../../components";
 import Evaluate from "../../../components/client/Review/Evaluate";
-import { useGetAllReviewQuery } from "../../../api";
+import { useGetAllReviewQuery, useInfoAccountQuery } from "../../../api";
 
 const Review = ({ dataHotel }: any) => {
-  const { data } = useGetAllReviewQuery();
+  const { data: userData } = useInfoAccountQuery("");
+  const { data } = useGetAllReviewQuery("");
   console.log("🚀 ~ Review ~ data:", data);
   const [Data, setData] = useState([]);
 
@@ -22,10 +23,10 @@ const Review = ({ dataHotel }: any) => {
 
       <div className="flex justify-between">
         <Comment data={Data} />
-        <Evaluate id_hotel={dataHotel} />
+        <Evaluate id_hotel={dataHotel} data={userData} />
       </div>
 
-      <ReviewInput data={Data} />
+      <ReviewInput data={Data} userData={userData} />
     </div>
   );
 };

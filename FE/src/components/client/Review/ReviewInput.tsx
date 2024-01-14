@@ -1,12 +1,9 @@
 import { Rate, message } from "antd";
 import moment from "moment";
-import { useDeleteReviewMutation, useInfoAccountQuery } from "../../../api";
+import { useDeleteReviewMutation } from "../../../api";
 import toast from "react-hot-toast";
 
-const ReviewInput = ({ data }: any) => {
-  console.log("🚀 ~ ReviewInput ~ data⭐:", data);
-  const { data: userData } = useInfoAccountQuery("");
-  console.log("🚀 ~ ReviewInput ~ data❤️:", userData.data);
+const ReviewInput = ({ data, userData }: any) => {
   const [deleteReview] = useDeleteReviewMutation();
   const [messageApi, contextHolder] = message.useMessage();
 
