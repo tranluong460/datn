@@ -1,9 +1,12 @@
 import { Rate, message } from "antd";
 import moment from "moment";
-import { useDeleteReviewMutation } from "../../../api";
+import { useDeleteReviewMutation, useInfoAccountQuery } from "../../../api";
 import toast from "react-hot-toast";
 
 const ReviewInput = ({ data }: any) => {
+  console.log("🚀 ~ ReviewInput ~ data⭐:", data);
+  const { data: userData } = useInfoAccountQuery("");
+  console.log("🚀 ~ ReviewInput ~ data❤️:", userData.data);
   const [deleteReview] = useDeleteReviewMutation();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -33,12 +36,16 @@ const ReviewInput = ({ data }: any) => {
               {comment?.comment}1
             </div>
 
-            <button
-              className="bg-blue-500 p-1 px-2 text-[white] rounded-md mt-2"
-              onClick={() => removeReview(comment?._id)}
-            >
-              xóa bình luận
-            </button>
+            {userData?.data && userData?.data?._id == comment?.id_user?._id ? (
+              <button
+                className="bg-blue-500 p-1 px-2 text-[white] rounded-md mt-2"
+                onClick={() => removeReview(comment?._id)}
+              >
+                xóa bình luận
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         );
       })}
