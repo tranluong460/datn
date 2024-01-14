@@ -1,6 +1,21 @@
 import { ComboPriceCard, Container } from "../..";
+import { useEffect, useState } from "react";
+import { useGetAllHotelQuery } from "../../../api";
+import { Loading } from "../../../pages";
 
 const ComboPrice = () => {
+  const { data: hotelData, isLoading } = useGetAllHotelQuery("");
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+    if (hotelData && hotelData.data) {
+      setData(hotelData?.data[0].id_room);
+    }
+  }, [hotelData, isLoading]);
+  // console.log("🚀 ~ ComboPrice ~ hotelData:", Data);
   // const data = [
   //   {
   //     image:
@@ -39,25 +54,25 @@ const ComboPrice = () => {
   //   },
   // ];
 
-  // const itemsPerPage = 3;
-  // const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 3;
+  const [currentPage, setCurrentPage] = useState(0);
 
-  // const nextPage = () => {
-  //   setCurrentPage(
-  //     (prevPage) => (prevPage + 1) % Math.ceil(data.length / itemsPerPage)
-  //   );
-  // };
+  const nextPage = () => {
+    setCurrentPage(
+      (prevPage) => (prevPage + 1) % Math.ceil(data.length / itemsPerPage)
+    );
+  };
 
-  // const prevPage = () => {
-  //   setCurrentPage(
-  //     (prevPage) =>
-  //       (prevPage - 1 + Math.ceil(data.length / itemsPerPage)) %
-  //       Math.ceil(data.length / itemsPerPage)
-  //   );
-  // };
+  const prevPage = () => {
+    setCurrentPage(
+      (prevPage) =>
+        (prevPage - 1 + Math.ceil(data.length / itemsPerPage)) %
+        Math.ceil(data.length / itemsPerPage)
+    );
+  };
 
-  // const startIdx = currentPage * itemsPerPage;
-  // const visibleData = data.slice(startIdx, startIdx + itemsPerPage);
+  const startIdx = currentPage * itemsPerPage;
+  const visibleData = data.slice(startIdx, startIdx + itemsPerPage);
 
   return (
     <>
@@ -75,15 +90,13 @@ const ComboPrice = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-5 relative ">
-            <ComboPriceCard />
-            {/* {data.map((item: any, index: number) => {
-              console.log(item);
-              return <div>ssádfasdf</div>;
-            })} */}
+            {data?.map((item: any, index: number) => {
+              return <ComboPriceCard data={item} key={index} />;
+            })}
 
             <button
               className="absolute left-7 top-1/2 transform -translate-y-1/2 translate-x-[-50%] bg-gradient-to-r from-amber-500 to-transparent hover:from-amber-200 hover:to-transparent text-white font-bold py-2 px-4 rounded-full overflow-hidden  "
-              // onClick={prevPage}
+              onClick={prevPage}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +116,7 @@ const ComboPrice = () => {
 
             <button
               className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gradient-to-l from-amber-500 to-transparent hover:from-amber-200 hover:to-transparent text-white font-bold py-2 px-4 rounded-full overflow-hidden"
-              // onClick={nextPage}
+              onClick={nextPage}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

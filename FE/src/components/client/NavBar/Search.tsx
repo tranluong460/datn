@@ -120,6 +120,7 @@ const Search = () => {
                   type=""
                   value={durationLabel}
                   onClick={searchModal.onOpen}
+                  onChange={searchModal.onOpen}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -148,6 +149,7 @@ const Search = () => {
                   type=""
                   value={roomLabel}
                   onClick={searchModal.onOpen}
+                  onChange={searchModal.onOpen}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -200,6 +202,7 @@ const Search = () => {
                   type=""
                   value="Tìm kiếm"
                   onClick={searchModal.onOpen}
+                  onChange={searchModal.onOpen}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
