@@ -1,24 +1,6 @@
 import { ComboPriceCard, Container } from "../..";
-import { useEffect, useState } from "react";
-import { useGetAllHotelQuery } from "../../../api";
-import { Loading } from "../../../pages";
 
 const ComboPrice = () => {
-  const { data: hotelData, isLoading } = useGetAllHotelQuery();
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     return <Loading />;
-  //   }
-  //   if (hotelData && hotelData.data) {
-  //     setData(hotelData?.data);
-  //   }
-  // }, [hotelData, isLoading]);
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-  // console.log("🚀 ~ ComboPrice ~ hotelData:", Data);
   // const data = [
   //   {
   //     image:
@@ -93,6 +75,7 @@ const ComboPrice = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-5 relative ">
+            <ComboPriceCard />
             {/* {data.map((item: any, index: number) => {
               console.log(item);
               return <div>ssádfasdf</div>;

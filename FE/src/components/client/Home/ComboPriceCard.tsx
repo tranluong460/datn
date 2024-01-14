@@ -4,7 +4,7 @@ type ComboPriceCardProps = {
   image: string;
   title: string;
   price: string;
-  style?: React.CSSProperties; // Add this line
+  // style?: React.CSSProperties; // Add this line
 };
 
 const ComboPriceCard = ({
