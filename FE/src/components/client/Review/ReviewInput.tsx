@@ -2,10 +2,12 @@ import { Rate, message } from "antd";
 import moment from "moment";
 import { useDeleteReviewMutation } from "../../../api";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const ReviewInput = ({ data, userData }: any) => {
   const [deleteReview] = useDeleteReviewMutation();
   const [messageApi, contextHolder] = message.useMessage();
+  const [visibleReviews, setVisibleReviews] = useState(5);
 
   const removeReview = async (id: string) => {
     deleteReview(id)
@@ -17,9 +19,13 @@ const ReviewInput = ({ data, userData }: any) => {
         toast.error(error.data.message);
       });
   };
+
+  const handleLoadMore = () => {
+    setVisibleReviews((prevVisibleReviews) => prevVisibleReviews + 5);
+  };
   return (
     <>
-      {data?.map((comment: any, index: number) => {
+      {data?.slice(0, visibleReviews).map((comment: any, index: number) => {
         return (
           <div className="border-b py-4" key={index}>
             {contextHolder}
@@ -46,6 +52,15 @@ const ReviewInput = ({ data, userData }: any) => {
           </div>
         );
       })}
+      {data && data.length > visibleReviews && (
+        <div
+          className="cursor-pointer text-white mt-4 py-2 max-w-[200px] text-center mx-auto rounded-2xl"
+          style={{ background: "linear-gradient(45deg, #00bfff, #0077cc)" }}
+          onClick={handleLoadMore}
+        >
+          Xem thêm
+        </div>
+      )}
     </>
   );
 };
