@@ -8,10 +8,11 @@ type ComboPriceCardProps = {
 };
 
 const ComboPriceCard = ({ data }: any) => {
+  console.log("🚀 ~ ComboPriceCard ~ data:", data);
   const { data: dataRoom } = useGetOneRoomQuery(data._id);
   return (
     <div className="group overflow-hidden relative rounded-[5px] border hover:shadow-lg transform transition-transform duration-300 ease-in-out ">
-      <a href="">
+      <a href={`hotel-detail/${data.id_hotel}`}>
         <img
           src={data?.images[0]?.url}
           alt="Service"
