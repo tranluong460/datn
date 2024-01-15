@@ -98,7 +98,6 @@ const SearchModal = () => {
 
 export default SearchModal;
 
-
 // import qs from "query-string";
 // import moment from "moment";
 // import toast from "react-hot-toast";
@@ -198,4 +197,3 @@ export default SearchModal;
 // };
 
 // export default SearchModal;
-
