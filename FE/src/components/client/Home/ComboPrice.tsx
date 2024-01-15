@@ -90,12 +90,12 @@ const ComboPrice = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 lg:gap-5 relative ">
-            {data?.map((item: any, index: number) => {
+            {visibleData?.map((item: any, index: number) => {
               return <ComboPriceCard data={item} key={index} />;
             })}
 
             <button
-              className="absolute left-7 top-1/2 transform -translate-y-1/2 translate-x-[-50%] bg-gradient-to-r from-amber-500 to-transparent hover:from-amber-200 hover:to-transparent text-white font-bold py-2 px-4 rounded-full overflow-hidden  "
+              className="absolute left-7 top-1/2 transform -translate-y-1/2 translate-x-[-50%] bg-gradient-to-r from-amber-500 to-transparent hover:from-amber-200 hover:to-transparent text-white font-bold py-2 px-4 rounded-full overflo  "
               onClick={prevPage}
             >
               <svg
