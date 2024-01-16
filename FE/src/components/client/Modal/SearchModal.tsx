@@ -71,10 +71,10 @@ const SearchModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-3 justify-center items-center">
-      <CountrySelect
+      {/* <CountrySelect
         location={city?.code}
         onChange={(value) => setCity(value)}
-      />
+      /> */}
 
       <Calendar
         dateRange={dateRange}
