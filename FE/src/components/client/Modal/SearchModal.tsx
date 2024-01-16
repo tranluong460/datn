@@ -34,6 +34,13 @@ const SearchModal = () => {
       hotel: null,
     };
 
+    if (city) {
+      updatedQuery.location = city.code;
+    } else {
+      // Nếu không có city được chọn, loại bỏ thuộc tính location khỏi query
+      updatedQuery.location = 1;
+    }
+
     if (dateRange.startDate) {
       updatedQuery.checkin = dateRange.startDate;
     }
@@ -46,9 +53,9 @@ const SearchModal = () => {
       updatedQuery.room = room;
     }
 
-    if (!updatedQuery.location) {
-      return toast.error("Bạn chưa chọn vị trí");
-    }
+    // if (!updatedQuery.location) {
+    //   return toast.error("Bạn chưa chọn vị trí");
+    // }
 
     const url = qs.stringifyUrl(
       {
