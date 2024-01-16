@@ -1,7 +1,7 @@
 import { useState } from "react";
 import moment from "moment";
 import type { ColumnsType } from "antd/es/table";
-import { Button, Select, Space, Table, Tooltip, message } from "antd";
+import { Button, Select, Space, Table, Tooltip, message, Modal } from "antd";
 
 import { IHotel } from "../../../interface";
 import {
@@ -17,26 +17,38 @@ import {
 
 const Comment = () => {
   const [idHotel, setIdHotel] = useState("");
-  const [idHotelEdit, setIdHotelEdit] = useState("");
+  const [idReview, setIdReview] = useState("");
   const [openHotelDrawn, setOpenHotelDrawn] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [deletingItemId, setDeletingItemId] = useState("");
 
   const { data: allReview, isLoading } = useGetAllReviewQuery("");
-  console.log("🚀 ~ Comment ~ allReview:", allReview);
-  const { data: oneReview, isFetching } = useGetOneReviewQuery(idHotelEdit);
+  const { data: oneReview, isFetching } = useGetOneReviewQuery(idReview);
   const [deleteReview] = useDeleteReviewMutation();
 
   const onClosedHotelDrawn = () => {
     setOpenHotelDrawn(false);
   };
-  const handleChange = (value: string) => {
-    deleteReview({ _id })
+
+  const showDeleteConfirm = (itemId: string) => {
+    setDeletingItemId(itemId);
+    setDeleteModalVisible(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    deleteReview(deletingItemId)
       .unwrap()
       .then(() => {
-        message.success("Cập nhật trạng thái thành công");
+        message.success("Đã xóa bình luận thành công");
+        setDeleteModalVisible(false);
       })
       .catch((error) => {
         message.error(error.data.message);
       });
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModalVisible(false);
   };
 
   const columns: ColumnsType<IHotel> = [
@@ -84,13 +96,7 @@ const Comment = () => {
       render: (_, { _id }) => (
         <>
           <Space>
-            <Button
-              onClick={() => {
-                deleteReview(_id);
-              }}
-            >
-              Xóa
-            </Button>
+            <Button onClick={() => showDeleteConfirm(_id)}>Xóa</Button>
           </Space>
         </>
       ),
@@ -121,13 +127,15 @@ const Comment = () => {
         pagination={paginationConfig}
       />
 
-      {idHotel && (
-        <HotelDrawn
-          idHotel={idHotel}
-          openHotelDrawn={openHotelDrawn}
-          onClosedHotelDrawn={onClosedHotelDrawn}
-        />
-      )}
+      <Modal
+        title="Xác nhận xóa"
+        visible={deleteModalVisible}
+        onOk={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        okButtonProps={{ style: { backgroundColor: "red", color: "white" } }}
+      >
+        <p>Bạn có chắc muốn xóa bình luận này không?</p>
+      </Modal>
     </>
   );
 };
