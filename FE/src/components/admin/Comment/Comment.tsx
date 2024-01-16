@@ -23,7 +23,6 @@ const Comment = () => {
   const [deletingItemId, setDeletingItemId] = useState("");
 
   const { data: allReview, isLoading } = useGetAllReviewQuery("");
-  const { data: oneReview, isFetching } = useGetOneReviewQuery(idReview);
   const [deleteReview] = useDeleteReviewMutation();
 
   const onClosedHotelDrawn = () => {
@@ -81,6 +80,11 @@ const Comment = () => {
       title: "Nội dung comment",
       dataIndex: "comment",
       key: "comment",
+    },
+    {
+      title: "Đánh giá",
+      dataIndex: "rating",
+      key: "rating",
     },
     {
       title: "Thời gian comment",
