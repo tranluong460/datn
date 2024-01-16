@@ -10,10 +10,14 @@ const DashboardStatsGrid = () => {
     return acc + (room.quantity || 0);
   }, 0);
   // Phòng đã được đặt
-  const bookedRoom = bookings?.data?.filter((booking: any) => booking.status == 'Thành Công')
-  const totalBookRoomQuantity = bookedRoom?.reduce((acc: number, room: any) => {
-    return acc + (room.quantity || 0);
+  const bookedRoom = bookings?.data?.filter((booking: any) => booking.status === 'Thành Công');
+  const totalBookRoomQuantity = bookedRoom?.reduce((acc: number, booking: any) => {
+    const roomQuantities = booking.list_room?.map((room: any) => room.quantity) || [];
+    const bookingTotalQuantity = roomQuantities.reduce((roomAcc: number, roomQuantity: number) => roomAcc + (roomQuantity || 0), 0);
+    return acc + bookingTotalQuantity;
   }, 0);
+  // console.log(bookedRoom);
+
   // doanh thu
   // const paymentRoom = payment?.data?.filter((booking: any) => booking?.status == 'Thành công')
   const totaPayment = bookedRoom?.reduce((acc: number, room: any) => {
