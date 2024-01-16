@@ -1,10 +1,10 @@
 import React from "react";
-import { Comment } from "../../../components";
+import { Comments } from "../../../components";
 
 const CommentManage = () => {
   return (
     <div>
-      <Comment />
+      <Comments />
     </div>
   );
 };
