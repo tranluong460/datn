@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import {
   AmenitiesRouter,
   AuthRouter,
+  BannerRouter,
   BillRouter,
   BookingRouter,
   HotelRouter,
@@ -33,6 +34,7 @@ app.use("/payment", PaymentRouter);
 app.use("/review", ReviewRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
+app.use("/banner", BannerRouter)
 
 mongoose.connect(process.env.DB_URL);
 
