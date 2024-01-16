@@ -7,7 +7,7 @@ import PaymentRouter from "./payment";
 import ReviewRouter from "./review";
 import RoomRouter from "./room";
 import RoomTypeRouter from "./roomType";
-
+import BannerRouter from "./banner";
 export {
   AmenitiesRouter,
   AuthRouter,
@@ -18,4 +18,5 @@ export {
   ReviewRouter,
   RoomRouter,
   RoomTypeRouter,
+  BannerRouter
 };

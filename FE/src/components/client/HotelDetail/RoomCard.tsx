@@ -1,22 +1,30 @@
 import { IRoom } from "../../../interface";
-
+import { Button } from "../../";
 type RoomCardProps = {
   room: IRoom;
+  onOpenDetail: () => void;
 };
-const RoomCard = ({ room }: RoomCardProps) => {
+const RoomCard = ({ room, onOpenDetail }: RoomCardProps) => {
   return (
     <>
       <div className="h-auto transition duration-300 rounded-md bg-light dark:bg-dark">
         <div className="overflow-hidden h-64">
-          <img
-            src={`${room.images[0].url}`}
-            alt="Room"
-            className="w-full h-full object-cover"
-          />
+          <button onClick={onOpenDetail}>
+            <img
+              src={`${room?.images[0]?.url}`}
+              alt="Room"
+              className="w-full h-full object-cover"
+            />
+          </button>
         </div>
 
         <div className="flex-1 p-5 text-textLight2nd dark:text-textDark2nd">
-          <h5 className="font-semibold text-lg"> {room?.id_roomType?.name} </h5>
+          <button
+            onClick={onOpenDetail}
+            className="text-blue-500 cursor-default"
+          >
+            <h5 className="font-semibold text-lg">{room?.id_roomType?.name}</h5>
+          </button>
 
           <div className="flex flex-row justify-between items-center">
             <div className="mt-3">

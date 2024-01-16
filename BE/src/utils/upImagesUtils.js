@@ -21,3 +21,35 @@ export const uploadImageToCloudinary = async (image) => {
     throw error;
   }
 };
+export const deleteImageFromCloudinary = async (imageUrl) => {
+  try {
+    const publicId = getPublicIdFromImageUrl(imageUrl);
+    if (publicId) {
+      // Gọi API xóa hình ảnh từ Cloudinary
+      const result = await cloudinary.uploader.destroy(publicId, (error, result) => {
+        if (error) {
+          console.error(error);
+          throw new Error(`Không thể xóa hình ảnh từ Cloudinary: ${publicId}`);
+        }
+        return result;
+      });
+
+      console.log(result);
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+// Hàm hỗ trợ để lấy public_id từ đường link hình ảnh
+const getPublicIdFromImageUrl = (imageUrl) => {
+  try {
+    const urlParts = imageUrl?.split('/');
+    const publicIdPart = urlParts[urlParts.length - 1]?.split('.')[0];
+    return publicIdPart;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
