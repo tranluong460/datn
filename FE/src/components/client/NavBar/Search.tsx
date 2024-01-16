@@ -7,6 +7,7 @@ import moment from "moment";
 import { DatePicker, Space } from "antd";
 import { useSearchModal } from "../../../hooks";
 import dayjs from "dayjs";
+
 const disabledDate = (current: any) => {
   return current && current < moment().startOf("day");
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useGetHotelByCityQuery } from "../../../api";
+import { useGetAllRoomQuery } from "../../../api";
 import {
   Container,
   Filter,
@@ -20,7 +20,7 @@ const HotelListPage = () => {
   const [showRate, setShowRate] = useState(true);
   const [locationValue, setLocationValue] = useState(params.get("location"));
 
-  const { data, isFetching } = useGetHotelByCityQuery(locationValue);
+  const { data, isFetching } = useGetAllRoomQuery("");
 
   useEffect(() => {
     setLocationValue(params.get("location"));
