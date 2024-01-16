@@ -40,13 +40,13 @@ const RoomCard = ({ room, onOpenDetail }: RoomCardProps) => {
               <span className="ml-1 text-xs">/đêm</span>
             </div>
 
-            <div className="w-[40%]">
+            {/* <div className="w-[40%]">
               <Button
                 label="Đặt ngay"
                 onClick={() => alert("Đặt phòng")}
                 disabled={room.quantity === 0}
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

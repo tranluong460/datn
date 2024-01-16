@@ -16,6 +16,7 @@ const RoomManager = () => {
 
   const { data: oneRoom, isFetching } = useGetOneRoomQuery(idRoomEdit);
   const { data: allRoom, isLoading } = useGetAllRoomQuery("");
+  console.log("🚀 ~ RoomManager ~ allRoom:", allRoom);
 
   const onClosedRoomDrawn = () => {
     setOpenRoomDrawn(false);
@@ -78,6 +79,7 @@ const RoomManager = () => {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
+
       render: (_, { quantity }) => {
         return (
           <Tag color={quantity > 0 ? "#87d068" : "#f70000"}>
