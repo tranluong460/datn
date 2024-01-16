@@ -8,7 +8,7 @@ import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find().populate("id_roomType id_hotel");
+    const roomList = await RoomModel.find().select("-createdAt -updatedAt").populate({ path: "id_roomType id_hotel", select: "_id name" });
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");

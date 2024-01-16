@@ -23,7 +23,7 @@ const AmenitiesManager = () => {
   const { data, isLoading } = useGetAllAmenitiesQuery("");
   const { data: dataOneAmenities, isFetching } =
     useGetOneAmenitiesQuery(idAmenities);
-  const [editAmenities] = useUpdateAmenitiesMutation()
+  const [editAmenities] = useUpdateAmenitiesMutation();
   // const [deleteAmenities] = useDeleteAmenitiesMutation();
 
   // const onDelete = (id: string) => {
@@ -53,10 +53,10 @@ const AmenitiesManager = () => {
   //     });
   // };
   const handleChange = (value: string) => {
-    editAmenities({ status: value, _id: idAmenities, })
+    editAmenities({ status: value, _id: idAmenities })
       .unwrap()
       .then(() => {
-        message.success('Cập nhật trạng thái thành công');
+        message.success("Cập nhật trạng thái thành công");
       })
       .catch((error) => {
         message.error(error.data.message);
@@ -103,8 +103,8 @@ const AmenitiesManager = () => {
             onChange={(value) => handleChange(value)}
             onClick={() => setIdAmenities(_id)}
             options={[
-              { value: 'Đang áp dụng', label: 'Đang áp dụng' },
-              { value: 'Không được áp dụng', label: 'Không được áp dụng' },
+              { value: "Đang áp dụng", label: "Đang áp dụng" },
+              { value: "Không được áp dụng", label: "Không được áp dụng" },
             ]}
           />
         </Space>

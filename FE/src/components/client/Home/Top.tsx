@@ -13,20 +13,19 @@ const Top = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % image.length);
-    }, 4000); // Change image every 3 seconds
+    }, 4000);
 
     return () => {
-      clearInterval(interval); // Clear the interval on component unmount
+      clearInterval(interval);
     };
-  }, []); // Re-run the effect when the component mounts
+  }, []);
 
   return (
     <>
       <Container>
-      <div className="flex flex-row max-lg:flex-col p-3 md:p-10">
+        <div className="flex flex-row max-lg:flex-col p-3 md:p-10">
           <div className="col-span-6 p-5">
             <div className="flex flex-row items-center">
-             
               <h3 className="w-max select-none py-0 px-[0.5rem] pr-[1rem] rounded-[50px] font-medium text-[1.7rem] bg-[#faa935] text-textLight dark:text-textDark font-Island">
                 Know Before You Go
               </h3>
@@ -34,19 +33,16 @@ const Top = () => {
               <img
                 src="/images/world.png"
                 alt="Tour"
-            
                 className="w-[2.3rem] h-[2.3rem] select-none"
               />
             </div>
 
-          
             <h1 className="md:text-[3.2rem] text-[2rem] font-semibold mt-[1rem] mb-[2rem] text-textLight dark:text-textDark select-none">
               Tạo dấu ấn trong kỳ nghỉ của bạn với
               <br className="block sm:hidden" />
               <span className="text-orange-500"> Seven Teen</span>
             </h1>
 
-           
             <p className="text-[1.1rem] leading-[2rem] text-textLight2nd dark:text-textDark2nd select-none">
               Tận hưởng kỳ nghỉ lý tưởng tại khách sạn chúng tôi - nơi hòa quyện
               giữa tiện nghi hiện đại và không gian thoáng đãng, mang đến cho
@@ -81,33 +77,32 @@ const Top = () => {
             </div>
           </div>
         </div>
-      <div className="relative overflow-hidden">
-        <div className="flex justify-center items-center">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <div
-              key={index}
-              className={`w-full transition-transform transform ${
-                index === 1
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-full opacity-0"
-              }`}
-              style={{
-                transition: "transform 1s, opacity 1s",
-                flex: " 0 0 100%",
-              }}
-            >
-              <img
-                className="w-full h-full object-cover"
-                src={image[(currentImageIndex + index) % image.length]}
-                alt=""
-              />
-            </div>
-          ))}
-        </div>
-        {/* absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 */}
-        <div className="-translate-y-1/3 ">
-          <Search/>
-        </div>
+        <div className="relative overflow-hidden">
+          <div className="flex justify-center items-center">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div
+                key={index}
+                className={`w-full transition-transform transform ${
+                  index === 1
+                    ? "translate-x-0 opacity-100"
+                    : "translate-x-full opacity-0"
+                }`}
+                style={{
+                  transition: "transform 1s, opacity 1s",
+                  flex: " 0 0 100%",
+                }}
+              >
+                <img
+                  className="w-full h-full object-cover"
+                  src={image[(currentImageIndex + index) % image.length]}
+                  alt=""
+                />
+              </div>
+            ))}
+          </div>
+          <div className="-translate-y-1/3 mb-4">
+            <Search />
+          </div>
         </div>
       </Container>
     </>
