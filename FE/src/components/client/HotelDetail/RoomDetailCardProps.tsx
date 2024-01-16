@@ -24,14 +24,8 @@ const RoomDetailCard = ({ room, onCloseDetail }: RoomDetailCardProps) => {
       <div className="flex w-[1000px]">
         <div className="flex flex-col bg-[#98999b]">
           <div className="w-[590px] relative">
-            <CSSTransition
-              in={true}
-              timeout={500}
-              classNames="fade"
-              unmountOnExit
-            >
-              <img src={currentImage} key={currentImage} alt="" />
-            </CSSTransition>
+            <img src={currentImage} key={currentImage} alt="" />
+
             <span className="bottom-0 pl-3 py-2 bg-[black] absolute opacity-40 w-full text-[white] font-bold">
               {room?.id_roomType?.name}
             </span>
