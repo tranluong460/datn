@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { IRoom } from "../../../interface";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import RoomAmenities from "./RoomAmenities";
-import { CSSTransition } from "react-transition-group";
 import styles from "./styles.module.css";
 
 type RoomDetailCardProps = {
