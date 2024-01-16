@@ -1,10 +1,15 @@
+import { Button } from "antd";
 import { IUser } from "../../../interface";
+import { useState } from "react";
+import UpdateInfo from "./updateInfo";
 
 type InfoUserProps = {
   user: IUser;
 };
 
 const InfoUser = ({ user }: InfoUserProps) => {
+  const [openForm, setOpenform] = useState(false)
+
   return (
     <div className="mt-5 overflow-hidden">
       <dl>
@@ -40,7 +45,7 @@ const InfoUser = ({ user }: InfoUserProps) => {
             {user.id_information.address}
           </dd>
         </div>
-        <div className="bg-light dark:bg-dark border-t border-divideLight dark:border-divideDark px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        {/* <div className="bg-light dark:bg-dark border-t border-divideLight dark:border-divideDark px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt className="text-sm font-medium text-textLight dark:text-textDark">
             Ảnh
           </dt>
@@ -50,8 +55,13 @@ const InfoUser = ({ user }: InfoUserProps) => {
               alt={user.id_information.image}
             />
           </dd>
+        </div> */}
+        <div className="flex justify-center">
+          <Button onClick={() => setOpenform(true)}>Cập nhật</Button>
         </div>
       </dl>
+
+      <UpdateInfo isOpenUpdate={openForm} onCancel={() => setOpenform(false)} user={user.id_information} />
     </div>
   );
 };

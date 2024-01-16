@@ -8,6 +8,7 @@ import RegisterValidate from "./register";
 import ReviewValidate from "./review";
 import RoomValidate from "./room";
 import RoomTypeValidate from "./roomType";
+import infomationUser from "./infomationUser";
 import BannerValidate from "./banner";
 
 export {
@@ -21,5 +22,6 @@ export {
   ReviewValidate,
   RoomValidate,
   RoomTypeValidate,
+  infomationUser,
   BannerValidate
 };
