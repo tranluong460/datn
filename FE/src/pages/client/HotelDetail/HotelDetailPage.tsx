@@ -16,7 +16,6 @@ import { useState } from "react";
 const HotelDetailPage = () => {
   const { id } = useParams<{ id: string | undefined }>();
   const { data, isLoading, isSuccess } = useGetOneHotelQuery(id);
-  console.log("🚀 ~ HotelDetailPage ~ data:", data);
 
   if (isLoading) {
     return <Loading />;

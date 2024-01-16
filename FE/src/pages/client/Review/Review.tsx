@@ -6,7 +6,6 @@ import { useGetAllReviewQuery, useInfoAccountQuery } from "../../../api";
 const Review = ({ dataHotel }: any) => {
   const { data: userData } = useInfoAccountQuery("");
   const { data } = useGetAllReviewQuery("");
-  console.log("🚀 ~ Review ~ data:", data);
   const [Data, setData] = useState([]);
 
   useEffect(() => {

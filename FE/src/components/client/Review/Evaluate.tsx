@@ -12,7 +12,6 @@ const desc = [
 ];
 
 const Evaluate = (datahotel: any, data: any) => {
-  console.log("🚀 ~ Evaluate ~ userData:", data);
   const [createReview] = useCreateReviewMutation();
   const [value, setValue] = useState(1);
   const [showForm, setShowForm] = useState(false);
