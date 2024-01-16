@@ -8,6 +8,7 @@ import ReviewModel from "./review";
 import RoomModel from "./room";
 import RoomTypeModel from "./roomType";
 import UserModel from "./user";
+import BannerModel from "./banner";
 
 export {
   AmenitiesModel,
@@ -20,4 +21,5 @@ export {
   RoomModel,
   RoomTypeModel,
   UserModel,
+  BannerModel
 };
