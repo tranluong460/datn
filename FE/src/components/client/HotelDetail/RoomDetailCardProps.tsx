@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { IRoom } from "../../../interface";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import RoomAmenities from "./RoomAmenities";
+import styles from "./styles.module.css";
 
 type RoomDetailCardProps = {
   room: IRoom;
@@ -8,19 +10,37 @@ type RoomDetailCardProps = {
 };
 
 const RoomDetailCard = ({ room, onCloseDetail }: RoomDetailCardProps) => {
+  const [currentImage, setCurrentImage] = useState<string>(room?.images[0].url);
+
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+
+  const handleThumbnailClick = (imageUrl: string, index: number) => {
+    setCurrentImageIndex(index);
+    setCurrentImage(imageUrl);
+  };
+
   return (
     <>
       <div className="flex w-[1000px]">
         <div className="flex flex-col bg-[#98999b]">
           <div className="w-[590px] relative">
-            <img src={`${room?.images[0].url}`} />
+            <img src={currentImage} key={currentImage} alt="" />
+
             <span className="bottom-0 pl-3 py-2 bg-[black] absolute opacity-40 w-full text-[white] font-bold">
               {room?.id_roomType?.name}
             </span>
           </div>
           <div className="flex w-[140px] p-3 gap-3 border-none">
-            {room?.images.map((img) => (
-              <img src={img.url} alt="" />
+            {room?.images.map((img, index) => (
+              <img
+                key={index}
+                src={img.url}
+                alt=""
+                onClick={() => handleThumbnailClick(img.url, index)}
+                className={
+                  currentImageIndex === index ? styles.selectedThumbnail : ""
+                }
+              />
             ))}
           </div>
         </div>
