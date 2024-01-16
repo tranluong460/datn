@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -12,51 +12,88 @@ import {
 import { useGetAllBookingQuery } from "../../../api";
 import { DatePicker } from "antd";
 
+const { RangePicker } = DatePicker;
+
 function TransactionChart() {
   const { data } = useGetAllBookingQuery('');
-  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedRange, setSelectedRange] = useState(null);
   const [chartData, setChartData] = useState([]);
 
   const handleSearch = () => {
     const paymentData = data?.data;
 
-    if (paymentData && paymentData.length > 0) {
+    if (selectedRange && paymentData) {
+      const [startDate, endDate]: any = selectedRange;
+
       const filteredPayment = paymentData.filter(
-        (booking: any) =>
-          booking.status === "Thành Công" &&
-          new Date(booking.createdAt).getFullYear() == selectedYear?.$y
+        (booking: any) => {
+          const bookingDate = new Date(booking.createdAt);
+          return (
+            booking.status === "Thành Công" &&
+            bookingDate >= startDate &&
+            bookingDate <= endDate
+          );
+        }
       );
 
-      const totalRevenueByMonth = filteredPayment.reduce((acc: any, curr: any) => {
-        const month = new Date(curr.createdAt).getMonth() + 1;
-        acc[month] = (acc[month] || 0) + curr.total_price;
+      const totalRevenueByDate = filteredPayment.reduce((acc: any, curr: any) => {
+        const date = new Date(curr.createdAt).toLocaleDateString();
+        acc[date] = (acc[date] || 0) + curr.total_price;
         return acc;
       }, {});
 
-      const newChartData: any = Object.keys(totalRevenueByMonth).map((month) => ({
-        name: `Tháng ${month}`,
-        DoanhThu: totalRevenueByMonth[month],
+      const newChartData: any = Object.keys(totalRevenueByDate).map((date) => ({
+        name: date,
+        DoanhThu: totalRevenueByDate[date],
       }));
 
       setChartData(newChartData);
-    }
-  };
+    } else {
+      const Payment = data?.data.filter(
+        (booking: any) => booking.status == "Thành Công"
+      );
 
+      // console.log(Payment);
+
+      if (Payment && Payment.length > 0) {
+        const totalRevenue = Payment.reduce((acc: any, curr: any) => {
+          const date = new Date(curr.createdAt).toLocaleDateString();
+          acc[date] = (acc[date] || 0) + curr.total_price;
+          return acc;
+        }, {});
+
+        // console.log(totalRevenue);
+
+        const newChartData: any = Object.entries(totalRevenue).map(([date, value]) => ({
+          name: date,
+          DoanhThu: value,
+        }));
+
+        // console.log(newChartData);
+        setChartData(newChartData);
+      } else {
+        console.error('No successful bookings found.');
+      }
+    }
+
+  };
+  useEffect(() => {
+    handleSearch()
+  }, [data])
   return (
     <div className="h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1 mb-3">
       <strong className="text-gray-700 font-medium">
-        Doanh thu trong 12 tháng
+        Doanh thu theo ngày
       </strong>
       <div className="w-full mt-3 flex-1 text-xs">
         <div>
-          <label htmlFor="yearInput" className="mr-2">
-            Năm:
+          <label htmlFor="dateRangeInput" className="mr-2">
+            Chọn khoảng ngày:
           </label>
-          <DatePicker
-            picker="year"
-            id="yearInput"
-            value={selectedYear}
-            onChange={(date) => setSelectedYear(date)}
+          <RangePicker
+            id="dateRangeInput"
+            value={selectedRange}
+            onChange={(dates: any) => setSelectedRange(dates)}
           />
           <button onClick={handleSearch} className="ml-2 bg-blue-400 text-white p-1">
             Tìm kiếm
@@ -69,10 +106,10 @@ function TransactionChart() {
               height={300}
               data={chartData}
               margin={{
-                top: 20,
+                top: 30,
                 right: 10,
                 left: 20,
-                bottom: 0,
+                bottom: 50,
               }}
             >
               <CartesianGrid strokeDasharray="3 3 0 0" vertical={false} />
