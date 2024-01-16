@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import moment from "moment";
 import { DatePicker, Space } from "antd";
 import { useSearchModal } from "../../../hooks";
-
+import dayjs from "dayjs";
 const disabledDate = (current: any) => {
   return current && current < moment().startOf("day");
 };
@@ -129,6 +129,13 @@ const Search = () => {
                   <RangePicker
                     className="py-[11px] focus:border-yellow-500 hover:border-yellow-500"
                     disabledDate={disabledDate}
+                    defaultValue={[dayjs(), dayjs().add(1, "days")]}
+                    onChange={(dates, dateStrings) => {
+                      setDateRange({
+                        startDate: dateStrings[0],
+                        endDate: dateStrings[1],
+                      });
+                    }}
                   />
                 </Space>
               </div>
