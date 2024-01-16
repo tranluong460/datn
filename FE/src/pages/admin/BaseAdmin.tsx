@@ -44,7 +44,7 @@ const BaseAdmin = () => {
       .unwrap()
       .then((response) => {
         message.success(response.message);
-        navigate("/");
+        navigate("/admin-login");
       })
       .catch((error) => {
         console.log(error);

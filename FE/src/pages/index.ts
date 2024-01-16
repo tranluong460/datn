@@ -1,4 +1,5 @@
 // Admin
+import AdminLogin from "./admin/AdminLogin";
 import RouteAdmin from "./admin/RouteAdmin";
 import BaseAdmin from "./admin/BaseAdmin";
 import AmenitiesManager from "./admin/Amenities/AmenitiesManager";
@@ -40,6 +41,7 @@ import Page500 from "./error/Page500";
 import Success from "./error/Success";
 
 export {
+  AdminLogin,
   RouteAdmin,
   BaseAdmin,
   AmenitiesManager,

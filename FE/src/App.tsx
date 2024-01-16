@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { PrivateRoute } from "./utils";
 import {
+  AdminLogin,
   Page403,
   Page500,
   RouteAdmin,
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/*" element={<RouteClient />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route element={<PrivateRoute allowedRoles={["User", "Admin"]} />}>
             <Route path="/auth/*" element={<RouteAuth />} />
           </Route>

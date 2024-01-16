@@ -16,6 +16,6 @@ export const PrivateRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
   ) : isSuccess && data ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
-    <Navigate to="/" state={{ from: location }} replace />
+    <Navigate to="/admin-login" state={{ from: location }} replace />
   );
 };
