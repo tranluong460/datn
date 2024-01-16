@@ -25,16 +25,16 @@ const RoomTypeManage = () => {
   const { data: dataOneRoomType, isFetching } =
     useGetOneRoomTypeQuery(idRoomType);
   const handleChange = (value: any) => {
-    editRoomType({ status: value.value, name: value.name, _id: idRoomType, })
+    editRoomType({ status: value.value, name: value.name, _id: idRoomType })
       .unwrap()
       .then(() => {
-        message.success('Cập nhật trạng thái thành công');
+        message.success("Cập nhật trạng thái thành công");
       })
       .catch((error) => {
         message.error(error.data.message);
       });
-    console.log(value)
-  }
+    console.log(value);
+  };
   // const [deleteRoomType] = useDeleteRoomTypeMutation();
 
   // const onDelete = (id: string) => {
@@ -86,12 +86,12 @@ const RoomTypeManage = () => {
             onChange={(value) => handleChange({ value, name })}
             onClick={() => setIdRoomType(_id)}
             options={[
-              { value: 'Đang áp dụng', label: 'Đang áp dụng' },
-              { value: 'Không được áp dụng', label: 'Không được áp dụng' },
+              { value: "Đang áp dụng", label: "Đang áp dụng" },
+              { value: "Không được áp dụng", label: "Không được áp dụng" },
             ]}
           />
         </Space>
-      )
+      ),
     },
     {
       title: "Hành động",

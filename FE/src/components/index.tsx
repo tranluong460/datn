@@ -22,6 +22,7 @@ import Roomsheavilybooked from "./admin/Dashboard/Roomsheavilybooked";
 import TransactionChart from "./admin/Dashboard/Reservationchart";
 // import BuyerProfileChart from "./admin/Dashboard/Bookerprofilechart";
 import DashboardStatsGrid from "./admin/Dashboard/DashboardStatsGrid";
+import Comments from "./admin/Comment/Comment";
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
 import Sidebar from "./auth/Sidebar";
@@ -87,7 +88,7 @@ import RoomDetailCardProps from "./client/HotelDetail/RoomDetailCardProps";
 
 export {
   ReviewInput,
-  Comment,
+  Comments,
   Roomsheavilybooked,
   RecentRooms,
   DashboardStatsGrid,
@@ -163,6 +164,7 @@ export {
   Amenities,
   Map,
   NavBarIcon,
+  Comment,
   // Preferential,
   // PreferentialCard,
   // News,
