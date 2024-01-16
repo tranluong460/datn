@@ -73,6 +73,16 @@ import {
   useLockUserMutation,
 } from "./user";
 
+// review api
+import {
+  useGetAllReviewQuery,
+  useGetOneReviewQuery,
+  useCreateReviewMutation,
+  useUpdateReviewMutation,
+  useDeleteReviewMutation,
+  reviewApi,
+} from "./review";
+
 export {
   amenitiesApi,
   useGetAllAmenitiesQuery,
@@ -120,4 +130,10 @@ export {
   useGetAllUserQuery,
   useGetOneUserMutation,
   useLockUserMutation,
+  reviewApi,
+  useGetAllReviewQuery,
+  useGetOneReviewQuery,
+  useCreateReviewMutation,
+  useUpdateReviewMutation,
+  useDeleteReviewMutation,
 };

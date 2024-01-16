@@ -7,7 +7,10 @@ import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
-    const reviewList = await ReviewModel.find();
+    const reviewList = await ReviewModel.find().populate({
+      path: "id_user",
+      select: "_id email",
+    });
 
     if (!reviewList || reviewList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách bình luận");
@@ -82,11 +85,15 @@ export const remove = async (req, res) => {
       return sendResponse(res, 400, "ID không hợp lệ");
     }
 
-    const data = await ReviewModel.findById(req.params.id);
+    const data = await ReviewModel.findById(req.params.id).populate({
+      path: "id_user",
+      select: "_id",
+    });
 
-    if (data.id_user !== req.user._id) {
-      return sendResponse(res, 404, "Không được xóa bình luận");
+    if (req.user._id != data.id_user._id.toString()) {
+      return sendResponse(res, 403, "Không có quyền xóa đánh giá");
     }
+
 
     await ReviewModel.findByIdAndDelete(data._id);
     await HotelModel.findOneAndUpdate(
