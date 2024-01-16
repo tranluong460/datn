@@ -11,6 +11,7 @@ import {
   RoomTypeManage,
   UserManager,
 } from "..";
+import CommentManage from "./Comment/CommentManage";
 
 const RouteAdmin = () => {
   return (
@@ -24,6 +25,7 @@ const RouteAdmin = () => {
           <Route path="/room-manager" element={<RoomManager />} />
           <Route path="/user-manager" element={<UserManager />} />
           <Route path="/roomType-manager" element={<RoomTypeManage />} />
+          <Route path="/comment-manager" element={<CommentManage />} />
         </Route>
 
         <Route path="/*" element={<Page404 />} />

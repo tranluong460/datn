@@ -68,12 +68,13 @@ const BaseAdmin = () => {
 
   const menuItems: MenuItem[] = [
     getItem("Dashboard", "/admin", <MdOutlineDashboardCustomize />),
-    getItem("Đặt Phòng", "/admin/booking-manager", <TbBrandBooking />),
+    getItem("Quản lý Đặt Phòng", "/admin/booking-manager", <TbBrandBooking />),
     getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />),
     getItem("Phòng", "/admin/room-manager", <MdOutlineRoomPreferences />),
     getItem("Loại phòng", "/admin/roomType-manager", <AiOutlineHdd />),
     getItem("Tiện ích", "/admin/amenities-manager", <PiLightbulbFilament />),
     getItem("Người dùng", "/admin/user-manager", <AiOutlineUser />),
+    getItem("Quản lý bình luận", "/admin/comment-manager", <AiOutlineUser />),
   ];
 
   // eslint-disable-next-line
@@ -203,7 +204,7 @@ const BaseAdmin = () => {
           </Content>
 
           <Footer style={{ textAlign: "center" }} className="bg-white">
-            Hotel ©2023 Created by Alone
+            Hotel ©2024 Created by Alone
           </Footer>
         </Layout>
       </Layout>

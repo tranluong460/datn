@@ -8,6 +8,7 @@ import HotelManager from "./admin/Hotel/HotelManager";
 import RoomManager from "./admin/Room/RoomManager";
 import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
 import UserManager from "./admin/User/UserManager";
+import CommentManager from "./admin/Comment/CommentManage";
 
 // Auth
 import RouteAuth from "./auth/RouteAuth";
@@ -48,6 +49,7 @@ export {
   RoomManager,
   RoomTypeManage,
   UserManager,
+  CommentManager,
   LoadingAll,
   RouteAuth,
   BaseAuth,
