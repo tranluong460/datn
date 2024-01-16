@@ -9,11 +9,13 @@ const RoomCard = ({ room, onOpenDetail }: RoomCardProps) => {
     <>
       <div className="h-auto transition duration-300 rounded-md bg-light dark:bg-dark">
         <div className="overflow-hidden h-64">
-          <img
-            src={`${room?.images[0]?.url}`}
-            alt="Room"
-            className="w-full h-full object-cover"
-          />
+          <button onClick={onOpenDetail}>
+            <img
+              src={`${room?.images[0]?.url}`}
+              alt="Room"
+              className="w-full h-full object-cover"
+            />
+          </button>
         </div>
 
         <div className="flex-1 p-5 text-textLight2nd dark:text-textDark2nd">

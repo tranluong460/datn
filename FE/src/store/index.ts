@@ -9,6 +9,7 @@ import {
   roomApi,
   roomTypeApi,
   userApi,
+  reviewApi,
 } from "../api";
 import { paymentApi } from "../api/payment";
 
@@ -23,6 +24,7 @@ export const store = configureStore({
     [provincesApi.reducerPath]: provincesApi.reducer,
     [bookingApi.reducerPath]: bookingApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
+    [reviewApi.reducerPath]: reviewApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({})
@@ -34,5 +36,6 @@ export const store = configureStore({
       .concat(roomApi.middleware)
       .concat(provincesApi.middleware)
       .concat(bookingApi.middleware)
-      .concat(paymentApi.middleware),
+      .concat(paymentApi.middleware)
+      .concat(reviewApi.middleware),
 });

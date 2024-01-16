@@ -5,8 +5,8 @@ import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
 const router = express.Router();
 
-router.get("/", isAdminMiddleware, getAll);
-router.get("/:id", isAdminMiddleware, getOne);
+router.get("/", getAll);
+router.get("/:id", getOne);
 router.post("/", loginMiddleware, create);
 router.delete("/:id", loginMiddleware, remove);
 

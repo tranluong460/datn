@@ -41,7 +41,7 @@ const BookingManager = () => {
     allBooking.data &&
     allBooking.data.map((item: IBooking) => ({
       id: item._id,
-      title: item.id_user.email,
+      title: item.id_user?.email,
       start: moment(item.check_in).format("YYYY-MM-DD"),
       end: moment(item.check_out).format("YYYY-MM-DD"),
       color:

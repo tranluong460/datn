@@ -22,13 +22,15 @@ import Roomsheavilybooked from "./admin/Dashboard/Roomsheavilybooked";
 import TransactionChart from "./admin/Dashboard/Reservationchart";
 // import BuyerProfileChart from "./admin/Dashboard/Bookerprofilechart";
 import DashboardStatsGrid from "./admin/Dashboard/DashboardStatsGrid";
-import Comment from "./admin/Comment/Comment";
+import Comments from "./admin/Comment/Comment";
 // Auth
 import InfoUser from "./auth/Profile/InfoUser";
 import Sidebar from "./auth/Sidebar";
 
 // Client
 import Footer from "./client/Footer/Footer";
+import ReviewInput from "./client/Review/ReviewInput";
+import Comment from "./client/Review/Comment";
 // import Attractive from "./client/Home/Attractive";
 // import AttractiveCard from "./client/Home/AttractiveCard";
 import Experience from "./client/Home/Experience";
@@ -85,6 +87,8 @@ import RoomDetailCardProps from "./client/HotelDetail/RoomDetailCardProps";
 // import NewsCard from "./client/Home/NewsCard";
 
 export {
+  ReviewInput,
+  Comments,
   Roomsheavilybooked,
   RecentRooms,
   DashboardStatsGrid,
