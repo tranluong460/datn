@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import moment from "moment";
 import type { ColumnsType } from "antd/es/table";
 import { Button, Select, Space, Table, Tooltip, message } from "antd";
 
@@ -21,22 +21,23 @@ const Comment = () => {
   const [openHotelDrawn, setOpenHotelDrawn] = useState(false);
 
   const { data: allReview, isLoading } = useGetAllReviewQuery("");
+  console.log("🚀 ~ Comment ~ allReview:", allReview);
   const { data: oneReview, isFetching } = useGetOneReviewQuery(idHotelEdit);
   const [deleteReview] = useDeleteReviewMutation();
 
   const onClosedHotelDrawn = () => {
     setOpenHotelDrawn(false);
   };
-  // const handleChange = (value: string) => {
-  //   editHotel({ status: value, _id: idHotelEdit })
-  //     .unwrap()
-  //     .then(() => {
-  //       message.success("Cập nhật trạng thái thành công");
-  //     })
-  //     .catch((error) => {
-  //       message.error(error.data.message);
-  //     });
-  // };
+  const handleChange = (value: string) => {
+    deleteReview({ _id })
+      .unwrap()
+      .then(() => {
+        message.success("Cập nhật trạng thái thành công");
+      })
+      .catch((error) => {
+        message.error(error.data.message);
+      });
+  };
 
   const columns: ColumnsType<IHotel> = [
     {
@@ -58,8 +59,11 @@ const Comment = () => {
     },
     {
       title: "Tên Người dùng",
-      dataIndex: "id_user.email",
-      key: "email",
+      dataIndex: "id_user",
+      key: "id_user",
+      render: (user) => {
+        return <p className="font-bold">{user.email}</p>;
+      },
     },
     {
       title: "Nội dung comment",
@@ -70,6 +74,9 @@ const Comment = () => {
       title: "Thời gian comment",
       dataIndex: "createdAt",
       key: "createdAt",
+      render: (createdAt) => {
+        return <span>{moment(createdAt).format("YYYY-MM-DD | HH:mm:ss")}</span>;
+      },
     },
     {
       title: "Hành động",
@@ -114,26 +121,13 @@ const Comment = () => {
         pagination={paginationConfig}
       />
 
-      {/* {idHotel && (
+      {idHotel && (
         <HotelDrawn
           idHotel={idHotel}
           openHotelDrawn={openHotelDrawn}
           onClosedHotelDrawn={onClosedHotelDrawn}
         />
-      )} */}
-
-      {/* <CreateHotelModal
-        isOpenCreate={showCreateModal}
-        onCancel={() => setShowCreateModal(false)}
-      /> */}
-
-      {/* <EditHotelModal
-        key={oneHotel?.data._id}
-        isOpenEdit={showEditModal}
-        data={oneHotel?.data}
-        loading={isFetching}
-        onCancel={() => setShowEditModal(false)}
-      /> */}
+      )}
     </>
   );
 };
