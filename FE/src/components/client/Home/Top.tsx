@@ -100,7 +100,7 @@ const Top = () => {
               </div>
             ))}
           </div>
-          <div className="-translate-y-1/3">
+          <div className="-translate-y-1/3 mb-4">
             <Search />
           </div>
         </div>
