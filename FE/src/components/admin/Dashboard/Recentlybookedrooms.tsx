@@ -60,13 +60,13 @@ export default function RecentRooms() {
     } else {
       const roomBooking = bookings?.data?.filter((item: any) => item.status == 'Thành Công')
       // Tạo một đối tượng để theo dõi số lần xuất hiện của từng phòng
-      console.log(roomBooking);
+      // console.log(roomBooking);
       const roomCountMap: any = {};
       for (const booking of (roomBooking || [])) {
         for (const room of booking?.list_room || []) {
           const roomId = room.idRoom._id; // Giả sử roomId là một trường duy nhất để định danh phòng
           const quantity = room.quantity || 0; // Số lượng mặc định là 1 nếu không có trường quantity
-
+          console.log(roomCountMap[roomId]);
           // Kiểm tra xem đã có phòng với roomId trong roomCountMap hay chưa
           if (!roomCountMap[roomId]) {
             // Nếu chưa có, tạo một đối tượng mới cho roomId
@@ -84,10 +84,10 @@ export default function RecentRooms() {
         }
       }
 
-      console.log(roomCountMap);
 
       // Chuyển đối tượng đếm thành một mảng các đối tượng phòng để sắp xếp
       const roomCountArray = Object.values(roomCountMap);
+      // console.log(roomCountMap);
 
       // Sắp xếp mảng theo số lần xuất hiện giảm dần
       roomCountArray.sort((a: any, b: any) => b.count - a.count);

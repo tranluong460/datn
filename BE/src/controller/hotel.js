@@ -4,6 +4,7 @@ import { HotelModel } from "../models";
 import { HotelValidate } from "../validate";
 import { validateFormMiddleware } from "../middleware";
 import { sendResponse, uploadImageToCloudinary } from "../utils";
+import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
 
 export const getAll = async (req, res) => {
   try {
@@ -156,7 +157,7 @@ export const update = async (req, res) => {
           });
         }
       }
-
+      await Promise.all(currentData.images.map(deleteImageFromCloudinary))
       // Cập nhật ảnh mới chỉ khi có ảnh mới được tải lên
       const newImages = await Promise.all(imagesArray.map(uploadImageToCloudinary));
 
