@@ -16,7 +16,7 @@ export default function RecentRooms() {
       const roomBooking = bookings?.data.filter((booking: any) => {
         const bookingDate = new Date(booking.createdAt);
         return (
-          booking.status === "Thành Công" &&
+          booking.status === "Thành công" &&
           bookingDate >= startDate &&
           bookingDate <= endDate
         );
@@ -58,7 +58,7 @@ export default function RecentRooms() {
       const topRooms = roomCountArray.slice(0, 5);
       setTop5(topRooms)
     } else {
-      const roomBooking = bookings?.data?.filter((item: any) => item.status == 'Thành Công')
+      const roomBooking = bookings?.data?.filter((item: any) => item.status == 'Thành công')
       // Tạo một đối tượng để theo dõi số lần xuất hiện của từng phòng
       // console.log(roomBooking);
       const roomCountMap: any = {};
@@ -122,7 +122,7 @@ export default function RecentRooms() {
         </button>
       </div>
       <div className="mt-4">
-        {top5?.length > 0 ? (<table className="min-w-full border border-gray-300">
+        <table className="min-w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
               <th className="py-2 text-center border-b px-4">STT</th>
@@ -153,7 +153,7 @@ export default function RecentRooms() {
               </tr>
             ))}
           </tbody>
-        </table>) : (<h2 className="mt-4 text-base text-center">Không có dữ liệu</h2>)}
+        </table>
 
       </div>
     </div>
