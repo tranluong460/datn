@@ -26,7 +26,7 @@ export const isAdminMiddleware = async (req, res, next) => {
       "Admin",
       "Manager",
       "Reservation Manager",
-      "HumanResources Manager",
+      "Human Resources Manager",
       "Room Manager",
       "Facilities Manager",
     ];
