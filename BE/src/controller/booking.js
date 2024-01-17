@@ -95,8 +95,14 @@ export const getBookingByUser = async (req, res) => {
       .populate("id_payment")
       .populate({
         path: "list_room",
-        populate: "idRoom",
-      });
+        populate: {
+          path: "idRoom",
+          populate: {
+            path: "id_roomType",
+            model: "RoomType",
+          },
+        },
+      });;
 
     if (!bookingUser || bookingUser.length === 0) {
       return sendResponse(res, 404, "Người dùng chưa đặt phòng");
