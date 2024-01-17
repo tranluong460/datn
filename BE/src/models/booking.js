@@ -58,7 +58,7 @@ const BookingSchema = new mongoose.Schema(
         "Đã hủy bỏ",
         "Vắng mặt",
         "Đã nhận phòng",
-        "Thành Công",
+        "Thành công",
       ],
       default: "Chờ thanh toán",
     },

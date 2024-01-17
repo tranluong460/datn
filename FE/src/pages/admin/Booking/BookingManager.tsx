@@ -121,21 +121,21 @@ const BookingManager = () => {
       value: "Đã nhận phòng",
     },
     {
-      label: "Thành Công",
-      value: "Thành Công",
+      label: "Thành công",
+      value: "Thành công",
     },
   ];
 
   return (
     <>
       <div className="py-5 flex flex-col gap-3">
-        <Select
+        {/* <Select
           allowClear
           className="w-1/4"
           placeholder="Chọn khách sạn"
           onChange={onChangeHotel}
           options={transformationHotel}
-        />
+        /> */}
         <Select
           allowClear
           className="w-1/4"
