@@ -49,6 +49,10 @@ const BookingSchema = new mongoose.Schema(
         },
       },
     ],
+    payment_status: {
+      type: Boolean,
+      default: false,
+    },
     status: {
       type: String,
       enum: [

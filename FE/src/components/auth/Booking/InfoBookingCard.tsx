@@ -13,7 +13,6 @@ type InfoBookingCardProps = {
 };
 
 const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
-  console.log("🚀 ~ InfoBookingCard ~ info:", info);
   const [updateBooking] = useUpdateBookingMutation();
   const [checkStatusZaloPay] = useCheckStatusZaloPayMutation();
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,6 +46,9 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
   const handleCancel = () => {
     setModalVisible(false);
   };
+
+  const statusList = ["Chờ thanh toán", "Đã xác nhận"];
+
   return (
     <li className="flex items-center gap-x-6 py-5 border border-divideLight dark:border-divideDark pl-5 text-textLight2nd dark:text-textDark2nd">
       <div className="flex min-w-0 gap-x-4">
@@ -66,15 +68,24 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         })}
       </p>
 
-      <p className="mt-1 text-xs leading-5">
-        Nhận phòng: {moment(info.check_in).format("DD/MM/YYYY")}
-      </p>
+      <div>
+        <p className="mt-1 text-xs leading-5">
+          Nhận phòng: {moment(info.check_in).format("DD/MM/YYYY")}
+        </p>
 
-      <p className="mt-1 text-xs leading-5">
-        Trả phòng: {moment(info.check_out).format("DD/MM/YYYY")}
-      </p>
+        <p className="mt-1 text-xs leading-5">
+          Trả phòng: {moment(info.check_out).format("DD/MM/YYYY")}
+        </p>
+      </div>
 
-      <div>Trạng thái: {info.status}</div>
+      <div>
+        <p>
+          Trạng thái thanh toán:{" "}
+          {info.payment_status ? "Đã thanh toán" : "Chưa thanh toán"}
+        </p>
+
+        <p>Trạng thái đơn đặt phòng: {info.status}</p>
+      </div>
 
       {info.payment_method === "Zalo Pay" &&
         info.status === "Chờ thanh toán" && (
@@ -120,10 +131,9 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         <p>Nhận phòng: {moment(info.check_in).format("DD/MM/YYYY")}</p>
         <p>Trả phòng: {moment(info.check_out).format("DD/MM/YYYY")}</p>
         <p>Trạng thái: {info.status}</p>
-        {/* Add more details as needed */}
       </Modal>
 
-      {info?.status === "Đang xử lý" ? (
+      {statusList.includes(info.status) && (
         <button
           disabled={info.status === "Đã hủy bỏ"}
           onClick={toggleUpdateBooking}
@@ -131,7 +141,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         >
           Hủy đặt phòng
         </button>
-      ) : ('')}
+      )}
     </li>
   );
 };

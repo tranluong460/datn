@@ -102,7 +102,7 @@ export const getBookingByUser = async (req, res) => {
             model: "RoomType",
           },
         },
-      });;
+      });
 
     if (!bookingUser || bookingUser.length === 0) {
       return sendResponse(res, 404, "Người dùng chưa đặt phòng");
@@ -132,6 +132,21 @@ export const create = async (req, res) => {
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
       let id_hotel;
+      let hasError = false;
+
+      await Promise.all(
+        list_room.map(async (item) => {
+          const room = await RoomModel.findById(item.idRoom);
+
+          if (room.quantity === 0) {
+            hasError = true;
+          }
+        })
+      );
+
+      if (hasError) {
+        return sendResponse(res, 404, "Vui lòng thực hiện đặt phòng lại");
+      }
 
       await Promise.all(
         list_room.map(async (item) => {
@@ -145,6 +160,7 @@ export const create = async (req, res) => {
           }
         })
       );
+
       const data = await BookingModel.create({
         id_user: user._id,
         id_hotel: id_hotel,
@@ -185,7 +201,7 @@ export const update = async (req, res) => {
     }
 
     if (!status) {
-      return sendResponse(res, 404, "Trạng thái không dược để trống");
+      return sendResponse(res, 404, "Trạng thái không được để trống");
     }
 
     const booking = await BookingModel.findById(id);
@@ -203,7 +219,6 @@ export const update = async (req, res) => {
         path: "id_information",
       },
     });
-
 
     if (newBooking.status === "Đã hủy bỏ") {
       const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
@@ -279,7 +294,7 @@ export const calculateTotalAmountDay = async (req, res) => {
     const result = await BookingModel.aggregate([
       {
         $match: {
-          status: { $nin: ["Đã hủy bỏ"] },
+          payment_status: true,
           createdAt: {
             $gte: new Date(startDate),
             $lte: new Date(endDate),
@@ -336,7 +351,7 @@ export const calculateTotalAmountMonth = async (req, res) => {
     const result = await BookingModel.aggregate([
       {
         $match: {
-          status: { $nin: ["Đã hủy bỏ"] },
+          payment_status: true,
           createdAt: {
             $gte: startDate,
             $lte: endDate,

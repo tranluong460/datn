@@ -1,176 +1,418 @@
-import { useEffect, useState } from "react";
+import { Button, Space, Table, Input, DatePicker } from "antd";
+import type { DatePickerProps, GetRef, TableProps } from "antd";
+import { useGetAllBookingQuery, useGetOneBookingQuery } from "../../../api";
+import { IBooking, IRoom } from "../../../interface";
+import { useRef, useState } from "react";
 import moment from "moment";
-import { Select } from "antd";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import listPlugin from "@fullcalendar/list";
-import viLocale from "@fullcalendar/core/locales/vi";
+import { EditBookingDrawn } from "../../../components";
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from "react-highlight-words";
+import { FilterDropdownProps } from "antd/es/table/interface";
 
-import {
-  useGetAllBookingQuery,
-  useGetAllHotelQuery,
-  useGetOneBookingQuery,
-} from "../../../api";
-import { IBooking, IHotel } from "../../../interface";
-import { InfoBookingDrawn } from "../../../components";
+type InputRef = GetRef<typeof Input>;
 
 const BookingManager = () => {
-  const [eventsKey, setEventsKey] = useState(0);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [idBooking, setIdBooking] = useState("");
-  const [open, setOpen] = useState(false);
-  const [select, setSelect] = useState({
-    status: "",
-    id_hotel: "",
-  });
+  const [searchText, setSearchText] = useState("");
+  const [searchTextCheckIn, setSearchTextCheckIn] = useState("");
+  const [searchTextCheckOut, setSearchTextCheckOut] = useState("");
+  const searchInput = useRef<InputRef>(null);
 
-  const {
-    data: allBooking,
-    isLoading,
-    refetch: refetchAllBooking,
-  } = useGetAllBookingQuery(
-    `id_hotel=${select.id_hotel}&status=${select.status}`
-  );
-  const { data: oneBooking, isLoading: resultGetInfo } =
-    useGetOneBookingQuery(idBooking);
-  const { data: allHotel } = useGetAllHotelQuery("");
+  const { data: allBooking, isLoading } = useGetAllBookingQuery("");
+  const { data: dataOneBooking, isFetching } = useGetOneBookingQuery(idBooking);
 
-  const transformationBooking =
-    allBooking &&
-    allBooking.data &&
-    allBooking.data.map((item: IBooking) => ({
-      id: item._id,
-      title: item.id_user?.email,
-      start: moment(item.check_in).format("YYYY-MM-DD"),
-      end: moment(item.check_out).format("YYYY-MM-DD"),
-      color:
-        (item.status === "Đã hủy bỏ" && "red") ||
-        (item.status === "Chờ thanh toán" && "orange"),
-    }));
-
-  const transformationHotel =
-    allHotel &&
-    allHotel.data &&
-    allHotel.data.map((item: IHotel) => ({
-      label: item.name,
-      value: item._id,
-    }));
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await refetchAllBooking();
-      setEventsKey((prevKey) => prevKey + 1);
-    };
-
-    fetchData();
-    // eslint-disable-next-line
-  }, [select.status, select.id_hotel]);
-
-  if (isLoading) {
-    return null;
-  }
-
-  // eslint-disable-next-line
-  const handleEventClick = (args: any) => {
-    setIdBooking(args.event._def.publicId);
-    setOpen(true);
+  const handleSearch = (
+    selectedKeys: string[],
+    confirm: FilterDropdownProps["confirm"]
+  ) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
   };
 
-  const onClosed = () => {
-    setOpen(false);
+  const handleSearchCheckIn = (
+    selectedKeys: string[],
+    confirm: FilterDropdownProps["confirm"]
+  ) => {
+    confirm();
+    setSearchTextCheckIn(selectedKeys[0]);
   };
 
-  const onChangeHotel = (value: string) => {
-    setSelect((prev) => ({
-      ...prev,
-      id_hotel: value || "",
-    }));
+  const handleSearchCheckOut = (
+    selectedKeys: string[],
+    confirm: FilterDropdownProps["confirm"]
+  ) => {
+    confirm();
+    setSearchTextCheckOut(selectedKeys[0]);
   };
 
-  const onChangeStatus = (value: string) => {
-    setSelect((prev) => ({
-      ...prev,
-      status: value || "",
-    }));
+  const onClickSearch = (confirm: any, selectedKeys: any) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
   };
 
-  const statusData = [
+  const onClickSearchCheckIn = (confirm: any, selectedKeys: any) => {
+    confirm();
+    setSearchTextCheckIn(selectedKeys[0]);
+  };
+
+  const onClickSearchCheckOut = (confirm: any, selectedKeys: any) => {
+    confirm();
+    setSearchTextCheckOut(selectedKeys[0]);
+  };
+
+  const onClearSearch = (clearFilters: any, confirm: any) => {
+    clearFilters();
+    confirm();
+  };
+
+  const columns: TableProps<IBooking>["columns"] = [
     {
-      label: "Chờ thanh toán",
-      value: "Chờ thanh toán",
+      title: "Tên",
+      dataIndex: "id_user",
+      key: "name",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={searchInput}
+            placeholder="Search name"
+            value={selectedKeys[0]}
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() => handleSearch(selectedKeys as string[], confirm)}
+            style={{ marginBottom: 8, display: "block" }}
+          />
+          <Space>
+            <Button
+              type="default"
+              onClick={() => onClickSearch(confirm, selectedKeys)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
+            </Button>
+            <Button
+              onClick={() => {
+                setSearchText("");
+                onClearSearch(clearFilters, confirm);
+              }}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Reset
+            </Button>
+          </Space>
+        </div>
+      ),
+      filterIcon: (filtered: boolean) => (
+        <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
+      ),
+      onFilter: (value, record) =>
+        record.id_user.id_information.name
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase()),
+      onFilterDropdownOpenChange: (visible) => {
+        if (visible) {
+          setTimeout(() => searchInput.current?.select(), 100);
+        }
+      },
+      render: (text) =>
+        searchText ? (
+          <Highlighter
+            searchWords={[searchText]}
+            textToHighlight={text.id_information.name}
+          />
+        ) : (
+          text.id_information.name
+        ),
     },
     {
-      label: "Đang xử lý",
-      value: "Đang xử lý",
+      title: "Phòng",
+      dataIndex: "list_room",
+      key: "list_room",
+      render: (list_room) => (
+        <Space direction="vertical" size="small">
+          {list_room?.map(
+            (item: { idRoom: IRoom; quantity: number }, index: number) => (
+              <Space key={item.idRoom._id} direction="horizontal">
+                <div>
+                  {index + 1}. {item.idRoom.id_roomType.name}
+                </div>
+                <div>x{item.quantity}</div>
+              </Space>
+            )
+          )}
+        </Space>
+      ),
     },
     {
-      label: "Đã xác nhận",
-      value: "Đã xác nhận",
+      title: "Ngày nhận phòng",
+      dataIndex: "check_in",
+      key: "check_in",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={searchInput}
+            placeholder="Search name"
+            value={selectedKeys[0]}
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() =>
+              handleSearchCheckIn(selectedKeys as string[], confirm)
+            }
+            style={{ marginBottom: 8, display: "block" }}
+          />
+          <Space>
+            <Button
+              type="default"
+              onClick={() => onClickSearchCheckIn(confirm, selectedKeys)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
+            </Button>
+            <Button
+              onClick={() => {
+                setSearchTextCheckIn("");
+                onClearSearch(clearFilters, confirm);
+              }}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Reset
+            </Button>
+          </Space>
+        </div>
+      ),
+      filterIcon: (filtered: boolean) => (
+        <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
+      ),
+      onFilter: (value, record) => {
+        const date = moment(record.check_in).format("DD/MM/YYYY");
+
+        return date
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase());
+      },
+      onFilterDropdownOpenChange: (visible) => {
+        if (visible) {
+          setTimeout(() => searchInput.current?.select(), 100);
+        }
+      },
+      render: (text) => {
+        const date = moment(text).format("DD/MM/YYYY");
+
+        return searchTextCheckIn ? (
+          <Highlighter
+            searchWords={[searchTextCheckIn]}
+            textToHighlight={date}
+          />
+        ) : (
+          date
+        );
+      },
     },
     {
-      label: "Đã hủy bỏ",
-      value: "Đã hủy bỏ",
+      title: "Ngày trả phòng",
+      dataIndex: "check_out",
+      key: "check_out",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={searchInput}
+            placeholder="Search name"
+            value={selectedKeys[0]}
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() =>
+              handleSearchCheckOut(selectedKeys as string[], confirm)
+            }
+            style={{ marginBottom: 8, display: "block" }}
+          />
+          <Space>
+            <Button
+              type="default"
+              onClick={() => onClickSearchCheckOut(confirm, selectedKeys)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
+            </Button>
+            <Button
+              onClick={() => {
+                setSearchTextCheckOut("");
+                onClearSearch(clearFilters, confirm);
+              }}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Reset
+            </Button>
+          </Space>
+        </div>
+      ),
+      filterIcon: (filtered: boolean) => (
+        <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
+      ),
+      onFilter: (value, record) => {
+        const date = moment(record.check_out).format("DD/MM/YYYY");
+
+        return date
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase());
+      },
+      onFilterDropdownOpenChange: (visible) => {
+        if (visible) {
+          setTimeout(() => searchInput.current?.select(), 100);
+        }
+      },
+      render: (text) => {
+        const date = moment(text).format("DD/MM/YYYY");
+
+        return searchTextCheckOut ? (
+          <Highlighter
+            searchWords={[searchTextCheckOut]}
+            textToHighlight={date}
+          />
+        ) : (
+          date
+        );
+      },
     },
     {
-      label: "Vắng mặt",
-      value: "Vắng mặt",
+      title: "Tổng giá",
+      dataIndex: "total_price",
+      key: "total_price",
+      render: (total_price) =>
+        total_price.toLocaleString("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }),
+      sorter: (a, b) => a.total_price - b.total_price,
     },
     {
-      label: "Đã nhận phòng",
-      value: "Đã nhận phòng",
+      title: "Trạng thái thanh toán",
+      dataIndex: "payment_status",
+      key: "payment_status",
+      render: (payment_status) =>
+        payment_status ? "Đã thanh toán" : "Chưa thanh toán",
     },
     {
-      label: "Thành công",
-      value: "Thành công",
+      title: "Trạng thái đơn hàng",
+      dataIndex: "status",
+      key: "status",
+      filters: [
+        {
+          text: "Chờ thanh toán",
+          value: "Chờ thanh toán",
+        },
+        {
+          text: "Đang xử lý",
+          value: "Đang xử lý",
+        },
+        {
+          text: "Đã xác nhận",
+          value: "Đã xác nhận",
+        },
+        {
+          text: "Đã hủy bỏ",
+          value: "Đã hủy bỏ",
+        },
+        {
+          text: "Vắng mặt",
+          value: "Vắng mặt",
+        },
+        {
+          text: "Đã nhận phòng",
+          value: "Đã nhận phòng",
+        },
+        {
+          text: "Thành công",
+          value: "Thành công",
+        },
+      ],
+      onFilter: (value: string, { status }) => status.indexOf(value) === 0,
+    },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (_, { _id, status }) => (
+        <>
+          <Space>
+            <Button
+              disabled={
+                status === "Thành công" ||
+                status === "Đã hủy bỏ" ||
+                status === "Vắng mặt"
+              }
+              onClick={() => {
+                setShowEditModal(true);
+                setIdBooking(_id);
+              }}
+            >
+              Cập nhật
+            </Button>
+          </Space>
+        </>
+      ),
     },
   ];
 
+  const [currentItem, setCurrentItem] = useState(10);
+  const paginationConfig = {
+    pageSize: currentItem,
+    showSizeChanger: true,
+    pageSizeOptions: ["10", "20", "30", "50"],
+    onShowSizeChange: (_current: number, size: number) => {
+      setCurrentItem(size);
+    },
+
+    showTotal: (total: number, range: number[]) =>
+      `${range[0]}-${range[1]} của ${total} mục`,
+  };
+
   return (
     <>
-      <div className="py-5 flex flex-col gap-3">
-        {/* <Select
-          allowClear
-          className="w-1/4"
-          placeholder="Chọn khách sạn"
-          onChange={onChangeHotel}
-          options={transformationHotel}
-        /> */}
-        <Select
-          allowClear
-          className="w-1/4"
-          placeholder="Chọn trạng thái"
-          onChange={onChangeStatus}
-          options={statusData}
-        />
-      </div>
-
-      <FullCalendar
-        height="75vh"
-        key={`calender-${eventsKey}`}
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
-        }}
-        initialView="dayGridMonth"
-        dayMaxEvents={false}
-        locale={viLocale}
-        initialEvents={
-          transformationBooking.length > 0 ? transformationBooking : []
-        }
-        eventClick={handleEventClick}
+      <Table
+        bordered
+        rowKey="_id"
+        columns={columns}
+        dataSource={allBooking?.data}
+        loading={isLoading}
+        pagination={paginationConfig}
       />
 
-      {oneBooking && (
-        <InfoBookingDrawn
-          info={oneBooking?.data}
-          isOpen={open}
-          onClosed={onClosed}
-          loading={resultGetInfo}
-        />
-      )}
+      <EditBookingDrawn
+        key={dataOneBooking?.data._id}
+        isOpenEdit={showEditModal}
+        onCancel={() => setShowEditModal(false)}
+        data={dataOneBooking?.data}
+        loading={isFetching}
+      />
     </>
   );
 };

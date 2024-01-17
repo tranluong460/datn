@@ -9,6 +9,7 @@ export interface IBooking {
   payment_method: string;
   list_room: IRoomBooking[];
   status: string;
+  payment_status: boolean;
   createdAt: string;
   updatedAt: string;
   id_payment: IPaymentBooking;

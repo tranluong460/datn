@@ -62,7 +62,10 @@ const UserMenu = () => {
                   onClick={() => navigate("/auth")}
                 />
                 {listRole.includes(data?.data.role) && (
-                  <MenuItem label="Admin" onClick={() => navigate("/admin")} />
+                  <MenuItem
+                    label="Trang quản trị"
+                    onClick={() => navigate("/admin")}
+                  />
                 )}
 
                 <hr className="border border-divideLight dark:border-divideDark" />

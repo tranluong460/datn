@@ -125,7 +125,7 @@ export const vnPayPaymentReturn = async (req, res) => {
         })
       );
 
-      return res.redirect(`${process.env.PUBLIC_URL}/close-payment`);
+      return res.redirect(`${process.env.PUBLIC_URL}/auth/booking`);
     }
 
     const payment = await PaymentModel.findByIdAndUpdate(
@@ -136,7 +136,7 @@ export const vnPayPaymentReturn = async (req, res) => {
 
     await BookingModel.findByIdAndUpdate(
       { _id: payment.id_booking },
-      { status: "Đang xử lý" },
+      { status: "Đang xử lý", payment_status: true },
       { new: true }
     );
 
@@ -276,13 +276,12 @@ export const checkStatusZaloPay = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const data = await PaymentModel.find()
-      .populate('id_booking')
+    const data = await PaymentModel.find().populate("id_booking");
     if (data.length < 0) {
-      return sendResponse(res, 404, 'Không lấy được dữ liệu')
+      return sendResponse(res, 404, "Không lấy được dữ liệu");
     }
-    return sendResponse(res, 200, 'Lấy dữ liệu thành công', data)
+    return sendResponse(res, 200, "Lấy dữ liệu thành công", data);
   } catch (error) {
-    return sendResponse(res, 500, 'Lỗi server')
+    return sendResponse(res, 500, "Lỗi server");
   }
-}
+};
