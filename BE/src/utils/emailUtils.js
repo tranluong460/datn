@@ -83,7 +83,8 @@ export const sendMailBooking = async (
   name,
   checkInDate,
   checkOutDate,
-  totalPrice
+  totalPrice,
+  nameRoom
 ) => {
   await transporter.sendMail({
     from: process.env.MAIL,
