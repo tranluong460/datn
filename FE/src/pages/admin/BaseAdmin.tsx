@@ -66,23 +66,52 @@ const BaseAdmin = () => {
     } as MenuItem;
   };
 
+  const humanRole = ["Human Resources Manager", "Admin", "Manager"];
+  const reservationRole = ["Reservation Manager", "Admin", "Manager"];
+  const roomRole = ["Room Manager", "Admin", "Manager"];
+  const facilitiesRole = ["Facilities Manager", "Admin", "Manager"];
+
   const menuItems: MenuItem[] = [
     getItem("Dashboard", "/admin", <MdOutlineDashboardCustomize />),
-    // getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />),
-    getItem(
-      "Quản lý phòng",
-      "/admin/room-manager",
-      <MdOutlineRoomPreferences />
-    ),
-    getItem("Quản lý loại phòng", "/admin/roomType-manager", <AiOutlineHdd />),
-    getItem(
-      "Quản lý tiện ích",
-      "/admin/amenities-manager",
-      <PiLightbulbFilament />
-    ),
-    getItem("Quản lý người dùng", "/admin/user-manager", <AiOutlineUser />),
+    (data.data.role === "Admin" &&
+      getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />)) ||
+      null,
+    (roomRole.includes(data.data.role) &&
+      getItem(
+        "Quản lý phòng",
+        "/admin/room-manager",
+        <MdOutlineRoomPreferences />
+      )) ||
+      null,
+    (roomRole.includes(data.data.role) &&
+      getItem(
+        "Quản lý loại phòng",
+        "/admin/roomType-manager",
+        <AiOutlineHdd />
+      )) ||
+      null,
+    (facilitiesRole.includes(data.data.role) &&
+      getItem(
+        "Quản lý tiện ích",
+        "/admin/amenities-manager",
+        <PiLightbulbFilament />
+      )) ||
+      null,
+    (humanRole.includes(data.data.role) &&
+      getItem(
+        "Quản lý người dùng",
+        "/admin/user-manager",
+        <AiOutlineUser />
+      )) ||
+      null,
     getItem("Quản lý bình luận", "/admin/comment-manager", <AiOutlineUser />),
-    getItem("Quản lý Đặt Phòng", "/admin/booking-manager", <TbBrandBooking />),
+    (reservationRole.includes(data.data.role) &&
+      getItem(
+        "Quản lý Đặt Phòng",
+        "/admin/booking-manager",
+        <TbBrandBooking />
+      )) ||
+      null,
   ];
 
   // eslint-disable-next-line

@@ -18,10 +18,37 @@ function App() {
         <Routes>
           <Route path="/*" element={<RouteClient />} />
           <Route path="/admin-login" element={<AdminLogin />} />
-          <Route element={<PrivateRoute allowedRoles={["User", "Admin"]} />}>
+          <Route
+            element={
+              <PrivateRoute
+                allowedRoles={[
+                  "User",
+                  "Admin",
+                  "Manager",
+                  "HumanResources Manager",
+                  "Reservation Manager",
+                  "Room Manager",
+                  "Facilities Manager",
+                ]}
+              />
+            }
+          >
             <Route path="/auth/*" element={<RouteAuth />} />
           </Route>
-          <Route element={<PrivateRoute allowedRoles={["Admin"]} />}>
+          <Route
+            element={
+              <PrivateRoute
+                allowedRoles={[
+                  "Admin",
+                  "Manager",
+                  "Human Resources Manager",
+                  "Reservation Manager",
+                  "Room Manager",
+                  "Facilities Manager",
+                ]}
+              />
+            }
+          >
             <Route path="/admin/*" element={<RouteAdmin />} />
           </Route>
           <Route path="/unauthorized" element={<Page403 />} />

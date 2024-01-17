@@ -22,7 +22,16 @@ export const isAdminMiddleware = async (req, res, next) => {
         select: "-createdAt -updatedAt",
       });
 
-    if (!user || user.role !== "Admin") {
+    const listRole = [
+      "Admin",
+      "Manager",
+      "Reservation Manager",
+      "HumanResources Manager",
+      "Room Manager",
+      "Facilities Manager",
+    ];
+
+    if (!user || !listRole.includes(user.role)) {
       return sendResponse(res, 403, "Bạn không có quyền truy cập");
     }
 

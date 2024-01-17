@@ -30,6 +30,15 @@ const UserMenu = () => {
       });
   };
 
+  const listRole = [
+    "Admin",
+    "Manager",
+    "Reservation Manager",
+    "HumanResources Manager",
+    "Room Manager",
+    "Facilities Manager",
+  ];
+
   return (
     <>
       <div className="relative z-10">
@@ -52,7 +61,7 @@ const UserMenu = () => {
                   label="Thông tin cá nhân"
                   onClick={() => navigate("/auth")}
                 />
-                {data?.data.role === "Admin" && (
+                {listRole.includes(data?.data.role) && (
                   <MenuItem label="Admin" onClick={() => navigate("/admin")} />
                 )}
 
@@ -74,4 +83,3 @@ const UserMenu = () => {
 };
 
 export default UserMenu;
-
