@@ -123,9 +123,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         {/* Add more details as needed */}
       </Modal>
 
-      {info?.status === "Thành công" ? (
-        ""
-      ) : (
+      {info?.status === "Đang xử lý" ? (
         <button
           disabled={info.status === "Đã hủy bỏ"}
           onClick={toggleUpdateBooking}
@@ -133,7 +131,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         >
           Hủy đặt phòng
         </button>
-      )}
+      ) : ('')}
     </li>
   );
 };

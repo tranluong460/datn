@@ -145,7 +145,6 @@ export const create = async (req, res) => {
           }
         })
       );
-
       const data = await BookingModel.create({
         id_user: user._id,
         id_hotel: id_hotel,
@@ -164,8 +163,7 @@ export const create = async (req, res) => {
         user.id_information.name,
         check_in,
         check_out,
-        data.total_price,
-        data.name
+        data.total_price
       );
 
       return sendResponse(res, 200, "Đặt phòng thành công", data);
@@ -206,6 +204,7 @@ export const update = async (req, res) => {
       },
     });
 
+
     if (newBooking.status === "Đã hủy bỏ") {
       const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
       const check_out = moment(newBooking.check_out).format("DD/MM/YYYY");
@@ -221,7 +220,6 @@ export const update = async (req, res) => {
           }
         })
       );
-
       sendMailCancelBooking(
         newBooking.id_user.email,
         newBooking.id_user.id_information.name,
