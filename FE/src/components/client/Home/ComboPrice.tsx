@@ -15,44 +15,6 @@ const ComboPrice = () => {
       setData(hotelData?.data[0].id_room);
     }
   }, [hotelData, isLoading]);
-  // console.log("🚀 ~ ComboPrice ~ hotelData:", Data);
-  // const data = [
-  //   {
-  //     image:
-  //       "https://i.pinimg.com/originals/72/c9/21/72c921591058bba1215c367dc0d91708.jpg",
-  //     title: "Phòng thường",
-  //     price: "1,600,000",
-  //   },
-  //   {
-  //     image: "https://vr360.com.vn/uploads/images/anh%20chup%20khach%20san.jpg",
-  //     title: "Phòng VIP 1",
-  //     price: "1,600,000",
-  //   },
-  //   {
-  //     image:
-  //       "https://i.pinimg.com/originals/90/82/a3/9082a352f8d7e45269ff1e1f347088bc.jpg",
-  //     title: "Phòng VIP 2",
-  //     price: "1,600,000",
-  //   },
-  //   {
-  //     image:
-  //       "https://i.pinimg.com/564x/06/18/33/06183306e1639f2a43281cdd84137f2a.jpg",
-  //     title: "Phòng đơn",
-  //     price: "1,600,000",
-  //   },
-  //   {
-  //     image:
-  //       "https://i.pinimg.com/736x/62/98/58/629858972ff9acd7bbeb38d71fbc625d.jpg",
-  //     title: "Phòng đơn",
-  //     price: "1,600,000",
-  //   },
-  //   {
-  //     image:
-  //       "https://i.pinimg.com/564x/98/cc/af/98ccafe559fa68d13def7d81b468c83d.jpg",
-  //     title: "Phòng đơn",
-  //     price: "1,600,000",
-  //   },
-  // ];
 
   const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(0);

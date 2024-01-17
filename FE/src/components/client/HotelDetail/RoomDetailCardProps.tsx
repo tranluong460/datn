@@ -10,6 +10,7 @@ type RoomDetailCardProps = {
 };
 
 const RoomDetailCard = ({ room, onCloseDetail }: RoomDetailCardProps) => {
+  console.log(room)
   const [currentImage, setCurrentImage] = useState<string>(room?.images[0].url);
 
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
