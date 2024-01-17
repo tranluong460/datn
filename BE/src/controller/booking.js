@@ -158,7 +158,8 @@ export const create = async (req, res) => {
         user.id_information.name,
         check_in,
         check_out,
-        data.total_price
+        data.total_price,
+        data.name
       );
 
       return sendResponse(res, 200, "Đặt phòng thành công", data);

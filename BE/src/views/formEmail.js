@@ -118,7 +118,7 @@ export const formResetPassword = (
           <p>Nếu bạn không thực hiện yêu cầu này, vui lòng liên hệ chúng tôi ngay lập tức qua địa chỉ email
             <a href="mailto:support@kinghotel.com" style="color: #007bff; text-decoration: none;">support@kinghotel.com</a>
             hoặc số điện thoại 1800-203-203.
-          </p> 
+          </p>
           <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
           <p>Trân trọng,</p>
           <p>King Hotel</p>
@@ -136,7 +136,7 @@ export const emailBooking = (name, checkInDate, checkOutDate, totalPrice) => {
               Xin chào, ${name}!
           </div>
           <div style="font-size: 16px; color: #555555; line-height: 1.6;">
-              <p>Cảm ơn bạn đã chọn King Hotel để trải nghiệm dịch vụ của chúng tôi!</p>
+              <p>Cảm ơn bạn đã chọn SevenTeen Hotel để trải nghiệm dịch vụ của chúng tôi!</p>
               <p>Chúng tôi xác nhận rằng đơn đặt phòng của bạn đã được xử lý thành công.</p>
               <p>Chi tiết đặt phòng:</p>
               <ul style="list-style-type: none; padding: 0; margin: 0;">
@@ -182,7 +182,7 @@ export const emailCancelBooking = (name, check_in, check_out) => {
 };
 
 export const emailSuccessBooking = (name) => {
-  return /*html*/ `
+  return `
     <div style="font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 10px;">
       <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); text-align: center; margin-top: 30px; margin-bottom: 30px;">
         <div style="font-size: 24px; font-weight: bold; color: #333333; margin-bottom: 10px;">
