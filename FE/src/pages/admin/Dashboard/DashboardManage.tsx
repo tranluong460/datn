@@ -19,6 +19,7 @@ import {
 import { useEffect, useState } from "react";
 import { DatePicker } from "antd";
 import moment from "moment";
+import { RecentRooms, Roomsheavilybooked } from "../../../components";
 
 const { RangePicker } = DatePicker;
 
@@ -62,7 +63,7 @@ const DashboardManage = () => {
       });
   };
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", '#33FF99', '#33CC99', '#FF3300'];
   const RADIAN = Math.PI / 180;
 
   const renderCustomizedLabel = ({
@@ -149,6 +150,7 @@ const DashboardManage = () => {
 
   return (
     <>
+      <h1 className="py-3 px-2 text-lg font-semibold">Thống kê doanh thu</h1>
       <div>
         <RangePicker onChange={onChange} className="mb-10" allowClear={false} />
 
@@ -231,7 +233,14 @@ const DashboardManage = () => {
             </ResponsiveContainer>
           )}
         </div>
-
+        <div className="flex gap-7 mt-3">
+          <RecentRooms />
+          <Roomsheavilybooked />
+        </div>
+        <div className="mt-5">
+          <h1 className="text-lg font-semibold">Thống kê tỉ lệ trạng thái khi đặt phòng của khách hàng
+          </h1>
+        </div>
         {totalStatus && totalStatus.data && (
           <ResponsiveContainer width="100%" height={350}>
             <PieChart width={400} height={400}>
@@ -258,6 +267,7 @@ const DashboardManage = () => {
           </ResponsiveContainer>
         )}
       </div>
+
     </>
   );
 };

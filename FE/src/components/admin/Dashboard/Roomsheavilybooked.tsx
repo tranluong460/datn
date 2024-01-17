@@ -17,7 +17,7 @@ function Roomsheavilybooked() {
       const bookedRoom = bookings?.data?.filter((booking: any) => {
         const bookingDate = new Date(booking.createdAt);
         return (
-          booking.status === "Thành Công" &&
+          booking.status === "Thành công" &&
           bookingDate >= startDate &&
           bookingDate <= endDate
         );
@@ -54,7 +54,7 @@ function Roomsheavilybooked() {
     } else {
       const bookedRoom = bookings?.data?.filter((booking: any) => {
         return (
-          booking.status === "Thành Công"
+          booking.status === "Thành công"
         );
       })
       // console.log(bookedRoom)
@@ -115,26 +115,23 @@ function Roomsheavilybooked() {
         </button>
       </div>
       <div className="mt-4 flex flex-col gap-2">
-        {topCustomers.length > 0 ? (
-          <table className="min-w-full border border-gray-300">
-            <thead>
-              <tr className="bg-gray-100">
-                <th className="py-2 px-4 border-b">Tên khách hàng</th>
-                <th className="py-2 px-4 border-b">Số lượng đặt phòng</th>
+        <table className="min-w-full border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="py-2 px-4 border-b">Tên khách hàng</th>
+              <th className="py-2 px-4 border-b">Số lượng đặt phòng</th>
+            </tr>
+          </thead>
+          <tbody>
+            {topCustomers.map((customer: any) => (
+              <tr key={customer.id} className="border-b text-center">
+                <td className="py-2 px-4">{customer.name}</td>
+                <td className="py-2 px-4">{customer.totalRooms}</td>
               </tr>
-            </thead>
-            <tbody>
-              {topCustomers.map((customer: any) => (
-                <tr key={customer.id} className="border-b text-center">
-                  <td className="py-2 px-4">{customer.name}</td>
-                  <td className="py-2 px-4">{customer.totalRooms}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <div className="mt-2 text-base text-center"><h2>Không có dữ liệu</h2></div>
-        )}
+            ))}
+          </tbody>
+        </table>
+
       </div>
     </div>
   );

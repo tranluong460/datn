@@ -25,7 +25,7 @@ function App() {
                   "User",
                   "Admin",
                   "Manager",
-                  "HumanResources Manager",
+                  "Human Resources Manager",
                   "Reservation Manager",
                   "Room Manager",
                   "Facilities Manager",

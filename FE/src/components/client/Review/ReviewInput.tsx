@@ -34,9 +34,9 @@ const ReviewInput = ({ data, userData }: any) => {
               <span>{moment(comment?.createdAt).format("DD-MM-YYYY")}</span>
             </div>
 
-            <div className="flex gap-24">
-              <Rate disabled defaultValue={comment?.rating} className="flex" />
-              {comment?.comment}1
+            <div className="">
+              <Rate disabled defaultValue={comment?.rating} />
+              <p className="mx-1"> {comment?.comment}</p>
             </div>
 
             {userData?.data && userData?.data?._id == comment?.id_user?._id ? (
