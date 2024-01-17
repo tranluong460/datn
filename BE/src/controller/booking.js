@@ -23,22 +23,24 @@ export const getAll = async (req, res) => {
       query.status = req.query.status;
     }
 
-    const bookingList = await BookingModel.find(query).populate({
-      path: "id_user",
-      populate: {
-        path: 'id_information',
-        model: 'Information',
-      },
-    }).populate({
-      path: "list_room",
-      populate: {
-        path: "idRoom",
+    const bookingList = await BookingModel.find(query)
+      .populate({
+        path: "id_user",
         populate: {
-          path: "id_roomType",
-          model: "RoomType" // Thay "RoomTypeModel" bằng tên của model RoomType
-        }
-      }
-    });
+          path: "id_information",
+          model: "Information",
+        },
+      })
+      .populate({
+        path: "list_room",
+        populate: {
+          path: "idRoom",
+          populate: {
+            path: "id_roomType",
+            model: "RoomType", // Thay "RoomTypeModel" bằng tên của model RoomType
+          },
+        },
+      });
 
     if (!bookingList || bookingList.length === 0) {
       return sendResponse(res, 200, "Không có danh sách đặt phòng", []);
@@ -248,6 +250,143 @@ export const update = async (req, res) => {
         : "Cập nhật trạng thái thành công",
       newBooking
     );
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+export const calculateTotalAmountDay = async (req, res) => {
+  try {
+    const { startDate, endDate } = req.body;
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const datesInRange = [];
+
+    const currentDate = new Date(start);
+    while (currentDate <= end) {
+      datesInRange.push(new Date(currentDate));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    const result = await BookingModel.aggregate([
+      {
+        $match: {
+          status: { $nin: ["Đã hủy bỏ"] },
+          createdAt: {
+            $gte: new Date(startDate),
+            $lte: new Date(endDate),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          totalAmount: { $sum: "$total_price" },
+        },
+      },
+      {
+        $sort: { _id: 1 },
+      },
+    ]);
+
+    const logData = {};
+
+    result.forEach((item) => {
+      logData[item._id] = item.totalAmount;
+    });
+
+    datesInRange.forEach((date) => {
+      const dateString = date.toISOString().split("T")[0];
+      if (!logData.hasOwnProperty(dateString)) {
+        logData[dateString] = 0;
+      }
+    });
+
+    const dailyTotals = datesInRange.map((date) => {
+      const dateString = date.toISOString().split("T")[0];
+      return {
+        name: dateString,
+        total: logData[dateString],
+      };
+    });
+
+    return sendResponse(res, 200, "Thông tin tổng giá theo ngày", dailyTotals);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+export const calculateTotalAmountMonth = async (req, res) => {
+  try {
+    const { startYear, endYear } = req.body;
+
+    const startDate = new Date(`${startYear}-01T00:00:00.000Z`);
+    const endDate = new Date(`${endYear}-12-31T23:59:59.999Z`);
+
+    const result = await BookingModel.aggregate([
+      {
+        $match: {
+          status: { $nin: ["Đã hủy bỏ"] },
+          createdAt: {
+            $gte: startDate,
+            $lte: endDate,
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
+          totalAmount: { $sum: "$total_price" },
+        },
+      },
+    ]);
+
+    const finalData = [];
+    const currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      const formattedMonth = currentDate.toISOString().slice(0, 7);
+
+      const foundMonth = result.find((item) => item._id === formattedMonth);
+
+      if (currentDate >= startDate && currentDate <= endDate) {
+        if (foundMonth) {
+          finalData.push({
+            name: formattedMonth,
+            total: foundMonth.totalAmount,
+          });
+        } else {
+          finalData.push({ name: formattedMonth, total: 0 });
+        }
+      }
+
+      currentDate.setMonth(currentDate.getMonth() + 1);
+    }
+
+    return sendResponse(res, 200, "Thông tin tổng giá theo tháng", finalData);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+export const getTotalStatus = async (req, res) => {
+  try {
+    let matchCondition = {};
+
+    const orderStatusCounts = await BookingModel.aggregate([
+      { $match: matchCondition },
+      { $group: { _id: "$status", value: { $sum: 1 } } },
+      { $project: { name: "$_id", value: 1, _id: 0 } },
+    ]);
+
+    return sendResponse(res, 200, "TỔng trạng thái", orderStatusCounts);
   } catch (error) {
     console.error(error);
 

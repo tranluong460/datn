@@ -79,6 +79,32 @@ export const bookingApi = createApi({
       }),
       providesTags: ["Booking"],
     }),
+    getTotalStatus: builder.query({
+      query: () => ({
+        url: "/booking/getTotalStatus",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Booking"],
+    }),
+    calculateTotalAmountDay: builder.mutation({
+      query: (data) => ({
+        url: "/booking/calculateTotalAmountDay",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["Booking"],
+    }),
+    calculateTotalAmountMonth: builder.mutation({
+      query: (data) => ({
+        url: "/booking/calculateTotalAmountMonth",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["Booking"],
+    }),
   }),
 });
 
@@ -91,4 +117,7 @@ export const {
   useZaloPayPaymentMutation,
   useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
+  useCalculateTotalAmountDayMutation,
+  useCalculateTotalAmountMonthMutation,
+  useGetTotalStatusQuery,
 } = bookingApi;

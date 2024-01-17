@@ -31,6 +31,9 @@ import {
   useZaloPayPaymentMutation,
   useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
+  useCalculateTotalAmountDayMutation,
+  useCalculateTotalAmountMonthMutation,
+  useGetTotalStatusQuery,
 } from "./booking";
 
 // Hotel API
@@ -107,6 +110,9 @@ export {
   useZaloPayPaymentMutation,
   useCheckStatusZaloPayMutation,
   useGetBookingByUserQuery,
+  useCalculateTotalAmountDayMutation,
+  useCalculateTotalAmountMonthMutation,
+  useGetTotalStatusQuery,
   hotelApi,
   useGetAllHotelQuery,
   useGetOneHotelQuery,
