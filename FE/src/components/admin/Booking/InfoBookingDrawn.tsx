@@ -20,7 +20,7 @@ const InfoBookingDrawn = ({
   onClosed,
 }: InfoBookingDrawnProps) => {
   const [openDrawnBookingRoom, setOpenDrawnBookingRoom] = useState(false);
-
+  console.log(info);
   const items: DescriptionsProps["items"] = [
     {
       key: "1",

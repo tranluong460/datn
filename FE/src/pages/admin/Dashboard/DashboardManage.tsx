@@ -19,6 +19,7 @@ import {
 import { useEffect, useState } from "react";
 import { DatePicker } from "antd";
 import moment from "moment";
+import { RecentRooms, Roomsheavilybooked } from "../../../components";
 
 const { RangePicker } = DatePicker;
 
@@ -149,6 +150,7 @@ const DashboardManage = () => {
 
   return (
     <>
+      <h1 className="py-3 px-2 text-lg font-semibold">Thống kê doanh thu</h1>
       <div>
         <RangePicker onChange={onChange} className="mb-10" allowClear={false} />
 
@@ -231,7 +233,10 @@ const DashboardManage = () => {
             </ResponsiveContainer>
           )}
         </div>
-
+        <div className="flex gap-7 mt-3">
+          <RecentRooms />
+          <Roomsheavilybooked />
+        </div>
         {totalStatus && totalStatus.data && (
           <ResponsiveContainer width="100%" height={350}>
             <PieChart width={400} height={400}>
@@ -258,6 +263,7 @@ const DashboardManage = () => {
           </ResponsiveContainer>
         )}
       </div>
+
     </>
   );
 };
