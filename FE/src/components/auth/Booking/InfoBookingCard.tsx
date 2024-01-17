@@ -78,13 +78,16 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
           </button>
         )}
 
-      <button
-        disabled={info.status === "Đã hủy bỏ"}
-        onClick={toggleUpdateBooking}
-        className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
-      >
-        Hủy đặt phòng
-      </button>
+
+      {info.status == 'Đang xử lý' && (
+        <button
+          disabled={info.status == 'Đã hủy bỏ'}
+          onClick={toggleUpdateBooking}
+          className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
+        >
+          Hủy đặt phòng
+        </button>
+      )}
     </li>
   );
 };
