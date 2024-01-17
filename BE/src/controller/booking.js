@@ -158,16 +158,14 @@ export const create = async (req, res) => {
       const check_in = moment(data.check_in).format("DD/MM/YYYY");
       const check_out = moment(data.check_out).format("DD/MM/YYYY");
 
-      if (data.status == 'Đang xử lý') {
-        sendMailBooking(
-          user.email,
-          user.id_information.name,
-          check_in,
-          check_out,
-          data.total_price
-        );
+      sendMailBooking(
+        user.email,
+        user.id_information.name,
+        check_in,
+        check_out,
+        data.total_price
+      );
 
-      }
       return sendResponse(res, 200, "Đặt phòng thành công", data);
     });
   } catch (error) {
@@ -205,15 +203,7 @@ export const update = async (req, res) => {
         path: "id_information",
       },
     });
-    if (newBooking.status == 'Đang xử lý ') {
-      sendMailBooking(
-        newBooking.id_user.email,
-        newBooking.id_user.id_information.name,
-        newBooking.check_in,
-        newBooking.check_out,
-        newBooking.total_price
-      );
-    }
+
 
     if (newBooking.status === "Đã hủy bỏ") {
       const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
