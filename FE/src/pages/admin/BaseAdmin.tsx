@@ -68,13 +68,21 @@ const BaseAdmin = () => {
 
   const menuItems: MenuItem[] = [
     getItem("Dashboard", "/admin", <MdOutlineDashboardCustomize />),
-    getItem("Quản lý Đặt Phòng", "/admin/booking-manager", <TbBrandBooking />),
-    getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />),
-    getItem("Phòng", "/admin/room-manager", <MdOutlineRoomPreferences />),
-    getItem("Loại phòng", "/admin/roomType-manager", <AiOutlineHdd />),
-    getItem("Tiện ích", "/admin/amenities-manager", <PiLightbulbFilament />),
-    getItem("Người dùng", "/admin/user-manager", <AiOutlineUser />),
+    // getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />),
+    getItem(
+      "Quản lý phòng",
+      "/admin/room-manager",
+      <MdOutlineRoomPreferences />
+    ),
+    getItem("Quản lý loại phòng", "/admin/roomType-manager", <AiOutlineHdd />),
+    getItem(
+      "Quản lý tiện ích",
+      "/admin/amenities-manager",
+      <PiLightbulbFilament />
+    ),
+    getItem("Quản lý người dùng", "/admin/user-manager", <AiOutlineUser />),
     getItem("Quản lý bình luận", "/admin/comment-manager", <AiOutlineUser />),
+    getItem("Quản lý Đặt Phòng", "/admin/booking-manager", <TbBrandBooking />),
   ];
 
   // eslint-disable-next-line
