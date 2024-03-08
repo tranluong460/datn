@@ -2,21 +2,30 @@ import { IoBagHandle } from "react-icons/io5";
 import { useGetAllBookingQuery, useGetAllRoomQuery } from "../../../api";
 
 const DashboardStatsGrid = () => {
-  const { data: rooms } = useGetAllRoomQuery('')
-  const { data: bookings } = useGetAllBookingQuery('')
+  const { data: rooms } = useGetAllRoomQuery("");
+  const { data: bookings } = useGetAllBookingQuery("");
   // Phòng trống
-  const emtyRoom = rooms?.data?.filter((room: any) => room.status == 'Có sẵn')
+  const emtyRoom = rooms?.data?.filter((room: any) => room.status == "Có sẵn");
   const totalEmptyRoomQuantity = emtyRoom?.reduce((acc: number, room: any) => {
     return acc + (room.quantity || 0);
   }, 0);
   // Phòng đã được đặt
-  const bookedRoom = bookings?.data?.filter((booking: any) => booking.status === 'Thành Công');
-  const totalBookRoomQuantity = bookedRoom?.reduce((acc: number, booking: any) => {
-    const roomQuantities = booking.list_room?.map((room: any) => room.quantity) || [];
-    const bookingTotalQuantity = roomQuantities.reduce((roomAcc: number, roomQuantity: number) => roomAcc + (roomQuantity || 0), 0);
-    return acc + bookingTotalQuantity;
-  }, 0);
-  // console.log(bookedRoom);
+  const bookedRoom = bookings?.data?.filter(
+    (booking: any) => booking.status === "Thành Công"
+  );
+  const totalBookRoomQuantity = bookedRoom?.reduce(
+    (acc: number, booking: any) => {
+      const roomQuantities =
+        booking.list_room?.map((room: any) => room.quantity) || [];
+      const bookingTotalQuantity = roomQuantities.reduce(
+        (roomAcc: number, roomQuantity: number) =>
+          roomAcc + (roomQuantity || 0),
+        0
+      );
+      return acc + bookingTotalQuantity;
+    },
+    0
+  );
 
   // doanh thu
   // const paymentRoom = payment?.data?.filter((booking: any) => booking?.status == 'Thành công')

@@ -33,6 +33,7 @@ const CreateHotelModal = ({
 
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
   const { data: allProvinces } = useGetAllProvincesQuery("");
+
   const [createHotel, resultCreate] = useCreateHotelMutation();
 
   const onFinish = (data: IHotel) => {
@@ -127,16 +128,16 @@ const CreateHotelModal = ({
             >
               <Select>
                 {allProvinces &&
-                  allProvinces.map(
+                  allProvinces.results.map(
                     (
                       item: {
-                        name: string;
-                        code: string;
+                        province_name: string;
+                        province_id: string;
                       },
                       index: number
                     ) => (
-                      <Option key={item.code} value={item.code}>
-                        {index + 1}, {item.name}
+                      <Option key={item.province_id} value={item.province_id}>
+                        {index + 1}, {item.province_name}
                       </Option>
                     )
                   )}

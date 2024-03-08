@@ -7,7 +7,6 @@ import { TbWashHand, TbWashMachine, TbGlassFull } from "react-icons/tb";
 import { IoBan } from "react-icons/io5";
 
 export default function RoomAmenities({ amenities }: any) {
-  console.log("🚀 ~ RoomAmenities ~ amenities:", amenities);
   return (
     <div className="grid grid-cols-2 gap-2">
       <div className="flex items-center gap-1">

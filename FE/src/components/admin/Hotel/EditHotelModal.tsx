@@ -151,16 +151,19 @@ const EditHotelModal = ({
               >
                 <Select>
                   {allProvinces &&
-                    allProvinces.map(
+                    allProvinces.results.map(
                       (
                         item: {
-                          name: string;
-                          code: number;
+                          province_name: string;
+                          province_id: string;
                         },
                         index: number
                       ) => (
-                        <Option key={item.code} value={item.code}>
-                          {index + 1}, {item.name}
+                        <Option
+                          key={parseInt(item.province_id)}
+                          value={parseInt(item.province_id)}
+                        >
+                          {index + 1}, {item.province_name}
                         </Option>
                       )
                     )}

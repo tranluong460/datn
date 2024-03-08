@@ -37,8 +37,6 @@ const DashboardManage = () => {
       endDate: dateString[1],
     };
 
-    console.log(date);
-
     const month = {
       startYear: moment(dateString[0]).format("YYYY"),
       endYear: moment(dateString[1]).format("YYYY"),
@@ -63,7 +61,15 @@ const DashboardManage = () => {
       });
   };
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", '#33FF99', '#33CC99', '#FF3300'];
+  const COLORS = [
+    "#0088FE",
+    "#00C49F",
+    "#FFBB28",
+    "#FF8042",
+    "#33FF99",
+    "#33CC99",
+    "#FF3300",
+  ];
   const RADIAN = Math.PI / 180;
 
   const renderCustomizedLabel = ({
@@ -238,7 +244,8 @@ const DashboardManage = () => {
           <Roomsheavilybooked />
         </div>
         <div className="mt-5">
-          <h1 className="text-lg font-semibold">Thống kê tỉ lệ trạng thái khi đặt phòng của khách hàng
+          <h1 className="text-lg font-semibold">
+            Thống kê tỉ lệ trạng thái khi đặt phòng của khách hàng
           </h1>
         </div>
         {totalStatus && totalStatus.data && (
@@ -267,7 +274,6 @@ const DashboardManage = () => {
           </ResponsiveContainer>
         )}
       </div>
-
     </>
   );
 };

@@ -33,7 +33,6 @@ const RoomTypeManage = () => {
       .catch((error) => {
         message.error(error.data.message);
       });
-    console.log(value);
   };
   // const [deleteRoomType] = useDeleteRoomTypeMutation();
 

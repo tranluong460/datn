@@ -11,7 +11,6 @@ type HotelCardProps = {
 };
 
 const HotelCard = ({ hotel }: HotelCardProps) => {
-  console.log("🚀 ~ HotelCard ~ hotel:", hotel);
   const location = useLocation();
   const navigate = useNavigate();
 

@@ -16,7 +16,6 @@ const RoomManager = () => {
 
   const { data: oneRoom, isFetching } = useGetOneRoomQuery(idRoomEdit);
   const { data: allRoom, isLoading } = useGetAllRoomQuery("");
-  console.log("🚀 ~ RoomManager ~ allRoom:", allRoom);
 
   const onClosedRoomDrawn = () => {
     setOpenRoomDrawn(false);

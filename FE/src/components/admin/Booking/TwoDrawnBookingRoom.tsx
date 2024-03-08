@@ -13,8 +13,6 @@ const TwoDrawnBookingRoom = ({
   openDrawnRoom,
   isClosedDrawnBookingRoom,
 }: TwoDrawnBookingRoomProps) => {
-  console.log(dataBookingRooms);
-
   return (
     <Drawer
       title="Thông tin đặt phòng"

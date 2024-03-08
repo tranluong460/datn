@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import { useGetAllBookingQuery } from "../../../api";
 import { DatePicker } from "antd";
 
-
-
 function Roomsheavilybooked() {
   const { RangePicker } = DatePicker;
   const [selectedRange, setSelectedRange] = useState(null);
-  const { data: bookings } = useGetAllBookingQuery('');
+  const { data: bookings } = useGetAllBookingQuery("");
   const [topCustomers, setTopCustomers] = useState([]);
-
 
   const handleCick = () => {
     if (selectedRange && bookings?.data) {
@@ -21,26 +18,30 @@ function Roomsheavilybooked() {
           bookingDate >= startDate &&
           bookingDate <= endDate
         );
-      })
+      });
       // Tính tổng số lượng phòng của từng khách hàng
-      const customerBookings = bookedRoom.reduce((acc: any, booking: any) => {
-        const customerId = booking.id_user?._id; // Thay thế bằng thuộc tính thực tế đại diện cho ID khách hàng
-        const customerName = booking.id_user?.id_information?.name; // Thêm thông tin tên khách hàng
+      const customerBookings =
+        bookedRoom.reduce((acc: any, booking: any) => {
+          const customerId = booking.id_user?._id; // Thay thế bằng thuộc tính thực tế đại diện cho ID khách hàng
+          const customerName = booking.id_user?.id_information?.name; // Thêm thông tin tên khách hàng
 
-        // Tính tổng số lượng phòng trong đặt hàng
-        const totalRoomsInBooking = booking?.list_room?.reduce((sum: any, room: any) => sum + room.quantity, 0);
+          // Tính tổng số lượng phòng trong đặt hàng
+          const totalRoomsInBooking = booking?.list_room?.reduce(
+            (sum: any, room: any) => sum + room.quantity,
+            0
+          );
 
-        if (!acc[customerId]) {
-          acc[customerId] = {
-            id: customerId,
-            name: customerName,
-            totalRooms: 0,
-          };
-        }
+          if (!acc[customerId]) {
+            acc[customerId] = {
+              id: customerId,
+              name: customerName,
+              totalRooms: 0,
+            };
+          }
 
-        acc[customerId].totalRooms += totalRoomsInBooking; // Thêm số lượng phòng đặt vào tổng số phòng
-        return acc;
-      }, {}) || {};
+          acc[customerId].totalRooms += totalRoomsInBooking; // Thêm số lượng phòng đặt vào tổng số phòng
+          return acc;
+        }, {}) || {};
 
       // Sắp xếp khách hàng theo số lượng phòng đặt giảm dần
       const sortedCustomers: any = Object.values(customerBookings).sort(
@@ -53,29 +54,29 @@ function Roomsheavilybooked() {
       setTopCustomers(top5Customers);
     } else {
       const bookedRoom = bookings?.data?.filter((booking: any) => {
-        return (
-          booking.status === "Thành công"
-        );
-      })
-      // console.log(bookedRoom)
+        return booking.status === "Thành công";
+      });
       // Tính tổng số lượng phòng của từng khách hàng
-      const customerBookings = bookedRoom?.reduce((acc: any, booking: any) => {
-        const customerId = booking.id_user?._id;
-        const customerName = booking.id_user?.id_information?.name;
-        const totalRoomsInBooking = booking.list_room.reduce((sum: any, room: any) => sum + room.quantity, 0);
+      const customerBookings =
+        bookedRoom?.reduce((acc: any, booking: any) => {
+          const customerId = booking.id_user?._id;
+          const customerName = booking.id_user?.id_information?.name;
+          const totalRoomsInBooking = booking.list_room.reduce(
+            (sum: any, room: any) => sum + room.quantity,
+            0
+          );
 
-        if (!acc[customerId]) {
-          acc[customerId] = {
-            id: customerId,
-            name: customerName,
-            totalRooms: 0,
-          };
-        }
+          if (!acc[customerId]) {
+            acc[customerId] = {
+              id: customerId,
+              name: customerName,
+              totalRooms: 0,
+            };
+          }
 
-        acc[customerId].totalRooms += totalRoomsInBooking;
-        return acc;
-      }, {}) || {};
-
+          acc[customerId].totalRooms += totalRoomsInBooking;
+          return acc;
+        }, {}) || {};
 
       // Sắp xếp khách hàng theo số lượng phòng đặt giảm dần
       const sortedCustomers: any = Object.values(customerBookings).sort(
@@ -87,12 +88,11 @@ function Roomsheavilybooked() {
 
       setTopCustomers(top5Customers);
     }
-  }
+  };
 
   useEffect(() => {
-    handleCick()
+    handleCick();
   }, [bookings]);
-  // console.log(topCustomers);
   return (
     <div className="w-[30rem] bg-white p-4 rounded-sm border border-gray-200">
       <strong className="text-gray-700 font-medium">
@@ -108,9 +108,12 @@ function Roomsheavilybooked() {
           id="dateRangeInput"
           value={selectedRange}
           onChange={(dates: any) => setSelectedRange(dates)}
-          style={{ width: '70%' }}
+          style={{ width: "70%" }}
         />
-        <button onClick={handleCick} className="ml-2 bg-blue-400 text-white p-1">
+        <button
+          onClick={handleCick}
+          className="ml-2 bg-blue-400 text-white p-1"
+        >
           Tìm kiếm
         </button>
       </div>
@@ -131,7 +134,6 @@ function Roomsheavilybooked() {
             ))}
           </tbody>
         </table>
-
       </div>
     </div>
   );

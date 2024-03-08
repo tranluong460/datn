@@ -4,7 +4,7 @@ export const provincesApi = createApi({
   reducerPath: "provincesApi",
   tagTypes: ["Provinces"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://provinces.open-api.vn/api/",
+    baseUrl: "https://vapi.vnappmob.com/api/province/",
   }),
   endpoints: (builder) => ({
     getAllProvinces: builder.query({

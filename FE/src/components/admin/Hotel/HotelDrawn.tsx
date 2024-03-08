@@ -38,7 +38,7 @@ const HotelDrawn = ({
       imgList.push(item.url);
     });
 
-  const city = getCityByCode(data?.data?.city, allProvinces);
+  const city = getCityByCode(data?.data?.city, allProvinces.results);
 
   const items: DescriptionsProps["items"] = [
     {
