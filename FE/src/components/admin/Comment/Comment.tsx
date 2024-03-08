@@ -73,7 +73,7 @@ const Comment = () => {
       dataIndex: "id_user",
       key: "id_user",
       render: (user) => {
-        return <p className="font-bold">{user.email}</p>;
+        return <p className="font-bold">{user?.email}</p>;
       },
     },
     {

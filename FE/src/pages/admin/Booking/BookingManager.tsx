@@ -142,11 +142,11 @@ const BookingManager = () => {
         <Space direction="vertical" size="small">
           {list_room?.map(
             (item: { idRoom: IRoom; quantity: number }, index: number) => (
-              <Space key={item.idRoom._id} direction="horizontal">
+              <Space key={item?.idRoom?._id} direction="horizontal">
                 <div>
-                  {index + 1}. {item.idRoom.id_roomType.name}
+                  {index + 1}. {item?.idRoom?.id_roomType?.name}
                 </div>
-                <div>x{item.quantity}</div>
+                <div>x{item?.quantity}</div>
               </Space>
             )
           )}

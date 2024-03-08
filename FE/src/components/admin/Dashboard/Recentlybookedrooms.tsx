@@ -25,7 +25,7 @@ export default function RecentRooms() {
 
       for (const booking of roomBooking) {
         for (const room of booking?.list_room || []) {
-          const roomId = room.idRoom._id; // Giả sử roomId là một trường duy nhất để định danh phòng
+          const roomId = room.idRoom?._id; // Giả sử roomId là một trường duy nhất để định danh phòng
           const quantity = room.quantity || 0; // Số lượng mặc định là 1 nếu không có trường quantity
 
           // Kiểm tra xem đã có phòng với roomId trong roomCountMap hay chưa
@@ -33,8 +33,8 @@ export default function RecentRooms() {
             // Nếu chưa có, tạo một đối tượng mới cho roomId
             roomCountMap[roomId] = {
               count: 0,
-              name: room.idRoom.id_roomType?.name,
-              price: room.idRoom.price,
+              name: room?.idRoom?.id_roomType?.name,
+              price: room?.idRoom?.price,
             };
           }
 
@@ -63,15 +63,15 @@ export default function RecentRooms() {
       const roomCountMap: any = {};
       for (const booking of roomBooking || []) {
         for (const room of booking?.list_room || []) {
-          const roomId = room.idRoom._id; // Giả sử roomId là một trường duy nhất để định danh phòng
+          const roomId = room?.idRoom?._id; // Giả sử roomId là một trường duy nhất để định danh phòng
           const quantity = room.quantity || 0; // Số lượng mặc định là 1 nếu không có trường quantity
           // Kiểm tra xem đã có phòng với roomId trong roomCountMap hay chưa
           if (!roomCountMap[roomId]) {
             // Nếu chưa có, tạo một đối tượng mới cho roomId
             roomCountMap[roomId] = {
               count: 0,
-              name: room.idRoom.id_roomType?.name,
-              price: room.idRoom.price,
+              name: room.idRoom?.id_roomType?.name,
+              price: room.idRoom?.price,
             };
           }
 
@@ -135,14 +135,14 @@ export default function RecentRooms() {
             {top5.map((booking: any, index: number) => (
               <tr key={index} className="border-b">
                 <td className=" py-2  text-[red] text-center">{index + 1}</td>
-                <td className="text-center">{booking.name}</td>
+                <td className="text-center">{booking?.name}</td>
                 <td className="text-center">
                   {booking.price?.toLocaleString("vi-VN", {
                     style: "currency",
                     currency: "VND",
                   })}
                 </td>
-                <td className="text-center">{booking.count}</td>
+                <td className="text-center">{booking?.count}</td>
                 <td className="text-center">
                   {booking.total?.toLocaleString("vi-VN", {
                     style: "currency",
