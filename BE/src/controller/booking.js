@@ -129,12 +129,6 @@ export const create = async (req, res) => {
   const user = req.user;
   const { list_room, check_in, check_out } = req.body;
 
-  const specificIDate = new Date(check_in);
-  const specificODate = new Date(check_out);
-
-  console.log(specificIDate.toISOString());
-  console.log(specificODate.toISOString());
-
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
       let id_hotel;
@@ -211,14 +205,14 @@ export const create = async (req, res) => {
         return sendResponse(res, 404, "Đặt phòng thất bại");
       }
 
-      // const check_in = moment(data.check_in).format("DD/MM/YYYY");
-      // const check_out = moment(data.check_out).format("DD/MM/YYYY");
+      const FCheck_in = moment(data.check_in).format("DD/MM/YYYY");
+      const FCheck_out = moment(data.check_out).format("DD/MM/YYYY");
 
       sendMailBooking(
         user.email,
         user.id_information.name,
-        check_in,
-        check_out,
+        FCheck_in,
+        FCheck_out,
         data.total_price
       );
 
