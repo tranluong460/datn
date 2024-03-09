@@ -152,12 +152,7 @@ export const create = async (req, res) => {
         $or: [
           {
             status: {
-              $nin: [
-                "Chờ thanh toán",
-                "Đã xác nhận",
-                "Đang xử lý",
-                "Đã nhận phòng",
-              ],
+              $nin: ["Đã hủy bỏ", "Thành công"],
             },
           },
           {
