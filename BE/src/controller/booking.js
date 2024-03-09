@@ -157,20 +157,8 @@ export const create = async (req, res) => {
           },
           {
             $and: [
-              { check_in: { $gte: check_in } },
               { check_in: { $lte: check_out } },
-            ],
-          },
-          {
-            $and: [
               { check_out: { $gte: check_in } },
-              { check_out: { $lte: check_out } },
-            ],
-          },
-          {
-            $and: [
-              { check_in: { $lte: check_in } },
-              { check_out: { $gte: check_out } },
             ],
           },
         ],
