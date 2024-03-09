@@ -129,6 +129,8 @@ export const create = async (req, res) => {
   const user = req.user;
   const { list_room, check_in, check_out } = req.body;
 
+  const roomIds = list_room.map((room) => room.idRoom);
+
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
       let id_hotel;
@@ -149,31 +151,20 @@ export const create = async (req, res) => {
       }
 
       const bookings = await BookingModel.find({
-        $and: [
+        status: { $nin: ["Thành công", "Đã hủy bỏ"] },
+        list_room: { $elemMatch: { idRoom: { $in: roomIds } } },
+        $or: [
           {
-            status: { $nin: ["Thành công", "Đã hủy bỏ"] },
+            $and: [
+              { check_in: { $lte: check_in } },
+              { check_out: { $gte: check_out } },
+            ],
           },
           {
-            $or: [
-              {
-                $and: [
-                  { check_in: { $lte: check_in } },
-                  { check_out: { $gte: check_out } },
-                ],
-              },
-              {
-                $and: [
-                  { check_in: { $gte: check_in } },
-                  { check_in: { $lte: check_out } },
-                ],
-              },
-              {
-                $and: [
-                  { check_out: { $gte: check_in } },
-                  { check_out: { $lte: check_out } },
-                ],
-              },
-            ],
+            $and: [{ check_in: { $gte: check_in, $lte: check_out } }],
+          },
+          {
+            $and: [{ check_out: { $gte: check_in, $lte: check_out } }],
           },
         ],
       });
