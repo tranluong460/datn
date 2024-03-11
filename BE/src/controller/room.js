@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import { RoomValidate } from "../validate";
-import { RoomModel, HotelModel } from "../models";
+import { RoomModel, HotelModel, BookingModel } from "../models";
 import { validateFormMiddleware } from "../middleware";
 import { sendResponse, uploadImageToCloudinary } from "../utils";
 import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
@@ -165,3 +165,25 @@ export const update = async (req, res) => {
   }
 };
 
+export const search = async (req, res) => {
+  try {
+    const { quantity, checkin, checkout } = req.body
+    const bookedRoom = await BookingModel.distinct('list_room', {
+      $or: [
+        { check_in: { $lt: checkout }, check_out: { $gt: checkout } },
+        { check_in: { $eq: checkin } },
+        { check_out: { $eq: checkout } }
+      ]
+    })
+    const room = bookedRoom?.map(item => item.idRoom)
+    const data = await RoomModel.find({ _id: { $nin: room }, quantity: { $gte: quantity } })
+    // console.log({ checkin }, { checkout });
+    if (data.length == 0) {
+      return sendResponse(res, 404, 'Không còn phòng nào trống')
+    }
+    return sendResponse(res, 200, 'Tìm kiếm phòng thành công', data)
+  } catch (error) {
+    console.log(error);
+    return sendResponse(res, 500, 'Lỗi server')
+  }
+}
