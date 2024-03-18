@@ -165,3 +165,35 @@ export const update = async (req, res) => {
   }
 };
 
+export const search = async (req, res) => {
+  try {
+    const { quantity, checkin, checkout } = req.body;
+
+    // Tìm các phòng đã được đặt cùng một thời gian check-in và check-out với yêu cầu của khách hàng
+    const bookedRooms = await BookingModel.find({
+      $or: [
+        { check_in: { $lt: checkout }, check_out: { $gt: checkin } },
+        { check_in: { $eq: checkin } },
+        { check_out: { $eq: checkout } }
+      ]
+    });
+
+    // Lấy danh sách các phòng đã đặt
+    const bookedRoomIds = bookedRooms.map(room => room.idRoom);
+
+    // Tìm các phòng trống có số lượng đủ và không yêu cầu cùng giờ check-in và check-out với các phòng đã đặt
+    const availableRooms = await RoomModel.find({
+      _id: { $nin: bookedRoomIds },
+      quantity: { $gte: quantity },
+    });
+
+    if (availableRooms.length === 0) {
+      return sendResponse(res, 404, 'Không còn phòng nào trống');
+    }
+
+    return sendResponse(res, 200, 'Tìm kiếm phòng thành công', availableRooms);
+  } catch (error) {
+    console.error(error);
+    return sendResponse(res, 500, 'Lỗi server');
+  }
+};
