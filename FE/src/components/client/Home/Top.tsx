@@ -1,6 +1,4 @@
-import { Container, 
-  // Search
- } from "../..";
+import { Container, Search } from "../..";
 import { useState, useEffect } from "react";
 
 const Top = () => {
@@ -102,9 +100,9 @@ const Top = () => {
               </div>
             ))}
           </div>
-          {/* <div className="-translate-y-1/3 mb-4">
+          <div className="-translate-y-1/2">
             <Search />
-          </div> */}
+          </div>
         </div>
       </Container>
     </>
