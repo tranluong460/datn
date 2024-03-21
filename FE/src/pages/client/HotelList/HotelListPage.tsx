@@ -52,9 +52,9 @@ const HotelListPage = () => {
           </div>
 
           <div className="pb-24 pt-3">
-            <h2 id="products-heading" className="sr-only">
-              Danh sách khách sạn
-            </h2>
+            <h1 id="products-heading" className="sr-only">
+              Danh sách phòng
+            </h1>
 
             <div className="grid grid-cols-1 gap-x-5 gap-y-10 lg:grid-cols-4">
               <Filter
