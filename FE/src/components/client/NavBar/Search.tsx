@@ -13,22 +13,6 @@ const disabledDate = (current: any) => {
 };
 
 const Search = () => {
-  const [arrow, setArrow] = useState("Show");
-
-  const mergedArrow = useMemo(() => {
-    if (arrow === "Hide") {
-      return false;
-    }
-
-    if (arrow === "Show") {
-      return true;
-    }
-
-    return {
-      pointAtCenter: true,
-    };
-  }, [arrow]);
-
   // thông báo nếu chưa nhập số lượng phòng
   const [errorMessage, setErrorMessage] = useState("");
   const content = (
@@ -52,7 +36,7 @@ const Search = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     let value = parseInt(e.target.value, 10) || 0;
-    value = Math.min(value, 60);
+    value = Math.min(value, 20);
     setAdditionalRooms(value);
   };
 
@@ -145,12 +129,11 @@ const Search = () => {
 
   return (
     <>
-      <div className="font-sans bg-white mx-auto max-w-[880px] px-5 md:px-8 lg:px-8 rounded-[3px] shadow-xl">
+      <div className="font-sans bg-white mx-auto max-w-[650px] px-5 md:px-8 lg:px-8 rounded-[3px] shadow-xl">
         <h1 className="font-bold pt-4">Tìm phòng</h1>
-        <div className="grid grid-cols-4">
-          {" "}
+        <div className="grid grid-cols-3">
           {/* space-x-4 */}
-          <div className="relative mt-[10px] mb-[20px] ">
+          <div className="mt-[10px] mb-[20px] w-[250px]">
             <p className="font-medium text-base text-gray-600 mb-1">Ngày</p>
             <Space direction="vertical" size={12}>
               <RangePicker
@@ -166,7 +149,7 @@ const Search = () => {
               />
             </Space>
           </div>
-          <div className="relative mt-[10px] mb-[20px] ml-[15px] basis-1/4 max-w-[160px]">
+          <div className=" mt-[10px] mb-[20px] ml-[65px] basis-1/4 w-[160px]">
             <p className="font-medium text-base text-gray-600 mb-1">
               Số lượng phòng
             </p>
@@ -197,7 +180,7 @@ const Search = () => {
                         className="bg-gray-300 px-4 py-2 rounded-sm"
                         onClick={() => {
                           const newValue = additionalRooms + 1;
-                          if (newValue <= 1000) {
+                          if (newValue <= 20) {
                             setAdditionalRooms(newValue);
                           }
                         }}
@@ -224,11 +207,7 @@ const Search = () => {
               </div>
             </div>
           </div>
-          {/* TODO */}
-          <div>
-            <h1>Tổng số người ở</h1>
-          </div>
-          <div className="relative mt-[38px] ml-[15px] ">
+          <div className="mt-[38px] ml-10">
             <Popover content={content} title="Thông báo" trigger="click">
               <button
                 className="relative pl-8 pr-2 text-sm text-white bg-amber-400 py-3 border-gray-300 rounded transition-all duration-300 focus:outline-none focus:border-yellow-500 hover:border-yellow-500"
