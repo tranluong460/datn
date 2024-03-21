@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import { RoomValidate } from "../validate";
-import { RoomModel, HotelModel } from "../models";
+import { RoomModel, HotelModel, BookingModel } from "../models";
 import { validateFormMiddleware } from "../middleware";
 import { sendResponse, uploadImageToCloudinary } from "../utils";
 import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
@@ -173,18 +173,19 @@ export const search = async (req, res) => {
     const bookedRooms = await BookingModel.find({
       $or: [
         { check_in: { $lt: checkout }, check_out: { $gt: checkin } },
-        { check_in: { $eq: checkin } },
-        { check_out: { $eq: checkout } }
+        { check_in: checkin, check_out: checkout } // Thêm điều kiện này để tìm các phòng có cùng thời gian check-in và check-out
       ]
     });
 
     // Lấy danh sách các phòng đã đặt
-    const bookedRoomIds = bookedRooms.map(room => room.idRoom);
-
-    // Tìm các phòng trống có số lượng đủ và không yêu cầu cùng giờ check-in và check-out với các phòng đã đặt
+    const bookedRoomIds = bookedRooms.map(room => room.list_room.map(roomItem => roomItem.idRoom)).flat();
+    // Tìm các phòng trống có số lượng đủ, bao gồm cả phòng đã đặt nhưng vẫn còn phòng trống
     const availableRooms = await RoomModel.find({
-      _id: { $nin: bookedRoomIds },
-      quantity: { $gte: quantity },
+      $or: [
+        { _id: { $nin: bookedRoomIds } }, // Loại bỏ các phòng đã đặt
+        { _id: { $in: bookedRoomIds }, quantity: { $gt: 0 } } // Bao gồm phòng đã đặt nhưng vẫn còn phòng trống
+      ],
+      quantity: { $gte: quantity }
     });
 
     if (availableRooms.length === 0) {
@@ -197,3 +198,4 @@ export const search = async (req, res) => {
     return sendResponse(res, 500, 'Lỗi server');
   }
 };
+
