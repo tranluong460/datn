@@ -14,7 +14,7 @@ const FilterTop = ({ onShowDialog }: FilterTopProps) => {
   return (
     <div className="flex items-center justify-between border-b border-divideLight dark:border-divideDark p-5 bg-light dark:bg-dark rounded-md">
       <h1 className="text-2xl font-bold tracking-tight text-textLight dark:text-textDark">
-        <p className="hidden sm:block">Danh sách khách sạn</p>
+        <p className="hidden sm:block">Danh sách Phòng</p>
       </h1>
 
       <div className="flex items-center">

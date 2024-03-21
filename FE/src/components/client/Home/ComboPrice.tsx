@@ -42,10 +42,7 @@ const ComboPrice = () => {
         <div className="mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-8 relative ">
           <div className="flex flex-col items-center mb-5 text-center md:mb-8">
             <h2 className="flex ">
-              <p className="text-lg md:text-xl lg:text-2xl mb-2 md:mb-4 select-none font-bold text-neutral-700">
-                COMBO
-              </p>
-              <p className="ml-0 md:ml-2 text-lg md:text-xl lg:text-2xl mb-2 md:mb-4 select-none font-normal text-neutral-500">
+              <p className="ml-0 md:ml-2 text-lg md:text-xl lg:text-2xl mb-2 md:mb-4 select-none font-bold text-neutral-500">
                 PHÒNG
               </p>
             </h2>
