@@ -4,9 +4,8 @@ import { ICountry } from "../../../interface";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, Popover } from "antd";
 import dayjs from "dayjs";
-import { Button, Popover } from "antd";
 
 const disabledDate = (current: any) => {
   return current && current < moment().startOf("day");
@@ -91,22 +90,19 @@ const Search = () => {
     }
     const updatedQuery: any = {
       ...currentQuery,
-      location: city?.code,
       hotel: null,
     };
-
-    if (city) {
-      updatedQuery.location = city.code;
-    } else {
-      updatedQuery.location = 1;
-    }
 
     if (dateRange.startDate) {
       updatedQuery.checkin = dateRange.startDate;
     }
 
+    if (dateRange.endDate) {
+      updatedQuery.checkout = dateRange.endDate;
+    }
+
     if (additionalRooms) {
-      updatedQuery.room = additionalRooms;
+      updatedQuery.quantity = additionalRooms;
     }
 
     if (dateRange.endDate === "" || additionalRooms <= 0) {
@@ -115,7 +111,7 @@ const Search = () => {
     }
 
     // Nếu không có lỗi, tiếp tục xử lý như bình thường
-    updatedQuery.room = additionalRooms;
+    updatedQuery.quantity = additionalRooms;
 
     const url = qs.stringifyUrl(
       {

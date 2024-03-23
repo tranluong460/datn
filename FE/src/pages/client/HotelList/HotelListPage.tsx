@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-import { useGetAllRoomQuery } from "../../../api";
+import { useSearchRoomMutation } from "../../../api";
 import {
   Container,
   Filter,
@@ -9,36 +9,45 @@ import {
   FilterTop,
   ListHotel,
 } from "../../../components";
-import { useSearchModal } from "../../../hooks";
 
 const HotelListPage = () => {
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
+  const params = location.search;
   const navigate = useNavigate();
-  const searchModal = useSearchModal();
   const [showDialog, setShowDialog] = useState(false);
   const [showRate, setShowRate] = useState(true);
-  const [locationValue, setLocationValue] = useState(params.get("location"));
+  // const [locationValue, setLocationValue] = useState(params.get("location"));
+  // const newUsser = params.get("location");
 
-  const { data, isFetching } = useGetAllRoomQuery("");
+  const [searchParams] = useSearchParams();
+
+  const checkin = searchParams.get("checkin") || "";
+  const checkout = searchParams.get("checkout") || "";
+  const quantity = searchParams.get("quantity") || "";
+
+  const [search, setSearch] = useSearchRoomMutation();
+  const [searchResult, setSearchResult] = useState(null);
+  console.log("🚀 ~ HotelListPage ~ searchResult:", searchResult);
 
   useEffect(() => {
-    setLocationValue(params.get("location"));
-    // eslint-disable-next-line
-  }, [location]);
+    const fetchData = async () => {
+      try {
+        const response = await search({ checkin, checkout, quantity });
+        setSearchResult(response?.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
 
-  useEffect(() => {
-    if (!locationValue) {
-      navigate("/");
-      searchModal.onOpen();
-    }
-
-    // eslint-disable-next-line
-  }, [locationValue]);
+    fetchData();
+  }, [checkin, checkout, quantity, search]);
 
   return (
     <>
       <Container>
+        {/* <button onClick={() => onFinish({ checkin, checkout, quantity })}>
+          Tìm kiếm
+        </button> */}
         <FilterDialog
           isShowRate={showRate}
           onShowRate={() => setShowRate(!showRate)}
@@ -63,7 +72,7 @@ const HotelListPage = () => {
               />
 
               <div className="lg:col-span-3">
-                <ListHotel listHotel={data?.data} isLoading={isFetching} />
+                <ListHotel listHotel={searchResult?.data} />
               </div>
             </div>
           </div>

@@ -11,13 +11,14 @@ type ListHotelProps = {
   isLoading: boolean;
 };
 
-const ListHotel = ({ listHotel, isLoading }: ListHotelProps) => {
+const ListHotel = ({ listHotel }: ListHotelProps) => {
+  console.log("🚀 ~ ListHotel ~ listHoteldang test:", listHotel);
   const itemsPerPage = 5; // Số lượng mục trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   // Tính toán chỉ những mục thuộc về trang hiện tại
   const indexOfLastItem = currentPage * itemsPerPage;

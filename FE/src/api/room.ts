@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
 
@@ -20,6 +21,7 @@ export const roomApi = createApi({
       }),
       providesTags: ["Room"],
     }),
+
     createRoom: builder.mutation({
       query: (data) => {
         const formData = new FormData();
@@ -70,6 +72,18 @@ export const roomApi = createApi({
       },
       invalidatesTags: ["Room"],
     }),
+    searchRoom: builder.mutation({
+      query: (Params: any) => {
+        // const paramsString = new URLSearchParams(Params).toString();
+        console.log(Params);
+        return {
+          url: `room/search`,
+          method: "POST",
+          body: Params,
+        };
+      },
+      invalidatesTags: ["Room"],
+    }),
   }),
 });
 
@@ -78,4 +92,5 @@ export const {
   useGetOneRoomQuery,
   useCreateRoomMutation,
   useUpdateRoomMutation,
+  useSearchRoomMutation,
 } = roomApi;

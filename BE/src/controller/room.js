@@ -8,7 +8,9 @@ import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find().select("-createdAt -updatedAt").populate({ path: "id_roomType id_hotel", select: "_id name" });
+    const roomList = await RoomModel.find()
+      .select("-createdAt -updatedAt")
+      .populate({ path: "id_roomType id_hotel", select: "_id name" });
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
@@ -121,9 +123,11 @@ export const update = async (req, res) => {
           });
         }
       }
-      await Promise.all(currentData.images.map(deleteImageFromCloudinary))
+      await Promise.all(currentData.images.map(deleteImageFromCloudinary));
       // Cập nhật ảnh mới chỉ khi có ảnh mới được tải lên
-      const newImages = await Promise.all(imagesArray.map(uploadImageToCloudinary));
+      const newImages = await Promise.all(
+        imagesArray.map(uploadImageToCloudinary)
+      );
 
       // Tạo mảng mới chứa thông tin URL của ảnh mới
       const images = newImages.map((imageUrl, index) => ({
@@ -139,7 +143,9 @@ export const update = async (req, res) => {
 
     if (req.fields.id_amenities) {
       const id_amenities = req.fields.id_amenities.split(",");
-      const amenities = id_amenities.map((item) => new mongoose.Types.ObjectId(item));
+      const amenities = id_amenities.map(
+        (item) => new mongoose.Types.ObjectId(item)
+      );
       req.fields.id_amenities = amenities;
     }
 
@@ -168,34 +174,36 @@ export const update = async (req, res) => {
 export const search = async (req, res) => {
   try {
     const { quantity, checkin, checkout } = req.body;
+    console.log({ checkout }, checkin);
 
     // Tìm các phòng đã được đặt cùng một thời gian check-in và check-out với yêu cầu của khách hàng
     const bookedRooms = await BookingModel.find({
       $or: [
         { check_in: { $lt: checkout }, check_out: { $gt: checkin } },
-        { check_in: checkin, check_out: checkout } // Thêm điều kiện này để tìm các phòng có cùng thời gian check-in và check-out
-      ]
+        { check_in: checkin, check_out: checkout }, // Thêm điều kiện này để tìm các phòng có cùng thời gian check-in và check-out
+      ],
     });
 
     // Lấy danh sách các phòng đã đặt
-    const bookedRoomIds = bookedRooms.map(room => room.list_room.map(roomItem => roomItem.idRoom)).flat();
+    const bookedRoomIds = bookedRooms
+      .map((room) => room.list_room.map((roomItem) => roomItem.idRoom))
+      .flat();
     // Tìm các phòng trống có số lượng đủ, bao gồm cả phòng đã đặt nhưng vẫn còn phòng trống
     const availableRooms = await RoomModel.find({
       $or: [
         { _id: { $nin: bookedRoomIds } }, // Loại bỏ các phòng đã đặt
-        { _id: { $in: bookedRoomIds }, quantity: { $gt: 0 } } // Bao gồm phòng đã đặt nhưng vẫn còn phòng trống
+        { _id: { $in: bookedRoomIds }, quantity: { $gt: 0 } }, // Bao gồm phòng đã đặt nhưng vẫn còn phòng trống
       ],
-      quantity: { $gte: quantity }
+      quantity: { $gte: quantity },
     });
 
     if (availableRooms.length === 0) {
-      return sendResponse(res, 404, 'Không còn phòng nào trống');
+      return sendResponse(res, 404, "Không còn phòng nào trống");
     }
 
-    return sendResponse(res, 200, 'Tìm kiếm phòng thành công', availableRooms);
+    return sendResponse(res, 200, "Tìm kiếm phòng thành công", availableRooms);
   } catch (error) {
     console.error(error);
-    return sendResponse(res, 500, 'Lỗi server');
+    return sendResponse(res, 500, "Lỗi server");
   }
 };
-
