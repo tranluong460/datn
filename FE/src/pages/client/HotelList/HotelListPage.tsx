@@ -24,8 +24,8 @@ const HotelListPage = () => {
   const checkin = searchParams.get("checkin") || "";
   const checkout = searchParams.get("checkout") || "";
   const quantity = searchParams.get("quantity") || "";
-  const minPrice = searchParams.get("minPrice") || "";
-  const maxPrice = searchParams.get("maxPrice") || "";
+  const minPrice = searchParams.get("minPrice") || undefined;
+  const maxPrice = searchParams.get("maxPrice") || undefined;
 
   const [search, setSearch] = useSearchRoomMutation();
   const [searchResult, setSearchResult] = useState(null);

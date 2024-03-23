@@ -196,8 +196,14 @@ export const search = async (req, res) => {
       quantity: { $gte: quantity },
     };
 
-    if (minPrice !== undefined && maxPrice !== undefined) {
-      query.price = { $gte: minPrice, $lte: maxPrice };
+    if (minPrice !== undefined || maxPrice !== undefined) {
+      query.price = {};
+      if (minPrice !== undefined) {
+        query.price.$gte = minPrice;
+      }
+      if (maxPrice !== undefined) {
+        query.price.$lte = maxPrice;
+      }
     }
 
     const availableRooms = await RoomModel.find(query).populate({
