@@ -173,9 +173,7 @@ export const update = async (req, res) => {
 
 export const search = async (req, res) => {
   try {
-    const { quantity, checkin, checkout } = req.body;
-    console.log({ checkout }, checkin);
-
+    const { quantity, checkin, checkout, minPrice, maxPrice } = req.body;
     // Tìm các phòng đã được đặt cùng một thời gian check-in và check-out với yêu cầu của khách hàng
     const bookedRooms = await BookingModel.find({
       $or: [
@@ -189,12 +187,22 @@ export const search = async (req, res) => {
       .map((room) => room.list_room.map((roomItem) => roomItem.idRoom))
       .flat();
     // Tìm các phòng trống có số lượng đủ, bao gồm cả phòng đã đặt nhưng vẫn còn phòng trống
-    const availableRooms = await RoomModel.find({
+
+    const query = {
       $or: [
-        { _id: { $nin: bookedRoomIds } }, // Loại bỏ các phòng đã đặt
-        { _id: { $in: bookedRoomIds }, quantity: { $gt: 0 } }, // Bao gồm phòng đã đặt nhưng vẫn còn phòng trống
+        { _id: { $nin: bookedRoomIds } },
+        { _id: { $in: bookedRoomIds }, quantity: { $gt: 0 } },
       ],
       quantity: { $gte: quantity },
+    };
+
+    if (minPrice !== undefined && maxPrice !== undefined) {
+      query.price = { $gte: minPrice, $lte: maxPrice };
+    }
+
+    const availableRooms = await RoomModel.find(query).populate({
+      path: "id_roomType id_hotel",
+      select: "_id name",
     });
 
     if (availableRooms.length === 0) {

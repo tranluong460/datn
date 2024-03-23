@@ -24,6 +24,8 @@ const HotelListPage = () => {
   const checkin = searchParams.get("checkin") || "";
   const checkout = searchParams.get("checkout") || "";
   const quantity = searchParams.get("quantity") || "";
+  const minPrice = searchParams.get("minPrice") || "";
+  const maxPrice = searchParams.get("maxPrice") || "";
 
   const [search, setSearch] = useSearchRoomMutation();
   const [searchResult, setSearchResult] = useState(null);
@@ -32,7 +34,13 @@ const HotelListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await search({ checkin, checkout, quantity });
+        const response = await search({
+          checkin,
+          checkout,
+          quantity,
+          maxPrice,
+          minPrice,
+        });
         setSearchResult(response?.data);
       } catch (error) {
         console.error("Error:", error);
@@ -40,14 +48,11 @@ const HotelListPage = () => {
     };
 
     fetchData();
-  }, [checkin, checkout, quantity, search]);
+  }, [checkin, checkout, quantity, search, minPrice, maxPrice]);
 
   return (
     <>
       <Container>
-        {/* <button onClick={() => onFinish({ checkin, checkout, quantity })}>
-          Tìm kiếm
-        </button> */}
         <FilterDialog
           isShowRate={showRate}
           onShowRate={() => setShowRate(!showRate)}

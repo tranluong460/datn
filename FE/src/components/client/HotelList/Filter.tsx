@@ -10,9 +10,35 @@ const Filter = () => {
     setMaxValue(value[1]);
   };
 
+  // TODO
+  // ! đoạn đang test
+  const generateNewUrl = (
+    oldUrl: string,
+    minPrice: number,
+    maxPrice: number
+  ): string => {
+    const url = new URL(oldUrl);
+    url.searchParams.set("minPrice", String(minPrice));
+    url.searchParams.set("maxPrice", String(maxPrice));
+    return url.toString();
+  };
+
+  // Sử dụng hàm này khi giá trị minPrice và maxPrice thay đổi
+  const onChass = (value: number[]) => {
+    const newUrl = generateNewUrl(window.location.href, value[0], value[1]);
+    // Sử dụng newUrl ở đây, ví dụ chuyển hướng đến trang mới
+    window.location.href = newUrl;
+  };
+
   return (
     <div className="hidden lg:block bg-light dark:bg-dark p-3 rounded-md">
       <h3 className="sr-only">Danh sách</h3>
+      {/* <button
+        className="text-red-900"
+        onClick={() => onChass([minValue, maxValue])}
+      >
+        tìm kiếm
+      </button> */}
       <ul
         role="list"
         className="border-b border-divideLight dark:border-divideDark pb-1 text-sm font-medium text-textLight2nd dark:text-textDark2nd"

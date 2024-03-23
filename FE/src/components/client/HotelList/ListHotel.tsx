@@ -12,7 +12,6 @@ type ListHotelProps = {
 };
 
 const ListHotel = ({ listHotel }: ListHotelProps) => {
-  console.log("🚀 ~ ListHotel ~ listHoteldang test:", listHotel);
   const itemsPerPage = 5; // Số lượng mục trên mỗi trang
   const [currentPage, setCurrentPage] = useState(1);
 
