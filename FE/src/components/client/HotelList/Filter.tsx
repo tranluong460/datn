@@ -10,8 +10,6 @@ const Filter = () => {
     setMaxValue(value[1]);
   };
 
-  // TODO
-  // ! đoạn đang test
   const generateNewUrl = (
     oldUrl: string,
     minPrice: number,
@@ -33,12 +31,6 @@ const Filter = () => {
   return (
     <div className="hidden lg:block bg-light dark:bg-dark p-3 rounded-md">
       <h3 className="sr-only">Danh sách</h3>
-      <button
-        className="text-red-900"
-        onClick={() => onChass([minValue, maxValue])}
-      >
-        tìm kiếm
-      </button>
       <ul
         role="list"
         className="border-b border-divideLight dark:border-divideDark pb-1 text-sm font-medium text-textLight2nd dark:text-textDark2nd"

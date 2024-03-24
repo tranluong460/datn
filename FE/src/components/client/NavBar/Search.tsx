@@ -14,6 +14,59 @@ const disabledDate = (current: any) => {
 const Search = () => {
   // thông báo nếu chưa nhập số lượng phòng
   const [errorMessage, setErrorMessage] = useState("");
+  const [roomInfo, setRoomInfo] = useState([{ adults: 1, children: 0 }]);
+
+  const addRoom = () => {
+    const newRoomInfo = [...roomInfo, { adults: 1, children: 0 }];
+    setRoomInfo(newRoomInfo);
+  };
+
+  const handleAdultChange = (index, value) => {
+    const newRoomInfo = [...roomInfo];
+    newRoomInfo[index].adults = value;
+    setRoomInfo(newRoomInfo);
+  };
+
+  const handleChildrenChange = (index, value) => {
+    const newRoomInfo = [...roomInfo];
+    newRoomInfo[index].children = value;
+    setRoomInfo(newRoomInfo);
+  };
+
+  const removeRoom = (index) => {
+    const newRoomInfo = [...roomInfo];
+    newRoomInfo.splice(index, 1);
+    setRoomInfo(newRoomInfo);
+  };
+
+  const handleIncrementAdults = (index) => {
+    const newRoomInfo = [...roomInfo];
+    newRoomInfo[index].adults++;
+    setRoomInfo(newRoomInfo);
+  };
+
+  const handleDecrementAdults = (index) => {
+    if (roomInfo[index].adults > 0) {
+      const newRoomInfo = [...roomInfo];
+      newRoomInfo[index].adults--;
+      setRoomInfo(newRoomInfo);
+    }
+  };
+
+  const handleIncrementChildren = (index) => {
+    const newRoomInfo = [...roomInfo];
+    newRoomInfo[index].children++;
+    setRoomInfo(newRoomInfo);
+  };
+
+  const handleDecrementChildren = (index) => {
+    if (roomInfo[index].children > 0) {
+      const newRoomInfo = [...roomInfo];
+      newRoomInfo[index].children--;
+      setRoomInfo(newRoomInfo);
+    }
+  };
+
   const content = (
     <div>
       <p className="text-[red] font-bold">{errorMessage}</p>
@@ -29,6 +82,14 @@ const Search = () => {
   const handleRoomLabelClick = () => {
     setShowAdditionalRooms(true);
   };
+
+  let totalAdults = 0;
+  let totalChildren = 0;
+
+  roomInfo.forEach((room) => {
+    totalAdults += room.adults;
+    totalChildren += room.children;
+  });
 
   // số lượng được chọn chỉ được 999 phòng
   const handleAdditionalRoomsChange = (
@@ -125,10 +186,9 @@ const Search = () => {
 
   return (
     <>
-      <div className="font-sans bg-white mx-auto max-w-[650px] px-5 md:px-8 lg:px-8 rounded-[3px] shadow-xl">
+      <div className="font-sans bg-white mx-auto max-w-[750px] md:px-8 lg:px-8 rounded-[3px] shadow-xl">
         <h1 className="font-bold pt-4">Tìm phòng</h1>
-        <div className="grid grid-cols-3">
-          {/* space-x-4 */}
+        <div className="grid grid-cols-3 ">
           <div className="mt-[10px] mb-[20px] w-[250px]">
             <p className="font-medium text-base text-gray-600 mb-1">Ngày</p>
             <Space direction="vertical" size={12}>
@@ -145,10 +205,9 @@ const Search = () => {
               />
             </Space>
           </div>
-          <div className=" mt-[10px] mb-[20px] ml-[65px] basis-1/4 w-[160px]">
-            <p className="font-medium text-base text-gray-600 mb-1">
-              Số lượng phòng
-            </p>
+          <div className=" mt-[10px] mb-[20px] ml-[30px] basis-1/4 w-[275px] relative">
+            <p className="font-medium text-base text-gray-600 mb-1">Phòng</p>
+
             <div className="relative">
               <div className="flex items-center">
                 <div
@@ -156,32 +215,75 @@ const Search = () => {
                   className={`pl-4 pr-2  text-sm bg-white w-full text-gray-500 py-3 border border-gray-300 rounded transition-all duration-300 focus:outline-none focus:border-yellow-500 hover:border-yellow-500 relative`}
                   onClick={handleRoomLabelClick}
                 >
-                  {roomLabel}
+                  <div className="flex">
+                    {roomInfo.length} Phòng <p className="mx-1">•</p>{" "}
+                    {totalAdults} Người lớn <p className="mx-1">•</p>{" "}
+                    {totalChildren} Trẻ em
+                  </div>
 
+                  {/* FIXME đang làm tìm kiếm*/}
                   {showAdditionalRooms && (
-                    <div className="flex items-center absolute right-2 -bottom-[74px] bg-white px-2 py-4 translate-x-2 z-[999] shadow border-t-2">
+                    <div className="absolute right-2 top-11 bg-white px-2 py-4 translate-x-2 z-[999'] shadow border-t-2 w-[273px] border">
+                      {roomInfo.map((room, index) => (
+                        <div key={index}>
+                          <div className="mb-2">
+                            <p className="text-base">Phòng {index + 1}</p>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-base">Người lớn</p>
+                            </div>
+
+                            <div>
+                              <button
+                                onClick={() => handleDecrementAdults(index)}
+                                className="border rounded-full px-3 py-1 my-2 border-slate-950"
+                              >
+                                -
+                              </button>
+                              <span className="mx-2">{room.adults}</span>
+                              <button
+                                onClick={() => handleIncrementAdults(index)}
+                                className="border rounded-full px-3 py-1 my-2 border-slate-950"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <p className="text-base">Trẻ em</p>
+                            </div>
+                            <div>
+                              <button
+                                onClick={() => handleDecrementChildren(index)}
+                                className="border rounded-full px-3 py-1 my-2 border-slate-950"
+                              >
+                                -
+                              </button>
+                              <span className="mx-2">{room.children}</span>
+                              <button
+                                onClick={() => handleIncrementChildren(index)}
+                                className="border rounded-full px-3 py-1 my-2 border-slate-950"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => removeRoom(index)}
+                            className="text-lg text-blue-500 font-bold"
+                          >
+                            Xóa phòng
+                          </button>
+                        </div>
+                      ))}
                       <button
-                        className="bg-gray-300 px-4 py-2 rounded-sm"
-                        onClick={handleDecrementRooms}
+                        onClick={addRoom}
+                        className="text-blue-900 text-lg"
                       >
-                        -
-                      </button>
-                      <input
-                        className="pl-2 pr-2 text-sm bg-neutral-200 w-14 mx-1 text-center text-gray-500 py-2 border-t border-b border-gray-300 transition-all duration-300 focus:outline-none focus:border-yellow-500 hover:border-yellow-500"
-                        type="text"
-                        value={additionalRooms}
-                        onChange={handleAdditionalRoomsChange}
-                      />
-                      <button
-                        className="bg-gray-300 px-4 py-2 rounded-sm"
-                        onClick={() => {
-                          const newValue = additionalRooms + 1;
-                          if (newValue <= 20) {
-                            setAdditionalRooms(newValue);
-                          }
-                        }}
-                      >
-                        +
+                        Thêm phòng
                       </button>
                     </div>
                   )}
@@ -203,7 +305,7 @@ const Search = () => {
               </div>
             </div>
           </div>
-          <div className="mt-[38px] ml-10">
+          <div className="mt-[38px] ml-[90px]">
             <Popover content={content} title="Thông báo" trigger="click">
               <button
                 className="relative pl-8 pr-2 text-sm text-white bg-amber-400 py-3 border-gray-300 rounded transition-all duration-300 focus:outline-none focus:border-yellow-500 hover:border-yellow-500"
