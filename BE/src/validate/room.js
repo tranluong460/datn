@@ -19,7 +19,7 @@ const roomValidate = joi.object({
     .min(1)
     .required()
     .messages(validationErrors("Số lượng phòng")),
-  price: joi.number().min(0).required().messages(validationErrors("Giá phòng")),
+  // price: joi.number().min(0).required().messages(validationErrors("Giá phòng")),
   status: joi
     .string()
     .optional()
