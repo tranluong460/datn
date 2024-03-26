@@ -10,6 +10,24 @@ const Filter = () => {
     setMaxValue(value[1]);
   };
 
+  const generateNewUrl = (
+    oldUrl: string,
+    minPrice: number,
+    maxPrice: number
+  ): string => {
+    const url = new URL(oldUrl);
+    url.searchParams.set("minPrice", String(minPrice));
+    url.searchParams.set("maxPrice", String(maxPrice));
+    return url.toString();
+  };
+
+  // Sử dụng hàm này khi giá trị minPrice và maxPrice thay đổi
+  const onChass = (value: number[]) => {
+    const newUrl = generateNewUrl(window.location.href, value[0], value[1]);
+    // Sử dụng newUrl ở đây, ví dụ chuyển hướng đến trang mới
+    window.location.href = newUrl;
+  };
+
   return (
     <div className="hidden lg:block bg-light dark:bg-dark p-3 rounded-md">
       <h3 className="sr-only">Danh sách</h3>

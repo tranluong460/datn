@@ -25,6 +25,7 @@ import {
   AiOutlineHome,
   AiOutlineLogout,
   AiOutlineSetting,
+  AiFillHome,
 } from "../../icons";
 import { Logo } from "../../components";
 import { useInfoAccountQuery, useLogoutAccountMutation } from "../../api";
@@ -139,6 +140,12 @@ const BaseAdmin = () => {
       key: "1",
       label: "Cài đặt",
       icon: <AiOutlineSetting />,
+    },
+    {
+      key: "2",
+      label: "Trang chủ",
+      icon: <AiFillHome />,
+      onClick: () => navigate("/"),
     },
     {
       type: "divider",

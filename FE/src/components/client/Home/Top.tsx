@@ -77,8 +77,8 @@ const Top = () => {
             </div>
           </div>
         </div>
-        <div className="relative overflow-hidden">
-          <div className="flex justify-center items-center">
+        <div className="relative ">
+          <div className="flex justify-center items-center overflow-hidden">
             {Array.from({ length: 3 }).map((_, index) => (
               <div
                 key={index}
