@@ -2,6 +2,43 @@ import { Container, Search } from "../..";
 import { useState, useEffect } from "react";
 
 const Top = () => {
+  //TODO test ẩn hiện tìm kiếm
+  // const [isSearching, setIsSearching] = useState(false);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     // Kiểm tra điều kiện để ẩn hoặc hiện phần tìm kiếm dựa trên cuộc di chuyển của người dùng
+  //     if (window.scrollY < 100) {
+  //       setIsSearching(true);
+  //     } else {
+  //       setIsSearching(false);
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  // const handleSearch = () => {
+  //   // Xử lý khi người dùng nhấn vào nút tìm kiếm
+  //   // Đặt trạng thái của phần tìm kiếm để hiển thị ở đầu trang
+  //   setIsSearching(true);
+
+  //   const searchDom = document.querySelector(".fixed");
+  //   searchDom?.classList.remove("bottom-0");
+  //   searchDom?.classList.add("top-24");
+  //   // Scroll lên đầu trang
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "smooth",
+  //   });
+  // };
+
+  // ! end test
+
   const image = [
     "https://booking.muongthanh.com/images/banners/original/banner-du-lich-kham-pha-2_1696491847.jpg",
     // "https://teccodosonhotel.com.vn/wp-content/uploads/2017/08/anh-1-1470946509186-1200x480.jpg",
@@ -100,9 +137,10 @@ const Top = () => {
               </div>
             ))}
           </div>
-          <div className="-translate-y-1/2">
-            <Search />
-          </div>
+        </div>
+
+        <div>
+          <Search />
         </div>
       </Container>
     </>
