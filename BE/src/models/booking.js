@@ -36,19 +36,17 @@ const BookingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    list_room: [
-      {
-        _id: false,
-        idRoom: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Room",
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
+    list_room: {
+      _id: false,
+      idRoom: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Room",
       },
-    ],
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    },
     payment_status: {
       type: Boolean,
       default: false,
