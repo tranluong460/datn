@@ -80,6 +80,21 @@
   }
 }
 
+@keyframes slideInBottom {
+  from {
+    transform: translateY(0%);
+    /* opacity: 0; */
+  }
+  to {
+    transform: translateY(30%);
+    /* opacity: 1; */
+  }
+}
+
 .transition-search {
-  animation: slideIn 5s ease;
+  animation: slideIn 1s ease;
+}
+
+.transition-search-bottom {
+  animation: slideInBottom 1s ease;
 }

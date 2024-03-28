@@ -6,7 +6,11 @@ import { useLocation } from "react-router-dom";
 import moment from "moment";
 import { DatePicker, Space, Popover } from "antd";
 import dayjs from "dayjs";
-import { AiOutlineSearch, AiOutlineUsergroupDelete } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiOutlineUsergroupDelete,
+  AiOutlineClose,
+} from "react-icons/ai";
 
 const disabledDate = (current: any) => {
   return current && current < moment().startOf("day");
@@ -190,34 +194,48 @@ const Search = () => {
   };
 
   const handleCollapse = () => {
+    console.log("đã nhấn");
     setIsExpanded(false);
     setIsVisible(true);
   };
+
+  // FIXME test fix
+  const [isScrollDisabled, setIsScrollDisabled] = useState(false);
+  useEffect(() => {
+    if (isExpanded) {
+      setIsScrollDisabled(true); // Disable scroll when search is expanded
+    } else {
+      setIsScrollDisabled(false); // Enable scroll when search is collapsed
+    }
+  }, [isExpanded]);
   return (
     <>
-      <button className="absolute top-0 text-red-900" onClick={handleCollapse}>
-        tắt search
+      <button
+        className={`absolute text-black text-4xl top-3 right-1 ${
+          isExpanded ? "" : "hidden"
+        }`}
+        onClick={handleCollapse}
+      >
+        <AiOutlineClose />
       </button>
-
       <div
-        // className={`grid grid-cols-[300px_340px_450px] justify-start border mt-2 border-gary-300  shadow-xl mx-auto text-base max-w-[1090px] bg-white fixed bottom-10 left-[10%]`}
         onClick={handleExpand}
-        className={`grid grid-cols-[300px_340px_450px] justify-start border mt-2 border-gary-300  shadow-xl mx-auto text-base max-w-[1090px] fixed bg-white ${
+        className={`grid grid-cols-[400px_340px_560px] justify-start border mt-2 border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
           isExpanded
-            ? `fixed top-32 inset-x-0 z-50 transition-search`
-            : "left-[10%] bottom-10"
+            ? `fixed top-14 inset-x-0 z-50 transition-search`
+            : "left-[3%] bottom-10 transition-search-bottom"
         }`}
 
         // search-bar ${ isVisible ? "visible" : "hidden" }
       >
-        <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[14px]">
+        <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[18px]">
           <p>
             <AiOutlineSearch />
           </p>
 
           <p className="text-black">Khách sạn Melia Hà Nội Việt Nam</p>
         </div>
-        <div className="flex items-center ml-6 gap-2 border-r-[1px] border-gray-300 py-4 text-[14px]">
+        <div className="flex items-center ml-6 gap-2 border-r-[1px] border-gray-300 py-4 text-[18px]">
           <Space direction="vertical" size={12}>
             <RangePicker
               className="
@@ -235,7 +253,7 @@ const Search = () => {
           </Space>
         </div>
         <div
-          className="flex items-center justify-between ml-4 text-[14px] relative font-[Graphik]"
+          className="flex items-center justify-between ml-4 text-[18px] relative font-[Graphik]"
           ref={inputRef}
         >
           <div className="flex items-center gap-2">
