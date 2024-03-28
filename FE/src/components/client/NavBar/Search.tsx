@@ -165,9 +165,51 @@ const Search = () => {
     navigate(url);
   };
 
+  // TODO làm thanh ẩn hiện
+  // const [isVisible, setIsVisible] = useState(true);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop =
+  //       window.pageYOffset || document.documentElement.scrollTop;
+  //     const isVissibleNow = scrollTop < window.innerHeight * 0.9;
+  //     setIsVisible(isVissibleNow);
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  const [isVisible, setIsVisible] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleExpand = () => {
+    setIsExpanded(true);
+    setIsVisible(false);
+  };
+
+  const handleCollapse = () => {
+    setIsExpanded(false);
+    setIsVisible(true);
+  };
   return (
     <>
-      <div className="grid grid-cols-[300px_340px_450px] justify-start border mt-2 border-gary-300  shadow-xl mx-10 text-base max-w-[1090px] bg-white">
+      <button className="absolute top-0 text-red-900" onClick={handleCollapse}>
+        tắt search
+      </button>
+
+      <div
+        // className={`grid grid-cols-[300px_340px_450px] justify-start border mt-2 border-gary-300  shadow-xl mx-auto text-base max-w-[1090px] bg-white fixed bottom-10 left-[10%]`}
+        onClick={handleExpand}
+        className={`grid grid-cols-[300px_340px_450px] justify-start border mt-2 border-gary-300  shadow-xl mx-auto text-base max-w-[1090px] fixed bg-white ${
+          isExpanded
+            ? `fixed top-32 inset-x-0 z-50 transition-search`
+            : "left-[10%] bottom-10"
+        }`}
+
+        // search-bar ${ isVisible ? "visible" : "hidden" }
+      >
         <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[14px]">
           <p>
             <AiOutlineSearch />
@@ -183,6 +225,7 @@ const Search = () => {
               disabledDate={disabledDate}
               defaultValue={[dayjs(), dayjs().add(1, "days")]}
               onChange={(dates, dateStrings) => {
+                handleExpand();
                 setDateRange({
                   startDate: dateStrings[0],
                   endDate: dateStrings[1],
@@ -194,13 +237,12 @@ const Search = () => {
         <div
           className="flex items-center justify-between ml-4 text-[14px] relative font-[Graphik]"
           ref={inputRef}
-          onClick={handleRoomLabelClick}
         >
           <div className="flex items-center gap-2">
             <p>
               <AiOutlineUsergroupDelete />
             </p>
-            <div className="flex">
+            <div className="flex" onClick={handleRoomLabelClick}>
               {roomInfo.length} Phòng <p className="mx-1">•</p> {totalAdults}{" "}
               Người lớn
               {totalChildren === 0 ? (
@@ -214,7 +256,9 @@ const Search = () => {
           </div>
           {showAdditionalRooms && (
             <div
-              className={`absolute -left-6 top-full bg-white px-2 py-4 translate-x-2 z-[999'] shadow border-t-2 w-[273px]  ${
+              className={`absolute -left-6 top-full bg-white px-2 py-4 translate-x-2 z-[999'] shadow border-t-2 w-[273px] overflow-auto ${
+                roomInfo.length === 1 ? "h-72" : "h-96"
+              } ${
                 showAdditionalRooms ? "border-t-black border" : "border-none"
               } `}
             >
