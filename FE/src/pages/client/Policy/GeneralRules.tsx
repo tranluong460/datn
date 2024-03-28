@@ -32,15 +32,15 @@ const GeneralRules = () => {
             }}
           >
             Những quy định sau đây đã được đưa ra bởi: Công ty cổ phần Tập đoàn
-            Seven Teen, Doanh nghiệp tư nhân xây dựng số 1 tỉnh Điện Biên, Công
+            MeliaHanoi, Doanh nghiệp tư nhân xây dựng số 1 tỉnh Điện Biên, Công
             ty T NHH DV Du lịch Vịnh Hạ Long, Công ty CP Khách sạn Trí Đức, Công
             ty cổ phần Dầu khí Phương Đông, Công ty cổ phần Thương mại và Xây
             dựng Hồng Lam, Công ty cổ phần Du lịch Khách sạn Suối Mơ, Công ty CP
             Golf Xuân Thành, Công ty cổ phần Hoàng gia Cao Bằng (Sau đây gọi
-            chung là<strong> “Seven Teen”</strong>) nhằm đảm bảo an toàn, ổn
+            chung là<strong> “MeliaHanoi”</strong>) nhằm đảm bảo an toàn, ổn
             định và bảo vệ các lợi ích của Khách hàng. Các quy định này sẽ được
             thực hiện nghiêm túc bởi toàn bộ Ban quản lý và nhân viên Khách Sạn
-            mang thương hiệu Seven Teen. Seven Teen mong muốn Khách hàng được
+            mang thương hiệu MeliaHanoi. MeliaHanoi mong muốn Khách hàng được
             hưởng thụ các tiện nghi, dịch vụ và quyền lợi của các Khách Sạn.
             Theo đó, Khách hàng cần hiểu rõ và tuân theo Quy Định Chung{" "}
             <strong>(“QĐC”)</strong> nhằm đảm bảo Khách nhận được trải nghiệm
@@ -55,9 +55,9 @@ const GeneralRules = () => {
             }}
           >
             QĐC này có thể được sửa đổi, bổ sung tại từng thời điểm theo quyết
-            định của Seven Teen nhằm nâng cao chất lượng Dịch Vụ và trải nghiệm
-            của Khách hàng và được đăng tải trên Trang Web chính thức của Seven
-            Teen tại địa chỉ{" "}
+            định của MeliaHanoi nhằm nâng cao chất lượng Dịch Vụ và trải nghiệm
+            của Khách hàng và được đăng tải trên Trang Web chính thức của
+            MeliaHanoi tại địa chỉ{" "}
             <a
               href={url}
               style={{ color: "#0563c1", textDecoration: "underline" }}
@@ -97,10 +97,10 @@ const GeneralRules = () => {
               margin: "0in 0in 10pt",
             }}
           >
-            Các sản phẩm/ dịch vụ mà Seven Teen cung cấp trên Trang Web bao gồm:
-            Dịch vụ lưu trú, tiệc sự kiện hoặc các dịch vụ bổ sung khác mà Seven
-            Teen cung cấp tại từng thời điểm như vận chuyển, vui chơi giải trí,
-            ẩm thực…
+            Các sản phẩm/ dịch vụ mà MeliaHanoi cung cấp trên Trang Web bao gồm:
+            Dịch vụ lưu trú, tiệc sự kiện hoặc các dịch vụ bổ sung khác mà
+            MeliaHanoi cung cấp tại từng thời điểm như vận chuyển, vui chơi giải
+            trí, ẩm thực…
           </p>
           <p
             style={{
@@ -113,10 +113,10 @@ const GeneralRules = () => {
             }}
           >
             Ngoài ra, các thông tin và tài liệu khác giới thiệu trên trang web
-            này sẽ được Seven Teen cung cấp một cách hợp pháp và chỉ mang tính
+            này sẽ được MeliaHanoi cung cấp một cách hợp pháp và chỉ mang tính
             chất tham khảo và không nhằm mục đích tư vấn chuyên môn. Vui lòng
             liên hệ với chúng tôi để nhận được tư vấn về thông tin chi tiết.
-            Đồng thời, Seven Teen có quyền thay đổi, cập nhật và cải thiện các
+            Đồng thời, MeliaHanoi có quyền thay đổi, cập nhật và cải thiện các
             thông tin, tài liệu đó mà không cần thông báo trước.
           </p>
           <p
@@ -129,7 +129,7 @@ const GeneralRules = () => {
               margin: "0in 0in 10pt",
             }}
           >
-            Seven Teen và mọi nhân viên, nhà quản lý, và các bên đại diện hoàn
+            MeliaHanoi và mọi nhân viên, nhà quản lý, và các bên đại diện hoàn
             toàn không chịu trách nhiệm gì đối với bất kỳ tổn thất, thiệt hại
             hoặc chi phí phát sinh do việc truy cập và sử dụng trang web này và
             các trang web được kết nối với nó, bao gồm nhưng không giới hạn,
@@ -165,10 +165,10 @@ const GeneralRules = () => {
               margin: "0in 0in 10pt",
             }}
           >
-            Seven Teen là chủ sở hữu của các nhãn hiệu, biểu tượng và nhãn của
+            MeliaHanoi là chủ sở hữu của các nhãn hiệu, biểu tượng và nhãn của
             các sản phẩm/ dịch vụ được đăng trên trang web này. Mọi cá nhân, tổ
             chức không được phép sử dụng bất kỳ nhãn hiệu, biểu tượng, nhãn mác
-            nào của sản phẩm, dịch vụ đó khi chưa được Seven Teen đồng ý bằng
+            nào của sản phẩm, dịch vụ đó khi chưa được MeliaHanoi đồng ý bằng
             văn bản.
           </p>
           <p
@@ -201,9 +201,9 @@ const GeneralRules = () => {
               margin: "0in 0in 10pt",
             }}
           >
-            Seven Teen sẽ không chịu trách nhiệm về nội dung hoặc thông tin, tài
+            MeliaHanoi sẽ không chịu trách nhiệm về nội dung hoặc thông tin, tài
             liệu từ bất kỳ trang web nào khác không thuộc sở hữu/ quản lý của
-            Seven Teen kết nối với trang web này
+            MeliaHanoi kết nối với trang web này
             <strong> (“Trang Web khác có kết nối với trang web này”)</strong>.
             Khi truy cập và sử dụng các nội dung, thông tin, tài liệu từ các
             trang web khác có kết nối với trang web này, khách hàng phải chịu
@@ -499,7 +499,7 @@ const GeneralRules = () => {
                 textAlign: "justify",
               }}
             >
-              Thực hiện các thủ tục khác theo quy định của Seven Teen và cơ quan
+              Thực hiện các thủ tục khác theo quy định của MeliaHanoi và cơ quan
               chức năng quản lý lưu trú tại địa phương tại từng thời điểm (nếu
               có).
             </li>
@@ -538,7 +538,7 @@ const GeneralRules = () => {
                 textAlign: "justify",
               }}
             >
-              Thực hiện các thủ tục khác theo quy định của Seven Teen tại từng
+              Thực hiện các thủ tục khác theo quy định của MeliaHanoi tại từng
               thời điểm (nếu có).
             </li>
           </ol>{" "}
