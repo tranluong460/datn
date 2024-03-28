@@ -3,7 +3,9 @@ const HomePage = () => {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <Top />
+        <div className="z-[999]">
+          <Top />
+        </div>
         <Service />
         <ComboPrice />
         <Between/>

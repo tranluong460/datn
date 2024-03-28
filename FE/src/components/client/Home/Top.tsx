@@ -2,6 +2,43 @@ import { Container, Search } from "../..";
 import { useState, useEffect } from "react";
 
 const Top = () => {
+  //TODO test ẩn hiện tìm kiếm
+  // const [isSearching, setIsSearching] = useState(false);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     // Kiểm tra điều kiện để ẩn hoặc hiện phần tìm kiếm dựa trên cuộc di chuyển của người dùng
+  //     if (window.scrollY < 100) {
+  //       setIsSearching(true);
+  //     } else {
+  //       setIsSearching(false);
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+  // const handleSearch = () => {
+  //   // Xử lý khi người dùng nhấn vào nút tìm kiếm
+  //   // Đặt trạng thái của phần tìm kiếm để hiển thị ở đầu trang
+  //   setIsSearching(true);
+
+  //   const searchDom = document.querySelector(".fixed");
+  //   searchDom?.classList.remove("bottom-0");
+  //   searchDom?.classList.add("top-24");
+  //   // Scroll lên đầu trang
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "smooth",
+  //   });
+  // };
+
+  // ! end test
+
   const image = [
     "https://cf.bstatic.com/xdata/images/hotel/max1280x900/498024122.jpg?k=9cee0dae48e8b9e5406974666fbbe4aea43812be57da568d3f6de93f68654b2d&o=&hp=1",
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/498053205.jpg?k=14d4a832939d99f29e912e76450e8b9fdf3a961a285cc161544dd3f62042bcbe&o=&hp=1",
@@ -62,6 +99,7 @@ const Top = () => {
             </div>
           </div>
         </div>
+
         <hr />
 
         <div className="flex-col justify-center items-center p-4  mx-auto max-w-7xl">
@@ -83,6 +121,7 @@ const Top = () => {
             <Search />
           </div>
         </div> */}
+
       </Container>
     </>
   );

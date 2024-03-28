@@ -64,7 +64,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
 
     const url = qs.stringifyUrl(
       {
-        url: `/hotel-detail/${id}`,
+        url: `/hotel-detail/${hotel?.id_hotel?._id}`,
         query: updatedQuery,
       },
       { skipNull: true }

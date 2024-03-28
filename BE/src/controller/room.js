@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
 import { RoomValidate } from "../validate";
-import { RoomModel, HotelModel } from "../models";
+import { RoomModel, HotelModel, BookingModel } from "../models";
 import { validateFormMiddleware } from "../middleware";
 import { sendResponse, uploadImageToCloudinary } from "../utils";
 import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
 
 export const getAll = async (req, res) => {
   try {
-    const roomList = await RoomModel.find().select("-createdAt -updatedAt").populate({ path: "id_roomType id_hotel", select: "_id name" });
+    const roomList = await RoomModel.find()
+      .select("-createdAt -updatedAt")
+      .populate({ path: "id_roomType id_hotel", select: "_id name" });
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
@@ -121,9 +123,11 @@ export const update = async (req, res) => {
           });
         }
       }
-      await Promise.all(currentData.images.map(deleteImageFromCloudinary))
+      await Promise.all(currentData.images.map(deleteImageFromCloudinary));
       // Cập nhật ảnh mới chỉ khi có ảnh mới được tải lên
-      const newImages = await Promise.all(imagesArray.map(uploadImageToCloudinary));
+      const newImages = await Promise.all(
+        imagesArray.map(uploadImageToCloudinary)
+      );
 
       // Tạo mảng mới chứa thông tin URL của ảnh mới
       const images = newImages.map((imageUrl, index) => ({
@@ -139,7 +143,9 @@ export const update = async (req, res) => {
 
     if (req.fields.id_amenities) {
       const id_amenities = req.fields.id_amenities.split(",");
-      const amenities = id_amenities.map((item) => new mongoose.Types.ObjectId(item));
+      const amenities = id_amenities.map(
+        (item) => new mongoose.Types.ObjectId(item)
+      );
       req.fields.id_amenities = amenities;
     }
 
@@ -165,3 +171,54 @@ export const update = async (req, res) => {
   }
 };
 
+export const search = async (req, res) => {
+  try {
+    const { quantity, checkin, checkout } = req.body;
+    // Danh sách các trạng thái bạn quan tâm
+    const targetStatuses = ["Đang xử lý", "Đã xác nhận", "Đã nhận phòng"];
+
+    // Lấy danh sách các đơn booking trong khoảng thời gian check-in và check-out và có trạng thái quan tâm
+    const booked = await BookingModel.find({
+      $or: [
+        { check_in: { $lte: checkout }, check_out: { $gte: checkin } }, // Đơn booking bắt đầu trước thời gian check-out và kết thúc sau thời gian check-in
+        { check_in: { $eq: checkin } }, // Đơn booking bắt đầu vào cùng thời gian check-in
+        { check_out: { $eq: checkout } } // Đơn booking kết thúc vào cùng thời gian check-out
+      ],
+      status: { $in: targetStatuses }
+    });
+
+    // Tạo mảng chứa thông tin về phòng đã đặt
+    const bookedRoomInfo = booked.map(booking => {
+      return {
+        idRoom: booking.list_room.idRoom,
+        quantity: booking.list_room.quantity
+      };
+    });
+
+    // Lấy danh sách tất cả các phòng từ cơ sở dữ liệu
+    const roomQuantities = await RoomModel.find({}).populate(
+      "id_amenities id_hotel id_roomType"
+    );
+
+    // Lọc các phòng còn trống và có số lượng phòng yêu cầu
+    const availableRoomsFromBooked = roomQuantities.filter(room => {
+      const bookedRoom = bookedRoomInfo.find(item => item.idRoom.toString() === room._id.toString());
+      const remainingQuantity = bookedRoom ? room.quantity - bookedRoom.quantity : room.quantity;
+      return remainingQuantity >= quantity && room.quantity >= quantity;
+    });
+
+    // Lọc các phòng không có trong danh sách đơn đặt hàng và có số lượng phòng yêu cầu
+    const availableRoomsNotBooked = roomQuantities.filter(room => {
+      const isNotBooked = !bookedRoomInfo.some(item => item.idRoom.toString() === room._id.toString());
+      return isNotBooked && room.quantity >= quantity;
+    });
+
+    // Kết hợp hai danh sách phòng đã lọc được
+    const availableRooms = [...availableRoomsFromBooked, ...availableRoomsNotBooked];
+
+    return sendResponse(res, 200, 'Tìm kiếm phòng thành công', availableRooms);
+  } catch (error) {
+    console.error(error);
+    return sendResponse(res, 500, 'Lỗi server');
+  }
+};

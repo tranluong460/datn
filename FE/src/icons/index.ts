@@ -33,6 +33,7 @@ import {
   AiOutlineDesktop,
   AiOutlineSearch,
   AiOutlineMenu,
+  AiFillHome,
 } from "react-icons/ai";
 
 export {
@@ -67,4 +68,5 @@ export {
   BsFillSunFill,
   BsFillMoonStarsFill,
   AiOutlineMenu,
+  AiFillHome,
 };
