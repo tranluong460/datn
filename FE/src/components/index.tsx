@@ -81,7 +81,8 @@ import Map from "./client/HotelDetail/Map";
 import Amenities from "./client/HotelDetail/Amenities";
 import NavBarIcon from "./client/NavBar/NavBarIcon";
 import RoomDetailCardProps from "./client/HotelDetail/RoomDetailCardProps";
-
+import Between from "./client/Home/Between";
+import Information from "./client/Home/information";
 // import Preferential from "./client/Home/Preferential";
 // import PreferentialCard from "./client/Home/PreferentialCard";
 // import News from "./client/Home/News";
@@ -167,6 +168,8 @@ export {
   Map,
   NavBarIcon,
   Comment,
+  Between,
+  Information,
   // Preferential,
   // PreferentialCard,
   // News,
