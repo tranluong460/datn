@@ -44,8 +44,8 @@ const ComplaintResolutionPolicy = () => {
               margin: "0in 0in 10pt",
             }}
           >
-            Seven Teen chịu trách nhiệm giải quyết khiếu nại của Khách hàng liên
-            quan đến sản phẩm/dịch vụ do Seven Teen cung cấp trên trang web{" "}
+            MeliaHanoi chịu trách nhiệm giải quyết khiếu nại của Khách hàng liên
+            quan đến sản phẩm/dịch vụ do MeliaHanoi cung cấp trên trang web{" "}
             {url}
           </p>
 
@@ -59,7 +59,7 @@ const ComplaintResolutionPolicy = () => {
               margin: "0in 0in 10pt",
             }}
           >
-            Seven Teen sẽ tiếp nhận/ xử lý các khiếu nại phát sinh sau khi nhận
+            MeliaHanoi sẽ tiếp nhận/ xử lý các khiếu nại phát sinh sau khi nhận
             được thông báo từ khàng hàng đối với giao dịch mua sản phẩm/dịch vụ
             trên trang web {url}
           </p>
@@ -107,7 +107,7 @@ const ComplaintResolutionPolicy = () => {
           >
             <u>
               <strong>
-                Seven Teen sẽ thực hiện giải quyết các tranh chấp theo quy trình
+              MeliaHanoi sẽ thực hiện giải quyết các tranh chấp theo quy trình
                 sau:
               </strong>
             </u>
@@ -139,11 +139,11 @@ const ComplaintResolutionPolicy = () => {
             <u>
               <strong>Bước 1:</strong>
             </u>{" "}
-            Bộ phận Chăm Sóc Khách Hàng của&nbsp;Seven Teen sẽ tiếp nhận các
+            Bộ phận Chăm Sóc Khách Hàng của&nbsp;MeliaHanoi sẽ tiếp nhận các
             khiếu nại của Thành viên hoặc Bộ phận Kinh doanh sẽ tiếp nhận các
             khiếu nại của Khách hàng. Các Bộ phận này chủ động giải quyết nhanh
             chóng và trả lời ngay kết quả giải quyết các khiếu nại trên cơ sở
-            các Chính sách mà Seven Teen đã công bố.
+            các Chính sách mà MeliaHanoi đã công bố.
           </p>
 
           <p
@@ -160,7 +160,7 @@ const ComplaintResolutionPolicy = () => {
               <strong>Bước 2:</strong>
             </u>{" "}
             Trong trường hợp phức tạp hoặc không được quy định tại các chính
-            sách mà Seven Teen đã công&nbsp;bố thì Bộ phận Chăm Sóc Khách Hàng/
+            sách mà MeliaHanoi đã công&nbsp;bố thì Bộ phận Chăm Sóc Khách Hàng/
             Bộ phận Kinh doanh sẽ cam kết thời hạn phản hồi cho Khách hàng không
             quá 07 ngày.
           </p>
@@ -237,7 +237,7 @@ const ComplaintResolutionPolicy = () => {
               margin: "0in 0in 10pt",
             }}
           >
-            <strong>Công ty Cổ phần Tập đoàn Seven Teen</strong>
+            <strong>Công ty Cổ phần Tập đoàn MeliaHanoi</strong>
           </p>
 
           <p

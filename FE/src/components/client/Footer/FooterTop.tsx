@@ -29,7 +29,7 @@ const FooterTop = () => {
       <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
         <div>
           <h2 className="mb-6 text-sm font-semibold text-textLight uppercase dark:text-textDark">
-            Về Seven Teen
+            Về MeliaHanoi
           </h2>
           <ul className="text-textLight2nd dark:text-textDark2nd font-medium">
             <li className="mb-4">
