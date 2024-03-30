@@ -73,9 +73,9 @@ const Top = () => {
               20% cho thành viên MeliaHanoi.
             </p>
           </div>
-
-          <div className="relative ">
-            <div className="flex justify-center items-center overflow-hidden">
+    
+          <div className="w-1/2 overflow-hidden">
+            <div className="flex justify-center items-center ">
               {Array.from({ length: 3 }).map((_, index) => (
                 <div
                   key={index}
@@ -90,7 +90,7 @@ const Top = () => {
                   }}
                 >
                   <img
-                    className="w-full h-full object-cover"
+                    className="h-[600px] w-full object-cover dark:border-divideDark"
                     src={image[(currentImageIndex + index) % image.length]}
                     alt=""
                   />
@@ -98,15 +98,15 @@ const Top = () => {
               ))}
             </div>
           </div>
-
-          <div>
+          
+          <div className="">
             <Search />
           </div>
         </div>
 
         <hr />
 
-        <div className="flex-col justify-center items-center p-4  mx-auto max-w-7xl">
+        <div className="flex-col justify-center items-center p-4 mx-auto max-w-7xl">
           <h1 className="md:text-[2.2rem] text-[2rem] font-mono mt-[1rem] text-textLight dark:text-textDark select-none text-center">
             A sophisticated and memorable experience in the heart of Hanoi
             <br className="block sm:hidden" />

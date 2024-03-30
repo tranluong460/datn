@@ -1,18 +1,26 @@
-import { Service, Top, ComboPrice, Map, Between, Information } from "../../../components";
+import {
+  Service,
+  Top,
+  ComboPrice,
+  Map,
+  Between,
+  Information,
+} from "../../../components";
 const HomePage = () => {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <div className="z-[999]">
+        {/* <div className="z-[999]">
           <Top />
-        </div>
+        </div> */}
+        <Top />
         <Service />
         <ComboPrice />
-        <Between/>
+        <Between />
         <div className=" w-full">
           <Map />
         </div>
-        <Information/>
+        <Information />
       </div>
     </>
   );
@@ -20,9 +28,11 @@ const HomePage = () => {
 
 export default HomePage;
 
-{/* <div className="flex flex-col gap-10">
+{
+  /* <div className="flex flex-col gap-10">
   <Top />
   <Service />
   <ComboPrice />
   <Map />
-</div>; */}
+</div>; */
+}
