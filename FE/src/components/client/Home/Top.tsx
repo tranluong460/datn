@@ -64,7 +64,7 @@ const Top = () => {
             <h1 className="md:text-[3.2rem] text-[2rem] font-semibold mt-[1rem] mb-[2rem] text-textLight dark:text-textDark select-none">
               Tạo dấu ấn trong kỳ nghỉ của bạn với
               <br className="block sm:hidden" />
-              <span className="text-neutral-400"> MeliaHanoi</span> 
+              <span className="text-neutral-400"> MeliaHanoi</span>
             </h1>
 
             <p className="text-[1.1rem] leading-[2rem] text-textLight2nd dark:text-textDark2nd select-none">
@@ -74,8 +74,8 @@ const Top = () => {
             </p>
           </div>
 
-          <div className="w-1/2 overflow-hidden">
-            <div className="flex justify-center items-center">
+          <div className="relative ">
+            <div className="flex justify-center items-center overflow-hidden">
               {Array.from({ length: 3 }).map((_, index) => (
                 <div
                   key={index}
@@ -86,17 +86,21 @@ const Top = () => {
                   }`}
                   style={{
                     transition: "transform 1s, opacity 1s",
-                    flex: "0 0 100%",
+                    flex: " 0 0 100%",
                   }}
                 >
                   <img
-                    className="h-[600px] w-full object-cover dark:border-divideDark"
+                    className="w-full h-full object-cover"
                     src={image[(currentImageIndex + index) % image.length]}
                     alt=""
                   />
                 </div>
               ))}
             </div>
+          </div>
+
+          <div>
+            <Search />
           </div>
         </div>
 
@@ -121,14 +125,12 @@ const Top = () => {
             <Search />
           </div>
         </div> */}
-
       </Container>
     </>
   );
 };
 
 export default Top;
-
 
 // 2
 // import { Container, Search } from "../..";
@@ -160,7 +162,7 @@ export default Top;
 //             <h1 className="md:text-[3.2rem] text-[2rem] font-semibold mt-[1rem] mb-[2rem] text-textLight dark:text-textDark select-none">
 //               Tạo dấu ấn trong kỳ nghỉ của bạn với
 //               <br className="block sm:hidden" />
-//               <span className="text-neutral-400"> MeliaHanoi</span> 
+//               <span className="text-neutral-400"> MeliaHanoi</span>
 //             </h1>
 
 //             <p className="text-[1.1rem] leading-[2rem] text-textLight2nd dark:text-textDark2nd select-none">
@@ -222,7 +224,6 @@ export default Top;
 // };
 
 // export default Top;
-
 
 // 1
 // import { Container, Search } from "../..";
