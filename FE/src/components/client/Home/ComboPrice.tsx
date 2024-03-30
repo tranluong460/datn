@@ -206,8 +206,6 @@ export default ComboPrice;
 
 // export default ComboPrice;
 
-
-
 // 2
 // import { ComboPriceCard, Container } from "../..";
 // import { useEffect, useState } from "react";
@@ -311,9 +309,6 @@ export default ComboPrice;
 // };
 
 // export default ComboPrice;
-
-
-
 
 // 1
 // import { ComboPriceCard, Container } from "../..";

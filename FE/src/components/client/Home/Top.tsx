@@ -74,7 +74,7 @@ const Top = () => {
             </p>
           </div>
 
-          <div className="relative ">
+          <div className="relative">
             <div className="flex justify-center items-center overflow-hidden">
               {Array.from({ length: 3 }).map((_, index) => (
                 <div
@@ -90,7 +90,7 @@ const Top = () => {
                   }}
                 >
                   <img
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover z-10"
                     src={image[(currentImageIndex + index) % image.length]}
                     alt=""
                   />
@@ -120,11 +120,6 @@ const Top = () => {
             Southeast Asia’s most exciting destinations.
           </p>
         </div>
-        {/* <div className="">
-          <div className="">
-            <Search />
-          </div>
-        </div> */}
       </Container>
     </>
   );

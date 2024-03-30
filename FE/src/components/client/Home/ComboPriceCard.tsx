@@ -36,7 +36,6 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
 
 export default ComboPriceCard;
 
-
 // 2
 // import React from "react";
 // import { useGetOneRoomQuery } from "../../../api";
@@ -75,9 +74,6 @@ export default ComboPriceCard;
 // };
 
 // export default ComboPriceCard;
-
-
-
 
 // 1
 // import React from "react";
