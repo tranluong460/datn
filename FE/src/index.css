@@ -98,3 +98,18 @@
 .transition-search-bottom {
   animation: slideInBottom 1s ease;
 }
+
+.overlay {
+  position: fixed; /* Cho phần tử overlay cố định ở vị trí trên cùng của cửa sổ trình duyệt */
+  top: 0;
+  left: 0;
+  width: 100%; /* Chiều rộng overlay là 100% của cửa sổ trình duyệt */
+  height: 100%; /* Chiều cao overlay là 100% của cửa sổ trình duyệt */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Màu nền của overlay, ở đây là màu đen có độ trong suốt 50% */
+  z-index: 999; /* Đảm bảo overlay được đặt trên phần còn lại của trang với z-index cao */
+}

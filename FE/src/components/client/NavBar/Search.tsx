@@ -210,8 +210,9 @@ const Search = () => {
   }, [isExpanded]);
   return (
     <>
+      {isExpanded && <div className="overlay" />}
       <button
-        className={`absolute text-black text-4xl top-3 right-1 ${
+        className={`fixed text-black text-4xl top-3 right-1 z-[999] ${
           isExpanded ? "" : "hidden"
         }`}
         onClick={handleCollapse}
@@ -220,7 +221,7 @@ const Search = () => {
       </button>
       <div
         onClick={handleExpand}
-        className={`grid grid-cols-[400px_340px_560px] justify-start border mt-2 border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
+        className={`grid grid-cols-[400px_340px_560px] justify-start border mt-2 z-[999] border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
           isExpanded
             ? `fixed top-14 inset-x-0 z-50 transition-search`
             : "left-[3%] bottom-10 transition-search-bottom"
