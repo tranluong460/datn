@@ -173,7 +173,7 @@ export const update = async (req, res) => {
 
 export const search = async (req, res) => {
   try {
-    const { quantity, checkin, checkout, price } = req.body;
+    const { quantity, checkin, checkout, price, adults, children } = req.body;
     // Danh sách các trạng thái bạn quan tâm
     const targetStatuses = ["Đang xử lý", "Đã xác nhận", "Đã nhận phòng"];
 
@@ -198,8 +198,13 @@ export const search = async (req, res) => {
     let rooms = await RoomModel.find({}).populate({
       path: 'id_roomType', // Liên kết đến RoomType
       model: 'RoomType',
-    }).exec();
-
+    })
+    // console.log(rooms);
+    if (adults && children) {
+      rooms = rooms.filter(room => {
+        return room.id_roomType && room.id_roomType.adults <= adults && room.id_roomType.children <= children;
+      });
+    }
     // Lọc các phòng theo giá nếu có giá được chỉ định từ req.body
     if (price) {
       rooms = rooms.filter(room => {

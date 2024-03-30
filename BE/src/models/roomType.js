@@ -13,12 +13,12 @@ const roomTypeSchema = new mongoose.Schema(
     },
     adults: {
       type: Number,
-      min: 0,
+      min: 1,
       required: true,
     },
     children: {
       type: Number,
-      min: 0,
+      min: 1,
       required: true,
     },
     bed: {
