@@ -43,9 +43,9 @@ const Between = () => {
               Một vũ trụ đầy tiện ích
             </h3>
             <p className="text-[1.1rem] leading-[2rem] text-textLight2nd dark:text-textDark2nd select-none ">
-              Ưu đãi, giảm giá và thông tin độc quyền tại khách sạn của
-              chúng tôi như ưu tiên nhận phòng nhanh, trả phòng trễ cùng nhiều
-              dịch vụ khác.
+              Ưu đãi, giảm giá và thông tin độc quyền tại khách sạn của chúng
+              tôi như ưu tiên nhận phòng nhanh, trả phòng trễ cùng nhiều dịch vụ
+              khác.
             </p>
           </div>
         </div>
@@ -54,7 +54,6 @@ const Between = () => {
   );
 };
 export default Between;
-
 
 // 3
 // const Between = () => {
