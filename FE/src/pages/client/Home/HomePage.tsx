@@ -10,9 +10,6 @@ const HomePage = () => {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <div className="z-[10]">
-          <Top />
-        </div> */}
         <Top />
         <Service />
         <ComboPrice />
