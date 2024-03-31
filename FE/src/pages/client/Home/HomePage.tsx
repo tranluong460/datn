@@ -12,7 +12,8 @@ const HomePage = () => {
       <div className="flex flex-col gap-10">
         <div className="z-[10]">
           <Top />
-        </div>
+        </div> */}
+        <Top />
         <Service />
         <ComboPrice />
         <Between />
@@ -26,12 +27,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-{
-  /* <div className="flex flex-col gap-10">
-  <Top />
-  <Service />
-  <ComboPrice />
-  <Map />
-</div>; */
-}
