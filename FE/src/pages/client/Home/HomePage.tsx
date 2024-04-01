@@ -10,9 +10,6 @@ const HomePage = () => {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <div className="z-[10]">
-          <Top />
-        </div> */}
         <Top />
         <Service />
         <ComboPrice />
@@ -27,3 +24,14 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+// <div className="flex flex-col gap-10">
+//         <Top />
+//         <Service />
+//         <ComboPrice />
+//         <Between />
+//         <div className=" w-full">
+//           <Map />
+//         </div>
+//         <Information />
+//       </div>
