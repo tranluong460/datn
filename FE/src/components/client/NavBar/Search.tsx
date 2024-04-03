@@ -224,7 +224,7 @@ const Search = () => {
         className={`grid grid-cols-[400px_340px_560px] justify-start border mt-2 z-[999] border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
           isExpanded
             ? `fixed top-14 inset-x-0 z-50 transition-search`
-            : "left-[3%] bottom-10 transition-search-bottom"
+            : "left-[3%] bottom-10 transition-search-bottom 2xl:left-[15%]"
         }`}
 
         // search-bar ${ isVisible ? "visible" : "hidden" }

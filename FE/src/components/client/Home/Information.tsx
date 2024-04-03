@@ -29,7 +29,6 @@ const Information = () => {
 
 export default Information;
 
-
 // const Information = () => {
 //   return (
 //     <div className="flex flex-row mx-auto max-w-7xl select-none">
