@@ -10,7 +10,7 @@ export const getAll = async (req, res) => {
   try {
     const roomList = await RoomModel.find()
       .select("-createdAt -updatedAt")
-      .populate({ path: "id_roomType id_hotel", select: "_id name" });
+      .populate({ path: "id_roomType id_hotel", select: "_id name price" });
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
@@ -173,58 +173,81 @@ export const update = async (req, res) => {
 
 export const search = async (req, res) => {
   try {
-    const { quantity, checkin, checkout, minPrice, maxPrice, adults, children } = req.body;
+    const {
+      quantity,
+      checkin,
+      checkout,
+      minPrice,
+      maxPrice,
+      adults,
+      children,
+    } = req.body;
     const targetStatuses = ["Đang xử lý", "Đã xác nhận", "Đã nhận phòng"];
 
     const bookingConditions = {
       $or: [
         { check_in: { $lte: checkout }, check_out: { $gte: checkin } },
         { check_in: { $eq: checkin } },
-        { check_out: { $eq: checkout } }
+        { check_out: { $eq: checkout } },
       ],
-      status: { $in: targetStatuses }
+      status: { $in: targetStatuses },
     };
 
     const booked = await BookingModel.find(bookingConditions);
-    const bookedRoomInfo = booked.map(booking => ({
+
+    const bookedRoomInfo = booked.map((booking) => ({
       idRoom: booking.list_room.idRoom,
-      quantity: booking.list_room.quantity
+      quantity: booking.list_room.quantity,
     }));
 
     let rooms = await RoomModel.find({}).populate({
-      path: 'id_roomType',
-      model: 'RoomType',
+      path: "id_roomType",
+      model: "RoomType",
     });
 
     if (adults && children) {
-      rooms = rooms.filter(room =>
-        room.id_roomType && room.id_roomType.adults <= adults && room.id_roomType.children <= children
+      rooms = rooms.filter(
+        (room) =>
+          room.id_roomType &&
+          room.id_roomType.adults <= adults &&
+          room.id_roomType.children <= children
       );
     }
 
     if (minPrice && maxPrice) {
-      rooms = rooms.filter(room =>
-        room.id_roomType && room.id_roomType.price >= minPrice && room.id_roomType.price <= maxPrice
+      rooms = rooms.filter(
+        (room) =>
+          room.id_roomType &&
+          room.id_roomType.price >= minPrice &&
+          room.id_roomType.price <= maxPrice
       );
     }
 
-    const availableRoomsFromBooked = rooms.filter(room => {
-      const bookedRoom = bookedRoomInfo.find(item => item.idRoom.toString() === room._id.toString());
-      const remainingQuantity = bookedRoom ? room.quantity - bookedRoom.quantity : room.quantity;
+    const availableRoomsFromBooked = rooms.filter((room) => {
+      const bookedRoom = bookedRoomInfo.find(
+        (item) => item.idRoom.toString() === room._id.toString()
+      );
+      const remainingQuantity = bookedRoom
+        ? room.quantity - bookedRoom.quantity
+        : room.quantity;
       return remainingQuantity >= quantity && room.quantity >= quantity;
     });
 
-    const availableRoomsNotBooked = rooms.filter(room => {
-      const isNotBooked = !bookedRoomInfo.some(item => item.idRoom.toString() === room._id.toString());
+    const availableRoomsNotBooked = rooms.filter((room) => {
+      const isNotBooked = !bookedRoomInfo.some(
+        (item) => item.idRoom.toString() === room._id.toString()
+      );
       return isNotBooked && room.quantity >= quantity;
     });
 
-    const availableRooms = [...availableRoomsFromBooked, ...availableRoomsNotBooked];
+    const availableRooms = [
+      ...availableRoomsFromBooked,
+      ...availableRoomsNotBooked,
+    ];
     const data = [...new Set(availableRooms)];
-    return sendResponse(res, 200, 'Tìm kiếm phòng thành công', data);
+    return sendResponse(res, 200, "Tìm kiếm phòng thành công", data);
   } catch (error) {
     console.error(error);
-    return sendResponse(res, 500, 'Lỗi server');
+    return sendResponse(res, 500, "Lỗi server");
   }
 };
-
