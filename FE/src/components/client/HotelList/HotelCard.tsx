@@ -95,7 +95,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
               onClick={() => toggleDetail(hotel?._id)}
               className="no-underline hover:text-blue-500 cursor-pointer"
             >
-              {hotel?.id_roomType.name}
+              {hotel?.id_roomType?.name}
             </div>
           </h2>
 
