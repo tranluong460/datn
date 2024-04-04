@@ -42,8 +42,8 @@ const RoomBooking = ({
       }
     }
 
-    const roomTotal = room.price * newValue;
-    const newRoomTotal = roomTotal - room.price * currentValue;
+    const roomTotal = room?.id_roomType?.price * newValue;
+    const newRoomTotal = roomTotal - room?.id_roomType?.price * currentValue;
 
     setTotal(total + newRoomTotal);
   };
@@ -65,7 +65,7 @@ const RoomBooking = ({
 
         <div className="text-textLight2nd dark:text-textDark2nd flex gap-1 items-center text-xl">
           <span>
-            {room.price.toLocaleString("vi-VN", {
+            {room?.id_roomType.price.toLocaleString("vi-VN", {
               style: "currency",
               currency: "VND",
             })}

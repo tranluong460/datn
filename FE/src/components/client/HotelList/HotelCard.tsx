@@ -124,7 +124,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
 
                   <p className="text-md lg:text-2xl font-bold text-textLight dark:text-textDark">
                     <p className="text-md lg:text-2xl font-bold text-textLight dark:text-textDark">
-                      {hotel?.price.toLocaleString("vi-VN", {
+                      {hotel?.id_roomType?.price.toLocaleString("vi-VN", {
                         style: "currency",
                         currency: "VND",
                       })}
