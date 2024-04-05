@@ -4920,19 +4920,4 @@ export default RegulationsBookingInformation;
 //                       width: "134.65pt",
 //                       borderTop: "none",
 //                       padding: "0in 5.4pt",
-//                     }}
-//                     width="180"
-//                   >
-//                     <p
-//                       style={{
-//                         marginTop: "6pt",
-//                         marginRight: "0in",
-//                         marginBottom: "6pt",
-//                         marginLeft: "0in",
-//                       }}
-//                     >
-//                       Trước 6:00 giờ
-//                     </p>
-//                   </td>
-//                   <td
-//           
+// 
