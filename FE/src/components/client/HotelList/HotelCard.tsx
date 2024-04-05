@@ -84,7 +84,8 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
             <img
               src={hotel?.images[0].url}
               alt={hotel?.id_roomType?.name}
-              className="rounded-md w-full xl:h-48 md:h-44 object-contain"
+              className=""
+              // className="rounded-md w-full xl:h-48 md:h-44 object-contain"
             />
           </div>
         </div>
