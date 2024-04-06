@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
 import { Table, Space, Button, message, Select } from "antd";
 
 import { IRoomType } from "../../../interface";
 import {
-  // useDeleteRoomTypeMutation,
+  useDeleteRoomTypeMutation,
   useGetAllRoomTypeQuery,
   useGetOneRoomTypeQuery,
   useUpdateRoomTypeMutation,
@@ -13,8 +13,8 @@ import {
 import { CreateRoomTypeModal, EditRoomTypeModal } from "../../../components";
 
 const RoomTypeManage = () => {
-  // const key0 = "deleteAmenitiesMutation";
-  // const [contextHolder] = message.useMessage();
+  const key0 = "deleteAmenitiesMutation";
+  const [contextHolder] = message.useMessage();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [idRoomType, setIdRoomType] = useState("");
@@ -22,6 +22,12 @@ const RoomTypeManage = () => {
   const { data, isLoading } = useGetAllRoomTypeQuery("");
   const [editRoomType] = useUpdateRoomTypeMutation();
 
+  const handleEditClick = (itemId: string) => {
+    console.log("🚀 ~ handleEditClick ~ itemId:", itemId);
+
+    setIdRoomType(itemId);
+    setShowEditModal(true);
+  };
   const { data: dataOneRoomType, isFetching } =
     useGetOneRoomTypeQuery(idRoomType);
   const handleChange = (value: any) => {
@@ -34,34 +40,35 @@ const RoomTypeManage = () => {
         message.error(error.data.message);
       });
   };
-  // const [deleteRoomType] = useDeleteRoomTypeMutation();
 
-  // const onDelete = (id: string) => {
-  //   messageApi.open({
-  //     key: key0,
-  //     type: "loading",
-  //     content: "Loading...",
-  //   });
+  const [deleteRoomType] = useDeleteRoomTypeMutation();
 
-  //   deleteRoomType(id)
-  //     .unwrap()
-  //     .then((response) => {
-  //       messageApi.open({
-  //         key: key0,
-  //         type: "success",
-  //         content: response.message,
-  //         duration: 2,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       messageApi.open({
-  //         key: key0,
-  //         type: "error",
-  //         content: error.data.message,
-  //         duration: 2,
-  //       });
-  //     });
-  // };
+  const onDelete = (id: string) => {
+    messageApi.open({
+      key: key0,
+      type: "loading",
+      content: "Loading...",
+    });
+
+    deleteRoomType(id)
+      .unwrap()
+      .then((response) => {
+        messageApi.open({
+          key: key0,
+          type: "success",
+          content: response.message,
+          duration: 2,
+        });
+      })
+      .catch((error) => {
+        messageApi.open({
+          key: key0,
+          type: "error",
+          content: error.data.message,
+          duration: 2,
+        });
+      });
+  };
 
   const columns: ColumnsType<IRoomType> = [
     {
@@ -141,7 +148,7 @@ const RoomTypeManage = () => {
     <>
       {/* {contextHolder} */}
 
-      <Table
+      {/* <Table
         title={() => (
           <div className="flex items-center justify-end">
             <Button onClick={() => setShowCreateModal(true)}>Thêm mới</Button>
@@ -150,10 +157,98 @@ const RoomTypeManage = () => {
         bordered
         rowKey="_id"
         columns={columns}
-        dataSource={data?.data}
+        dataSource={nameData}
         loading={isLoading}
         pagination={paginationConfig}
-      />
+      /> */}
+
+      <div className=" flex flex-col">
+        <button
+          className="flex-auto bg-red-900 text-white py-2 px-5 rounded-md max-w-[100px] mb-3"
+          onClick={() => setShowCreateModal(true)}
+        >
+          thêm mới
+        </button>
+
+        <table className="border border-black border-solid text-center">
+          <thead>
+            <tr>
+              <th className="border border-black border-solid ">STT</th>
+              <th className="border border-black border-solid ">Name</th>
+              <th className="border border-black border-solid ">price</th>
+              <th className="border border-black border-solid ">
+                số lượng giường
+              </th>
+              <th className="border border-black border-solid ">
+                số lượng người lớn
+              </th>
+              <th className="border border-black border-solid ">
+                số lượng Trẻ em
+              </th>
+              <th className="border border-black border-solid ">
+                Trạng thái phòng
+              </th>
+              <th className="border border-black border-solid ">Hành Động</th>
+            </tr>
+          </thead>
+          {data?.data?.map((items: any, index: number) => {
+            return (
+              <>
+                <tbody>
+                  <tr>
+                    <td className="border border-black border-solid ">
+                      {index + 1}
+                    </td>
+                    <td className="border border-black border-solid ">
+                      {items.name}
+                    </td>
+                    <td className="border border-black border-solid ">
+                      {items.price}
+                    </td>
+                    <td className="border border-black border-solid ">
+                      {items.bed}
+                    </td>
+                    <td className="border border-black border-solid ">
+                      {items.adults}
+                    </td>
+                    <td className="border border-black border-solid ">
+                      {items.children}
+                    </td>
+                    <td className="border border-black border-solid">
+                      <Space wrap>
+                        <Select
+                          defaultValue={items.status}
+                          style={{ width: 120 }}
+                          onChange={(value) =>
+                            handleChange({ value, name: items.name })
+                          }
+                          onClick={() => setIdRoomType(items._id)}
+                          options={[
+                            {
+                              name: items.name,
+                              value: "Đang áp dụng",
+                              label: "Đang áp dụng",
+                            },
+                            {
+                              value: "Không được áp dụng",
+                              label: "Không được áp dụng",
+                            },
+                          ]}
+                        />
+                      </Space>
+                    </td>
+                    <td className="border border-black border-solid ">
+                      <button onClick={() => handleEditClick(items._id)}>
+                        Sửa
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </>
+            );
+          })}
+        </table>
+      </div>
 
       <CreateRoomTypeModal
         isOpenCreate={showCreateModal}

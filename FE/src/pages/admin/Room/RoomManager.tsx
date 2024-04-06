@@ -64,10 +64,10 @@ const RoomManager = () => {
     },
     {
       title: "Giá",
-      dataIndex: "price",
-      key: "price",
+      dataIndex: "id_roomType",
+      key: "id_roomType",
       render: (price) => {
-        return price.toLocaleString("vi-VN", {
+        return price?.price.toLocaleString("vi-VN", {
           style: "currency",
           currency: "VND",
         });

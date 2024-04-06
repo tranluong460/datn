@@ -74,10 +74,8 @@ const Top = () => {
             </p>
           </div>
 
-    
           <div className="w-1/2 overflow-hidden">
             <div className="flex justify-center items-center ">
-
               {Array.from({ length: 3 }).map((_, index) => (
                 <div
                   key={index}
@@ -92,9 +90,7 @@ const Top = () => {
                   }}
                 >
                   <img
-
                     className="h-[600px] w-full object-cover dark:border-divideDark"
-
                     src={image[(currentImageIndex + index) % image.length]}
                     alt=""
                   />
@@ -102,7 +98,7 @@ const Top = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="">
             <Search />
           </div>
@@ -112,16 +108,16 @@ const Top = () => {
 
         <div className="flex-col justify-center items-center p-4 mx-auto max-w-7xl">
           <h1 className="md:text-[2.2rem] text-[2rem] font-mono mt-[1rem] text-textLight dark:text-textDark select-none text-center">
-            A sophisticated and memorable experience in the heart of Hanoi
+            Một trải nghiệm thú vị và đáng nhớ ở trung tâm của Hà Nội
             <br className="block sm:hidden" />
             {/* <span class="text-neutral-400"> MeliaHanoi</span> */}
           </h1>
           <p className="text-[1.1rem] leading-[2rem] text-textLight2nd dark:text-textDark2nd select-none text-center">
-            You won’t regret choosing this comfortable and well-located hotel
-            when visiting the capital of Vietnam. With an unbeatable city center
-            location, this modern hotel offers first-class facilities and an
-            exceptional service. An unbeatable opportunity to discover one of
-            Southeast Asia’s most exciting destinations.
+            Bạn sẽ không hối hận khi chọn khách sạn tiện nghi và có vị trí tốt
+            này khi đến thăm thủ đô của Việt Nam. Với một trung tâm thành phố
+            tuyệt vời với vị trí đắc địa, khách sạn hiện đại này cung cấp những
+            tiện nghi hạng nhất và một dịch vụ đặc biệt. Một cơ hội tuyệt vời để
+            khám phá một trong những Những điểm đến thú vị tại Hà Nội.
           </p>
         </div>
       </Container>

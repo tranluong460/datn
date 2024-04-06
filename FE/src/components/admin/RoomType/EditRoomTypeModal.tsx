@@ -65,6 +65,47 @@ const EditRoomTypeModal = ({
             <Input />
           </Form.Item>
 
+          <Form.Item
+            name="price"
+            label="Nhập giá phòng"
+            rules={[{ required: true, message: "Vui lòng nhập giá phòng!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="bed"
+            label="Số lượng giường có trong phòng"
+            rules={[
+              { required: true, message: "Vui lòng nhập số lượng giường!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="adults"
+            label="Số lượng người lớn có thể ở"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập số lượng người lớn ở!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="children"
+            label="Số lượng  trẻ em có thể ở"
+            rules={[
+              { required: true, message: "Vui lòng nhập số lượng trẻ em ở!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
           <Form.Item>
             <Space>
               <Button htmlType="submit" loading={resultEdit.isLoading}>

@@ -10,7 +10,7 @@ export const getAll = async (req, res) => {
   try {
     const roomList = await RoomModel.find()
       .select("-createdAt -updatedAt")
-      .populate({ path: "id_roomType id_hotel", select: "_id name" });
+      .populate({ path: "id_roomType id_hotel", select: "_id name price" });
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
@@ -178,11 +178,11 @@ export const search = async (req, res) => {
 
     const bookingConditions = {
       $or: [
-        { check_in: { $lte: checkout }, check_out: { $gte: checkin } },
-        { check_in: { $eq: checkin } },
-        { check_out: { $eq: checkout } }
+        { check_in: { $lte: checkout }, check_out: { $gte: checkin } }, // Đơn booking bắt đầu trước thời gian check-out và kết thúc sau thời gian check-in
+        { check_in: { $eq: checkin } }, // Đơn booking bắt đầu vào cùng thời gian check-in
+        { check_out: { $eq: checkout } }, // Đơn booking kết thúc vào cùng thời gian check-out
       ],
-      status: { $in: targetStatuses }
+      status: { $in: targetStatuses },
     };
 
     const booked = await BookingModel.find(bookingConditions);
@@ -224,7 +224,7 @@ export const search = async (req, res) => {
     return sendResponse(res, 200, 'Tìm kiếm phòng thành công', data);
   } catch (error) {
     console.error(error);
-    return sendResponse(res, 500, 'Lỗi server');
+    return sendResponse(res, 500, "Lỗi server");
   }
 };
 

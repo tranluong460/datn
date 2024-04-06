@@ -79,16 +79,6 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
 
           <Col span={12}>
             <Form.Item
-              name="price"
-              label="Giá"
-              rules={[{ required: true, message: "Vui lòng nhập giá!" }]}
-            >
-              <InputNumber className="w-full" min={1} addonAfter="VNĐ" />
-            </Form.Item>
-          </Col>
-
-          <Col span={12}>
-            <Form.Item
               name="id_hotel"
               label="Khách sạn"
               rules={[
