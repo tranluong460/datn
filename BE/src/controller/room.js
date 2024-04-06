@@ -173,7 +173,15 @@ export const update = async (req, res) => {
 
 export const search = async (req, res) => {
   try {
-    const { quantity, checkin, checkout, minPrice, maxPrice, adults, children } = req.body;
+    const {
+      quantity,
+      checkin,
+      checkout,
+      minPrice,
+      maxPrice,
+      adults,
+      children,
+    } = req.body;
     const targetStatuses = ["Đang xử lý", "Đã xác nhận", "Đã nhận phòng"];
 
     const bookingConditions = {
@@ -188,23 +196,29 @@ export const search = async (req, res) => {
     const booked = await BookingModel.find(bookingConditions);
     const bookedRoomInfo = booked.map(booking => ({
       idRoom: booking.list_room.idRoom,
-      quantity: booking.list_room.quantity
+      quantity: booking.list_room.quantity,
     }));
 
     let rooms = await RoomModel.find({}).populate({
-      path: 'id_roomType',
-      model: 'RoomType',
+      path: "id_roomType",
+      model: "RoomType",
     });
 
     if (adults && children) {
-      rooms = rooms.filter(room =>
-        room.id_roomType && room.id_roomType.adults <= adults && room.id_roomType.children <= children
+      rooms = rooms.filter(
+        (room) =>
+          room.id_roomType &&
+          room.id_roomType.adults <= adults &&
+          room.id_roomType.children <= children
       );
     }
 
     if (minPrice && maxPrice) {
-      rooms = rooms.filter(room =>
-        room.id_roomType && room.id_roomType.price >= minPrice && room.id_roomType.price <= maxPrice
+      rooms = rooms.filter(
+        (room) =>
+          room.id_roomType &&
+          room.id_roomType.price >= minPrice &&
+          room.id_roomType.price <= maxPrice
       );
     }
 
@@ -227,4 +241,3 @@ export const search = async (req, res) => {
     return sendResponse(res, 500, "Lỗi server");
   }
 };
-
