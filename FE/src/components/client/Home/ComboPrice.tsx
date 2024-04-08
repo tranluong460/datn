@@ -6,7 +6,6 @@ import { Loading } from "../../../pages";
 
 const ComboPrice = () => {
   const { data: hotelData, isLoading } = useGetAllRoomQuery("");
-  console.log("🚀 ~ ComboPrice ~ hotelData:", hotelData?.data);
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
@@ -18,26 +17,18 @@ const ComboPrice = () => {
     }
   }, [hotelData, isLoading]);
 
-  const itemsPerPage = 4;
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const nextPage = () => {
-    setCurrentPage(
-      (prevPage) => (prevPage + 1) % Math.ceil(data.length / itemsPerPage)
-    );
+  const [startIndex, setStartIndex] = useState(0);
+  const nextRooms = () => {
+    const nextIndex = startIndex + 1;
+    if (nextIndex <= hotelData?.data.length - 4) {
+      setStartIndex(nextIndex);
+    }
   };
 
-  const prevPage = () => {
-    setCurrentPage(
-      (prevPage) =>
-        (prevPage - 1 + Math.ceil(data.length / itemsPerPage)) %
-        Math.ceil(data.length / itemsPerPage)
-    );
+  const prevRooms = () => {
+    const prevIndex = Math.max(0, startIndex - 1);
+    setStartIndex(prevIndex);
   };
-
-  const startIdx = currentPage * itemsPerPage;
-  const visibleData = data.slice(startIdx, startIdx + itemsPerPage);
-
   return (
     <>
       <Container>
@@ -51,14 +42,31 @@ const ComboPrice = () => {
           </div>
 
           <div className="grid grid-cols-4 gap-5 relative">
-            {visibleData?.map((item: any, index: number) => (
-              <ComboPriceCard data={item} key={index} />
-            ))}
+            {/* //! đang test */}
+
+            {hotelData?.data?.length > 0 ? (
+              hotelData?.data
+                .slice(startIndex, startIndex + 4)
+                .map((room: any, index: number) => (
+                  <div
+                    key={room?._id}
+                    className={`relative ${index === 1 ? "z-10" : ""}`}
+                  >
+                    <ComboPriceCard data={room} key={index} />
+                  </div>
+                ))
+            ) : (
+              <p>Không có phòng nào</p>
+            )}
+
+            {/* //!end đang test */}
           </div>
 
           <button
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300"
-            onClick={prevPage}
+            className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300 ${
+              startIndex === 0 ? "bg-gray-50 opacity-0" : ""
+            } `}
+            onClick={prevRooms}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -77,8 +85,11 @@ const ComboPrice = () => {
           </button>
 
           <button
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300"
-            onClick={nextPage}
+            className={`absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300   ${
+              startIndex + 4 >= hotelData?.data.length ? "opacity-0" : ""
+            } active:bg-white`}
+            onClick={nextRooms}
+            disabled={startIndex + 4 >= hotelData?.data?.length}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
