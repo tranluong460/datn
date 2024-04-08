@@ -10,7 +10,7 @@ type HotelCardProps = {
   hotel: IRoom;
 };
 
-const HotelCard = ({ hotel }: HotelCardProps) => {
+const HotelCard = ({ hotel }: any) => {
   const location = useLocation();
   const navigate = useNavigate();
 

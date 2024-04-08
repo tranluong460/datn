@@ -30,12 +30,12 @@ const RoomCard = ({ room, onOpenDetail }: RoomCardProps) => {
             <div className="mt-3">
               <span className="mr-1 text-xs">Chỉ từ</span>
 
-              <span className="text-md text-yellow-500 font-bold capitalize">
+              {/* <span className="text-md text-yellow-500 font-bold capitalize">
                 {room?.price.toLocaleString("vi-VN", {
                   style: "currency",
                   currency: "VND",
                 })}
-              </span>
+              </span> */}
 
               <span className="ml-1 text-xs">/đêm</span>
             </div>

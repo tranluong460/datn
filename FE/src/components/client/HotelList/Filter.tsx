@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, InputNumber, Slider, Space } from "antd";
 
 const Filter = () => {
@@ -110,6 +110,8 @@ const Filter = () => {
           value={[minValue, maxValue]}
           onChange={onChange}
         />
+
+        <button onClick={() => onChass([minValue, maxValue])}>Tìm kiếm</button>
       </div>
     </div>
   );
