@@ -186,16 +186,15 @@ export const search = async (req, res) => {
 
     const bookingConditions = {
       $or: [
-        { check_in: { $lte: checkout }, check_out: { $gte: checkin } },
-        { check_in: { $eq: checkin } },
-        { check_out: { $eq: checkout } },
+        { check_in: { $lte: checkout }, check_out: { $gte: checkin } }, // Đơn booking bắt đầu trước thời gian check-out và kết thúc sau thời gian check-in
+        { check_in: { $eq: checkin } }, // Đơn booking bắt đầu vào cùng thời gian check-in
+        { check_out: { $eq: checkout } }, // Đơn booking kết thúc vào cùng thời gian check-out
       ],
       status: { $in: targetStatuses },
     };
 
     const booked = await BookingModel.find(bookingConditions);
-
-    const bookedRoomInfo = booked.map((booking) => ({
+    const bookedRoomInfo = booked.map(booking => ({
       idRoom: booking.list_room.idRoom,
       quantity: booking.list_room.quantity,
     }));
@@ -223,29 +222,20 @@ export const search = async (req, res) => {
       );
     }
 
-    const availableRoomsFromBooked = rooms.filter((room) => {
-      const bookedRoom = bookedRoomInfo.find(
-        (item) => item.idRoom.toString() === room._id.toString()
-      );
-      const remainingQuantity = bookedRoom
-        ? room.quantity - bookedRoom.quantity
-        : room.quantity;
+    const availableRoomsFromBooked = rooms.filter(room => {
+      const bookedRoom = bookedRoomInfo.find(item => item.idRoom.toString() === room._id.toString());
+      const remainingQuantity = bookedRoom ? room.quantity - bookedRoom.quantity : room.quantity;
       return remainingQuantity >= quantity && room.quantity >= quantity;
     });
 
-    const availableRoomsNotBooked = rooms.filter((room) => {
-      const isNotBooked = !bookedRoomInfo.some(
-        (item) => item.idRoom.toString() === room._id.toString()
-      );
+    const availableRoomsNotBooked = rooms.filter(room => {
+      const isNotBooked = !bookedRoomInfo.some(item => item.idRoom.toString() === room._id.toString());
       return isNotBooked && room.quantity >= quantity;
     });
 
-    const availableRooms = [
-      ...availableRoomsFromBooked,
-      ...availableRoomsNotBooked,
-    ];
+    const availableRooms = [...availableRoomsFromBooked, ...availableRoomsNotBooked];
     const data = [...new Set(availableRooms)];
-    return sendResponse(res, 200, "Tìm kiếm phòng thành công", data);
+    return sendResponse(res, 200, 'Tìm kiếm phòng thành công', data);
   } catch (error) {
     console.error(error);
     return sendResponse(res, 500, "Lỗi server");
