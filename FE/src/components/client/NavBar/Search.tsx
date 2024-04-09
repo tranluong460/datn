@@ -1,5 +1,5 @@
 import qs from "query-string";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { ICountry } from "../../../interface";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -17,6 +17,12 @@ const disabledDate = (current: any) => {
 };
 
 const Search = () => {
+  const [searchParams] = useSearchParams();
+  const checkin = searchParams.get("checkin") || "";
+
+  // ấn vào nút tìm kiếm nó sẽ render lại
+  const [isSearched, setIsSearched] = useState(false);
+
   // thông báo nếu chưa nhập số lượng phòng
   const [errorMessage, setErrorMessage] = useState("");
   const [roomInfo, setRoomInfo] = useState([{ adults: 1, children: 0 }]);
@@ -122,6 +128,12 @@ const Search = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (isSearched) {
+      window.location.reload();
+    }
+  }, [isSearched]);
+
   // tìm phòng
   const location = useLocation();
   const navigate = useNavigate();
@@ -159,6 +171,8 @@ const Search = () => {
     // Nếu không có lỗi, tiếp tục xử lý như bình thường
     updatedQuery.quantity = roomInfo.length;
 
+    setIsSearched(true);
+
     const url = qs.stringifyUrl(
       {
         url: "/hotel-list",
@@ -194,7 +208,6 @@ const Search = () => {
   };
 
   const handleCollapse = () => {
-    console.log("đã nhấn");
     setIsExpanded(false);
     setIsVisible(true);
   };
@@ -203,9 +216,9 @@ const Search = () => {
   const [isScrollDisabled, setIsScrollDisabled] = useState(false);
   useEffect(() => {
     if (isExpanded) {
-      setIsScrollDisabled(true); // Disable scroll when search is expanded
+      setIsScrollDisabled(true);
     } else {
-      setIsScrollDisabled(false); // Enable scroll when search is collapsed
+      setIsScrollDisabled(false);
     }
   }, [isExpanded]);
   return (
@@ -221,10 +234,14 @@ const Search = () => {
       </button>
       <div
         onClick={handleExpand}
-        className={`grid grid-cols-[400px_340px_560px] justify-start border mt-2 z-[999] border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
+        className={`grid grid-cols-[400px_340px_560px] justify-start border ${
+          checkin == "" ? "mt-2" : ""
+        } z-[999] border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
           isExpanded
-            ? `fixed top-14 inset-x-0 z-50 transition-search`
-            : "left-[3%] bottom-10 transition-search-bottom 2xl:left-[15%]"
+            ? ` top-20 inset-x-0 z-50 transition-search`
+            : `${
+                checkin == "" ? "left-[3%] bottom-10" : ""
+              }  2xl:left-[15%] transition-search-bottom`
         }`}
 
         // search-bar ${ isVisible ? "visible" : "hidden" }
