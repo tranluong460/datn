@@ -56,9 +56,13 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
 
           <div className="pt-3 grid grid-cols-1 gap-5">
             {filteredRooms?.map((room: IRoom, index: number) => {
+              console.log("🚀 ~ {filteredRooms?.map ~ room:", room);
+
               const bk = booking.list_room?.find(
                 (bookingRoom) => bookingRoom.idRoom === room._id
               );
+
+              console.log(bk);
 
               return (
                 <div
@@ -76,10 +80,13 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
                     <span>Giá:</span>
                     <p>
                       {bk &&
-                        (bk.quantity * room.price).toLocaleString("vi-VN", {
-                          style: "currency",
-                          currency: "VND",
-                        })}
+                        (bk.quantity * room?.id_roomType?.price).toLocaleString(
+                          "vi-VN",
+                          {
+                            style: "currency",
+                            currency: "VND",
+                          }
+                        )}
                     </p>
                   </div>
                 </div>

@@ -42,8 +42,6 @@ const ComboPrice = () => {
           </div>
 
           <div className="grid grid-cols-4 gap-5 relative">
-            {/* //! đang test */}
-
             {hotelData?.data?.length > 0 ? (
               hotelData?.data
                 .slice(startIndex, startIndex + 4)
@@ -58,8 +56,6 @@ const ComboPrice = () => {
             ) : (
               <p>Không có phòng nào</p>
             )}
-
-            {/* //!end đang test */}
           </div>
 
           <button
