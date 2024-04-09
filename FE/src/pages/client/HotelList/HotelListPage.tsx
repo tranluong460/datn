@@ -29,6 +29,8 @@ const HotelListPage = () => {
   const quantity = searchParams.get("quantity") || "";
   const minPrice = searchParams.get("minPrice") || undefined;
   const maxPrice = searchParams.get("maxPrice") || undefined;
+  const children = searchParams.get("children") || undefined;
+  const adults = searchParams.get("adults") || undefined;
 
   const [search, setSearch] = useSearchRoomMutation();
   const [searchResult, setSearchResult] = useState(null);
@@ -42,6 +44,8 @@ const HotelListPage = () => {
           quantity,
           maxPrice,
           minPrice,
+          adults,
+          children,
         });
         setSearchResult(response?.data);
       } catch (error) {
@@ -50,7 +54,16 @@ const HotelListPage = () => {
     };
 
     fetchData();
-  }, [checkin, checkout, quantity, search, minPrice, maxPrice]);
+  }, [
+    checkin,
+    checkout,
+    quantity,
+    search,
+    minPrice,
+    maxPrice,
+    adults,
+    children,
+  ]);
 
   const [selectedValues, setSelectedValues] = useState(1);
   // Cập nhật onChange function để thay đổi giá trị của radio button cho từng phần tử
@@ -77,7 +90,7 @@ const HotelListPage = () => {
 
   // đặt phòng
   const bookRoom = () => {
-    const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=65f80b7f1f4a2e01d0677d2c`;
+    const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=660e0d209b3248744855da80`;
 
     // Chuyển hướng sang trang booking
     window.location.href = bookingURL;

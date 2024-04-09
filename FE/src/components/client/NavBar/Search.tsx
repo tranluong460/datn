@@ -29,8 +29,10 @@ const Search = () => {
 
   // thêm phòng
   const addRoom = () => {
-    const newRoomInfo = [...roomInfo, { adults: 1, children: 0 }];
-    setRoomInfo(newRoomInfo);
+    if (roomInfo.length < 8) {
+      const newRoomInfo = [...roomInfo, { adults: 1, children: 0 }];
+      setRoomInfo(newRoomInfo);
+    }
   };
 
   // xóa phòng
@@ -170,9 +172,10 @@ const Search = () => {
 
     // Nếu không có lỗi, tiếp tục xử lý như bình thường
     updatedQuery.quantity = roomInfo.length;
+    updatedQuery.children = roomInfo[0].children;
+    updatedQuery.adults = roomInfo[0].adults;
 
     setIsSearched(true);
-
     const url = qs.stringifyUrl(
       {
         url: "/hotel-list",
@@ -370,12 +373,16 @@ const Search = () => {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => removeRoom(index)}
-                    className="text-lg text-blue-500 font-bold"
-                  >
-                    Xóa phòng
-                  </button>
+                  {roomInfo.length == 1 ? (
+                    ""
+                  ) : (
+                    <button
+                      onClick={() => removeRoom(index)}
+                      className="text-lg text-blue-500 font-bold"
+                    >
+                      Xóa phòng
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
