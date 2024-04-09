@@ -164,7 +164,11 @@ export const create = async (req, res) => {
         ],
       });
 
-      if (bookings.length > 0) {
+      const roomBooking = await RoomModel.findById(roomIds);
+
+      console.log(roomBooking);
+
+      if (bookings.length > roomBooking.quantity) {
         return sendResponse(res, 404, "Phòng đã được đặt");
       }
 
