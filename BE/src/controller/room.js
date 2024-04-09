@@ -192,7 +192,6 @@ export const search = async (req, res) => {
       ],
       status: { $in: targetStatuses },
     };
-
     const booked = await BookingModel.find(bookingConditions);
     const bookedRoomInfo = booked.map((booking) => ({
       idRoom: booking.list_room.idRoom,
@@ -203,13 +202,13 @@ export const search = async (req, res) => {
       path: "id_roomType",
       model: "RoomType",
     });
-
+    // console.log(rooms);
     if (adults && children) {
       rooms = rooms.filter(
         (room) =>
           room.id_roomType &&
-          room.id_roomType.adults <= adults &&
-          room.id_roomType.children <= children
+          room.id_roomType.adults >= adults &&
+          room.id_roomType.children >= children
       );
     }
 
@@ -221,7 +220,6 @@ export const search = async (req, res) => {
           room.id_roomType.price <= maxPrice
       );
     }
-
     const availableRoomsFromBooked = rooms.filter((room) => {
       const bookedRoom = bookedRoomInfo.find(
         (item) => item.idRoom.toString() === room._id.toString()
