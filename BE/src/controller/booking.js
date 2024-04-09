@@ -133,21 +133,16 @@ export const create = async (req, res) => {
 
   try {
     validateMiddleware(req, res, BookingValidate, async () => {
-      let id_hotel;
-      let hasError = false;
+      const checkInDate = moment(check_in);
+      const checkOutDate = moment(check_out);
+      const currentDate = moment().startOf("day");
 
-      await Promise.all(
-        list_room.map(async (item) => {
-          const room = await RoomModel.findById(item.idRoom);
-
-          if (room.quantity === 0) {
-            hasError = true;
-          }
-        })
-      );
-
-      if (hasError) {
-        return sendResponse(res, 404, "Vui lòng thực hiện đặt phòng lại");
+      if (
+        checkInDate.isBefore(currentDate) ||
+        checkOutDate.isBefore(currentDate) ||
+        checkOutDate.isBefore(checkInDate)
+      ) {
+        return sendResponse(res, 400, "Vui lòng thực hiện đặt phòng lại");
       }
 
       const bookings = await BookingModel.find({
@@ -173,23 +168,26 @@ export const create = async (req, res) => {
         return sendResponse(res, 404, "Phòng đã được đặt");
       }
 
-      await Promise.all(
-        list_room.map(async (item) => {
-          const room = await RoomModel.findById(item.idRoom);
-          id_hotel = room.id_hotel;
+      const userBooking = await BookingModel.findOne({
+        id_user: user._id,
+        status: "Chờ thanh toán",
+      });
 
-          if (room) {
-            room.quantity -= item.quantity;
-
-            await room.save();
-          }
-        })
-      );
+      if (userBooking) {
+        return sendResponse(
+          res,
+          404,
+          "Bạn có một đơn hàng đang chờ thanh toán"
+        );
+      }
 
       const data = await BookingModel.create({
         id_user: user._id,
-        id_hotel: id_hotel,
-        ...req.body,
+        list_room: req.body.list_room[0],
+        check_in: req.body.check_in,
+        check_out: req.body.check_out,
+        total_price: req.body.total_price,
+        city: req.body.city,
       });
 
       if (!data) {
