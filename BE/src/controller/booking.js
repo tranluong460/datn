@@ -147,7 +147,7 @@ export const create = async (req, res) => {
 
       const bookings = await BookingModel.find({
         status: { $nin: ["Thành công", "Đã hủy bỏ"] },
-        list_room: { $elemMatch: { idRoom: { $in: roomIds } } },
+        "list_room.idRoom": { $in: roomIds },
         $or: [
           {
             $and: [
