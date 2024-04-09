@@ -32,7 +32,6 @@ const HotelListPage = () => {
 
   const [search, setSearch] = useSearchRoomMutation();
   const [searchResult, setSearchResult] = useState(null);
-  console.log("🚀 ~ HotelListPage ~ searchResult:", searchResult);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,13 +59,8 @@ const HotelListPage = () => {
     setValue(e.target.value);
   };
 
-  const [Images, setImages] = useState({});
-
   // chuyển ảnh
-
   const [currentImageIndices, setCurrentImageIndices] = useState({});
-  console.log("🚀 ~ HotelListPage ~ currentImageIndices:", currentImageIndices);
-
   const handlePrevImage = (id: number) => {
     setCurrentImageIndices((prevIndices: any) => ({
       ...prevIndices,
@@ -81,8 +75,17 @@ const HotelListPage = () => {
     }));
   };
 
+  // đặt phòng
+  const bookRoom = () => {
+    const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=65f80b7f1f4a2e01d0677d2c`;
+
+    // Chuyển hướng sang trang booking
+    window.location.href = bookingURL;
+  };
+
   return (
     <>
+      <Search />
       <Container>
         <FilterDialog
           isShowRate={showRate}
@@ -90,10 +93,10 @@ const HotelListPage = () => {
           isShowDialog={showDialog}
           onShowDialog={() => setShowDialog(!showDialog)}
         />
-        <Search />
+
         <section className="max-w-[1400px] mx-auto mb-5 px-16">
-          <div className="flex gap-2 mt-5 shadow-none border-none  decoration-1 underline underline-offset-8 mx-auto">
-            <span className="border-r-gray-500 pr-4 border-r ">
+          <div className="flex gap-2 shadow-none border-none  decoration-1 underline underline-offset-8 mx-auto mt-24">
+            <span className="border-r-gray-500 pr-4 border-r">
               44B đường Lý Thường Kiệt 2RFX+PC Hà Nội
             </span>
             <span>Thông tin khách sạn</span>
@@ -291,6 +294,7 @@ const HotelListPage = () => {
                         className="min-w-full bg-[#918981] text-white
                         mb-4 py-4 hover:bg-[#938e83]
                         "
+                        onClick={bookRoom}
                       >
                         Đặt phòng
                       </button>
