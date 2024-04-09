@@ -26,30 +26,33 @@ const Search = () => {
   // thông báo nếu chưa nhập số lượng phòng
   const [errorMessage, setErrorMessage] = useState("");
   const [roomInfo, setRoomInfo] = useState([{ adults: 1, children: 0 }]);
+  const [room, setRoom] = useState(1);
 
   // thêm phòng
   const addRoom = () => {
-    if (roomInfo.length < 8) {
-      const newRoomInfo = [...roomInfo, { adults: 1, children: 0 }];
-      setRoomInfo(newRoomInfo);
+    if (room < 10) {
+      setRoom(room + 1);
     }
   };
 
   // xóa phòng
   const removeRoom = (index: number) => {
-    const newRoomInfo = [...roomInfo];
-    if (roomInfo.length <= 1) {
-      return setRoomInfo;
+    if (room > 1) {
+      setRoom(room - 1);
     }
-    newRoomInfo.splice(index, 1);
-    setRoomInfo(newRoomInfo);
+    // const newRoomInfo = [...roomInfo];
+    // if (roomInfo.length <= 1) {
+    //   return setRoomInfo;
+    // }
+    // newRoomInfo.splice(index, 1);
+    // setRoomInfo(newRoomInfo);
   };
 
   // tăng số lượng người lớn
   const handleIncrementAdults = (index: number) => {
     const newRoomInfo = [...roomInfo];
 
-    if (newRoomInfo[index].adults < 6) {
+    if (newRoomInfo[index].adults < 8) {
       newRoomInfo[index].adults++;
       setRoomInfo(newRoomInfo);
     }
@@ -171,7 +174,7 @@ const Search = () => {
     }
 
     // Nếu không có lỗi, tiếp tục xử lý như bình thường
-    updatedQuery.quantity = roomInfo.length;
+    updatedQuery.quantity = room;
     updatedQuery.children = roomInfo[0].children;
     updatedQuery.adults = roomInfo[0].adults;
 
@@ -238,7 +241,7 @@ const Search = () => {
       <div
         onClick={handleExpand}
         className={`grid grid-cols-[400px_340px_560px] justify-start border ${
-          checkin == "" ? "mt-2" : ""
+          checkin == "" ? "mt-2" : "right-10"
         } z-[999] border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
           isExpanded
             ? ` top-20 inset-x-0 z-50 transition-search`
@@ -282,8 +285,7 @@ const Search = () => {
               <AiOutlineUsergroupDelete />
             </p>
             <div className="flex" onClick={handleRoomLabelClick}>
-              {roomInfo.length} Phòng <p className="mx-1">•</p> {totalAdults}{" "}
-              Người lớn
+              {room} Phòng <p className="mx-1">•</p> {totalAdults} Người lớn
               {totalChildren === 0 ? (
                 ""
               ) : (
@@ -295,9 +297,7 @@ const Search = () => {
           </div>
           {showAdditionalRooms && (
             <div
-              className={`absolute -left-6 top-full bg-white px-2 py-4 translate-x-2 z-[999'] shadow border-t-2 w-[273px] overflow-auto ${
-                roomInfo.length === 1 ? "h-72" : "h-96"
-              } ${
+              className={`absolute -left-6 top-full bg-white px-2 py-4 translate-x-2 z-[999'] shadow border-t-2 w-[273px] overflow-auto h-56 ${
                 showAdditionalRooms ? "border-t-black border" : "border-none"
               } `}
             >
@@ -315,7 +315,7 @@ const Search = () => {
                     >
                       -
                     </button>
-                    <p>{roomInfo.length}</p>
+                    <p>{room}</p>
                     <button
                       onClick={addRoom}
                       className="border rounded-full px-3 py-1 my-2 border-slate-950"
@@ -329,7 +329,7 @@ const Search = () => {
               {roomInfo.map((room, index) => (
                 <div key={index}>
                   <div className="mb-2">
-                    <p className="text-base">Phòng {index + 1}</p>
+                    {/* <p className="text-base">Phòng {index + 1}</p> */}
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
