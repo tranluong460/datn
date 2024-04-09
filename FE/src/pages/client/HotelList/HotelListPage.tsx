@@ -77,7 +77,7 @@ const HotelListPage = () => {
 
   // đặt phòng
   const bookRoom = () => {
-    const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=65f80b7f1f4a2e01d0677d2c`;
+    const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=660e0d209b3248744855da80`;
 
     // Chuyển hướng sang trang booking
     window.location.href = bookingURL;
