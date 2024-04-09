@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-
+import moment from "moment";
 import { useSearchRoomMutation } from "../../../api";
 import {
   Container,
@@ -34,6 +34,10 @@ const HotelListPage = () => {
 
   const [search, setSearch] = useSearchRoomMutation();
   const [searchResult, setSearchResult] = useState(null);
+
+  const checkinDate = moment(checkin);
+  const checkoutDate = moment(checkout);
+  const numberOfDays = checkoutDate.diff(checkinDate, "days");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,8 +133,8 @@ const HotelListPage = () => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M10 14.039l-3.827 5.2.971-6.383-6.383.97L5.961 10l-5.2-3.827 6.383.971-.97-6.383L10 5.961l3.827-5.2-.971 6.383 6.383-.97-5.2 3.826 5.2 3.827-6.383-.971.97 6.383-3.826-5.2z"
                         fill="#C2C2C2"
                       ></path>
@@ -146,8 +150,8 @@ const HotelListPage = () => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M10 14.039l-3.827 5.2.971-6.383-6.383.97L5.961 10l-5.2-3.827 6.383.971-.97-6.383L10 5.961l3.827-5.2-.971 6.383 6.383-.97-5.2 3.826 5.2 3.827-6.383-.971.97 6.383-3.826-5.2z"
                         fill="#C2C2C2"
                       ></path>
@@ -163,8 +167,8 @@ const HotelListPage = () => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M10 14.039l-3.827 5.2.971-6.383-6.383.97L5.961 10l-5.2-3.827 6.383.971-.97-6.383L10 5.961l3.827-5.2-.971 6.383 6.383-.97-5.2 3.826 5.2 3.827-6.383-.971.97 6.383-3.826-5.2z"
                         fill="#C2C2C2"
                       ></path>
@@ -180,8 +184,8 @@ const HotelListPage = () => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M10 14.039l-3.827 5.2.971-6.383-6.383.97L5.961 10l-5.2-3.827 6.383.971-.97-6.383L10 5.961l3.827-5.2-.971 6.383 6.383-.97-5.2 3.826 5.2 3.827-6.383-.971.97 6.383-3.826-5.2z"
                         fill="#C2C2C2"
                       ></path>
@@ -197,8 +201,8 @@ const HotelListPage = () => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M10 14.039l-3.827 5.2.971-6.383-6.383.97L5.961 10l-5.2-3.827 6.383.971-.97-6.383L10 5.961l3.827-5.2-.971 6.383 6.383-.97-5.2 3.826 5.2 3.827-6.383-.971.97 6.383-3.826-5.2z"
                         fill="#C2C2C2"
                       ></path>
@@ -219,11 +223,12 @@ const HotelListPage = () => {
 
           <div className="my-5">
             {searchResult?.data?.map((items: any, index: number) => {
+              console.log(items);
               const id = items._id.toString(); // Assume each item has a unique id
               const maxIndex = items.images.length - 1;
               const currentIndex = currentImageIndices[id] || 0;
               return (
-                <div className="flex my-4 border-gray-500 border">
+                <div className="flex my-4 border-gray-500 border" key={index}>
                   <div className="relative max-w-[849px] max-h-[546px]">
                     <img
                       src={items.images[currentIndex].url}
@@ -257,10 +262,10 @@ const HotelListPage = () => {
                   <div className="flex flex-col w-full justify-between font-[Graphik,sans-serif] max-w-[600px]">
                     <div className="mt-16 px-10 ">
                       <span className="underline underline-offset-8 decoration-1 inline-flex text-[24px] leading-9 ">
-                        Phòng {items.id_roomType.name} ({items.id_roomType.name}{" "}
-                        Room)
+                        {items.id_roomType.name} ({items.id_roomType.name} Room)
                       </span>
 
+                      {/* TODO tiện nghi */}
                       <div className="flex gap-2 mt-2">
                         <span className="border-r border-r-gray-500 pr-2">
                           Giường đôi
@@ -272,7 +277,9 @@ const HotelListPage = () => {
                       </div>
 
                       <div className="mt-8 text-[15px] text-[#8C8C8C]">
-                        <span className="">2 đêm đã bao gồm thuế</span>
+                        <span className="">
+                          {numberOfDays} đêm đã bao gồm thuế
+                        </span>
                       </div>
                     </div>
 
