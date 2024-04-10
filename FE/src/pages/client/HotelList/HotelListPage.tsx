@@ -244,6 +244,7 @@ const HotelListPage = () => {
 
           <div className="my-5">
             {searchResult?.data?.map((items: any, index: number) => {
+              console.log(items);
               const id = items._id.toString(); // Assume each item has a unique id
               const maxIndex = items.images.length - 1;
               const currentIndex = currentImageIndices[id] || 0;
@@ -286,14 +287,14 @@ const HotelListPage = () => {
                       </span>
 
                       {/* TODO tiện nghi */}
-                      <div className="flex gap-2 mt-2">
-                        <span className="border-r border-r-gray-500 pr-2">
-                          Giường đôi
-                        </span>
-                        <span className="border-r border-r-gray-500 pr-2">
-                          hoặc 2 giường đơn
-                        </span>
-                        <span>32 m2</span>
+                      <div className="flex gap-2 mt-2 flex-wrap">
+                        {items?.id_amenities?.map((amenities: any) => {
+                          return (
+                            <span className="border-r border-r-gray-500 pr-2 last:border-none">
+                              {amenities?.name}
+                            </span>
+                          );
+                        })}
                       </div>
 
                       <div className="mt-8 text-[15px] text-[#8C8C8C]">
