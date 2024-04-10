@@ -62,8 +62,6 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
                 (bookingRoom) => bookingRoom.idRoom === room._id
               );
 
-              console.log(bk);
-
               return (
                 <div
                   key={room._id}

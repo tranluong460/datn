@@ -12,6 +12,7 @@ import {
 } from "../../../components";
 import { Radio, RadioChangeEvent } from "antd";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { useCookies } from "react-cookie";
 
 const HotelListPage = () => {
   const location = useLocation();
@@ -72,7 +73,6 @@ const HotelListPage = () => {
   const [selectedValues, setSelectedValues] = useState(1);
   // Cập nhật onChange function để thay đổi giá trị của radio button cho từng phần tử
   const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 
@@ -93,11 +93,32 @@ const HotelListPage = () => {
   };
 
   // đặt phòng
-  const bookRoom = () => {
-    const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=660e0d209b3248744855da80`;
 
-    // Chuyển hướng sang trang booking
-    window.location.href = bookingURL;
+  const [, setCookie] = useCookies<string>();
+
+  const bookRoom = (data: any) => {
+    // const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=660e0d209b3248744855da80`;
+    // window.location.href = bookingURL;
+
+    // !
+    console.log(data);
+    const numberOfDays = moment(checkout).diff(moment(checkin), "days");
+    const totalPriceEnd = numberOfDays * data?.id_roomType?.price;
+    const dataBooking = {
+      check_in: checkin,
+      check_out: checkout,
+      total_price: totalPriceEnd,
+      list_room: [
+        {
+          idRoom: data?._id,
+          quantity: 1,
+        },
+      ],
+      city: 1,
+    };
+
+    setCookie("booking", dataBooking, { path: "/" });
+    navigate(`/payment/660e0d209b3248744855da80`);
   };
 
   return (
@@ -223,7 +244,6 @@ const HotelListPage = () => {
 
           <div className="my-5">
             {searchResult?.data?.map((items: any, index: number) => {
-              console.log(items);
               const id = items._id.toString(); // Assume each item has a unique id
               const maxIndex = items.images.length - 1;
               const currentIndex = currentImageIndices[id] || 0;
@@ -314,7 +334,7 @@ const HotelListPage = () => {
                         className="min-w-full bg-[#918981] text-white
                         mb-4 py-4 hover:bg-[#938e83]
                         "
-                        onClick={bookRoom}
+                        onClick={() => bookRoom(items)}
                       >
                         Đặt phòng
                       </button>
