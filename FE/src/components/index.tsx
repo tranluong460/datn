@@ -87,8 +87,10 @@ import Information from "./client/Home/information";
 // import PreferentialCard from "./client/Home/PreferentialCard";
 // import News from "./client/Home/News";
 // import NewsCard from "./client/Home/NewsCard";
+import CheckCodeModal from "./client/Modal/CheckCodeModal";
 
 export {
+  CheckCodeModal,
   ReviewInput,
   EditBookingDrawn,
   Comments,

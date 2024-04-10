@@ -42,6 +42,7 @@ const LoginModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     loginUser(data)
       .unwrap()
+      // eslint-disable-next-line
       .then((response) => {
         toast.success(response.message);
         loginModal.onClose();

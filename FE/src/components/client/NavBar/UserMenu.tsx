@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { AiOutlineMenu } from "../../../icons";
@@ -8,6 +8,7 @@ import { useLogoutAccountMutation, useInfoAccountQuery } from "../../../api";
 import { useLoginModal, useRegisterModal } from "../../../hooks";
 
 const UserMenu = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
@@ -23,6 +24,7 @@ const UserMenu = () => {
     logoutUser(null)
       .unwrap()
       .then((response) => {
+        location.pathname === "/auth" && navigate("/");
         toast.success(response.message);
       })
       .catch((error) => {
@@ -45,7 +47,7 @@ const UserMenu = () => {
         <div onClick={onToggle} className="hidden md:block cursor-pointer">
           <Avatar
             key={data?.data.id_information.image}
-            imageUser={data?.data.id_information.image}
+            imageUser={data?.data.id_information.image || ""}
           />
         </div>
 
@@ -86,8 +88,6 @@ const UserMenu = () => {
 };
 
 export default UserMenu;
-
-
 
 // import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
@@ -177,4 +177,3 @@ export default UserMenu;
 // };
 
 // export default UserMenu;
-

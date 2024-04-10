@@ -12,6 +12,7 @@ import {
   emailBooking,
   emailCancelBooking,
   emailSuccessBooking,
+  checkEmailRegister,
 } from "../views";
 
 const transporter = nodemailer.createTransport({
@@ -118,5 +119,16 @@ export const sendMailSuccessBooking = async (email, name) => {
       "Cảm ơn bạn đã chọn chúng tôi - Sự hài lòng của quý khách là niềm tự hào của chúng tôi!",
     text: `Chào bạn, ${name}`,
     html: emailSuccessBooking(name),
+  });
+};
+
+export const sendCheckEmailRegister = async (email, name, code) => {
+  await transporter.sendMail({
+    from: process.env.MAIL,
+    to: email,
+    subject:
+      "Cảm ơn bạn đã chọn chúng tôi - Sự hài lòng của quý khách là niềm tự hào của chúng tôi!",
+    text: `Chào bạn, ${name}`,
+    html: checkEmailRegister(name, code),
   });
 };

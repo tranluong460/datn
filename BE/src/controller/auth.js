@@ -18,6 +18,7 @@ import {
   sendRestPassword,
   sendChangedPassword,
   sendForgotPassword,
+  sendCheckEmailRegister,
 } from "../utils";
 
 dotenv.config();
@@ -77,7 +78,7 @@ export const getInfoUserById = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
   try {
     validateMiddleware(req, res, RegisterValidate, async () => {
@@ -86,24 +87,71 @@ export const register = async (req, res) => {
         return sendResponse(res, 409, "Email đã tồn tại");
       }
 
+      const randomCode = generateRandomCode(6);
+
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const information = await InformationModel.create({ ...req.body });
+      const string = jwt.sign(
+        {
+          email,
+          name,
+          pa: hashedPassword,
+          rc: randomCode,
+        },
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "3m",
+        }
+      );
 
-      const user = await UserModel.create({
-        ...req.body,
-        password: hashedPassword,
-        id_information: information._id,
-      });
+      res.cookie("cra", string, { httpOnly: true });
 
-      sendMailRegister(user.name, user.email);
+      sendCheckEmailRegister(email, name, randomCode);
 
-      return sendResponse(res, 201, "Đăng ký thành công");
+      return sendResponse(res, 200, "Vui lòng kiểm tra email");
     });
   } catch (error) {
     console.error(error);
 
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi đăng ký");
+  }
+};
+
+export const checkMailRegister = async (req, res) => {
+  try {
+    const { code } = req.body;
+
+    const cra = req?.cookies.cra;
+
+    const decoded = jwt.verify(cra, process.env.SECRET_KEY);
+
+    if (code !== decoded.rc) {
+      return sendResponse(res, 401, "Vui lòng đăng ký lại");
+    }
+
+    const information = await InformationModel.create({ name: decoded.name });
+
+    const user = await UserModel.create({
+      email: decoded.email,
+      password: decoded.pa,
+      id_information: information._id,
+    });
+
+    sendMailRegister(user.name, user.email);
+
+    return sendResponse(res, 200, "Đăng ký thành công");
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      return sendResponse(res, 401, "Token đã hết hạn!");
+    } else if (error instanceof jwt.NotBeforeError) {
+      return sendResponse(res, 401, "Token chưa có hiệu lực!");
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return sendResponse(res, 401, "Token không hợp lệ!");
+    }
+
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };
 
@@ -504,6 +552,7 @@ export const resetPassword = async (req, res) => {
     return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
 };
+
 export const updateInfo = async (req, res) => {
   try {
     validateMiddleware(req, res, infomationUser, async () => {
@@ -511,15 +560,19 @@ export const updateInfo = async (req, res) => {
         req.params.id,
         { ...req.body },
         { new: true }
-      )
+      );
       if (!info) {
-        return sendResponse(res, 404, 'Không cập nhật được thông tin cá nhân')
+        return sendResponse(res, 404, "Không cập nhật được thông tin cá nhân");
       }
-      return sendResponse(res, 200, 'Cập nhật được thông tin cá nhân thành công', info)
-
-    })
+      return sendResponse(
+        res,
+        200,
+        "Cập nhật được thông tin cá nhân thành công",
+        info
+      );
+    });
   } catch (error) {
     console.log(error);
-    return sendResponse(res, 500, "Đã có lỗi xảy ra")
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
   }
-}
+};

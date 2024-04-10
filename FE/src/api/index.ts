@@ -18,6 +18,7 @@ import {
   useGetCodeChangePasswordMutation,
   useCheckCodeChangePasswordMutation,
   useChangePasswordMutation,
+  useCheckMailCodeMutation,
 } from "./auth";
 
 // Booking API
@@ -102,6 +103,7 @@ export {
   useGetCodeChangePasswordMutation,
   useCheckCodeChangePasswordMutation,
   useChangePasswordMutation,
+  useCheckMailCodeMutation,
   bookingApi,
   useGetAllBookingQuery,
   useGetOneBookingQuery,

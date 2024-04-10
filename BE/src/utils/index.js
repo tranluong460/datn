@@ -8,6 +8,7 @@ import {
   sendMailBooking,
   sendMailCancelBooking,
   sendMailSuccessBooking,
+  sendCheckEmailRegister,
 } from "./emailUtils";
 
 import { generateRandomCode } from "./generateRandomUtils";
@@ -44,4 +45,5 @@ export {
   createOrderMacData,
   uploadImageToCloudinary,
   validationErrors,
+  sendCheckEmailRegister,
 };

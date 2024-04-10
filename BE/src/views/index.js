@@ -7,6 +7,7 @@ import {
   emailBooking,
   emailCancelBooking,
   emailSuccessBooking,
+  checkEmailRegister,
 } from "./formEmail";
 
 export {
@@ -18,4 +19,5 @@ export {
   emailBooking,
   emailCancelBooking,
   emailSuccessBooking,
+  checkEmailRegister,
 };
