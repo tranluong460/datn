@@ -9,6 +9,10 @@ import { IoBan } from "react-icons/io5";
 export default function RoomAmenities({ amenities }: any) {
   return (
     <div className="grid grid-cols-2 gap-2">
+      {/* {amenities.map((items) => (
+        <div>{items.name}</div>
+      ))} */}
+
       <div className="flex items-center gap-1">
         <span>
           <IoMdShirt />

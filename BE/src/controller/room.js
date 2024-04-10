@@ -10,7 +10,10 @@ export const getAll = async (req, res) => {
   try {
     const roomList = await RoomModel.find()
       .select("-createdAt -updatedAt")
-      .populate({ path: "id_roomType id_hotel", select: "_id name price" });
+      .populate({
+        path: "id_roomType id_hotel id_amenities",
+        select: "_id name price",
+      });
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
@@ -198,13 +201,17 @@ export const search = async (req, res) => {
       quantity: booking.list_room.quantity,
     }));
 
-    let rooms = await RoomModel.find({}).populate({
-      path: "id_amenities", // Populate mảng Amenities
-      model: "Amenities",
-    }).populate({
-      path: "id_roomType",
-      model: "RoomType",
-    });
+
+    let rooms = await RoomModel.find({})
+      .populate({
+        path: "id_amenities", // Populate mảng Amenities
+        model: "Amenities",
+      })
+      .populate({
+        path: "id_roomType",
+        model: "RoomType",
+      });
+
     // console.log(rooms);
     if (adults && children) {
       rooms = rooms.filter(
