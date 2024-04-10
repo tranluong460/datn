@@ -20,6 +20,7 @@ export const authApi = createApi({
         url: "/auth/register",
         method: "POST",
         body: data,
+        credentials: "include",
       }),
       invalidatesTags: ["Auth"],
     }),
@@ -72,6 +73,15 @@ export const authApi = createApi({
         credentials: "include",
       }),
     }),
+    checkMailCode: builder.mutation({
+      query: (data) => ({
+        url: "auth/check-auth",
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
@@ -84,4 +94,5 @@ export const {
   useGetCodeChangePasswordMutation,
   useCheckCodeChangePasswordMutation,
   useChangePasswordMutation,
+  useCheckMailCodeMutation,
 } = authApi;

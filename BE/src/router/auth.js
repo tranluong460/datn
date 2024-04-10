@@ -15,7 +15,8 @@ import {
   changePassword,
   getSecurityCode,
   resetPassword,
-  updateInfo
+  updateInfo,
+  checkMailRegister,
 } from "../controller/auth";
 import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
@@ -35,6 +36,7 @@ router.post("/check-code", loginMiddleware, checkCode);
 router.post("/change-password", loginMiddleware, changePassword);
 router.post("/forgot-password", getSecurityCode);
 router.post("/reset-password", resetPassword);
-router.post('/update-user/:id', loginMiddleware, updateInfo)
+router.post("/update-user/:id", loginMiddleware, updateInfo);
+router.post("/check-auth", checkMailRegister);
 
 export default router;

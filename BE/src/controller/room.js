@@ -201,6 +201,7 @@ export const search = async (req, res) => {
       quantity: booking.list_room.quantity,
     }));
 
+
     let rooms = await RoomModel.find({})
       .populate({
         path: "id_amenities", // Populate mảng Amenities
@@ -210,6 +211,7 @@ export const search = async (req, res) => {
         path: "id_roomType",
         model: "RoomType",
       });
+
     // console.log(rooms);
     if (adults && children) {
       rooms = rooms.filter(

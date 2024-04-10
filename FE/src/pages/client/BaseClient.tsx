@@ -9,6 +9,7 @@ import {
   RegisterModal,
   SearchModal,
 } from "../../components";
+import CheckCodeModal from "../../components/client/Modal/CheckCodeModal";
 
 const BaseClient = () => {
   return (
@@ -18,6 +19,7 @@ const BaseClient = () => {
         <NavBar />
         <CalendarRangerModal />
         <SearchModal />
+        <CheckCodeModal />
         <LoginModal />
         <RegisterModal />
         <Outlet />

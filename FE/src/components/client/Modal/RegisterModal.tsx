@@ -7,12 +7,12 @@ import { Button, Input, Modal } from "../..";
 import { FcGoogle } from "../../../icons";
 import { getGoogleUrl } from "../../../utils";
 import { useRegisterAccountMutation } from "../../../api";
-import { useLoginModal, useRegisterModal } from "../../../hooks";
+import { useCheckCodeModal, useRegisterModal } from "../../../hooks";
 
 const RegisterModal = () => {
   const location = useLocation();
-  const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const checkCodeModal = useCheckCodeModal();
   const [registerUser, resultRegister] = useRegisterAccountMutation();
 
   const url = location.pathname || "/";
@@ -38,8 +38,8 @@ const RegisterModal = () => {
   const onToggle = useCallback(() => {
     reset();
     registerModal.onClose();
-    loginModal.onOpen();
-  }, [reset, loginModal, registerModal]);
+    checkCodeModal.onOpen();
+  }, [reset, checkCodeModal, registerModal]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     registerUser(data)
@@ -125,6 +125,7 @@ const RegisterModal = () => {
       </div>
     </div>
   );
+
   return (
     <Modal
       disabled={resultRegister.isLoading}
