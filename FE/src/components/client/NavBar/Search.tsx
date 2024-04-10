@@ -241,7 +241,7 @@ const Search = () => {
       <div
         onClick={handleExpand}
         className={`grid grid-cols-[400px_340px_560px] justify-start border ${
-          checkin == "" ? "mt-2" : "right-10"
+          checkin == "" ? "mt-2" : "left-0"
         } z-[999] border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
           isExpanded
             ? ` top-20 inset-x-0 z-50 transition-search`
