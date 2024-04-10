@@ -199,6 +199,9 @@ export const search = async (req, res) => {
     }));
 
     let rooms = await RoomModel.find({}).populate({
+      path: "id_amenities", // Populate mảng Amenities
+      model: "Amenities",
+    }).populate({
       path: "id_roomType",
       model: "RoomType",
     });
