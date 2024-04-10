@@ -6,6 +6,7 @@ import { Button, Modal, DatePicker, Space } from "antd";
 import dayjs from "dayjs";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 type ComboPriceCardProps = {
   data: {
@@ -19,6 +20,10 @@ type ComboPriceCardProps = {
 const { RangePicker } = DatePicker;
 
 const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
+  const [selectedRoom, setSelectedRoom] = useState<any | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { data: dataRoom } = useGetOneRoomQuery(data._id);
+
   const navigate = useNavigate();
 
   // ấn đặt phòng
@@ -37,45 +42,8 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const handleOk = () => {
-    const updatedQuery: any = {
-      hotel: null,
-    };
-
-    if (dateRange.startDate) {
-      updatedQuery.checkin = dateRange.startDate;
-    }
-
-    if (dateRange.endDate) {
-      updatedQuery.checkout = dateRange.endDate;
-    }
-
-    if (dateRange.endDate === "") {
-      setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
-      return;
-    }
-
-    updatedQuery.hotel = "660e0d209b3248744855da80";
-    // setIsSearched(true);
-
-    const url = qs.stringifyUrl(
-      {
-        url: "/booking",
-        query: updatedQuery,
-      },
-      { skipNull: true }
-    );
-    navigate(url);
-
-    setIsModalOpen(false);
-  };
-  // end ấn đặt phòng
 
   // xem chi tiết phòng
-  const [selectedRoom, setSelectedRoom] = useState<any | null>(null);
-
   const openRoomDetail = (room: any) => {
     setSelectedRoom(room);
   };
@@ -83,9 +51,40 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
   const closeRoomDetail = () => {
     setSelectedRoom(null);
   };
-  // end c t p
+  // end tp
 
-  const { data: dataRoom } = useGetOneRoomQuery(data._id);
+  // đặt phòng chuyển sang payment
+  const [, setCookie] = useCookies<string>();
+  const numberOfDays = moment(dateRange.endDate).diff(
+    moment(dateRange.startDate),
+    "days"
+  );
+
+  const handleOk = () => {
+    const totalPriceEnd = numberOfDays * dataRoom?.data?.id_roomType?.price;
+    const dataBooking = {
+      check_in: dateRange.startDate,
+      check_out: dateRange.endDate,
+      total_price: totalPriceEnd,
+      list_room: [
+        {
+          idRoom: dataRoom?.data?._id,
+          quantity: 1,
+        },
+      ],
+      city: 1,
+    };
+
+    if (dateRange.endDate === "" || dateRange.startDate === "") {
+      setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
+      return;
+    }
+
+    setCookie("booking", dataBooking, { path: "/" });
+    navigate(`/payment/660e0d209b3248744855da80`);
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <div className="overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105">
@@ -138,6 +137,7 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
                     });
                   }}
                 />
+                <p className="text-red-500 font-bold">{errorMessage}</p>
               </Space>
             </Modal>
           </div>
