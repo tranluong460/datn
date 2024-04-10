@@ -10,7 +10,10 @@ export const getAll = async (req, res) => {
   try {
     const roomList = await RoomModel.find()
       .select("-createdAt -updatedAt")
-      .populate({ path: "id_roomType id_hotel", select: "_id name price" });
+      .populate({
+        path: "id_roomType id_hotel id_amenities",
+        select: "_id name price",
+      });
 
     if (!roomList || roomList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách phòng");
