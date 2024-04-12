@@ -1,20 +1,41 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import moment from "moment";
-import { useSearchRoomMutation } from "../../../api";
 import {
-  Container,
-  Filter,
-  FilterDialog,
-  FilterTop,
-  ListHotel,
-  Search,
-} from "../../../components";
-import { Radio, RadioChangeEvent } from "antd";
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import moment from "moment";
+import { useSearchRoomMutation, useGetAllHotelQuery } from "../../../api";
+import { Container, FilterDialog, Search } from "../../../components";
+import { Button, Modal, Radio, RadioChangeEvent, Image } from "antd";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useCookies } from "react-cookie";
+import Review from "../Review/Review";
 
 const HotelListPage = () => {
+  const { data } = useGetAllHotelQuery("");
+  const [visibleRooms, setVisibleRooms] = useState(5); // Số lượng phòng hiển thị ban đầu
+  const [showMoreButton, setShowMoreButton] = useState(true);
+  const handleShowMore = () => {
+    // Tăng số lượng phòng hiển thị thêm 2
+    setVisibleRooms((prev) => prev + 2);
+  };
+  // show thông tin khách sạn
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const location = useLocation();
   const params = location.search;
   const navigate = useNavigate();
@@ -93,15 +114,8 @@ const HotelListPage = () => {
   };
 
   // đặt phòng
-
   const [, setCookie] = useCookies<string>();
-
   const bookRoom = (data: any) => {
-    // const bookingURL = `http://localhost:5173/booking?checkin=${checkin}&checkout=${checkout}&hotel=660e0d209b3248744855da80`;
-    // window.location.href = bookingURL;
-
-    // !
-    console.log(data);
     const numberOfDays = moment(checkout).diff(moment(checkin), "days");
     const totalPriceEnd = numberOfDays * data?.id_roomType?.price;
     const dataBooking = {
@@ -137,7 +151,45 @@ const HotelListPage = () => {
             <span className="border-r-gray-500 pr-4 border-r">
               44B đường Lý Thường Kiệt 2RFX+PC Hà Nội
             </span>
-            <span>Thông tin khách sạn</span>
+            <Button type="primary" onClick={showModal} className="text-black">
+              Thông tin khách sạn
+            </Button>
+            <Modal
+              title="Thông tin khách sạn"
+              open={isModalOpen}
+              onCancel={handleCancel}
+              footer={null}
+            >
+              <div>
+                <span className="flex gap-1">
+                  <h1 className="font-bold">Tên khách sạn:</h1>{" "}
+                  {data?.data[0]?.name}
+                </span>
+                <span className="flex gap-1">
+                  <h1 className="font-bold"> Địa chỉ:</h1>{" "}
+                  {data?.data[0]?.address}
+                </span>
+                <span className="">
+                  <h1 className="font-bold">Giới thiệu:</h1>
+                  <h1>{data?.data[0]?.description}</h1>
+                </span>
+                <span className="flex gap-1">
+                  <h1 className="font-bold">Email:</h1> {data?.data[0]?.email}
+                </span>
+                <span className="flex gap-1">
+                  <h1 className="font-bold">SĐT:</h1>
+                  {data?.data[0]?.phone}
+                </span>
+                <span className="flex gap-1">
+                  <h1 className="font-bold">Mức độ đánh giá:</h1>
+
+                  {data?.data[0]?.id_review.length == 0 ? "0" : "1"}
+                </span>
+                <h1>
+                  <Image width={200} src={data?.data[0]?.images[0].url} />
+                </h1>
+              </div>
+            </Modal>
           </div>
 
           <div className="flex flex-col">
@@ -239,111 +291,130 @@ const HotelListPage = () => {
             <span className="border-r-gray-500 border-r pr-2 cursor-pointer">
               Tất cả {searchResult?.data?.length}
             </span>
-            <span>Phòng vip</span>
+            <Link to="/review" className="hover:text-blue-500">
+              <button>Xem đánh giá khách sạn</button>
+            </Link>
           </div>
 
           <div className="my-5">
-            {searchResult?.data?.map((items: any, index: number) => {
-              console.log(items);
-              const id = items._id.toString(); // Assume each item has a unique id
-              const maxIndex = items.images.length - 1;
-              const currentIndex = currentImageIndices[id] || 0;
-              return (
-                <div className="flex my-4 border-gray-500 border" key={index}>
-                  <div className="relative max-w-[849px] max-h-[546px]">
-                    <img
-                      src={items.images[currentIndex].url}
-                      alt=""
-                      className="w-[849px] h-[500px] object-cover transition-all transition-shadow"
-                    />
+            {searchResult?.data
+              ?.slice(0, visibleRooms)
+              .map((items: any, index: number) => {
+                const id = items._id.toString(); // Assume each item has a unique id
+                const maxIndex = items.images.length - 1;
+                const currentIndex = currentImageIndices[id] || 0;
+                return (
+                  <div className="flex my-4 border-gray-500 border" key={index}>
+                    <div className="relative max-w-[849px] max-h-[546px]">
+                      <img
+                        src={items.images[currentIndex].url}
+                        alt=""
+                        className="w-[849px] h-[500px] object-cover transition-all transition-shadow"
+                      />
 
-                    {/* chuyển ảnh */}
-                    <div className="absolute  bottom-3 left-10 text-white font-bold text-xl items-center flex gap-1">
-                      <button
-                        className="text-2xl border border-transparent hover:border-white hover:border hover:rounded-full p-2"
-                        onClick={() => handlePrevImage(id)}
-                      >
-                        <AiOutlineArrowLeft />
-                      </button>
-                      <span>
-                        {currentImageIndices[id] !== undefined
-                          ? currentImageIndices[id] + 1
-                          : 1}{" "}
-                        / {items.images.length}
-                      </span>
-                      <button
-                        className="text-2xl border border-transparent hover:border-white hover:border hover:rounded-full p-2"
-                        onClick={() => handleNextImage(id, maxIndex)}
-                      >
-                        <AiOutlineArrowRight />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col w-full justify-between font-[Graphik,sans-serif] max-w-[600px]">
-                    <div className="mt-16 px-10 ">
-                      <span className="underline underline-offset-8 decoration-1 inline-flex text-[24px] leading-9 ">
-                        {items.id_roomType.name} ({items.id_roomType.name} Room)
-                      </span>
-
-                      {/* TODO tiện nghi */}
-                      <div className="flex gap-2 mt-2 flex-wrap">
-                        {items?.id_amenities?.map((amenities: any) => {
-                          return (
-                            <span className="border-r border-r-gray-500 pr-2 last:border-none">
-                              {amenities?.name}
-                            </span>
-                          );
-                        })}
-                      </div>
-
-                      <div className="mt-8 text-[15px] text-[#8C8C8C]">
-                        <span className="">
-                          {numberOfDays} đêm đã bao gồm thuế
+                      {/* chuyển ảnh */}
+                      <div className="absolute  bottom-3 left-10 text-white font-bold text-xl items-center flex gap-1">
+                        <button
+                          className="text-2xl border border-transparent hover:border-white hover:border hover:rounded-full p-2"
+                          onClick={() => handlePrevImage(id)}
+                        >
+                          <AiOutlineArrowLeft />
+                        </button>
+                        <span>
+                          {currentImageIndices[id] !== undefined
+                            ? currentImageIndices[id] + 1
+                            : 1}{" "}
+                          / {items.images.length}
                         </span>
+                        <button
+                          className="text-2xl border border-transparent hover:border-white hover:border hover:rounded-full p-2"
+                          onClick={() => handleNextImage(id, maxIndex)}
+                        >
+                          <AiOutlineArrowRight />
+                        </button>
                       </div>
                     </div>
 
-                    <div className="flex flex-col justify-between bg-[#c2c2c2] w-full pb-5 px-10 border-t border-t-slate-300">
-                      <div className="flex justify-between border-b-slate-300 border-b py-8">
-                        <div className="flex gap-3 ">
-                          <div>
-                            {/* TODO */}
-                            <Radio.Group
-                              onChange={onChange}
-                              value={selectedValues}
-                            >
-                              <Radio value={1}></Radio>
-                            </Radio.Group>
-                          </div>
+                    <div className="flex flex-col w-full justify-between font-[Graphik,sans-serif] max-w-[600px]">
+                      <div className="mt-16 px-10 ">
+                        <span className="underline underline-offset-8 decoration-1 inline-flex text-[24px] leading-9 ">
+                          {items.id_roomType.name} ({items.id_roomType.name}{" "}
+                          Room)
+                        </span>
 
-                          <div className="flex flex-col text-lg">
-                            <p> Chỉ phòng lưu trú</p>
-                            <p className="">
-                              Từ {items.id_roomType.price} VND mỗi đêm
+                        {/* TODO tiện nghi */}
+                        <div className="flex gap-2 mt-2 flex-wrap">
+                          {items?.id_amenities?.map((amenities: any) => {
+                            return (
+                              <span
+                                className="border-r border-r-gray-500 pr-2 last:border-none"
+                                key={amenities?._id}
+                              >
+                                {amenities?.name}
+                              </span>
+                            );
+                          })}
+                        </div>
+
+                        <div className="mt-8 text-[15px] text-[#8C8C8C]">
+                          <span className="">
+                            {numberOfDays} đêm đã bao gồm thuế
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col justify-between bg-[#c2c2c2] w-full pb-5 px-10 border-t border-t-slate-300">
+                        <div className="flex justify-between border-b-slate-300 border-b py-8">
+                          <div className="flex gap-3 ">
+                            <div>
+                              {/* TODO */}
+                              <Radio.Group
+                                onChange={onChange}
+                                value={selectedValues}
+                              >
+                                <Radio value={1}></Radio>
+                              </Radio.Group>
+                            </div>
+
+                            <div className="flex flex-col text-lg">
+                              <p> Chỉ phòng lưu trú</p>
+                              <p className="">
+                                Từ {items.id_roomType.price} VND mỗi đêm
+                              </p>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="font-[550] text-[16px]">
+                              {items.id_roomType.price} VND mỗi đêm
                             </p>
                           </div>
                         </div>
-                        <div>
-                          <p className="font-[550] text-[16px]">
-                            {items.id_roomType.price} VND mỗi đêm
-                          </p>
-                        </div>
-                      </div>
 
-                      <button
-                        className="min-w-full bg-[#918981] text-white
+                        <button
+                          className="min-w-full bg-[#918981] text-white
                         mb-4 py-4 hover:bg-[#938e83]
                         "
-                        onClick={() => bookRoom(items)}
-                      >
-                        Đặt phòng
-                      </button>
+                          onClick={() => bookRoom(items)}
+                        >
+                          Đặt phòng
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+
+            {/* Kiểm tra nếu còn phòng để hiển thị và nút "Xem thêm" chưa bị ẩn */}
+            <div className="text-center">
+              {searchResult?.data.length > visibleRooms && showMoreButton && (
+                <button
+                  onClick={handleShowMore}
+                  className="bg-blue-500 py-3 px-10 text-white rounded-md my-5"
+                >
+                  Xem thêm
+                </button>
+              )}
+            </div>
           </div>
         </section>
       </Container>

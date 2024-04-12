@@ -33,14 +33,14 @@ const Evaluate = (datahotel: any, data: any) => {
       await createReview({
         rating: value,
         comment: reviewText,
-        id_hotel: datahotel?.id_hotel?._id,
+        id_hotel: datahotel?.id_hotel?.data[0]?._id,
       }).unwrap();
       setShowForm(false);
       setValue(0);
       setReviewText("");
       setError("");
     } catch (error: any) {
-      setError(error?.data.message);
+      setError(error?.data?.message);
     }
   };
 
@@ -75,7 +75,7 @@ const Evaluate = (datahotel: any, data: any) => {
             <form className="w-80 mx-auto ">
               <span className="flex gap-2">
                 Đánh giá của bạn về:
-                <p className="font-bold">{datahotel.id_hotel.name}</p>
+                <p className="font-bold">{datahotel?.id_hotel?.name}</p>
               </span>
               <span>
                 <p className="font-bold flex flex-col">
