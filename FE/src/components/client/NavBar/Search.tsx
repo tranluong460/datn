@@ -252,7 +252,7 @@ const Search = () => {
 
         // search-bar ${ isVisible ? "visible" : "hidden" }
       >
-        <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[18px]">
+        <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[18px] pl-2">
           <p>
             <AiOutlineSearch />
           </p>
