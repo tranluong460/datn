@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import moment from "moment";
 import { useSearchRoomMutation, useGetAllHotelQuery } from "../../../api";
 import { Container, FilterDialog, Search } from "../../../components";
@@ -286,11 +291,12 @@ const HotelListPage = () => {
             <span className="border-r-gray-500 border-r pr-2 cursor-pointer">
               Tất cả {searchResult?.data?.length}
             </span>
-            <button>Xem đánh giá khách sạn</button>
-            <Review dataHotel={data} />
+            <Link to="/review" className="hover:text-blue-500">
+              <button>Xem đánh giá khách sạn</button>
+            </Link>
           </div>
 
-          <div className="my-5 text-center">
+          <div className="my-5">
             {searchResult?.data
               ?.slice(0, visibleRooms)
               .map((items: any, index: number) => {
@@ -399,14 +405,16 @@ const HotelListPage = () => {
               })}
 
             {/* Kiểm tra nếu còn phòng để hiển thị và nút "Xem thêm" chưa bị ẩn */}
-            {searchResult?.data.length > visibleRooms && showMoreButton && (
-              <button
-                onClick={handleShowMore}
-                className="bg-blue-500 py-3 px-10 text-white rounded-md my-5"
-              >
-                Xem thêm
-              </button>
-            )}
+            <div className="text-center">
+              {searchResult?.data.length > visibleRooms && showMoreButton && (
+                <button
+                  onClick={handleShowMore}
+                  className="bg-blue-500 py-3 px-10 text-white rounded-md my-5"
+                >
+                  Xem thêm
+                </button>
+              )}
+            </div>
           </div>
         </section>
       </Container>

@@ -14,6 +14,7 @@ import {
   PrivacyPolicy,
   RegulationsBookingInformation,
 } from "..";
+import Review from "./Review/Review";
 
 const RouteClient = () => {
   return (
@@ -36,6 +37,7 @@ const RouteClient = () => {
           <Route path="/general-rules" element={<GeneralRules />} />
           <Route path="/general-terms" element={<GeneralTerms />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/review" element={<Review />} />
         </Route>
 
         <Route path="/*" element={<Page404 />} />

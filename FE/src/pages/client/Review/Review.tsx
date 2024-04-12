@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { ReviewInput, Comment } from "../../../components";
 import Evaluate from "../../../components/client/Review/Evaluate";
-import { useGetAllReviewQuery, useInfoAccountQuery } from "../../../api";
+import {
+  useGetAllReviewQuery,
+  useInfoAccountQuery,
+  useGetAllHotelQuery,
+} from "../../../api";
 
-const Review = ({ dataHotel }: any) => {
+const Review = () => {
+  const { data: dataHotel } = useGetAllHotelQuery("");
+  console.log("🚀 ~ Review ~ dataHotel:", dataHotel?.data[0]?._id);
   const { data: userData } = useInfoAccountQuery("");
   const { data } = useGetAllReviewQuery("");
   const [Data, setData] = useState([]);
@@ -15,7 +21,7 @@ const Review = ({ dataHotel }: any) => {
   }, [data]);
 
   return (
-    <div className="max-w-screen-xl mx-auto xl:px-8 md:px-6 sm:px-4 px-4 py-10 font-Lato bg-white mt-4 rounded-2xl">
+    <div className="max-w-screen-xl mx-auto xl:px-8 md:px-6 sm:px-4 px-4 py-10 font-Lato bg-white mt-4 rounded-2xl my-10">
       <div className="text-[#333333] font-semibold leading-7 text-2xl text-left">
         <span>Đánh giá & Nhận xét Khách sạn {dataHotel?.name}</span>
       </div>
