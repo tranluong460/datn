@@ -13,11 +13,10 @@ const NavBar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-    
+
   return (
-    
     <div
-    // fixed 
+      // fixed
       className={`top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-transparent transition-transform duration-500 ease-in-out ${
         !visible ? "-translate-y-full" : ""
       }`}
