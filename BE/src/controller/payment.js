@@ -37,14 +37,6 @@ export const vnPayPayment = (req, res) => {
         amount,
       };
 
-      const payment = await PaymentModel.create(data);
-
-      await BookingModel.findByIdAndUpdate(
-        { _id: bookingId },
-        { id_payment: payment._id },
-        { new: true }
-      );
-
       let vnp_Params = {};
       vnp_Params["vnp_Version"] = "2.1.0";
       vnp_Params["vnp_Command"] = "pay";
@@ -69,6 +61,14 @@ export const vnPayPayment = (req, res) => {
       const url = `${process.env.VNP_URL}?${qs.stringify(vnp_Params, {
         encode: false,
       })}`;
+
+      const payment = await PaymentModel.create({ ...data, url_payment: url });
+
+      await BookingModel.findByIdAndUpdate(
+        { _id: bookingId },
+        { id_payment: payment._id },
+        { new: true }
+      );
 
       return sendResponse(res, 200, "Thanh toán VN Pay", url);
     });

@@ -1,0 +1,392 @@
+[{
+  "_id": {
+    "$oid": "660b074c3d69fecbfa663e04"
+  },
+  "name": "Spa",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-01T19:13:16.645Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-01T19:13:16.645Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660b07533d69fecbfa663e0a"
+  },
+  "name": "Sự kiện",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-01T19:13:23.754Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-01T19:13:23.754Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660b07593d69fecbfa663e10"
+  },
+  "name": "Sảnh VIP",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-01T19:13:29.668Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-01T19:13:29.668Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660b0c593d69fecbfa663e1a"
+  },
+  "name": "Dịch vụ hỗ trợ ở tiền sảnh",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-01T19:34:49.068Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-01T19:34:49.068Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e099a9b3248744855d9ce"
+  },
+  "name": "Dịch vụ phòng",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T01:59:54.339Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T01:59:54.339Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e099e9b3248744855d9d4"
+  },
+  "name": "Wi-Fi",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T01:59:58.325Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T01:59:58.325Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09a29b3248744855d9da"
+  },
+  "name": "24-hour gym",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:02.612Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:02.612Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09a79b3248744855d9e0"
+  },
+  "name": "Hồ bơi ngoài trời",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:07.780Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:07.780Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09ac9b3248744855d9e6"
+  },
+  "name": "Phòng Gia đình",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:12.576Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:12.576Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09b19b3248744855d9ec"
+  },
+  "name": "Thích hợp cho người bị suy giảm",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:17.227Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:17.227Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09b59b3248744855d9f2"
+  },
+  "name": "Nhà hàng",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:21.456Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:21.456Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09ba9b3248744855d9f8"
+  },
+  "name": "Phòng họp",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:26.523Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:26.523Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09be9b3248744855d9fe"
+  },
+  "name": "Đưa đón sân bay",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:30.631Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:30.631Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09c29b3248744855da04"
+  },
+  "name": "Trung tâm Dịch vụ Doanh nhân",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:34.421Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:34.421Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09c69b3248744855da0a"
+  },
+  "name": "Quầy tiếp tân phục vụ 24",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:38.178Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:38.178Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e09cc9b3248744855da10"
+  },
+  "name": "Không hút thuốc",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:00:44.178Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:00:44.178Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0d659b3248744855da8d"
+  },
+  "name": "Vòi sen",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:16:05.049Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:16:05.049Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0d699b3248744855da93"
+  },
+  "name": "Áo choàng tắm và dép",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:16:09.717Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:16:09.717Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0d709b3248744855da99"
+  },
+  "name": "Wi-Fi tốc độ cao",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:16:16.033Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:16:16.033Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0d739b3248744855da9f"
+  },
+  "name": "Phòng liên thông",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:16:19.695Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:16:19.695Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0d789b3248744855daa5"
+  },
+  "name": "Đồ vệ sinh cá nhân cao cấp",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:16:24.810Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:16:24.810Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0d7c9b3248744855daab"
+  },
+  "name": "Điều hòa không khí",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:16:28.334Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:16:28.334Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0ec99b3248744855dacb"
+  },
+  "name": "Vòi sen và bồn tắm",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:22:01.383Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:22:01.383Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0ecd9b3248744855dad1"
+  },
+  "name": "TV màn hình phẳng",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:22:05.892Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:22:05.892Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0ed49b3248744855dad7"
+  },
+  "name": "Dịch vụ phục vụ trà và cà phê tại phòng",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:22:12.798Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:22:12.798Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e10369b3248744855db2a"
+  },
+  "name": "Quyền lui tới trực tiếp sảnh khách executive",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:28:06.957Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:28:06.957Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e103c9b3248744855db30"
+  },
+  "name": "Máy pha kèm viên cà phê",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:28:12.087Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:28:12.087Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e10409b3248744855db36"
+  },
+  "name": "Nhận phòng riêng",
+  "status": "Đang áp dụng",
+  "features": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:28:16.151Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:28:16.151Z"
+  }
+}]

@@ -6,6 +6,9 @@ const paymentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Booking",
     },
+    url_payment: {
+      type: String,
+    },
     amount: {
       type: Number,
       required: true,

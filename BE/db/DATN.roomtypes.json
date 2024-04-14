@@ -1,0 +1,102 @@
+[{
+  "_id": {
+    "$oid": "660e0a719b3248744855da1e"
+  },
+  "name": "Phòng Deluxe",
+  "price": 1000000,
+  "adults": 2,
+  "children": 3,
+  "bed": 1,
+  "status": "Đang áp dụng",
+  "createdAt": {
+    "$date": "2024-04-04T02:03:29.830Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:03:29.830Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0ae79b3248744855da24"
+  },
+  "name": "Phòng Premium",
+  "price": 2000000,
+  "adults": 2,
+  "children": 4,
+  "bed": 1,
+  "status": "Đang áp dụng",
+  "createdAt": {
+    "$date": "2024-04-04T02:05:27.830Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:05:27.830Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0afb9b3248744855da2a"
+  },
+  "name": "Phòng Suite",
+  "price": 3000000,
+  "adults": 3,
+  "children": 4,
+  "bed": 1,
+  "status": "Đang áp dụng",
+  "createdAt": {
+    "$date": "2024-04-04T02:05:47.765Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:05:47.765Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0b0b9b3248744855da30"
+  },
+  "name": "Phòng Suite gia đình",
+  "price": 4000000,
+  "adults": 4,
+  "children": 5,
+  "bed": 2,
+  "status": "Đang áp dụng",
+  "createdAt": {
+    "$date": "2024-04-04T02:06:03.654Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:06:03.654Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e0f739b3248744855db07"
+  },
+  "name": "Phòng The Level Premium",
+  "price": 5000000,
+  "adults": 2,
+  "children": 3,
+  "bed": 1,
+  "status": "Đang áp dụng",
+  "createdAt": {
+    "$date": "2024-04-04T02:24:51.985Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:24:51.985Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "660e10189b3248744855db23"
+  },
+  "name": "Phòng The Level Suite",
+  "price": 6000000,
+  "adults": 2,
+  "children": 4,
+  "bed": 2,
+  "status": "Đang áp dụng",
+  "createdAt": {
+    "$date": "2024-04-04T02:27:36.111Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:27:36.111Z"
+  }
+}]

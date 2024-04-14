@@ -1,0 +1,94 @@
+[{
+  "_id": {
+    "$oid": "660e0d209b3248744855da80"
+  },
+  "name": "Melia Hà Nội",
+  "images": [
+    {
+      "url": "https://res.cloudinary.com/project-alone/image/upload/v1712196894/datn/sc2v9vrppf1pmimqlaht.avif"
+    }
+  ],
+  "address": "44B đường Lý Thường Kiệt  Hanoi",
+  "phone": "0343343343",
+  "status": "Đang hoạt động",
+  "email": "rsvn@meliahanoi.com.vn",
+  "description": "Khi đến thăm thủ đô của Việt Nam, bạn sẽ cực kỳ hài lòng khi chọn khách sạn tiện nghi tọa lạc ở vị trí vô cùng thuận tiện này. Khách sạn sở hữu vị trí đắc địa ngay trung tâm thành phố và phong cách hiện đại với các tiện nghi hàng đầu và dịch vụ trên cả mong đợi. Cơ hội tuyệt vời để khám phá một trong những điểm đến hấp dẫn nhất Đông Nam Á.",
+  "city": 1,
+  "id_amenities": [
+    {
+      "$oid": "660b074c3d69fecbfa663e04"
+    },
+    {
+      "$oid": "660b07533d69fecbfa663e0a"
+    },
+    {
+      "$oid": "660b07593d69fecbfa663e10"
+    },
+    {
+      "$oid": "660b0c593d69fecbfa663e1a"
+    },
+    {
+      "$oid": "660e099a9b3248744855d9ce"
+    },
+    {
+      "$oid": "660e099e9b3248744855d9d4"
+    },
+    {
+      "$oid": "660e09a29b3248744855d9da"
+    },
+    {
+      "$oid": "660e09a79b3248744855d9e0"
+    },
+    {
+      "$oid": "660e09ac9b3248744855d9e6"
+    },
+    {
+      "$oid": "660e09b19b3248744855d9ec"
+    },
+    {
+      "$oid": "660e09b59b3248744855d9f2"
+    },
+    {
+      "$oid": "660e09ba9b3248744855d9f8"
+    },
+    {
+      "$oid": "660e09be9b3248744855d9fe"
+    },
+    {
+      "$oid": "660e09c29b3248744855da04"
+    },
+    {
+      "$oid": "660e09c69b3248744855da0a"
+    },
+    {
+      "$oid": "660e09cc9b3248744855da10"
+    }
+  ],
+  "id_room": [
+    {
+      "$oid": "660e0e949b3248744855dab4"
+    },
+    {
+      "$oid": "660e0ebe9b3248744855dabf"
+    },
+    {
+      "$oid": "660e0f039b3248744855dade"
+    },
+    {
+      "$oid": "660e0f249b3248744855dae9"
+    },
+    {
+      "$oid": "660e107a9b3248744855db3c"
+    },
+    {
+      "$oid": "660e10be9b3248744855db59"
+    }
+  ],
+  "id_review": [],
+  "createdAt": {
+    "$date": "2024-04-04T02:14:56.189Z"
+  },
+  "updatedAt": {
+    "$date": "2024-04-04T02:30:22.238Z"
+  }
+}]
