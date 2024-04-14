@@ -37,6 +37,14 @@ export const vnPayPayment = (req, res) => {
         amount,
       };
 
+      const payment = await PaymentModel.create(data);
+
+      await BookingModel.findByIdAndUpdate(
+        { _id: bookingId },
+        { id_payment: payment._id },
+        { new: true }
+      );
+
       let vnp_Params = {};
       vnp_Params["vnp_Version"] = "2.1.0";
       vnp_Params["vnp_Command"] = "pay";
@@ -62,11 +70,9 @@ export const vnPayPayment = (req, res) => {
         encode: false,
       })}`;
 
-      const payment = await PaymentModel.create({ ...data, url_payment: url });
-
-      await BookingModel.findByIdAndUpdate(
-        { _id: bookingId },
-        { id_payment: payment._id },
+      await PaymentModel.findByIdAndUpdate(
+        { _id: payment._id },
+        { url_payment: url },
         { new: true }
       );
 
