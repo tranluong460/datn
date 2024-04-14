@@ -2241,13 +2241,4 @@ export default PrivacyPolicy;
 //                 textAlign: "justify",
 //               }}
 //             >
-//              
-//             </li>
-//           </ul>
-//         </div>
-//       </Container>
-//     </div>
-//   );
-// };
-
-// export default PrivacyPolicy;
+//             
