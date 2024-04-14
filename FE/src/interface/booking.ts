@@ -27,5 +27,6 @@ export interface IPaymentBooking {
   code: string;
   status: string;
   createdAt: string;
+  url_payment: string;
   updatedAt: string;
 }

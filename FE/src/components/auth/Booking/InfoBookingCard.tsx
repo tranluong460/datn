@@ -142,6 +142,15 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
           Hủy đặt phòng
         </button>
       )}
+
+      {info?.id_payment?.url_payment && (
+        <a
+          href={info?.id_payment?.url_payment}
+          className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
+        >
+          Thanh toán
+        </a>
+      )}
     </li>
   );
 };
