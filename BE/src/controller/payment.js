@@ -113,22 +113,10 @@ export const vnPayPaymentReturn = async (req, res) => {
         { new: true }
       );
 
-      const booking = await BookingModel.findByIdAndUpdate(
+      await BookingModel.findByIdAndUpdate(
         { _id: payment.id_booking },
         { status: "Đã hủy bỏ" },
         { new: true }
-      );
-
-      await Promise.all(
-        booking.list_room.map(async (item) => {
-          const room = await RoomModel.findById(item.idRoom);
-
-          if (room) {
-            room.quantity += item.quantity;
-
-            await room.save();
-          }
-        })
       );
 
       return res.redirect(`${process.env.PUBLIC_URL}/auth/booking`);
@@ -136,7 +124,7 @@ export const vnPayPaymentReturn = async (req, res) => {
 
     const payment = await PaymentModel.findByIdAndUpdate(
       { _id: idPayment },
-      { status: "Thành công", code: idPayment },
+      { status: "Thành công", code: idPayment, url_payment: null },
       { new: true }
     );
 
