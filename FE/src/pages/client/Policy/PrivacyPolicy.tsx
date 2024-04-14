@@ -2234,11 +2234,4 @@ export default PrivacyPolicy;
 //               hợp cần thiết khách hàng thông báo và yêu cầu MeliaHanoi hỗ trợ.
 //             </li>
 //             <li
-//               style={{
-//                 marginTop: "0.1in",
-//                 marginRight: "0in",
-//                 marginBottom: "0in",
-//                 textAlign: "justify",
-//               }}
-//             >
-//             
+//                      
