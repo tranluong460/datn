@@ -2241,12 +2241,7 @@ export default PrivacyPolicy;
 //                 textAlign: "justify",
 //               }}
 //             >
-//               5. Trong trường hợp bất kỳ giao dịch hoặc hành động bất hợp pháp
-//               nào được thực hiện liên quan đến tài khoản hoặc thông tin cá nhân
-//               của bạn mà không được cơ quan có thẩm quyền cho phép hoặc do sự
-//               nhầm lẫn cố ý hoặc vô ý của khách hàng, MeliaHanoi hiểu rằng bạn
-//               sẽ chịu mọi tổn thất và trách nhiệm theo quy định của pháp luật
-//               khi giao dịch đó hoặc hành động được thực hiện.
+//              
 //             </li>
 //           </ul>
 //         </div>
