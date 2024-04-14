@@ -16,7 +16,6 @@ import Review from "../Review/Review";
 const HotelListPage = () => {
   const { data } = useGetAllHotelQuery("");
   const [visibleRooms, setVisibleRooms] = useState(5); // Số lượng phòng hiển thị ban đầu
-  const [showMoreButton, setShowMoreButton] = useState(true);
   const handleShowMore = () => {
     // Tăng số lượng phòng hiển thị thêm 2
     setVisibleRooms((prev) => prev + 2);
@@ -406,7 +405,7 @@ const HotelListPage = () => {
 
             {/* Kiểm tra nếu còn phòng để hiển thị và nút "Xem thêm" chưa bị ẩn */}
             <div className="text-center">
-              {searchResult?.data.length > visibleRooms && showMoreButton && (
+              {searchResult?.data.length > visibleRooms && (
                 <button
                   onClick={handleShowMore}
                   className="bg-blue-500 py-3 px-10 text-white rounded-md my-5"

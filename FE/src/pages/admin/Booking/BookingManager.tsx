@@ -128,10 +128,10 @@ const BookingManager = () => {
         searchText ? (
           <Highlighter
             searchWords={[searchText]}
-            textToHighlight={text.id_information.name}
+            textToHighlight={text?.id_information?.name}
           />
         ) : (
-          text.id_information.name
+          text?.id_information?.name
         ),
     },
     {
@@ -150,9 +150,7 @@ const BookingManager = () => {
               </Space>
             )
           )} */}
-          <div>
-            {list_room?.idRoom?.id_roomType?.name}
-          </div>
+          <div>{list_room?.idRoom?.id_roomType?.name}</div>
           <div>x{list_room?.quantity}</div>
         </Space>
       ),
