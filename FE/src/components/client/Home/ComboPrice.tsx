@@ -41,7 +41,7 @@ const ComboPrice = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-4 gap-5 relative">
+          <div className="grid grid-cols-4 gap-5 relative cursor-pointer">
             {hotelData?.data?.length > 0 ? (
               hotelData?.data
                 .slice(startIndex, startIndex + 4)
