@@ -19,14 +19,23 @@ const disabledDate = (current: any) => {
 const Search = () => {
   const [searchParams] = useSearchParams();
   const checkin = searchParams.get("checkin") || "";
+  const checkout = searchParams.get("checkout") || "";
+  const quantity = searchParams.get("quantity") || "";
+  const children = searchParams.get("children") || "";
+  const adults = searchParams.get("adults") || "";
 
   // ấn vào nút tìm kiếm nó sẽ render lại
   const [isSearched, setIsSearched] = useState(false);
 
   // thông báo nếu chưa nhập số lượng phòng
   const [errorMessage, setErrorMessage] = useState("");
-  const [roomInfo, setRoomInfo] = useState([{ adults: 1, children: 0 }]);
-  const [room, setRoom] = useState(1);
+  const [roomInfo, setRoomInfo] = useState([
+    {
+      adults: Number(adults !== "" ? adults : 1),
+      children: Number(children !== "" ? children : ""),
+    },
+  ]);
+  const [room, setRoom] = useState(Number(quantity ? quantity : 1));
 
   // thêm phòng
   const addRoom = () => {
@@ -104,15 +113,6 @@ const Search = () => {
     totalAdults += room.adults;
     totalChildren += room.children;
   });
-
-  // số lượng được chọn chỉ được 999 phòng
-  const handleAdditionalRoomsChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    let value = parseInt(e.target.value, 10) || 0;
-    value = Math.min(value, 20);
-    setAdditionalRooms(value);
-  };
 
   const { RangePicker } = DatePicker;
   const { search } = useLocation();
@@ -264,15 +264,15 @@ const Search = () => {
             <RangePicker
               className="
               py-[11px] focus:border-yellow-500 hover:border-yellow-500 border-none"
-              disabledDate={disabledDate}
-              defaultValue={[dayjs(), dayjs().add(1, "days")]}
-              onChange={(dates, dateStrings) => {
-                handleExpand();
-                setDateRange({
-                  startDate: dateStrings[0],
-                  endDate: dateStrings[1],
-                });
-              }}
+              // disabledDate={disabledDate}
+              // defaultValue={[dayjs(), dayjs().add(1, "days")]}
+              // onChange={(dates, dateStrings) => {
+              //   handleExpand();
+              //   setDateRange({
+              //     startDate: dateStrings[0],
+              //     endDate: dateStrings[1],
+              //   });
+              // }}
             />
           </Space>
         </div>
@@ -290,7 +290,8 @@ const Search = () => {
                 ""
               ) : (
                 <span>
-                  <span className="mx-1">•</span> {totalChildren} Trẻ em
+                  <span className="mx-1">•</span>{" "}
+                  {totalChildren === 0 ? "" : totalChildren} Trẻ em
                 </span>
               )}
             </div>
