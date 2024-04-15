@@ -36,7 +36,7 @@ const UserMenu = () => {
     "Admin",
     "Manager",
     "Reservation Manager",
-    "HumanResources Manager",
+    "Human Resources Manager",
     "Room Manager",
     "Facilities Manager",
   ];
