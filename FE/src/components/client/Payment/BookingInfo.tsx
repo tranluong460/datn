@@ -56,8 +56,6 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
 
           <div className="pt-3 grid grid-cols-1 gap-5">
             {filteredRooms?.map((room: IRoom, index: number) => {
-              console.log("🚀 ~ {filteredRooms?.map ~ room:", room);
-
               const bk = booking.list_room?.find(
                 (bookingRoom) => bookingRoom.idRoom === room._id
               );

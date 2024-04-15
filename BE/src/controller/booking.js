@@ -167,7 +167,11 @@ export const create = async (req, res) => {
       const roomBooking = await RoomModel.findById(roomIds);
 
       if (bookings.length > roomBooking.quantity) {
-        return sendResponse(res, 404, "Phòng đã được đặt");
+        return sendResponse(
+          res,
+          404,
+          "Xin lỗi, số lượng phòng đã được đặt đã vượt quá số lượng phòng còn lại."
+        );
       }
 
       const userBooking = await BookingModel.findOne({
@@ -179,7 +183,24 @@ export const create = async (req, res) => {
         return sendResponse(
           res,
           404,
-          "Bạn có một đơn hàng đang chờ thanh toán"
+          "Bạn có một đơn đặt phòng đang chờ thanh toán. Vui lòng thanh toán hoặc hủy đơn hàng trước khi tiếp tục."
+        );
+      }
+
+      const firstDayOfMonth = moment().startOf("month").format("YYYY-MM-DD");
+      const lastDayOfMonth = moment().endOf("month").format("YYYY-MM-DD");
+
+      const bookingUser = await BookingModel.find({
+        id_user: user._id,
+        status: "Đã hủy bỏ",
+        createdAt: { $gte: firstDayOfMonth, $lte: lastDayOfMonth },
+      });
+
+      if (bookingUser.length > 3) {
+        return sendResponse(
+          res,
+          404,
+          "Bạn đã hủy quá nhiều đơn đặt phòng trong tháng này. Vui lòng thử lại sau."
         );
       }
 
