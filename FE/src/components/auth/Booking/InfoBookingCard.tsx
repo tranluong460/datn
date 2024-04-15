@@ -143,7 +143,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         </button>
       )}
 
-      {info?.id_payment?.url_payment && (
+      {info?.id_payment?.url_payment && info.status !== "Đã hủy bỏ" && (
         <a
           href={info?.id_payment?.url_payment}
           className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
