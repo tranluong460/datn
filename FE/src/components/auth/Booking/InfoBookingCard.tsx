@@ -1,14 +1,6 @@
 import moment from "moment";
 import toast from "react-hot-toast";
-import {
-  Modal,
-  PopconfirmProps,
-  Button,
-  message,
-  Popconfirm,
-  Checkbox,
-  CheckboxProps,
-} from "antd";
+import { Modal, Button, Checkbox, CheckboxProps } from "antd";
 import { IBooking } from "../../../interface";
 import {
   useCheckStatusZaloPayMutation,
@@ -24,21 +16,9 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
   const [errorCheckBox, setErrorCheckBox] = useState("");
   const [isCheckBoxChecked, setIsCheckBoxChecked] = useState(false);
 
-  const confirm: PopconfirmProps["onConfirm"] = (e) => {
-    console.log(e);
-    toggleUpdateBooking();
-    message.success("Đã hủy đặt phòng thành công");
-  };
-
-  const cancel: PopconfirmProps["onCancel"] = (e) => {
-    console.log(e);
-    message.error("Click on No");
-  };
-
   const onChange: CheckboxProps["onChange"] = (e) => {
     setIsCheckBoxChecked(e.target.checked);
-    setErrorCheckBox(""); // Xóa thông báo lỗi khi checkbox thay đổi trạng thái
-    console.log(`checked = ${e.target.checked}`);
+    setErrorCheckBox("");
   };
 
   const handleOk = () => {
@@ -94,7 +74,6 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
   };
 
   const statusList = ["Chờ thanh toán", "Đã xác nhận"];
-
   return (
     <li className="flex items-center gap-x-6 py-5 border border-divideLight dark:border-divideDark pl-5 text-textLight2nd dark:text-textDark2nd">
       <div className="flex min-w-0 gap-x-4">
@@ -155,7 +134,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         onCancel={handleCancel}
         footer={null}
       >
-        <p>Phòng: {info?.list_room[0]?.idRoom?.id_roomType?.name}</p>
+        <p>Phòng: {info?.list_room?.idRoom?.id_roomType?.name}</p>
         <p>Số lượng phòng: {info?.list_room[0]?.quantity}</p>
         <div>
           <p className="flex">
@@ -189,7 +168,6 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
             visible={modalCancelRoom}
             onCancel={handleCancelRoom}
             onOk={handleOk}
-            // footer={null}
           >
             <p>Phòng: {info?.list_room[0]?.idRoom?.id_roomType?.name}</p>
             <p>Số lượng phòng: {info?.list_room[0]?.quantity}</p>
