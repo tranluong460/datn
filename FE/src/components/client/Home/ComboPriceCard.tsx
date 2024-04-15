@@ -46,8 +46,11 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
               {dataRoom?.data?.id_roomType?.name}
             </h5>
             <p className="text-md text-yellow-500 font-bold capitalize">
-              {data?.id_roomType?.price}
-              <span className="ml-1 text-xs">/đêm</span>
+              {data?.id_roomType?.price.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
+              <span className="ml-1 text-xs">/ đêm</span>
             </p>
           </div>
 

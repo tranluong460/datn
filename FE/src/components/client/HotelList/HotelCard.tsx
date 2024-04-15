@@ -133,23 +133,6 @@ const HotelCard = ({ hotel }: any) => {
 
                   <p>phòng/đêm</p>
                 </div>
-                {/* {lowestPrice ? (
-                  <div>
-                    <p>Chỉ từ</p>
-
-                    <p className="text-md lg:text-2xl font-bold text-textLight dark:text-textDark">
-                      {lowestPrice.toLocaleString("vi-VN", {
-                        style: "currency",
-                        currency: "VND",
-                      })}
-                    </p>
-
-                    <p>phòng/đêm</p>
-                  </div>
-                ) : (
-                  ""
-                )} */}
-
                 <Button
                   label={hotel?.quantity >= 0 ? "Đặt phòng" : "Hết phòng"}
                   disabled={hotel?.quantity >= 0 ? false : true}
