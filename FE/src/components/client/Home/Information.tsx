@@ -18,7 +18,7 @@ const Information = () => {
       <div className="w-1/2 overflow-hidden">
         <div className="flex justify-center items-center">
           <img
-            src="https://dam.melia.com/melia/file/X2o8Wp3UzwU3ZXjePZpu.jpg?im=RegionOfInterestCrop=(1020,765),regionOfInterest=(1771.5,1328.5)"
+            src="https://dam.melia.com/melia/file/kJcT26dQQRooAoGt5FxD.jpg?im=RegionOfInterestCrop=(1020,765),regionOfInterest=(1771.5,1181.5)"
             alt=""
           />
         </div>

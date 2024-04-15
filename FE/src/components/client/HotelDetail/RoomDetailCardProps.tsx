@@ -133,7 +133,14 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
               </p>
               <p>Số lượng giường ngủ: {room?.id_roomType?.bed}</p>
               <p>Phòng còn trống: {room?.quantity}</p>
-              <p>Giá phòng: {room?.id_roomType?.price} đêm</p>
+              <p>
+                Giá phòng:
+                {room?.id_roomType?.price.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}{" "}
+                / đêm
+              </p>
             </div>
 
             <RangePicker
