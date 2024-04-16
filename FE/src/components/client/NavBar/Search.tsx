@@ -264,15 +264,19 @@ const Search = () => {
             <RangePicker
               className="
               py-[11px] focus:border-yellow-500 hover:border-yellow-500 border-none"
-              // disabledDate={disabledDate}
-              // defaultValue={[dayjs(), dayjs().add(1, "days")]}
-              // onChange={(dates, dateStrings) => {
-              //   handleExpand();
-              //   setDateRange({
-              //     startDate: dateStrings[0],
-              //     endDate: dateStrings[1],
-              //   });
-              // }}
+              disabledDate={disabledDate}
+              defaultValue={
+                checkin === ""
+                  ? [dayjs(), dayjs().add(1, "days")]
+                  : [dayjs(checkin), dayjs(checkout)]
+              }
+              onChange={(dates, dateStrings) => {
+                handleExpand();
+                setDateRange({
+                  startDate: dateStrings[0],
+                  endDate: dateStrings[1],
+                });
+              }}
             />
           </Space>
         </div>
