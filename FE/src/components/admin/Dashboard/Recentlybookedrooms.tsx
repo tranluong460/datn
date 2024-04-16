@@ -8,42 +8,42 @@ export default function RecentRooms() {
   const { data: bookings } = useGetAllBookingQuery("");
   const [top5, setTop5] = useState<any>([]);
   const [selectedRange, setSelectedRange] = useState(null);
-  const handleCick = () => {
+
+  const handleClick = () => {
     if (selectedRange && bookings?.data) {
       const [startDate, endDate]: any = selectedRange;
 
-      const roomBooking = bookings?.data.filter((booking: any) => {
-        const bookingDate = new Date(booking.createdAt);
-        return (
-          booking.status === "Thành công" &&
-          bookingDate >= startDate &&
-          bookingDate <= endDate
-        );
-      });
       // Tạo một đối tượng để theo dõi số lần xuất hiện của từng phòng
       const roomCountMap: any = {};
 
-      for (const booking of roomBooking) {
-        for (const room of booking?.list_room || []) {
-          const roomId = room.idRoom?._id; // Giả sử roomId là một trường duy nhất để định danh phòng
-          const quantity = room.quantity || 0; // Số lượng mặc định là 1 nếu không có trường quantity
+      // Lặp qua các đơn đặt phòng trong khoảng thời gian đã chọn
+      bookings.data.forEach((booking: any) => {
+        const bookingDate = new Date(booking.createdAt);
 
-          // Kiểm tra xem đã có phòng với roomId trong roomCountMap hay chưa
+        // Kiểm tra xem đơn đặt phòng có nằm trong khoảng thời gian và trạng thái "Thành công" không
+        if (
+          booking.status === "Thành công" &&
+          bookingDate >= startDate &&
+          bookingDate <= endDate
+        ) {
+          // Truy cập trực tiếp vào thông tin của phòng trong list_room
+          const room = booking.list_room;
+          const roomId = room.idRoom?._id;
+          const quantity = room.quantity || 0;
+
           if (!roomCountMap[roomId]) {
-            // Nếu chưa có, tạo một đối tượng mới cho roomId
             roomCountMap[roomId] = {
               count: 0,
-              name: room?.idRoom?.id_roomType?.name,
-              price: room?.idRoom?.price,
+              name: room.idRoom?.id_roomType?.name,
+              price: room.idRoom?.id_roomtype?.price,
             };
           }
 
-          // Cộng số lượng và tăng count của phòng đó
           roomCountMap[roomId].count += quantity;
           roomCountMap[roomId].total =
             roomCountMap[roomId].count * roomCountMap[roomId].price;
         }
-      }
+      });
 
       // Chuyển đối tượng đếm thành một mảng các đối tượng phòng để sắp xếp
       const roomCountArray = Object.values(roomCountMap);
@@ -54,48 +54,48 @@ export default function RecentRooms() {
       // Chọn top 5 phòng
       const topRooms = roomCountArray.slice(0, 5);
       setTop5(topRooms);
-    } else {
-      const roomBooking = bookings?.data?.filter(
-        (item: any) => item.status == "Thành công"
-      );
-      // Tạo một đối tượng để theo dõi số lần xuất hiện của từng phòng
-
+    } else if (bookings?.data) {
+      // Nếu không có ngày được chọn, truy vấn tất cả các đơn đặt phòng thành công
       const roomCountMap: any = {};
-      for (const booking of roomBooking || []) {
-        for (const room of booking?.list_room || []) {
-          const roomId = room?.idRoom?._id; // Giả sử roomId là một trường duy nhất để định danh phòng
-          const quantity = room.quantity || 0; // Số lượng mặc định là 1 nếu không có trường quantity
-          // Kiểm tra xem đã có phòng với roomId trong roomCountMap hay chưa
+
+      // Lặp qua tất cả các đơn đặt phòng
+      bookings.data.forEach((booking: any) => {
+        // Kiểm tra xem đơn đặt phòng có trạng thái "Thành công" không
+        if (booking.status === "Thành công") {
+          const room = booking.list_room;
+          const roomId = room.idRoom?._id;
+          const quantity = room.quantity || 0;
+
           if (!roomCountMap[roomId]) {
-            // Nếu chưa có, tạo một đối tượng mới cho roomId
             roomCountMap[roomId] = {
               count: 0,
               name: room.idRoom?.id_roomType?.name,
-              price: room.idRoom?.price,
+              price: room.idRoom?.id_roomType?.price,
             };
           }
 
-          // Cộng số lượng và tăng count của phòng đó
           roomCountMap[roomId].count += quantity;
           roomCountMap[roomId].total =
             roomCountMap[roomId].count * roomCountMap[roomId].price;
         }
-      }
+      });
 
       // Chuyển đối tượng đếm thành một mảng các đối tượng phòng để sắp xếp
       const roomCountArray = Object.values(roomCountMap);
 
       // Sắp xếp mảng theo số lần xuất hiện giảm dần
       roomCountArray.sort((a: any, b: any) => b.count - a.count);
-
+      // console.log(roomCountArray);
       // Chọn top 5 phòng
       const topRooms = roomCountArray.slice(0, 5);
       setTop5(topRooms);
     }
   };
+
   useEffect(() => {
-    handleCick();
-  }, [bookings]);
+    handleClick();
+  }, [bookings, selectedRange]);
+
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
       <strong className="text-gray-700 font-medium">
@@ -114,7 +114,7 @@ export default function RecentRooms() {
           style={{ width: "50%" }}
         />
         <button
-          onClick={handleCick}
+          onClick={handleClick}
           className="ml-2 bg-blue-400 text-white p-1"
         >
           Tìm kiếm
@@ -157,3 +157,5 @@ export default function RecentRooms() {
     </div>
   );
 }
+
+
