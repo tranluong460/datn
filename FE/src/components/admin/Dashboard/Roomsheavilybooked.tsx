@@ -6,97 +6,99 @@ function Roomsheavilybooked() {
   const { RangePicker } = DatePicker;
   const [selectedRange, setSelectedRange] = useState(null);
   const { data: bookings } = useGetAllBookingQuery("");
-  const [topCustomers, setTopCustomers] = useState([]);
+  const [topCustomers, setTopCustomers] = useState<any[]>([]);
 
   const handleCick = () => {
     if (selectedRange && bookings?.data) {
       const [startDate, endDate]: any = selectedRange;
-      const bookedRoom = bookings?.data?.filter((booking: any) => {
+
+      // Tạo đối tượng để lưu số lần mỗi khách hàng đã đặt thành công
+      const customerSuccessCount: any = {};
+
+      bookings.data.forEach((booking: any) => {
         const bookingDate = new Date(booking.createdAt);
-        return (
-          booking.status === "Thành công" &&
+
+        const customerId = booking.id_user?._id;
+
+        // Nếu đơn hàng là thành công và khách hàng đã tồn tại trong đối tượng, tăng số lần đặt thành công lên 1
+        if (booking.status === "Thành công" &&
           bookingDate >= startDate &&
-          bookingDate <= endDate
-        );
+          bookingDate <= endDate) {
+          if (customerSuccessCount[customerId]) {
+            customerSuccessCount[customerId]++;
+          } else {
+            // Nếu chưa tồn tại, tạo mới và đặt số lần đặt thành công là 1
+            customerSuccessCount[customerId] = 1;
+          }
+        }
       });
-      // Tính tổng số lượng phòng của từng khách hàng
-      const customerBookings =
-        bookedRoom.reduce((acc: any, booking: any) => {
-          const customerId = booking.id_user?._id; // Thay thế bằng thuộc tính thực tế đại diện cho ID khách hàng
-          const customerName = booking.id_user?.id_information?.name; // Thêm thông tin tên khách hàng
 
-          // Tính tổng số lượng phòng trong đặt hàng
-          const totalRoomsInBooking = booking?.list_room?.reduce(
-            (sum: any, room: any) => sum + room.quantity,
-            0
+      // Chuyển đối tượng thành mảng và sắp xếp theo số lần đặt thành công giảm dần
+      const sortedCustomers = Object.entries(customerSuccessCount)
+        .sort(([, countA], [, countB]) => countB - countA)
+        .slice(0, 5) // Chỉ lấy 5 khách hàng đặt thành công nhiều nhất
+        .map(([customerId, successCount]) => {
+          // Tìm tên khách hàng từ ID
+          const customer = bookings.data.find(
+            (booking: any) => booking.id_user?._id === customerId
           );
 
-          if (!acc[customerId]) {
-            acc[customerId] = {
-              id: customerId,
-              name: customerName,
-              totalRooms: 0,
-            };
+          // Trả về thông tin của khách hàng
+          return {
+            id: customerId,
+            name: customer?.id_user?.id_information?.name || "Unknown",
+            totalSuccess: successCount,
+          };
+        });
+
+      setTopCustomers(sortedCustomers);
+    } else if (bookings?.data) {
+      const customerSuccessCount: any = {};
+
+      bookings.data.forEach((booking: any) => {
+        const customerId = booking.id_user?._id;
+
+        // Nếu đơn hàng là thành công và khách hàng đã tồn tại trong đối tượng, tăng số lần đặt thành công lên 1
+        if (booking.status === "Thành công") {
+          if (customerSuccessCount[customerId]) {
+            customerSuccessCount[customerId]++;
+          } else {
+            // Nếu chưa tồn tại, tạo mới và đặt số lần đặt thành công là 1
+            customerSuccessCount[customerId] = 1;
           }
-
-          acc[customerId].totalRooms += totalRoomsInBooking; // Thêm số lượng phòng đặt vào tổng số phòng
-          return acc;
-        }, {}) || {};
-
-      // Sắp xếp khách hàng theo số lượng phòng đặt giảm dần
-      const sortedCustomers: any = Object.values(customerBookings).sort(
-        (a: any, b: any) => b.totalRooms - a.totalRooms
-      );
-
-      // Lấy top 5 khách hàng
-      const top5Customers = sortedCustomers.slice(0, 5);
-
-      setTopCustomers(top5Customers);
-    } else {
-      const bookedRoom = bookings?.data?.filter((booking: any) => {
-        return booking.status === "Thành công";
+        }
       });
-      // Tính tổng số lượng phòng của từng khách hàng
-      const customerBookings =
-        bookedRoom?.reduce((acc: any, booking: any) => {
-          const customerId = booking.id_user?._id;
-          const customerName = booking.id_user?.id_information?.name;
-          const totalRoomsInBooking = booking.list_room.reduce(
-            (sum: any, room: any) => sum + room.quantity,
-            0
+
+      // Chuyển đối tượng thành mảng và sắp xếp theo số lần đặt thành công giảm dần
+      const sortedCustomers = Object.entries(customerSuccessCount)
+        .sort(([, countA], [, countB]) => countB - countA)
+        .slice(0, 5) // Chỉ lấy 5 khách hàng đặt thành công nhiều nhất
+        .map(([customerId, successCount]) => {
+          // Tìm tên khách hàng từ ID
+          const customer = bookings.data.find(
+            (booking: any) => booking.id_user?._id === customerId
           );
 
-          if (!acc[customerId]) {
-            acc[customerId] = {
-              id: customerId,
-              name: customerName,
-              totalRooms: 0,
-            };
-          }
+          // Trả về thông tin của khách hàng
+          return {
+            id: customerId,
+            name: customer?.id_user?.id_information?.name || "Unknown",
+            totalSuccess: successCount,
+          };
+        });
 
-          acc[customerId].totalRooms += totalRoomsInBooking;
-          return acc;
-        }, {}) || {};
-
-      // Sắp xếp khách hàng theo số lượng phòng đặt giảm dần
-      const sortedCustomers: any = Object.values(customerBookings).sort(
-        (a: any, b: any) => b.totalRooms - a.totalRooms
-      );
-
-      // Lấy top 5 khách hàng
-      const top5Customers = sortedCustomers.slice(0, 5);
-
-      setTopCustomers(top5Customers);
+      setTopCustomers(sortedCustomers);
     }
   };
 
   useEffect(() => {
     handleCick();
   }, [bookings]);
+
   return (
     <div className="w-[30rem] bg-white p-4 rounded-sm border border-gray-200">
       <strong className="text-gray-700 font-medium">
-        Top 5 khách hàng đặt phòng nhiều nhất
+        Top 5 khách hàng đặt thành công nhiều nhất
       </strong>
       <div>
         <div className="m-3">
@@ -122,14 +124,14 @@ function Roomsheavilybooked() {
           <thead>
             <tr className="bg-gray-100">
               <th className="py-2 px-4 border-b">Tên khách hàng</th>
-              <th className="py-2 px-4 border-b">Số lượng đặt phòng</th>
+              <th className="py-2 px-4 border-b">Số lượng đặt thành công</th>
             </tr>
           </thead>
           <tbody>
-            {topCustomers.map((customer: any) => (
+            {topCustomers.map((customer) => (
               <tr key={customer.id} className="border-b text-center">
                 <td className="py-2 px-4">{customer.name}</td>
-                <td className="py-2 px-4">{customer.totalRooms}</td>
+                <td className="py-2 px-4">{customer.totalSuccess}</td>
               </tr>
             ))}
           </tbody>
