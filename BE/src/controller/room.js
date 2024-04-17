@@ -196,12 +196,19 @@ export const search = async (req, res) => {
       status: { $in: targetStatuses },
     };
     const booked = await BookingModel.find(bookingConditions);
-    const bookedRoomInfo = booked.map((booking) => ({
-      idRoom: booking.list_room.idRoom,
-      quantity: booking.list_room.quantity,
-    }));
 
+    // Tính tổng số lượng của từng loại phòng đã đặt trong các đơn đặt phòng trùng
+    const bookedRoomQuantities = {};
+    booked.forEach(booking => {
+      const roomId = booking.list_room.idRoom.toString();
+      if (bookedRoomQuantities[roomId]) {
+        bookedRoomQuantities[roomId] += booking.list_room.quantity;
+      } else {
+        bookedRoomQuantities[roomId] = booking.list_room.quantity;
+      }
+    });
 
+    // Lấy danh sách các phòng
     let rooms = await RoomModel.find({})
       .populate({
         path: "id_amenities", // Populate mảng Amenities
@@ -212,49 +219,36 @@ export const search = async (req, res) => {
         model: "RoomType",
       });
 
-    // console.log(rooms);
+    // Lọc các phòng theo số lượng người lớn và trẻ em
     if (adults && children) {
-      rooms = rooms.filter(
-        (room) =>
-          room.id_roomType &&
-          room.id_roomType.adults >= adults &&
-          room.id_roomType.children >= children
+      rooms = rooms.filter(room =>
+        room.id_roomType &&
+        room.id_roomType.adults >= adults &&
+        room.id_roomType.children >= children
       );
     }
 
+    // Lọc các phòng theo mức giá
     if (minPrice && maxPrice) {
-      rooms = rooms.filter(
-        (room) =>
-          room.id_roomType &&
-          room.id_roomType.price >= minPrice &&
-          room.id_roomType.price <= maxPrice
+      rooms = rooms.filter(room =>
+        room.id_roomType &&
+        room.id_roomType.price >= minPrice &&
+        room.id_roomType.price <= maxPrice
       );
     }
-    const availableRoomsFromBooked = rooms.filter((room) => {
-      const bookedRoom = bookedRoomInfo.find(
-        (item) => item.idRoom.toString() === room._id.toString()
-      );
-      const remainingQuantity = bookedRoom
-        ? room.quantity - bookedRoom.quantity
-        : room.quantity;
+
+    // Lọc các phòng có sẵn dựa trên số lượng đã đặt và số lượng còn lại
+    const availableRooms = rooms.filter(room => {
+      const roomId = room._id.toString();
+      const bookedQuantity = bookedRoomQuantities[roomId] || 0;
+      const remainingQuantity = room.quantity - bookedQuantity;
       return remainingQuantity >= quantity && room.quantity >= quantity;
     });
 
-    const availableRoomsNotBooked = rooms.filter((room) => {
-      const isNotBooked = !bookedRoomInfo.some(
-        (item) => item.idRoom.toString() === room._id.toString()
-      );
-      return isNotBooked && room.quantity >= quantity;
-    });
-
-    const availableRooms = [
-      ...availableRoomsFromBooked,
-      ...availableRoomsNotBooked,
-    ];
-    const data = [...new Set(availableRooms)];
-    return sendResponse(res, 200, "Tìm kiếm phòng thành công", data);
+    return sendResponse(res, 200, "Tìm kiếm phòng thành công", availableRooms);
   } catch (error) {
     console.error(error);
     return sendResponse(res, 500, "Lỗi server");
   }
 };
+
