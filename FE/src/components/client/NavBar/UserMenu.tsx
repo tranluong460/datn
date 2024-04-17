@@ -26,6 +26,10 @@ const UserMenu = () => {
       .then((response) => {
         location.pathname === "/auth" && navigate("/");
         toast.success(response.message);
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
       })
       .catch((error) => {
         console.log(error);

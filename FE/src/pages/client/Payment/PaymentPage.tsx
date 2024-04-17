@@ -78,6 +78,7 @@ const PaymentPage = () => {
     newDataBooking.payment_method = method;
     newDataBooking.is_deposit_amount = isDepositAmount;
     newDataBooking.total_price = totalPrice;
+    newDataBooking.id_voucher = voucher._id;
 
     booking(newDataBooking)
       .unwrap()

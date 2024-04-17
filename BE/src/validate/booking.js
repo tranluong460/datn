@@ -5,6 +5,7 @@ import { validationErrors } from "../utils";
 const bookingValidate = joi.object({
   check_in: joi.date().required().messages(validationErrors("Ngày nhận phòng")),
   check_out: joi.date().required().messages(validationErrors("Ngày trả phòng")),
+  id_voucher: joi.string(),
   total_price: joi.number().required().messages(validationErrors("Tổng giá")),
   is_deposit_amount: joi
     .boolean()

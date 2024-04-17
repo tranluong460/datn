@@ -28,6 +28,10 @@ const voucherSchema = new mongoose.Schema(
       ref: "RoomType",
       required: true,
     },
+    user_list: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+    },
   },
   { timestamps: true, versionKey: false }
 );

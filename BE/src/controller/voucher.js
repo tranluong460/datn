@@ -69,6 +69,10 @@ export const getVoucherByCode = async (req, res) => {
       return sendResponse(res, 400, "Voucher không áp dụng cho loại phòng này");
     }
 
+    if (voucher.user_list.includes(req.user._id)) {
+      return sendResponse(res, 400, "Bạn đã sử dụng voucher này");
+    }
+
     return sendResponse(res, 200, "Voucher đã được áp dụng", voucher);
   } catch (error) {
     console.error(error);
