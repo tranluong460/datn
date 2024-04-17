@@ -21,25 +21,27 @@ const EditBookingDrawn = ({
   const [updateBooking, resultEdit] = useUpdateBookingMutation();
   // console.log("ádf", dayjs());
   const onFinish = (data: IBooking) => {
+    console.log("🚀 ~ onFinish ~ data:", data);
     const checkDay = moment().format("YYYY-MM-DD");
     const checkInDate = moment(data?.check_in).format("YYYY-MM-DD");
-    const checkOutDate = moment(data?.check_out).format("YYYY-MM-DD");
 
-    if (checkInDate === checkDay) {
-      updateBooking(data)
-        .unwrap()
-        .then((response) => {
-          console.log("🚀 ~ .then ~ response:", response);
-          message.success(response.message);
-          onCancel();
-        })
-        .catch((error) => {
-          message.error(error.data.message);
-        });
-    } else {
-      message.error(
-        "Chưa đến ngày nhận phòng, không thể chuyển trạng thái đơn đặt phòng."
-      );
+    if (data.status === "Đã nhận phòng") {
+      if (checkInDate === checkDay) {
+        updateBooking(data)
+          .unwrap()
+          .then((response) => {
+            console.log("🚀 ~ .then ~ response:", response);
+            message.success(response.message);
+            onCancel();
+          })
+          .catch((error) => {
+            message.error(error.data.message);
+          });
+      } else {
+        message.error(
+          "Chưa đến ngày nhận phòng, không thể chuyển trạng thái đơn đặt phòng."
+        );
+      }
     }
   };
 
@@ -87,9 +89,6 @@ const EditBookingDrawn = ({
           </Form.Item>
 
           <Form.Item name="check_in" hidden>
-            <Input />
-          </Form.Item>
-          <Form.Item name="check_out" hidden>
             <Input />
           </Form.Item>
 
