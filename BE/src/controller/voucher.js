@@ -1,8 +1,23 @@
-import mongoose from "mongoose";
 import { validateMiddleware } from "../middleware";
 import { RoomModel, VoucherModel } from "../models";
 import { sendResponse } from "../utils";
 import { VoucherValidate } from "../validate";
+
+export const getAll = async (req, res) => {
+  try {
+    const voucherList = await VoucherModel.find();
+
+    if (!voucherList || voucherList.length === 0) {
+      return sendResponse(res, 404, "Không có danh sách voucher");
+    }
+
+    return sendResponse(res, 200, "Danh sách voucher", voucherList);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi lấy danh sách voucher");
+  }
+};
 
 export const createVoucher = async (req, res) => {
   try {
