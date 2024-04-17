@@ -167,7 +167,7 @@ export const create = async (req, res) => {
 
       const roomBooking = await RoomModel.findById(roomIds);
 
-      if (bookings.length > roomBooking.quantity) {
+      if (bookings.length >= roomBooking.quantity) {
         return sendResponse(
           res,
           404,
@@ -205,14 +205,16 @@ export const create = async (req, res) => {
         );
       }
 
-      const voucher = await VoucherModel.findById(id_voucher);
+      if (id_voucher) {
+        const voucher = await VoucherModel.findById(id_voucher);
 
-      const voucher_user_list = voucher.user_list;
-      const idu = req.user._id;
+        const voucher_user_list = voucher.user_list;
+        const idu = req.user._id;
 
-      await VoucherModel.findByIdAndUpdate(id_voucher, {
-        user_list: [...voucher_user_list, idu],
-      });
+        await VoucherModel.findByIdAndUpdate(id_voucher, {
+          user_list: [...voucher_user_list, idu],
+        });
+      }
 
       const data = await BookingModel.create({
         id_user: user._id,
