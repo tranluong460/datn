@@ -22,6 +22,7 @@ const EditBookingDrawn = ({
     updateBooking(data)
       .unwrap()
       .then((response) => {
+        console.log("🚀 ~ .then ~ response:", response);
         message.success(response.message);
         onCancel();
       })
@@ -75,7 +76,7 @@ const EditBookingDrawn = ({
 
           <Form.Item
             name="status"
-            label="Tên loại phòng"
+            label="Trạng thái đơn"
             rules={[
               { required: true, message: "Trạng thái không được để trống!" },
             ]}

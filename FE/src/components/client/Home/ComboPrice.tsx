@@ -63,7 +63,7 @@ const ComboPrice = () => {
                 .map((room: any, index: number) => (
                   <div
                     key={room?._id}
-                    className={`relative ${index === 1 ? "z-10" : ""}`}
+                    className={`relative ${index === 1 ? "z-[5]" : ""}`}
                   >
                     <ComboPriceCard
                       data={room}

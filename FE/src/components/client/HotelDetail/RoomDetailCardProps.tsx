@@ -20,7 +20,6 @@ type RoomDetailCardProps = {
 const { RangePicker } = DatePicker;
 
 const RoomDetailCard = ({ room, onCloseDetail }: any) => {
-  console.log("🚀 ~ RoomDetailCardtest chính đấy ~ room:", room);
   const [currentImage, setCurrentImage] = useState<string>(room?.images[0].url);
 
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
@@ -94,7 +93,7 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
             </span>
           </div>
           <div className="flex w-[140px] p-3 gap-3 border-none  object-cover">
-            {room?.images.map((img, index) => (
+            {room?.images.map((img, index: number) => (
               <img
                 key={index}
                 src={img.url}
