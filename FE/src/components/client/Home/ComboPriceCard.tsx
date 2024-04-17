@@ -30,13 +30,11 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
   const openRoomDetail = (room: void) => {
     setSelectedRoom(room);
     hiddenSearch();
-    document.body.classList.add("overflow-hidden");
   };
 
   const closeRoomDetail = () => {
     setSelectedRoom(null);
     hiddenSearch();
-    document.body.classList.remove("overflow-hidden");
   };
   return (
     <>

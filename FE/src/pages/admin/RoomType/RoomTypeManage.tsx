@@ -143,7 +143,6 @@ const RoomTypeManage = () => {
     showTotal: (total: number, range: number[]) =>
       `${range[0]}-${range[1]} của ${total} mục`,
   };
-
   return (
     <>
       {/* {contextHolder} */}
@@ -157,7 +156,7 @@ const RoomTypeManage = () => {
         bordered
         rowKey="_id"
         columns={columns}
-        dataSource={nameData}
+        dataSource={data?.data}
         loading={isLoading}
         pagination={paginationConfig}
       /> */}
@@ -170,25 +169,33 @@ const RoomTypeManage = () => {
           thêm mới
         </button>
 
-        <table className="border border-black border-solid text-center">
-          <thead>
-            <tr>
-              <th className="border border-black border-solid ">STT</th>
-              <th className="border border-black border-solid ">Name</th>
-              <th className="border border-black border-solid ">price</th>
-              <th className="border border-black border-solid ">
-                số lượng giường
+        <table className="border border-black border-solid">
+          <thead className="bg-[#fafafa] text-[14px] font-[600] py-2">
+            <tr className="">
+              <th className="border border-black border-solid py-2 bg-gray-200">
+                STT
               </th>
-              <th className="border border-black border-solid ">
-                số lượng người lớn
+              <th className="border border-black border-solid  bg-gray-200">
+                Name
               </th>
-              <th className="border border-black border-solid ">
-                số lượng Trẻ em
+              <th className="border border-black border-solid  bg-gray-200">
+                price
               </th>
-              <th className="border border-black border-solid ">
+              <th className="border border-black border-solid  bg-gray-200">
+                Số lượng giường
+              </th>
+              <th className="border border-black border-solid bg-gray-200 ">
+                Số lượng người lớn
+              </th>
+              <th className="border border-black border-solid  bg-gray-200">
+                Số lượng Trẻ em
+              </th>
+              <th className="border border-black border-solid  bg-gray-200">
                 Trạng thái phòng
               </th>
-              <th className="border border-black border-solid ">Hành Động</th>
+              <th className="border border-black border-solid  bg-gray-200">
+                Hành Động
+              </th>
             </tr>
           </thead>
           {data?.data?.map((items: any, index: number) => {
