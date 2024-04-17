@@ -1,4 +1,4 @@
-import qs from "query-string";
+// import qs from "query-string";
 import React, { useState } from "react";
 import { useGetOneRoomQuery } from "../../../api";
 import RoomDetailCard from "../HotelDetail/RoomDetailCardProps";
@@ -14,21 +14,28 @@ type ComboPriceCardProps = {
     id_hotel: string;
     images: { url: string }[];
     price: string;
+    id_roomType: { price: number };
   };
+  hiddenSearch: () => void;
 };
 
-const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
-  const [selectedRoom, setSelectedRoom] = useState<any | null>(null);
+const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
+  data,
+  hiddenSearch,
+}) => {
+  const [selectedRoom, setSelectedRoom] = useState<void | null>(null);
   const { data: dataRoom } = useGetOneRoomQuery(data._id);
 
   // xem chi tiết phòng
-  const openRoomDetail = (room: any) => {
+  const openRoomDetail = (room: void) => {
     setSelectedRoom(room);
+    hiddenSearch();
     document.body.classList.add("overflow-hidden");
   };
 
   const closeRoomDetail = () => {
     setSelectedRoom(null);
+    hiddenSearch();
     document.body.classList.remove("overflow-hidden");
   };
   return (
