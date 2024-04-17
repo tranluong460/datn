@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Service,
   Top,
@@ -5,7 +6,9 @@ import {
   Map,
   Between,
   Information,
+  Search,
 } from "../../../components";
+import Review from "../Review/Review";
 const HomePage = () => {
   return (
     <>
@@ -14,6 +17,10 @@ const HomePage = () => {
         <Service />
         <ComboPrice />
         <Between />
+
+        <div className="max-w-full">
+          <Review />
+        </div>
         <div className=" w-full">
           <Map />
         </div>

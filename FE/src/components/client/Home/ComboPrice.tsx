@@ -3,8 +3,21 @@ import { ComboPriceCard, Container } from "../..";
 import { useEffect, useState } from "react";
 import { useGetAllHotelQuery, useGetAllRoomQuery } from "../../../api";
 import { Loading } from "../../../pages";
+import { Search } from "../../../components/";
 
 const ComboPrice = () => {
+  // ẩn hiện thanh search
+
+  const [hiddenSearch, setHiddenSearch] = useState(false);
+  const handleHiddenSearch = () => {
+    if (hiddenSearch === true) {
+      setHiddenSearch(false);
+    } else {
+      setHiddenSearch(true);
+    }
+  };
+  // ! end ẩn hiện
+
   const { data: hotelData, isLoading } = useGetAllRoomQuery("");
   const [data, setData] = useState<any[]>([]);
 
@@ -31,6 +44,8 @@ const ComboPrice = () => {
   };
   return (
     <>
+      {hiddenSearch == false ? <Search /> : ""}
+
       <Container>
         <div className="mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-8 relative ">
           <div className="flex flex-col items-center mb-5 text-center md:mb-8">
@@ -50,7 +65,11 @@ const ComboPrice = () => {
                     key={room?._id}
                     className={`relative ${index === 1 ? "z-10" : ""}`}
                   >
-                    <ComboPriceCard data={room} key={index} />
+                    <ComboPriceCard
+                      data={room}
+                      key={index}
+                      hiddenSearch={handleHiddenSearch}
+                    />
                   </div>
                 ))
             ) : (

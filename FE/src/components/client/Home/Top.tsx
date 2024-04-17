@@ -61,10 +61,6 @@ const Top = () => {
               ))}
             </div>
           </div>
-
-          <div className="">
-            <Search />
-          </div>
         </div>
 
         <hr />

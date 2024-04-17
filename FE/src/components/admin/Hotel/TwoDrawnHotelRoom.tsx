@@ -34,7 +34,7 @@ const TwoDrawnHotelRoom = ({
                     {room.quantity}
                   </Descriptions.Item>
                   <Descriptions.Item label="Giá">
-                    {room.price.toLocaleString("vi-VN", {
+                    {room?.id_roomType?.price?.toLocaleString("vi-VN", {
                       style: "currency",
                       currency: "VND",
                     })}
