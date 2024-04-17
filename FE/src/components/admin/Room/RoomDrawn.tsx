@@ -44,7 +44,7 @@ const RoomDrawn = ({
     {
       key: "2",
       label: "Giá",
-      children: data?.data?.price.toLocaleString("vi-VN", {
+      children: data?.data?.id_roomType?.price?.toLocaleString("vi-VN", {
         style: "currency",
         currency: "VND",
       }),
