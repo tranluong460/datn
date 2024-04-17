@@ -189,33 +189,14 @@ const Search = () => {
     navigate(url);
   };
 
-  // TODO làm thanh ẩn hiện
-  // const [isVisible, setIsVisible] = useState(true);
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollTop =
-  //       window.pageYOffset || document.documentElement.scrollTop;
-  //     const isVissibleNow = scrollTop < window.innerHeight * 0.9;
-  //     setIsVisible(isVissibleNow);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
-  const [isVisible, setIsVisible] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleExpand = () => {
     setIsExpanded(true);
-    setIsVisible(false);
   };
 
   const handleCollapse = () => {
     setIsExpanded(false);
-    setIsVisible(true);
   };
 
   // FIXME test fix

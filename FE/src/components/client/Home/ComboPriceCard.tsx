@@ -2,11 +2,11 @@ import qs from "query-string";
 import React, { useState } from "react";
 import { useGetOneRoomQuery } from "../../../api";
 import RoomDetailCard from "../HotelDetail/RoomDetailCardProps";
-import { Button, DatePicker } from "antd";
-import dayjs from "dayjs";
-import moment from "moment";
-import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { Button } from "antd";
+// import dayjs from "dayjs";
+// import moment from "moment";
+// import { useNavigate } from "react-router-dom";
+// import { useCookies } from "react-cookie";
 
 type ComboPriceCardProps = {
   data: {
@@ -24,10 +24,12 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({ data }) => {
   // xem chi tiết phòng
   const openRoomDetail = (room: any) => {
     setSelectedRoom(room);
+    document.body.classList.add("overflow-hidden");
   };
 
   const closeRoomDetail = () => {
     setSelectedRoom(null);
+    document.body.classList.remove("overflow-hidden");
   };
   return (
     <>
