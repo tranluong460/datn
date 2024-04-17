@@ -73,7 +73,8 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
     setModalCancelRoom(false);
   };
 
-  const statusList = ["Chờ thanh toán", "Đã xác nhận"];
+  const statusList = ["Chờ thanh toán", "Đang xử lý"];
+
   return (
     <li className="flex items-center gap-x-6 py-5 border border-divideLight dark:border-divideDark pl-5 text-textLight2nd dark:text-textDark2nd">
       <div className="flex min-w-0 gap-x-4">

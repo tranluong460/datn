@@ -8,6 +8,7 @@ import {
   Information,
   Search,
 } from "../../../components";
+import Review from "../Review/Review";
 const HomePage = () => {
   return (
     <>
@@ -16,8 +17,10 @@ const HomePage = () => {
         <Service />
         <ComboPrice />
         <Between />
-        {/* <Search /> */}
 
+        <div className="max-w-full">
+          <Review />
+        </div>
         <div className=" w-full">
           <Map />
         </div>
