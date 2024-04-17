@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import customFetchBase from "./customFetchBase";
 

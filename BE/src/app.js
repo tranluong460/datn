@@ -15,6 +15,7 @@ import {
   ReviewRouter,
   RoomRouter,
   RoomTypeRouter,
+  VoucherRouter,
 } from "./router";
 
 dotenv.config();
@@ -34,8 +35,13 @@ app.use("/payment", PaymentRouter);
 app.use("/review", ReviewRouter);
 app.use("/room", RoomRouter);
 app.use("/room-type", RoomTypeRouter);
-app.use("/banner", BannerRouter)
+app.use("/banner", BannerRouter);
+app.use("/voucher", VoucherRouter);
 
 mongoose.connect(process.env.DB_URL);
+
+// process.on("uncaughtException", (err) => {
+//   console.log(err);
+// });
 
 export const viteNodeApp = app;

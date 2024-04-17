@@ -75,20 +75,40 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
 
   const statusList = ["Chờ thanh toán", "Đang xử lý"];
 
+  console.log(info);
+
   return (
     <li className="flex items-center gap-x-6 py-5 border border-divideLight dark:border-divideDark pl-5 text-textLight2nd dark:text-textDark2nd">
-      <div className="flex min-w-0 gap-x-4">
+      {/* <div className="flex min-w-0 gap-x-4">
         <div className="min-w-0 flex-auto flex gap-1">
           Phương thức thanh toán:
           <p className="text-sm font-semibold leading-6">
             {info.payment_method}
           </p>
         </div>
-      </div>
+      </div> */}
 
       <p className="text-sm leading-6">
-        Tổng giá:
+        Đã thanh toán:
         {info.total_price.toLocaleString("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        })}
+      </p>
+
+      <p className="text-sm leading-6">
+        Còn lại:
+        {(
+          info.id_payment.total_payment - info.id_payment.amount
+        ).toLocaleString("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        })}
+      </p>
+
+      <p className="text-sm leading-6">
+        Giá trị đơn hàng:
+        {info.id_payment.total_payment.toLocaleString("vi-VN", {
           style: "currency",
           currency: "VND",
         })}
@@ -148,7 +168,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
         </div>
         <p>Phương thức thanh toán: {info.payment_method}</p>
         <p>
-          Tổng giá:
+          Đã thanh toán:
           {info.total_price.toLocaleString("vi-VN", {
             style: "currency",
             currency: "VND",

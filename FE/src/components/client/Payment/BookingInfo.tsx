@@ -3,7 +3,10 @@ import moment from "moment";
 
 import { IRoom } from "../../../interface";
 import { useGetOneHotelQuery } from "../../../api";
-import { Checkbox } from "antd";
+import { Button, Checkbox, Input } from "antd";
+import { SearchProps } from "antd/es/input";
+
+const { Search } = Input;
 
 interface ListRoom {
   idRoom: string;
@@ -17,17 +20,32 @@ type BookingInfoProps = {
     total_price: number;
     list_room: ListRoom[];
   };
+  //eslint-disable-next-line
+  voucher: any;
+  totalPrice: number;
+  getCode: (value: string) => void;
+  setVoucher: () => void;
   isDepositAmount: boolean;
   setIsDepositAmount: () => void;
 };
 
-const BookingInfo = ({ booking, setIsDepositAmount }: BookingInfoProps) => {
+const BookingInfo = ({
+  totalPrice,
+  voucher,
+  isDepositAmount,
+  booking,
+  setIsDepositAmount,
+  getCode,
+  setVoucher,
+}: BookingInfoProps) => {
   const { id } = useParams<{ id: string | undefined }>();
   const { data } = useGetOneHotelQuery(id);
 
   const filteredRooms = data?.data.id_room.filter((room: IRoom) =>
     booking.list_room.some((rm) => room._id === rm.idRoom)
   );
+
+  const onSearch: SearchProps["onSearch"] = (value) => getCode(value);
 
   return (
     <>
@@ -97,12 +115,67 @@ const BookingInfo = ({ booking, setIsDepositAmount }: BookingInfoProps) => {
         <div className="relative mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
           Đặt cọc trước:
           <Checkbox onClick={setIsDepositAmount} />
+          {voucher && (
+            <div className="mt-3">
+              <div className="flex items-center justify-between">
+                <p>{voucher?.voucherCode}</p>
+                <div className="flex gap-1">
+                  <p>{moment(voucher?.issueDate).format("DD-MM-YYYY")}</p>
+                  đến
+                  <p>{moment(voucher?.expiryDate).format("DD-MM-YYYY")}</p>
+                </div>
+              </div>
+              <p>
+                {voucher?.discountValue.toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </p>
+              <p>{voucher?.description}</p>
+              <Button onClick={setVoucher}>Xóa</Button>
+            </div>
+          )}
+        </div>
+
+        <div className="relative mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
+          Voucher:
+          <Search onSearch={onSearch} enterButton="Kiểm tra" />
         </div>
 
         <div className="flex items-center justify-between text-base mb-4 font-bold">
-          <span className="text-textLight dark:text-textDark">Tổng giá:</span>
+          <span className="text-textLight dark:text-textDark">
+            Giảm voucher
+          </span>
+
           <span className="text-xl text-yellow-600">
-            {booking.total_price.toLocaleString("vi-VN", {
+            {(voucher?.discountValue || 0).toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </span>
+        </div>
+
+        <div className="flex items-center justify-between text-base mb-4 font-bold">
+          <div>
+            <span className="text-textLight dark:text-textDark">
+              Đặt cọc giữ phòng:
+            </span>
+
+            <p className="text-xs text-blue-400">
+              Đặt cọc chỉ cần thanh toán 30% số tiền tổng số tiền
+            </p>
+          </div>
+
+          {isDepositAmount ? "Có" : "Không"}
+        </div>
+
+        <div className="flex items-center justify-between text-base mb-4 font-bold">
+          <span className="text-textLight dark:text-textDark">
+            Tổng thanh toán:
+          </span>
+
+          <span className="text-xl text-yellow-600">
+            {totalPrice.toLocaleString("vi-VN", {
               style: "currency",
               currency: "VND",
             })}

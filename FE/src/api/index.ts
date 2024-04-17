@@ -50,6 +50,9 @@ import {
 // Provinces API
 import { provincesApi, useGetAllProvincesQuery } from "./provinces";
 
+// Voucher API
+import { useGetVoucherByCodeMutation, voucherApi } from "./voucher";
+
 // Room API
 import {
   roomApi,
@@ -104,6 +107,8 @@ export {
   useCheckCodeChangePasswordMutation,
   useChangePasswordMutation,
   useCheckMailCodeMutation,
+  voucherApi,
+  useGetVoucherByCodeMutation,
   bookingApi,
   useGetAllBookingQuery,
   useGetOneBookingQuery,

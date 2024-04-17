@@ -108,9 +108,11 @@ export const vnPayPaymentReturn = async (req, res) => {
     const vnp_ResponseCode = vnp_Params["vnp_ResponseCode"];
 
     if (vnp_ResponseCode !== "00") {
+      console.log(idPayment);
+
       const payment = await PaymentModel.findByIdAndUpdate(
         { _id: idPayment },
-        { status: "Thất bại" },
+        { status: "Thất bại", url_payment: "" },
         { new: true }
       );
 

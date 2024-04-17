@@ -4,10 +4,11 @@ import toast from "react-hot-toast";
 import { BillInfo, BookingInfo, Container } from "../../../components";
 import {
   useCreateBookingMutation,
+  useGetVoucherByCodeMutation,
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
 } from "../../../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const PaymentPage = () => {
   const [cookie, , removeCookie] = useCookies<string>();
@@ -17,25 +18,68 @@ const PaymentPage = () => {
   const [isDepositAmount, setIsDepositAmount] = useState(false);
   const [dataBooking, setDataBooking] = useState(cookie?.booking);
 
-  const toggleDepositAmount = () => {
-    setIsDepositAmount(!isDepositAmount);
+  const [getVoucher] = useGetVoucherByCodeMutation();
+  // eslint-disable-next-line
+  const [voucher, setVoucher] = useState<any>(null);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-    const newDataBooking = { ...dataBooking };
+  const calculateTotalPrice = (
+    basePrice: number,
+    voucherDiscount: number,
+    isDeposit: boolean
+  ): number => {
+    let totalPrice = basePrice;
 
-    if (!isDepositAmount) {
-      newDataBooking.total_price = (dataBooking.total_price * 30) / 100;
-    } else {
-      newDataBooking.total_price = cookie?.booking.total_price;
+    if (voucherDiscount !== 0) {
+      totalPrice -= voucherDiscount;
     }
 
-    setDataBooking(newDataBooking);
+    if (isDeposit) {
+      totalPrice = (totalPrice * 30) / 100;
+    }
+
+    return totalPrice;
+  };
+
+  const toggleGetVoucher = (value: string) => {
+    if (!value) return;
+    if (voucher) return toast.error("Bạn chỉ có thể sử dụng một voucher");
+
+    getVoucher({ code: value, idRoomType: dataBooking.list_room[0].idRoom })
+      // eslint-disable-next-line
+      .then((res: any) => {
+        if (res.data) {
+          toast.success(res?.data?.message);
+          setVoucher(res?.data?.data);
+
+          const newTotal = calculateTotalPrice(
+            cookie?.booking.total_price,
+            res?.data?.data.discountValue,
+            isDepositAmount
+          );
+
+          setTotalPrice(newTotal);
+        }
+
+        if (res?.error) toast.error(res?.error?.data?.message);
+      })
+      .catch(() => {
+        toast.error("Đã có lỗi xảy ra");
+      });
+  };
+
+  const toggleDepositAmount = () => {
+    setIsDepositAmount(!isDepositAmount);
   };
 
   const onToggleBooking = (method: string) => {
-    dataBooking.payment_method = method;
-    dataBooking.is_deposit_amount = isDepositAmount;
+    const newDataBooking = { ...dataBooking };
 
-    booking(dataBooking)
+    newDataBooking.payment_method = method;
+    newDataBooking.is_deposit_amount = isDepositAmount;
+    newDataBooking.total_price = totalPrice;
+
+    booking(newDataBooking)
       .unwrap()
       .then((response) => {
         toast.success(response.message);
@@ -45,7 +89,9 @@ const PaymentPage = () => {
 
         const dataPayment = {
           amount: total_price,
-          total_payment: dataBooking.total_price,
+          total_payment: voucher
+            ? dataBooking.total_price - voucher.discountValue
+            : dataBooking.total_price,
           bookingId: _id,
         };
 
@@ -74,6 +120,16 @@ const PaymentPage = () => {
       });
   };
 
+  useEffect(() => {
+    const newTotal = calculateTotalPrice(
+      cookie?.booking.total_price,
+      voucher?.discountValue || 0,
+      isDepositAmount
+    );
+
+    setTotalPrice(newTotal);
+  }, [cookie?.booking.total_price, voucher?.discountValue, isDepositAmount]);
+
   return (
     <>
       <Container>
@@ -89,9 +145,13 @@ const PaymentPage = () => {
               <BillInfo onToggleBooking={(value) => onToggleBooking(value)} />
 
               <BookingInfo
+                totalPrice={totalPrice}
+                voucher={voucher}
+                setVoucher={() => setVoucher(null)}
                 booking={dataBooking}
                 isDepositAmount={isDepositAmount}
                 setIsDepositAmount={toggleDepositAmount}
+                getCode={toggleGetVoucher}
               />
             </div>
           </div>

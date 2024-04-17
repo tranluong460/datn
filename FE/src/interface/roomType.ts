@@ -3,4 +3,5 @@ export interface IRoomType {
   name: string;
   createdAt: string;
   updatedAt: string;
+  price: number;
 }
