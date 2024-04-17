@@ -212,7 +212,7 @@ const Search = () => {
     <>
       {isExpanded && <div className="overlay" />}
       <button
-        className={`fixed text-black text-4xl top-8 right-72 z-[10] ${
+        className={`fixed text-black text-4xl top-8 right-72 z-[999] ${
           isExpanded ? "" : "hidden"
         }`}
         onClick={handleCollapse}
@@ -223,9 +223,9 @@ const Search = () => {
         onClick={handleExpand}
         className={`max-[1000px]:hidden max-[1000px]:grid max-[1100px]:grid-cols-[300px_240px_400px]  grid grid-cols-[400px_340px_560px] justify-start border ${
           checkin == "" ? "mt-2" : ""
-        } z-[10] border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
+        } z-50 border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white ${
           isExpanded
-            ? ` top-20 inset-x-0 z-50 transition-search`
+            ? ` top-20 inset-x-0 z-[999] transition-search`
             : `${
                 checkin == "" ? "left-[3%] bottom-10" : ""
               } transition-search-bottom inset-x-0`
@@ -283,7 +283,7 @@ const Search = () => {
           </div>
           {showAdditionalRooms && (
             <div
-              className={`absolute -left-6 top-full bg-white px-2 py-4 translate-x-2 z-[999'] shadow border-t-2 w-[273px] overflow-auto h-56 ${
+              className={`absolute -left-6 top-full bg-white px-2 py-4 translate-x-2 z-50 shadow border-t-2 w-[273px] overflow-auto h-56 ${
                 showAdditionalRooms ? "border-t-black border" : "border-none"
               } `}
             >
