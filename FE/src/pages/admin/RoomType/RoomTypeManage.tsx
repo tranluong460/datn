@@ -169,31 +169,31 @@ const RoomTypeManage = () => {
           thêm mới
         </button>
 
-        <table className="border border-black border-solid">
-          <thead className="bg-[#fafafa] text-[14px] font-[600] py-2">
+        <table className="border border-gray-500 border-solid text-center">
+          <thead className="bg-[#fafafa] text-[14px] py-2">
             <tr className="">
-              <th className="border border-black border-solid py-2 bg-gray-200">
+              <th className="border border-gray-300 border-solid py-3 bg-gray-200">
                 STT
               </th>
-              <th className="border border-black border-solid  bg-gray-200">
+              <th className="border border-gray-300 border-solid  bg-gray-200">
                 Name
               </th>
-              <th className="border border-black border-solid  bg-gray-200">
+              <th className="border border-gray-300 border-solid  bg-gray-200">
                 price
               </th>
-              <th className="border border-black border-solid  bg-gray-200">
+              <th className="border border-gray-300 border-solid  bg-gray-200">
                 Số lượng giường
               </th>
-              <th className="border border-black border-solid bg-gray-200 ">
+              <th className="border border-gray-300 border-solid bg-gray-200 ">
                 Số lượng người lớn
               </th>
-              <th className="border border-black border-solid  bg-gray-200">
+              <th className="border border-gray-300 border-solid  bg-gray-200">
                 Số lượng Trẻ em
               </th>
-              <th className="border border-black border-solid  bg-gray-200">
+              <th className="border border-gray-300 border-solid  bg-gray-200">
                 Trạng thái phòng
               </th>
-              <th className="border border-black border-solid  bg-gray-200">
+              <th className="border border-gray-300 border-solid  bg-gray-200">
                 Hành Động
               </th>
             </tr>
@@ -201,27 +201,27 @@ const RoomTypeManage = () => {
           {data?.data?.map((items: any, index: number) => {
             return (
               <>
-                <tbody>
+                <tbody className="pl-2">
                   <tr>
-                    <td className="border border-black border-solid ">
+                    <td className="border border-gray-300 border-solid">
                       {index + 1}
                     </td>
-                    <td className="border border-black border-solid ">
+                    <td className="border border-gray-300 border-solid ">
                       {items.name}
                     </td>
-                    <td className="border border-black border-solid ">
+                    <td className="border border-gray-300 border-solid ">
                       {items.price}
                     </td>
-                    <td className="border border-black border-solid ">
+                    <td className="border border-gray-300 border-solid ">
                       {items.bed}
                     </td>
-                    <td className="border border-black border-solid ">
+                    <td className="border border-gray-300 border-solid ">
                       {items.adults}
                     </td>
-                    <td className="border border-black border-solid ">
+                    <td className="border border-gray-300 border-solid ">
                       {items.children}
                     </td>
-                    <td className="border border-black border-solid">
+                    <td className="border border-gray-300 border-solid py-2">
                       <Space wrap>
                         <Select
                           defaultValue={items.status}
@@ -244,8 +244,11 @@ const RoomTypeManage = () => {
                         />
                       </Space>
                     </td>
-                    <td className="border border-black border-solid ">
-                      <button onClick={() => handleEditClick(items._id)}>
+                    <td className="border border-gray-300 border-solid ">
+                      <button
+                        onClick={() => handleEditClick(items._id)}
+                        className="shadow px-5 py-1 rounded-md hover:text-blue-500 hover:border-blue-500"
+                      >
                         Sửa
                       </button>
                     </td>
