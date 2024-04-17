@@ -17,7 +17,7 @@ import {
 dotenv.config();
 
 export const vnPayPayment = (req, res) => {
-  const { amount, bookingId } = req.body;
+  const { amount, bookingId, total_payment } = req.body;
 
   try {
     validateMiddleware(req, res, PaymentValidate, async () => {
@@ -35,6 +35,7 @@ export const vnPayPayment = (req, res) => {
       const data = {
         id_booking: bookingId,
         amount,
+        total_payment,
       };
 
       const payment = await PaymentModel.create(data);

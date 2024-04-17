@@ -3,6 +3,7 @@ import moment from "moment";
 
 import { IRoom } from "../../../interface";
 import { useGetOneHotelQuery } from "../../../api";
+import { Checkbox } from "antd";
 
 interface ListRoom {
   idRoom: string;
@@ -16,9 +17,11 @@ type BookingInfoProps = {
     total_price: number;
     list_room: ListRoom[];
   };
+  isDepositAmount: boolean;
+  setIsDepositAmount: () => void;
 };
 
-const BookingInfo = ({ booking }: BookingInfoProps) => {
+const BookingInfo = ({ booking, setIsDepositAmount }: BookingInfoProps) => {
   const { id } = useParams<{ id: string | undefined }>();
   const { data } = useGetOneHotelQuery(id);
 
@@ -89,6 +92,11 @@ const BookingInfo = ({ booking }: BookingInfoProps) => {
               );
             })}
           </div>
+        </div>
+
+        <div className="relative mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
+          Đặt cọc trước:
+          <Checkbox onClick={setIsDepositAmount} />
         </div>
 
         <div className="flex items-center justify-between text-base mb-4 font-bold">

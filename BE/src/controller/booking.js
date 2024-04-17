@@ -127,7 +127,7 @@ export const getBookingByUser = async (req, res) => {
 
 export const create = async (req, res) => {
   const user = req.user;
-  const { list_room, check_in, check_out } = req.body;
+  const { list_room, check_in, check_out, is_deposit_amount } = req.body;
 
   const roomIds = list_room.map((room) => room.idRoom);
 
@@ -211,6 +211,7 @@ export const create = async (req, res) => {
         check_out: req.body.check_out,
         total_price: req.body.total_price,
         city: req.body.city,
+        is_deposit_amount,
       });
 
       if (!data) {

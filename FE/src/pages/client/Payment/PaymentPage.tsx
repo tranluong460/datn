@@ -7,26 +7,45 @@ import {
   useVnPayPaymentMutation,
   useZaloPayPaymentMutation,
 } from "../../../api";
+import { useState } from "react";
 
 const PaymentPage = () => {
   const [cookie, , removeCookie] = useCookies<string>();
   const [booking] = useCreateBookingMutation();
   const [paymentVnPay] = useVnPayPaymentMutation();
   const [paymentZaloPay] = useZaloPayPaymentMutation();
+  const [isDepositAmount, setIsDepositAmount] = useState(false);
+  const [dataBooking, setDataBooking] = useState(cookie?.booking);
+
+  const toggleDepositAmount = () => {
+    setIsDepositAmount(!isDepositAmount);
+
+    const newDataBooking = { ...dataBooking };
+
+    if (!isDepositAmount) {
+      newDataBooking.total_price = (dataBooking.total_price * 30) / 100;
+    } else {
+      newDataBooking.total_price = cookie?.booking.total_price;
+    }
+
+    setDataBooking(newDataBooking);
+  };
 
   const onToggleBooking = (method: string) => {
-    const data = cookie?.booking;
-    data.payment_method = method;
+    dataBooking.payment_method = method;
+    dataBooking.is_deposit_amount = isDepositAmount;
 
-    booking(data)
+    booking(dataBooking)
       .unwrap()
       .then((response) => {
         toast.success(response.message);
         removeCookie("booking");
+
         const { _id, total_price, payment_method } = response.data;
 
         const dataPayment = {
           amount: total_price,
+          total_payment: dataBooking.total_price,
           bookingId: _id,
         };
 
@@ -69,7 +88,11 @@ const PaymentPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <BillInfo onToggleBooking={(value) => onToggleBooking(value)} />
 
-              <BookingInfo booking={cookie?.booking} />
+              <BookingInfo
+                booking={dataBooking}
+                isDepositAmount={isDepositAmount}
+                setIsDepositAmount={toggleDepositAmount}
+              />
             </div>
           </div>
         </div>
