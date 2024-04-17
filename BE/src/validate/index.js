@@ -10,8 +10,10 @@ import RoomValidate from "./room";
 import RoomTypeValidate from "./roomType";
 import infomationUser from "./infomationUser";
 import BannerValidate from "./banner";
+import VoucherValidate from "./voucher";
 
 export {
+  VoucherValidate,
   AmenitiesValidate,
   BillValidate,
   BookingValidate,
@@ -23,5 +25,5 @@ export {
   RoomValidate,
   RoomTypeValidate,
   infomationUser,
-  BannerValidate
+  BannerValidate,
 };

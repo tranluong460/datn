@@ -1,7 +1,7 @@
 import moment from "moment";
 import mongoose from "mongoose";
 
-import { BookingModel, RoomModel } from "../models";
+import { BookingModel, RoomModel, VoucherModel } from "../models";
 import { BookingValidate } from "../validate";
 import { validateMiddleware } from "../middleware";
 import {
@@ -127,7 +127,8 @@ export const getBookingByUser = async (req, res) => {
 
 export const create = async (req, res) => {
   const user = req.user;
-  const { list_room, check_in, check_out, is_deposit_amount } = req.body;
+  const { list_room, check_in, check_out, is_deposit_amount, id_voucher } =
+    req.body;
 
   const roomIds = list_room.map((room) => room.idRoom);
 
@@ -166,7 +167,7 @@ export const create = async (req, res) => {
 
       const roomBooking = await RoomModel.findById(roomIds);
 
-      if (bookings.length > roomBooking.quantity) {
+      if (bookings.length >= roomBooking.quantity) {
         return sendResponse(
           res,
           404,
@@ -202,6 +203,17 @@ export const create = async (req, res) => {
           404,
           "Bạn đã hủy quá nhiều đơn đặt phòng trong tháng này. Vui lòng thử lại sau."
         );
+      }
+
+      if (id_voucher) {
+        const voucher = await VoucherModel.findById(id_voucher);
+
+        const voucher_user_list = voucher.user_list;
+        const idu = req.user._id;
+
+        await VoucherModel.findByIdAndUpdate(id_voucher, {
+          user_list: [...voucher_user_list, idu],
+        });
       }
 
       const data = await BookingModel.create({

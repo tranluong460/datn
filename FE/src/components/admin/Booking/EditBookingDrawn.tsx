@@ -1,8 +1,6 @@
 import { useUpdateBookingMutation } from "../../../api";
 import { IBooking } from "../../../interface";
 import { Button, Form, Input, Modal, Select, Space, Spin, message } from "antd";
-import dayjs from "dayjs";
-import moment from "moment";
 
 type EditBookingDrawnProps = {
   loading: boolean;
@@ -19,30 +17,17 @@ const EditBookingDrawn = ({
 }: EditBookingDrawnProps) => {
   const [form] = Form.useForm();
   const [updateBooking, resultEdit] = useUpdateBookingMutation();
-  // console.log("ádf", dayjs());
-  const onFinish = (data: IBooking) => {
-    console.log("🚀 ~ onFinish ~ data:", data);
-    const checkDay = moment().format("YYYY-MM-DD");
-    const checkInDate = moment(data?.check_in).format("YYYY-MM-DD");
 
-    if (data.status === "Đã nhận phòng") {
-      if (checkInDate === checkDay) {
-        updateBooking(data)
-          .unwrap()
-          .then((response) => {
-            console.log("🚀 ~ .then ~ response:", response);
-            message.success(response.message);
-            onCancel();
-          })
-          .catch((error) => {
-            message.error(error.data.message);
-          });
-      } else {
-        message.error(
-          "Chưa đến ngày nhận phòng, không thể chuyển trạng thái đơn đặt phòng."
-        );
-      }
-    }
+  const onFinish = (data: IBooking) => {
+    updateBooking(data)
+      .unwrap()
+      .then((response) => {
+        message.success(response.message);
+        onCancel();
+      })
+      .catch((error) => {
+        message.error(error.data.message);
+      });
   };
 
   const statusOptionsMap: any = {

@@ -9,8 +9,10 @@ import RoomModel from "./room";
 import RoomTypeModel from "./roomType";
 import UserModel from "./user";
 import BannerModel from "./banner";
+import VoucherModel from "./voucher";
 
 export {
+  VoucherModel,
   AmenitiesModel,
   BillModel,
   BookingModel,
@@ -21,5 +23,5 @@ export {
   RoomModel,
   RoomTypeModel,
   UserModel,
-  BannerModel
+  BannerModel,
 };
