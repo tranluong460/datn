@@ -49,6 +49,20 @@ export const getVoucherByCode = async (req, res) => {
       return sendResponse(res, 404, "Không có thông tin voucher");
     }
 
+    const { issueDate, expiryDate } = voucher;
+
+    const currentDate = new Date();
+    const issueDateTime = new Date(issueDate);
+    const expiryDateTime = new Date(expiryDate);
+
+    if (currentDate > expiryDateTime) {
+      return sendResponse(res, 400, "Voucher đã hết hạn");
+    }
+
+    if (issueDateTime > currentDate) {
+      return sendResponse(res, 400, "Voucher chưa đến ngày được áp dụng");
+    }
+
     const room = await RoomModel.findById(idRoomType);
 
     if (room.id_roomType.toString() !== voucher.roomType._id.toString()) {
