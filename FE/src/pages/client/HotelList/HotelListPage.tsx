@@ -131,7 +131,7 @@ const HotelListPage = () => {
     };
 
     setCookie("booking", dataBooking, { path: "/" });
-    navigate(`/payment/660e0d209b3248744855da80`);
+    navigate(`/payment/661f928e1ca3c1911267f933`);
   };
 
   return (

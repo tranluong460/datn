@@ -18,6 +18,10 @@ const BookingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    deposit_amount: {
+      type: Number,
+      required: false,
+    },
     payment_method: {
       type: String,
       required: false,
