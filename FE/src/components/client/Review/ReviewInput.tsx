@@ -39,16 +39,16 @@ const ReviewInput = ({ data, userData }: any) => {
               <p className="mx-1"> {comment?.comment}</p>
             </div>
 
-            {userData?.data && userData?.data?._id == comment?.id_user?._id ? (
-              <button
-                className="bg-blue-500 p-1 px-2 text-[white] rounded-md mt-2"
-                onClick={() => removeReview(comment?._id)}
-              >
-                xóa bình luận
-              </button>
-            ) : (
-              ""
-            )}
+            {/* {userData?.data && userData?.data?._id == comment?.id_user?._id ? (
+                <button
+                  className="bg-blue-500 p-1 px-2 text-[white] rounded-md mt-2"
+                  onClick={() => removeReview(comment?._id)}
+                >
+                  xóa bình luận
+                </button>
+              ) : (
+                ""
+              )} */}
           </div>
         );
       })}
