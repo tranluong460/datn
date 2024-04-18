@@ -156,13 +156,19 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
             />
             <p className="text-red-500 font-bold">{errorMessage}</p>
 
-            <Button
-              type="primary"
-              className="text-white bg-blue-500 mr-3 mb-2 w-full"
-              onClick={handleOk}
-            >
-              Đặt phòng
-            </Button>
+            {room?.quantity > 0 ? (
+              <Button
+                type="primary"
+                className="text-white bg-blue-500 mr-3 mb-2 w-full"
+                onClick={handleOk}
+              >
+                Đặt phòng
+              </Button>
+            ) : (
+              <Button className="text-black bg-white-500 mr-3 mb-2 w-full">
+                Hết phòng
+              </Button>
+            )}
           </div>
         </div>
 

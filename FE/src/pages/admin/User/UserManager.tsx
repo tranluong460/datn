@@ -180,12 +180,6 @@ const UserManager = () => {
               )}
             </>
           )}
-
-          {role !== "Admin" ? (
-            <Button className="ml-3">Thay đổi chức vụ</Button>
-          ) : (
-            ""
-          )}
         </>
       ),
     },
