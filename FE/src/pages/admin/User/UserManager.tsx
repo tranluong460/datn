@@ -235,7 +235,12 @@ const UserManager = () => {
       />
 
       {info2 && (
-        <Modal title="Basic Modal" open={openModal} footer={null}>
+        <Modal
+          title="Basic Modal"
+          open={openModal}
+          onCancel={() => setOpenModal(false)}
+          footer={null}
+        >
           <Form form={form} onFinish={onFinish}>
             <Form.Item name="role" label="Vai trò">
               <Select placeholder="Chọn vai trò" allowClear>
