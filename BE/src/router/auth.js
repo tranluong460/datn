@@ -17,11 +17,13 @@ import {
   resetPassword,
   updateInfo,
   checkMailRegister,
+  changeRoleUser,
 } from "../controller/auth";
 import { isAdminMiddleware, loginMiddleware } from "../middleware";
 
 const router = express.Router();
 
+router.post("/change-role-user/:id", isAdminMiddleware, changeRoleUser);
 router.get("/", isAdminMiddleware, getAll);
 router.post("/info-user/:id", isAdminMiddleware, getInfoUserById);
 router.post("/register", register);

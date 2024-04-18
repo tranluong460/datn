@@ -23,6 +23,29 @@ import {
 
 dotenv.config();
 
+export const changeRoleUser = async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        role: req.body.role,
+      },
+      { new: true }
+    );
+
+    if (req.user.role !== "Admin")
+      return sendResponse(res, 404, "Bạn không có quyền");
+
+    if (!user) return sendResponse(res, 404, "Thất bại");
+
+    return sendResponse(res, 200, "Thành công", user);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
 export const getAll = async (req, res) => {
   try {
     const userList = await UserModel.find()

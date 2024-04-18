@@ -1,9 +1,24 @@
 import { useState } from "react";
 
 import type { ColumnsType } from "antd/es/table";
-import { Button, Table, Tag, Popconfirm, message, Tooltip } from "antd";
+import {
+  Button,
+  Table,
+  Tag,
+  Popconfirm,
+  message,
+  Tooltip,
+  Space,
+  Modal,
+  Select,
+  Form,
+  Input,
+} from "antd";
+
+const { Option } = Select;
 
 import {
+  useChangeRoleUserMutation,
   useGetAllUserQuery,
   useGetOneUserMutation,
   useLockUserMutation,
@@ -12,9 +27,11 @@ import { InfoUserDrawn } from "../../../components";
 import { IUser } from "../../../interface";
 
 const UserManager = () => {
+  const [form] = Form.useForm();
   const { data, isLoading } = useGetAllUserQuery("");
   const [lockAccount] = useLockUserMutation();
   const [infoUser, resultGetInfo] = useGetOneUserMutation();
+  const [changeRole, resultChangeRole] = useChangeRoleUserMutation();
 
   const key0 = "lockAccountMutation";
   const key1 = "getInfoMutation";
@@ -22,6 +39,10 @@ const UserManager = () => {
 
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState();
+  const [openModal, setOpenModal] = useState(false);
+
+  const [infoUser2] = useGetOneUserMutation();
+  const [info2, setInfo2] = useState();
 
   const onSubmit = (id: string) => {
     messageApi.open({
@@ -57,6 +78,24 @@ const UserManager = () => {
       .unwrap()
       .then((response) => {
         setInfo(response.data);
+      })
+      .catch((error) => {
+        messageApi.open({
+          key: key1,
+          type: "error",
+          content: error.data.message,
+          duration: 2,
+        });
+      });
+  };
+
+  const getInfo2 = (id: string) => {
+    setOpenModal(true);
+
+    infoUser2(id)
+      .unwrap()
+      .then((response) => {
+        setInfo2(response.data);
       })
       .catch((error) => {
         messageApi.open({
@@ -119,7 +158,7 @@ const UserManager = () => {
               {isLockAccount ? (
                 <Button disabled>Tài khoản đã bị khóa</Button>
               ) : (
-                <>
+                <Space>
                   <Popconfirm
                     placement="left"
                     title="Bạn có chắc chắn muốn thực hiện hành động này không?"
@@ -131,7 +170,9 @@ const UserManager = () => {
                   >
                     <Button danger>Khóa tài khoản</Button>
                   </Popconfirm>
-                </>
+
+                  <Button onClick={() => getInfo2(_id)}>Cập nhật</Button>
+                </Space>
               )}
             </>
           )}
@@ -139,6 +180,34 @@ const UserManager = () => {
       ),
     },
   ];
+
+  const onFinish = (values) => {
+    const data = {
+      id: info2._id,
+      ...values,
+    };
+
+    changeRole(data)
+      .unwrap()
+      .then((response) => {
+        messageApi.open({
+          key: key1,
+          type: "success",
+          content: response.message,
+          duration: 2,
+        });
+
+        setOpenModal(false);
+      })
+      .catch((error) => {
+        messageApi.open({
+          key: key1,
+          type: "error",
+          content: error.data.message,
+          duration: 2,
+        });
+      });
+  };
 
   const [currentItem, setCurrentItem] = useState(10);
   const paginationConfig = {
@@ -164,6 +233,33 @@ const UserManager = () => {
         loading={isLoading}
         pagination={paginationConfig}
       />
+
+      {info2 && (
+        <Modal title="Basic Modal" open={openModal} footer={null}>
+          <Form form={form} onFinish={onFinish}>
+            <Form.Item name="role" label="Vai trò">
+              <Select placeholder="Chọn vai trò" allowClear>
+                <Option value="Admin">Admin</Option>
+                <Option value="Reservation Manager">Reservation Manager</Option>
+                <Option value="Human Resources Manager">
+                  Human Resources Manager
+                </Option>
+                <Option value="Room Manager">Room Manager</Option>
+                <Option value="Facilities Manager">Facilities Manager</Option>
+                <Option value="User">User</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item>
+              <Space>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Space>
+            </Form.Item>
+          </Form>
+        </Modal>
+      )}
 
       {info && (
         <InfoUserDrawn

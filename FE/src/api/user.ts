@@ -30,6 +30,18 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["User"],
     }),
+    changeRoleUser: builder.mutation({
+      query: (body) => {
+        const { id, ...data } = body;
+        return {
+          url: `auth/change-role-user/${id}`,
+          method: "POST",
+          body: data,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
@@ -37,4 +49,5 @@ export const {
   useGetAllUserQuery,
   useLockUserMutation,
   useGetOneUserMutation,
+  useChangeRoleUserMutation,
 } = userApi;

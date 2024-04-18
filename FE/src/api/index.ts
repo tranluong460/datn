@@ -79,6 +79,7 @@ import {
   useGetAllUserQuery,
   useGetOneUserMutation,
   useLockUserMutation,
+  useChangeRoleUserMutation,
 } from "./user";
 
 // review api
@@ -144,6 +145,7 @@ export {
   useGetAllUserQuery,
   useGetOneUserMutation,
   useLockUserMutation,
+  useChangeRoleUserMutation,
   reviewApi,
   useGetAllReviewQuery,
   useGetOneReviewQuery,
