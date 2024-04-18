@@ -227,7 +227,7 @@ const Search = () => {
           isExpanded
             ? ` top-20 inset-x-0 z-[999] transition-search`
             : `${
-                checkin == "" ? "left-[3%] bottom-10" : ""
+                checkin == "" ? "bottom-10" : ""
               } transition-search-bottom inset-x-0`
         }`}
 

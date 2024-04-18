@@ -15,6 +15,7 @@ type ComboPriceCardProps = {
     images: { url: string }[];
     price: string;
     id_roomType: { price: number };
+    quantity: number;
   };
   hiddenSearch: () => void;
 };
@@ -62,13 +63,22 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
           </div>
 
           <div>
-            <Button
-              type="primary"
-              onClick={() => openRoomDetail(dataRoom?.data)}
-              className="text-white bg-blue-500 mr-3"
-            >
-              Đặt phòng
-            </Button>
+            {data?.quantity > 0 ? (
+              <Button
+                type="primary"
+                onClick={() => openRoomDetail(dataRoom?.data)}
+                className="text-white bg-blue-500 mr-3"
+              >
+                Đặt phòng
+              </Button>
+            ) : (
+              <Button
+                // onClick={() => openRoomDetail(dataRoom?.data)}
+                className=" mr-3"
+              >
+                Hết phòng
+              </Button>
+            )}
           </div>
         </div>
         {/* </a> */}
