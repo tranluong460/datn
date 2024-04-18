@@ -17,7 +17,7 @@ import {
   useGetTotalStatusQuery,
 } from "../../../api";
 import { useEffect, useState } from "react";
-import { DatePicker } from "antd";
+import { Button, DatePicker } from "antd";
 import moment from "moment";
 import { RecentRooms, Roomsheavilybooked } from "../../../components";
 
@@ -70,6 +70,7 @@ const DashboardManage = () => {
     "#33CC99",
     "#FF3300",
   ];
+
   const RADIAN = Math.PI / 180;
 
   const renderCustomizedLabel = ({
@@ -102,8 +103,24 @@ const DashboardManage = () => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-gray-300">
-          <p className="label">{`Tổng : ${payload[0].value}`}</p>
-          <p className="label">{`Thời gian : ${label}`}</p>
+          <p className="label">{`Tổng : ${payload[0].value.toLocaleString(
+            "vi-VN",
+            {
+              style: "currency",
+              currency: "VND",
+            }
+          )}`}</p>
+          {demo === "date" && (
+            <p className="label">{`Thời gian : ${moment(label).format(
+              "DD/MM/YYYY"
+            )}`}</p>
+          )}
+
+          {demo === "month" && (
+            <p className="label">{`Thời gian : ${moment(label).format(
+              "MM/YYYY"
+            )}`}</p>
+          )}
         </div>
       );
     }
@@ -161,19 +178,9 @@ const DashboardManage = () => {
         <RangePicker onChange={onChange} className="mb-10" allowClear={false} />
 
         <div className="flex gap-1 mb-4">
-          <button
-            className="font-bold text-xl"
-            onClick={() => setStatic("date")}
-          >
-            Theo ngày
-          </button>
+          <Button onClick={() => setStatic("date")}>Theo ngày</Button>
 
-          <button
-            className="font-bold text-xl"
-            onClick={() => setStatic("month")}
-          >
-            Theo tháng
-          </button>
+          <Button onClick={() => setStatic("month")}>Theo tháng</Button>
         </div>
       </div>
 
@@ -185,16 +192,21 @@ const DashboardManage = () => {
                 <XAxis
                   dataKey="name"
                   stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
+                  fontSize={8}
+                  tickLine={true}
                   axisLine={false}
                 />
                 <YAxis
                   stroke="#888888"
-                  fontSize={12}
-                  tickLine={false}
+                  fontSize={8}
+                  tickLine={true}
                   axisLine={true}
-                  tickFormatter={(value) => value}
+                  tickFormatter={(value) =>
+                    value.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })
+                  }
                 />
                 <Tooltip content={<CustomTooltip />} />
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
@@ -216,16 +228,21 @@ const DashboardManage = () => {
                 <XAxis
                   dataKey="name"
                   stroke="#888888"
-                  fontSize={12}
+                  fontSize={8}
                   tickLine={false}
                   axisLine={false}
                 />
                 <YAxis
                   stroke="#888888"
-                  fontSize={12}
+                  fontSize={8}
                   tickLine={false}
                   axisLine={true}
-                  tickFormatter={(value) => value}
+                  tickFormatter={(value) =>
+                    value.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })
+                  }
                 />
                 <Tooltip content={<CustomTooltip />} />
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
@@ -261,12 +278,14 @@ const DashboardManage = () => {
                 fill="#8884d8"
                 dataKey="value"
               >
-                {totalStatus?.data.map((_entry: any, index: any) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
+                {totalStatus?.data.map((_entry: any, index: any) => {
+                  return (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  );
+                })}
               </Pie>
               <Tooltip />
               <Legend />
