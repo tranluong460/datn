@@ -146,17 +146,21 @@ const UserManager = () => {
       render: (_, { _id, isLockAccount, role }) => (
         <>
           {role === "Admin" ? (
-            <Tooltip
-              placement="left"
-              color="red"
-              title="Không thể thực hiện hành động trên tài khoản này"
-            >
-              <p className="text-red-500 cursor-pointer">Administrator</p>
-            </Tooltip>
+            <>
+              <Tooltip
+                placement="left"
+                color="red"
+                title="Không thể thực hiện hành động trên tài khoản này"
+              >
+                <p className="text-red-500 cursor-pointer">Administrator</p>
+              </Tooltip>
+            </>
           ) : (
             <>
               {isLockAccount ? (
-                <Button disabled>Tài khoản đã bị khóa</Button>
+                <>
+                  <Button disabled>Tài khoản đã bị khóa</Button>
+                </>
               ) : (
                 <Space>
                   <Popconfirm

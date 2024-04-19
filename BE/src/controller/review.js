@@ -55,9 +55,15 @@ export const getOne = async (req, res) => {
 export const create = async (req, res) => {
   try {
     validateMiddleware(req, res, ReviewValidate, async () => {
+      const id_user = req.user._id;
+
+      const exitReview = await ReviewModel.findOne({ id_user });
+
+      if (exitReview) return sendResponse(res, 404, "Chỉ được đánh giá 1 lần");
+
       const data = await ReviewModel.create({
         ...req.body,
-        id_user: req.user._id,
+        id_user,
       });
 
       if (!data) {
@@ -93,7 +99,6 @@ export const remove = async (req, res) => {
     if (req.user._id != data.id_user._id.toString()) {
       return sendResponse(res, 403, "Không có quyền xóa đánh giá");
     }
-
 
     await ReviewModel.findByIdAndDelete(data._id);
     await HotelModel.findOneAndUpdate(

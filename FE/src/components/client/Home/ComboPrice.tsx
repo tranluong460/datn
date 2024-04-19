@@ -6,8 +6,6 @@ import { Loading } from "../../../pages";
 import { Search } from "../../../components/";
 
 const ComboPrice = () => {
-  // ẩn hiện thanh search
-
   const [hiddenSearch, setHiddenSearch] = useState(false);
   const handleHiddenSearch = () => {
     if (hiddenSearch === true) {
@@ -16,7 +14,6 @@ const ComboPrice = () => {
       setHiddenSearch(true);
     }
   };
-  // ! end ẩn hiện
 
   const { data: hotelData, isLoading } = useGetAllRoomQuery("");
   const [data, setData] = useState<any[]>([]);
@@ -42,6 +39,7 @@ const ComboPrice = () => {
     const prevIndex = Math.max(0, startIndex - 1);
     setStartIndex(prevIndex);
   };
+
   return (
     <>
       {hiddenSearch == false ? <Search /> : ""}
@@ -60,18 +58,17 @@ const ComboPrice = () => {
             {hotelData?.data?.length > 0 ? (
               hotelData?.data
                 .slice(startIndex, startIndex + 4)
-                .map((room: any, index: number) => (
-                  <div
-                    key={room?._id}
-                    className={`relative ${index === 1 ? "z-[5]" : ""}`}
-                  >
-                    <ComboPriceCard
-                      data={room}
-                      key={index}
-                      hiddenSearch={handleHiddenSearch}
-                    />
-                  </div>
-                ))
+                .map((room: any, index: number) => {
+                  return (
+                    <div key={room?._id} className={`relative`}>
+                      <ComboPriceCard
+                        data={room}
+                        key={index}
+                        hiddenSearch={handleHiddenSearch}
+                      />
+                    </div>
+                  );
+                })
             ) : (
               <p>Không có phòng nào</p>
             )}
@@ -80,7 +77,7 @@ const ComboPrice = () => {
           <button
             className={`absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-full transition duration-300 ${
               startIndex === 0 ? "bg-gray-50 opacity-0" : ""
-            } `}
+            } z-[3]`}
             onClick={prevRooms}
           >
             <svg
