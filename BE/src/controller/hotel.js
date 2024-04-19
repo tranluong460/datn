@@ -140,36 +140,38 @@ export const update = async (req, res) => {
     return sendResponse(res, 400, "ID không hợp lệ");
   }
 
+  const newOldImage = req.fields.oldImage.split(',').filter(url => url.trim() !== '');
+
+  const newnewOld = newOldImage.map((img) => ({ url: img }));
+
   try {
     // Lấy dữ liệu hiện tại của khách sạn từ cơ sở dữ liệu
     const currentData = await HotelModel.findById(req.params.id);
     let newData = { ...req.fields }; // Sao chép dữ liệu từ request
 
     // Kiểm tra xem có ảnh mới được tải lên không
-    if (req.files && Object.keys(req.files).length > 0) {
-      const imagesArray = [];
-      for (const field in req.files) {
-        if (req.files.hasOwnProperty(field)) {
-          const file = req.files[field];
-          imagesArray.push({
-            name: field,
-            url: file.path,
-          });
-        }
+    const imagesArray = [];
+    for (const field in req.files) {
+      if (req.files.hasOwnProperty(field)) {
+        const file = req.files[field];
+        imagesArray.push({
+          name: field,
+          url: file.path,
+        });
       }
-
-      // Cập nhật ảnh mới chỉ khi có ảnh mới được tải lên
-      const newImages = await Promise.all(imagesArray.map(uploadImageToCloudinary));
-
-      // Tạo mảng mới chứa thông tin URL của ảnh mới và ảnh cũ
-      const images = [...currentData.images, ...newImages.map(imageUrl => ({ url: imageUrl }))];
-
-      // Cập nhật trường ảnh trong dữ liệu mới
-      newData = {
-        ...newData,
-        images: images
-      };
     }
+
+    // Cập nhật ảnh mới chỉ khi có ảnh mới được tải lên
+    const newImages = await Promise.all(imagesArray.map(uploadImageToCloudinary));
+
+    // Tạo mảng mới chứa thông tin URL của ảnh mới và ảnh cũ
+    const images = [...newnewOld, ...newImages.map(imageUrl => ({ url: imageUrl }))];
+
+    // Cập nhật trường ảnh trong dữ liệu mới
+    newData = {
+      ...newData,
+      images: images
+    };
 
     if (req.fields.id_amenities) {
       const id_amenities = req.fields.id_amenities.split(",");

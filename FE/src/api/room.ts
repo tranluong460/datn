@@ -48,6 +48,7 @@ export const roomApi = createApi({
     updateRoom: builder.mutation({
       query: (data) => {
         const { _id, ...newData } = data;
+        const oldImage = newData.images.map((image: any) => image.url);
 
         const formData = new FormData();
 
@@ -61,6 +62,8 @@ export const roomApi = createApi({
             formData.append(key, data[key]);
           }
         });
+
+        formData.append("oldImage", oldImage);
 
         return {
           url: `room/${_id}`,
