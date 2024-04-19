@@ -5,7 +5,7 @@ import { VoucherValidate } from "../validate";
 
 export const getAll = async (req, res) => {
   try {
-    const voucherList = await VoucherModel.find();
+    const voucherList = await VoucherModel.find().populate('roomType');
 
     if (!voucherList || voucherList.length === 0) {
       return sendResponse(res, 404, "Không có danh sách voucher");

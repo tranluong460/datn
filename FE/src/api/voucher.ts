@@ -15,7 +15,28 @@ export const voucherApi = createApi({
       }),
       invalidatesTags: ["Voucher"],
     }),
+    getAll: builder.query({
+      query: () => ({
+        url: `voucher`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["Voucher"],
+    }),
+    createVoucher: builder.mutation({
+      query: (data) => ({
+        url: `voucher`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["Voucher"],
+    }),
   }),
 });
 
-export const { useGetVoucherByCodeMutation } = voucherApi;
+export const {
+  useGetVoucherByCodeMutation,
+  useGetAllQuery,
+  useCreateVoucherMutation,
+} = voucherApi;

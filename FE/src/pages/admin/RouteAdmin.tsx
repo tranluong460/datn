@@ -10,6 +10,7 @@ import {
   RoomManager,
   RoomTypeManage,
   UserManager,
+  VoucherManage,
 } from "..";
 import CommentManage from "./Comment/CommentManage";
 
@@ -26,6 +27,8 @@ const RouteAdmin = () => {
           <Route path="/user-manager" element={<UserManager />} />
           <Route path="/roomType-manager" element={<RoomTypeManage />} />
           <Route path="/comment-manager" element={<CommentManage />} />
+          <Route path="/voucher-manager" element={<VoucherManage />} />
+
         </Route>
 
         <Route path="/*" element={<Page404 />} />

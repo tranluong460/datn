@@ -4,7 +4,6 @@ import { HotelModel } from "../models";
 import { HotelValidate } from "../validate";
 import { validateFormMiddleware } from "../middleware";
 import { sendResponse, uploadImageToCloudinary } from "../utils";
-import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
 
 export const getAll = async (req, res) => {
   try {
@@ -144,6 +143,7 @@ export const update = async (req, res) => {
   try {
     // Lấy dữ liệu hiện tại của khách sạn từ cơ sở dữ liệu
     const currentData = await HotelModel.findById(req.params.id);
+    let newData = { ...req.fields }; // Sao chép dữ liệu từ request
 
     // Kiểm tra xem có ảnh mới được tải lên không
     if (req.files && Object.keys(req.files).length > 0) {
@@ -157,33 +157,26 @@ export const update = async (req, res) => {
           });
         }
       }
-      await Promise.all(currentData.images.map(deleteImageFromCloudinary))
+
       // Cập nhật ảnh mới chỉ khi có ảnh mới được tải lên
       const newImages = await Promise.all(imagesArray.map(uploadImageToCloudinary));
 
-      // Tạo mảng mới chứa thông tin URL của ảnh mới
-      const images = newImages.map((imageUrl, index) => ({
-        url: imageUrl,
-      }));
+      // Tạo mảng mới chứa thông tin URL của ảnh mới và ảnh cũ
+      const images = [...currentData.images, ...newImages.map(imageUrl => ({ url: imageUrl }))];
 
-      // Cập nhật dữ liệu với ảnh mới
-      req.fields.images = images;
-    } else {
-      // Nếu không có ảnh mới, giữ nguyên URL của ảnh cũ từ cơ sở dữ liệu
-      req.fields.images = currentData.images;
+      // Cập nhật trường ảnh trong dữ liệu mới
+      newData = {
+        ...newData,
+        images: images
+      };
     }
 
     if (req.fields.id_amenities) {
       const id_amenities = req.fields.id_amenities.split(",");
       const amenities = id_amenities.map((item) => new mongoose.Types.ObjectId(item));
-      req.fields.id_amenities = amenities;
+      newData.id_amenities = amenities;
     }
 
-    // validateFormMiddleware(req, res, HotelValidate, async () => {
-    // Tạo đối tượng newData chứa thông tin mới
-    const newData = {
-      ...req.fields,
-    };
     // Cập nhật dữ liệu trong cơ sở dữ liệu
     const data = await HotelModel.findByIdAndUpdate(req.params.id, newData, {
       new: true,
@@ -193,10 +186,9 @@ export const update = async (req, res) => {
       return sendResponse(res, 404, "Cập nhật khách sạn thất bại");
     }
 
-    return sendResponse(res, 200, "Cập nhật khách sạn thành công", data);
-    // });
+    return sendResponse(res, 200, "Cập nhật phòng thành công", data);
   } catch (error) {
     console.error(error);
-    return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật khách sạn");
+    return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật phòng");
   }
 };

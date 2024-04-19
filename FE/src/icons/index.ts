@@ -34,6 +34,7 @@ import {
   AiOutlineSearch,
   AiOutlineMenu,
   AiFillHome,
+  AiOutlineTag,
 } from "react-icons/ai";
 
 export {
@@ -69,4 +70,5 @@ export {
   BsFillMoonStarsFill,
   AiOutlineMenu,
   AiFillHome,
+  AiOutlineTag,
 };
