@@ -26,6 +26,7 @@ import {
   AiOutlineLogout,
   AiOutlineSetting,
   AiFillHome,
+  AiOutlineTag
 } from "../../icons";
 import { Logo } from "../../components";
 import { useInfoAccountQuery, useLogoutAccountMutation } from "../../api";
@@ -76,35 +77,35 @@ const BaseAdmin = () => {
     getItem("Dashboard", "/admin", <MdOutlineDashboardCustomize />),
     (data.data.role === "Admin" &&
       getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />)) ||
-      null,
+    null,
     (roomRole.includes(data.data.role) &&
       getItem(
         "Quản lý phòng",
         "/admin/room-manager",
         <MdOutlineRoomPreferences />
       )) ||
-      null,
+    null,
     (roomRole.includes(data.data.role) &&
       getItem(
         "Quản lý loại phòng",
         "/admin/roomType-manager",
         <AiOutlineHdd />
       )) ||
-      null,
+    null,
     (facilitiesRole.includes(data.data.role) &&
       getItem(
         "Quản lý tiện ích",
         "/admin/amenities-manager",
         <PiLightbulbFilament />
       )) ||
-      null,
+    null,
     (humanRole.includes(data.data.role) &&
       getItem(
         "Quản lý người dùng",
         "/admin/user-manager",
         <AiOutlineUser />
       )) ||
-      null,
+    null,
     getItem("Quản lý bình luận", "/admin/comment-manager", <AiOutlineUser />),
     (reservationRole.includes(data.data.role) &&
       getItem(
@@ -112,7 +113,14 @@ const BaseAdmin = () => {
         "/admin/booking-manager",
         <TbBrandBooking />
       )) ||
-      null,
+    null,
+    (humanRole.includes(data.data.role) &&
+      getItem(
+        "Quản lý voucher",
+        "/admin/voucher-manager",
+        <AiOutlineTag />
+      )) ||
+    null,
   ];
 
   // eslint-disable-next-line

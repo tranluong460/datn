@@ -10,6 +10,7 @@ import RoomManager from "./admin/Room/RoomManager";
 import RoomTypeManage from "./admin/RoomType/RoomTypeManage";
 import UserManager from "./admin/User/UserManager";
 import CommentManager from "./admin/Comment/CommentManage";
+import VoucherManage from "./admin/Voucher/VoucherManage";
 
 // Auth
 import RouteAuth from "./auth/RouteAuth";
@@ -52,6 +53,7 @@ export {
   RoomTypeManage,
   UserManager,
   CommentManager,
+  VoucherManage,
   LoadingAll,
   RouteAuth,
   BaseAuth,

@@ -1,7 +1,7 @@
 import { validateFormMiddleware } from "../middleware";
 import { BannerModel } from "../models";
 import { sendResponse, uploadImageToCloudinary } from "../utils";
-import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
+// import { deleteImageFromCloudinary } from "../utils/upImagesUtils";
 import { BannerValidate } from "../validate";
 export const create = async (req, res) => {
     try {
@@ -38,7 +38,7 @@ export const update = async (req, res) => {
         }
         // Nếu có file mới được tải lên, thực hiện xóa hình ảnh cũ trên Cloudinary
         if (req.files && req.files.url) {
-            await deleteImageFromCloudinary(existingBanner.url);
+            // await deleteImageFromCloudinary(existingBanner.url);
 
             // Tải lên hình ảnh mới và cập nhật đường link trong cơ sở dữ liệu
             const newImageUrl = await uploadImageToCloudinary({
