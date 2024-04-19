@@ -21,6 +21,7 @@ import {
   useChangeRoleUserMutation,
   useGetAllUserQuery,
   useGetOneUserMutation,
+  useInfoAccountQuery,
   useLockUserMutation,
 } from "../../../api";
 import { InfoUserDrawn } from "../../../components";
@@ -32,6 +33,7 @@ const UserManager = () => {
   const [lockAccount] = useLockUserMutation();
   const [infoUser, resultGetInfo] = useGetOneUserMutation();
   const [changeRole, resultChangeRole] = useChangeRoleUserMutation();
+  const { data: user } = useInfoAccountQuery("");
 
   const key0 = "lockAccountMutation";
   const key1 = "getInfoMutation";
@@ -42,8 +44,8 @@ const UserManager = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const [infoUser2] = useGetOneUserMutation();
-  const [info2, setInfo2] = useState();
 
+  const [info2, setInfo2] = useState();
   const onSubmit = (id: string) => {
     messageApi.open({
       key: key0,
@@ -172,10 +174,15 @@ const UserManager = () => {
                     okType="danger"
                     cancelText="Hủy"
                   >
-                    <Button danger>Khóa tài khoản</Button>
+                    {user?.data?.role == "Admin" ? (
+                      <div className="flex gap-2">
+                        <Button danger>Khóa tài khoản</Button>
+                        <Button onClick={() => getInfo2(_id)}>Cập nhật</Button>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </Popconfirm>
-
-                  <Button onClick={() => getInfo2(_id)}>Cập nhật</Button>
                 </Space>
               )}
             </>
