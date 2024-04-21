@@ -51,6 +51,9 @@ export const hotelApi = createApi({
     updateHotel: builder.mutation({
       query: (data) => {
         const { _id, ...newData } = data;
+
+        const oldImage = newData.images.map((image: any) => image.url);
+
         const formData = new FormData();
         Object.keys(newData).forEach((key) => {
           if (key === "images" && Array.isArray(data[key])) {
@@ -62,6 +65,8 @@ export const hotelApi = createApi({
             formData.append(key, data[key]);
           }
         });
+
+        formData.append("oldImage", oldImage);
 
         return {
           url: `hotel/${_id}`,
