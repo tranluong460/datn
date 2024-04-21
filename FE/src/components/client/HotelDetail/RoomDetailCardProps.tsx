@@ -156,7 +156,7 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
             />
             <p className="text-red-500 font-bold">{errorMessage}</p>
 
-            {room?.quantity > 0 ? (
+            {room?.id_roomType.status !== "Không được áp dụng" ? (
               <Button
                 type="primary"
                 className="text-white bg-blue-500 mr-3 mb-2 w-full"
@@ -166,7 +166,7 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
               </Button>
             ) : (
               <Button className="text-black bg-white-500 mr-3 mb-2 w-full">
-                Hết phòng
+                Hiện tại không thể đặt phòng này
               </Button>
             )}
           </div>

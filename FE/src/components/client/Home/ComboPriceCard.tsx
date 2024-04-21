@@ -63,7 +63,7 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
           </div>
 
           <div>
-            {data?.quantity > 0 ? (
+            {dataRoom?.data?.id_roomType?.status !== "Không được áp dụng" ? (
               <Button
                 type="primary"
                 onClick={() => openRoomDetail(dataRoom?.data)}
@@ -76,7 +76,7 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
                 // onClick={() => openRoomDetail(dataRoom?.data)}
                 className=" mr-3"
               >
-                Hết phòng
+                không thể đặt
               </Button>
             )}
           </div>
