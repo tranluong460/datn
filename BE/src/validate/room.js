@@ -38,6 +38,15 @@ const roomValidate = joi.object({
     .string()
     .required()
     .messages(validationErrors("Id loại phòng")),
+  list_rooms: joi
+    .array()
+    .min(1)
+    .required()
+    .items(
+      joi.object({
+        room: joi.number().required().messages(validationErrors('Số phòng'))
+      })
+    ).messages(validationErrors('Số phòng'))
 });
 
 export default roomValidate;
