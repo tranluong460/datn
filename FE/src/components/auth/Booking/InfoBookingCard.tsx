@@ -5,14 +5,25 @@ import { IBooking } from "../../../interface";
 import {
   useCheckStatusZaloPayMutation,
   useUpdateBookingMutation,
+  useUpdateInfoBookingMutation,
 } from "../../../api";
 import { useState } from "react";
+
+// !
+import type { FormProps } from "antd";
+import { Form, Input } from "antd";
+type FieldType = {
+  name?: string;
+  phone?: string;
+  cmt?: string;
+};
 
 type InfoBookingCardProps = {
   info: IBooking;
 };
 
 const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
+  console.log(info);
   const [errorCheckBox, setErrorCheckBox] = useState("");
   const [isCheckBoxChecked, setIsCheckBoxChecked] = useState(false);
 
@@ -62,6 +73,37 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
 
   const handleCancel = () => {
     setModalVisible(false);
+  };
+
+  // sủa thông tin thanh toán
+  const [updateAbate] = useUpdateInfoBookingMutation();
+  const [modalAbate, setModalAbate] = useState(false);
+  const showModalAbate = () => {
+    setModalAbate(true);
+  };
+
+  const handleCancelAbate = () => {
+    setModalAbate(false);
+  };
+
+  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+    console.log("Success:", values);
+    const data = { _id: info?._id, ...values };
+    console.log(data);
+    updateAbate(data)
+      .unwrap()
+      .then((response) => {
+        toast.success(response.message);
+      })
+      .catch((error) => {
+        toast.error(error.data.message);
+      });
+  };
+
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
+    errorInfo
+  ) => {
+    console.log("Failed:", errorInfo);
   };
 
   // tắt hiện hủy đặt phòng
@@ -138,7 +180,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
             <p className="text-sm leading-6">
               Còn lại:
               {(
-                info.id_payment.total_payment - info.id_payment.amount
+                info?.id_payment?.total_payment - info?.id_payment?.amount
               ).toLocaleString("vi-VN", {
                 style: "currency",
                 currency: "VND",
@@ -147,7 +189,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
 
             <p className="text-sm leading-6">
               Giá trị đơn hàng:
-              {info.id_payment.total_payment.toLocaleString("vi-VN", {
+              {info?.id_payment?.total_payment.toLocaleString("vi-VN", {
                 style: "currency",
                 currency: "VND",
               })}
@@ -156,15 +198,15 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
             <div>
               <p>
                 Trạng thái thanh toán:{" "}
-                {info.payment_status ? "Đã thanh toán" : "Chưa thanh toán"}{" "}
-                {info.is_deposit_amount ? "đặt cọc" : ""}
+                {info?.payment_status ? "Đã thanh toán" : "Chưa thanh toán"}{" "}
+                {info?.is_deposit_amount ? "đặt cọc" : ""}
               </p>
 
-              <p>Trạng thái đơn đặt phòng: {info.status}</p>
+              <p>Trạng thái đơn đặt phòng: {info?.status}</p>
             </div>
 
-            {info.payment_method === "Zalo Pay" &&
-              info.status === "Chờ thanh toán" && (
+            {info?.payment_method === "Zalo Pay" &&
+              info?.status === "Chờ thanh toán" && (
                 <button
                   onClick={toggleCheckStatusZaloPay}
                   className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
@@ -202,17 +244,17 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
               <p>Phương thức thanh toán: {info.payment_method}</p>
               <p>
                 Đã thanh toán:
-                {info.total_price.toLocaleString("vi-VN", {
+                {info?.total_price.toLocaleString("vi-VN", {
                   style: "currency",
                   currency: "VND",
                 })}
               </p>
-              <p>Nhận phòng: {moment(info.check_in).format("DD/MM/YYYY")}</p>
-              <p>Trả phòng: {moment(info.check_out).format("DD/MM/YYYY")}</p>
-              <p>Trạng thái: {info.status}</p>
+              <p>Nhận phòng: {moment(info?.check_in).format("DD/MM/YYYY")}</p>
+              <p>Trả phòng: {moment(info?.check_out).format("DD/MM/YYYY")}</p>
+              <p>Trạng thái: {info?.status}</p>
             </Modal>
 
-            {statusList.includes(info.status) && (
+            {statusList.includes(info?.status) && (
               <>
                 <Button danger onClick={showCancelRoom}>
                   Hủy đặt phòng
@@ -270,6 +312,77 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
                 Thanh toán
               </a>
             )}
+          </div>
+
+          {/* cập nhật thông tin nhận phòng */}
+          <div className="mt-1">
+            <button
+              onClick={showModalAbate}
+              className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
+            >
+              Sửa thông tin thánh toán
+            </button>
+
+            <Modal
+              title="Cập nhật thông tin thánh toán"
+              visible={modalAbate}
+              onCancel={handleCancelAbate}
+              footer={null}
+            >
+              <Form
+                name="basic"
+                labelCol={{ span: 8 }}
+                wrapperCol={{ span: 16 }}
+                style={{ maxWidth: 600 }}
+                initialValues={{ remember: true }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+              >
+                <Form.Item<FieldType>
+                  label="Tên"
+                  name="name"
+                  rules={[
+                    { required: true, message: "Vui lòng nhập tên của bạn!" },
+                  ]}
+                >
+                  <Input defaultValue={info?.info?.name} />
+                </Form.Item>
+
+                <Form.Item<FieldType>
+                  label="Số điện thoại"
+                  name="phone"
+                  rules={[
+                    { required: true, message: "vui lòng nhập số điện thoại!" },
+                    {
+                      pattern: /^(036|037)\d{7}$/,
+                      message: "Số điện thoại phải đủ 10 số và đầu 036 - 037!",
+                    },
+                  ]}
+                >
+                  <Input defaultValue={info?.info?.phone} />
+                </Form.Item>
+
+                <Form.Item<FieldType>
+                  label="Cmt"
+                  name="cmt"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Vui lòng nhập số chứng minh thư!",
+                    },
+                  ]}
+                >
+                  <Input defaultValue={info?.info?.cmt} />
+                </Form.Item>
+
+                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                  <Button type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Modal>
           </div>
         </div>
       </div>
