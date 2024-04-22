@@ -275,7 +275,7 @@ export const updateInfoBooking = async (req, res) => {
         info: {
           name: req.body.name,
           phone: req.body.phone,
-          cmt: req.body.phone,
+          cmt: req.body.cmt,
           update: true,
         },
       },
