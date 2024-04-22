@@ -40,8 +40,8 @@ app.use("/voucher", VoucherRouter);
 
 mongoose.connect(process.env.DB_URL);
 
-// process.on("uncaughtException", (err) => {
-//   console.log(err);
-// });
+process.on("uncaughtException", (err) => {
+  console.log(err);
+});
 
 export const viteNodeApp = app;
