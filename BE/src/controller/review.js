@@ -95,8 +95,9 @@ export const remove = async (req, res) => {
       path: "id_user",
       select: "_id",
     });
-
-    if (req.user._id != data.id_user._id.toString()) {
+    console.log("🚀 ~ remove ~ req:", req.user.role);
+    console.log(data.id_user._id);
+    if (req.user.role !== "Admin") {
       return sendResponse(res, 403, "Không có quyền xóa đánh giá");
     }
 
