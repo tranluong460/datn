@@ -69,6 +69,14 @@ export const create = async (req, res) => {
     );
     req.fields.id_amenities = amenities;
   }
+  if (req.fields.list_rooms) {
+    const list_rooms = req.fields.list_rooms.split(",");
+
+    const list_room = list_rooms.map((item) => ({
+      room: item,
+    }));
+    req.fields.list_rooms = list_room;
+  }
 
   try {
     validateFormMiddleware(req, res, RoomValidate, async () => {
@@ -109,10 +117,9 @@ export const update = async (req, res) => {
     return sendResponse(res, 400, "ID không hợp lệ");
   }
 
-  const newOldImage = req.fields.oldImage.split(',').filter(url => url.trim() !== '');
+  const newOldImage = req.fields.oldImage?.split(',')?.filter(url => url?.trim() !== '');
 
-  const newnewOld = newOldImage.map((img) => ({ url: img }));
-
+  const newnewOld = newOldImage?.map((img) => ({ url: img }));
 
   try {
     // Lấy dữ liệu hiện tại của khách sạn từ cơ sở dữ liệu
@@ -132,22 +139,31 @@ export const update = async (req, res) => {
       }
     }
 
+
+    const datL = req.fields.list_rooms.split(",");
+
+    const list_rooms = datL.map((r) => ({ room: Number(r) }));
+
     // Cập nhật ảnh mới chỉ khi có ảnh mới được tải lên
-    const newImages = await Promise.all(imagesArray.map(uploadImageToCloudinary));
+    const newImages = await Promise.all(
+      imagesArray.map(uploadImageToCloudinary)
+    );
 
     // Tạo mảng mới chứa thông tin URL của ảnh mới và ảnh cũ
-    const images = [...newnewOld, ...newImages.map(imageUrl => ({ url: imageUrl }))];
+    const images = [...newnewOld, ...newImages.map((imageUrl) => ({ url: imageUrl }))];
 
     // Cập nhật trường ảnh trong dữ liệu mới
     newData = {
       ...newData,
-      images: images
+      list_rooms,
+      images: images,
     };
-
 
     if (req.fields.id_amenities) {
       const id_amenities = req.fields.id_amenities.split(",");
-      const amenities = id_amenities.map((item) => new mongoose.Types.ObjectId(item));
+      const amenities = id_amenities.map(
+        (item) => new mongoose.Types.ObjectId(item)
+      );
       newData.id_amenities = amenities;
     }
 
@@ -160,14 +176,12 @@ export const update = async (req, res) => {
       return sendResponse(res, 404, "Cập nhật khách sạn thất bại");
     }
 
-
     return sendResponse(res, 200, "Cập nhật phòng thành công", data);
   } catch (error) {
     console.error(error);
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi cập nhật phòng");
   }
 };
-
 
 export const search = async (req, res) => {
   try {
@@ -194,7 +208,7 @@ export const search = async (req, res) => {
 
     // Tính tổng số lượng của từng loại phòng đã đặt trong các đơn đặt phòng trùng
     const bookedRoomQuantities = {};
-    booked.forEach(booking => {
+    booked.forEach((booking) => {
       const roomId = booking.list_room.idRoom.toString();
       if (bookedRoomQuantities[roomId]) {
         bookedRoomQuantities[roomId] += booking.list_room.quantity;
@@ -216,24 +230,26 @@ export const search = async (req, res) => {
 
     // Lọc các phòng theo số lượng người lớn và trẻ em
     if (adults && children) {
-      rooms = rooms.filter(room =>
-        room.id_roomType &&
-        room.id_roomType.adults >= adults &&
-        room.id_roomType.children >= children
+      rooms = rooms.filter(
+        (room) =>
+          room.id_roomType &&
+          room.id_roomType.adults >= adults &&
+          room.id_roomType.children >= children
       );
     }
 
     // Lọc các phòng theo mức giá
     if (minPrice && maxPrice) {
-      rooms = rooms.filter(room =>
-        room.id_roomType &&
-        room.id_roomType.price >= minPrice &&
-        room.id_roomType.price <= maxPrice
+      rooms = rooms.filter(
+        (room) =>
+          room.id_roomType &&
+          room.id_roomType.price >= minPrice &&
+          room.id_roomType.price <= maxPrice
       );
     }
 
     // Lọc các phòng có sẵn dựa trên số lượng đã đặt và số lượng còn lại
-    const availableRooms = rooms.filter(room => {
+    const availableRooms = rooms.filter((room) => {
       const roomId = room._id.toString();
       const bookedQuantity = bookedRoomQuantities[roomId] || 0;
       const remainingQuantity = room.quantity - bookedQuantity;
@@ -246,4 +262,3 @@ export const search = async (req, res) => {
     return sendResponse(res, 500, "Lỗi server");
   }
 };
-

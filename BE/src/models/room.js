@@ -15,7 +15,18 @@ const roomSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-
+    list_rooms: [
+      {
+        room: {
+          type: Number,
+          required: true,
+        },
+        status: {
+          type: Boolean,
+          default: false,
+        }
+      }
+    ],
     status: {
       type: String,
       default: "Có sẵn",
