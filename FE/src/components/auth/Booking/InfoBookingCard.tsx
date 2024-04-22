@@ -117,7 +117,12 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
 
   const statusList = ["Chờ thanh toán", "Đang xử lý"];
 
-  console.log(info);
+  const status = [
+    "Chưa thanh toán",
+    "Đang xử lý",
+    "Chờ thanh toán",
+    "Đã xác nhận",
+  ];
 
   return (
     <div className="flex flex-col gap-x-6 py-5 border border-divideLight dark:border-divideDark pl-5 text-textLight2nd dark:text-textDark2nd">
@@ -315,75 +320,81 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
           </div>
 
           {/* cập nhật thông tin nhận phòng */}
-          <div className="mt-1">
-            <button
-              onClick={showModalAbate}
-              className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
-            >
-              Sửa thông tin thánh toán
-            </button>
-
-            <Modal
-              title="Cập nhật thông tin thánh toán"
-              visible={modalAbate}
-              onCancel={handleCancelAbate}
-              footer={null}
-            >
-              <Form
-                name="basic"
-                labelCol={{ span: 8 }}
-                wrapperCol={{ span: 16 }}
-                style={{ maxWidth: 600 }}
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-                autoComplete="off"
+          {status?.includes(info?.id_payment?.status) && (
+            <div className="mt-1">
+              <button
+                onClick={showModalAbate}
+                className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
               >
-                <Form.Item<FieldType>
-                  label="Tên"
-                  name="name"
-                  rules={[
-                    { required: true, message: "Vui lòng nhập tên của bạn!" },
-                  ]}
-                >
-                  <Input defaultValue={info?.info?.name} />
-                </Form.Item>
+                Sửa thông tin thánh toán
+              </button>
 
-                <Form.Item<FieldType>
-                  label="Số điện thoại"
-                  name="phone"
-                  rules={[
-                    { required: true, message: "vui lòng nhập số điện thoại!" },
-                    {
-                      pattern: /^(036|037)\d{7}$/,
-                      message: "Số điện thoại phải đủ 10 số và đầu 036 - 037!",
-                    },
-                  ]}
+              <Modal
+                title="Cập nhật thông tin thánh toán"
+                visible={modalAbate}
+                onCancel={handleCancelAbate}
+                footer={null}
+              >
+                <Form
+                  name="basic"
+                  labelCol={{ span: 8 }}
+                  wrapperCol={{ span: 16 }}
+                  style={{ maxWidth: 600 }}
+                  initialValues={{ remember: true }}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
+                  autoComplete="off"
                 >
-                  <Input defaultValue={info?.info?.phone} />
-                </Form.Item>
+                  <Form.Item<FieldType>
+                    label="Tên"
+                    name="name"
+                    rules={[
+                      { required: true, message: "Vui lòng nhập tên của bạn!" },
+                    ]}
+                  >
+                    <Input defaultValue={info?.info?.name} />
+                  </Form.Item>
 
-                <Form.Item<FieldType>
-                  label="Cmt"
-                  name="cmt"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng nhập số chứng minh thư!",
-                    },
-                  ]}
-                >
-                  <Input defaultValue={info?.info?.cmt} />
-                </Form.Item>
+                  <Form.Item<FieldType>
+                    label="Số điện thoại"
+                    name="phone"
+                    rules={[
+                      {
+                        required: true,
+                        message: "vui lòng nhập số điện thoại!",
+                      },
+                      {
+                        pattern: /^(036|037)\d{7}$/,
+                        message:
+                          "Số điện thoại phải đủ 10 số và đầu 036 - 037!",
+                      },
+                    ]}
+                  >
+                    <Input defaultValue={info?.info?.phone} />
+                  </Form.Item>
 
-                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                  <Button type="primary" htmlType="submit">
-                    Submit
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Modal>
-          </div>
+                  <Form.Item<FieldType>
+                    label="Cmt"
+                    name="cmt"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Vui lòng nhập số chứng minh thư!",
+                      },
+                    ]}
+                  >
+                    <Input defaultValue={info?.info?.cmt} />
+                  </Form.Item>
+
+                  <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Button type="primary" htmlType="submit">
+                      Submit
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </Modal>
+            </div>
+          )}
         </div>
       </div>
     </div>
