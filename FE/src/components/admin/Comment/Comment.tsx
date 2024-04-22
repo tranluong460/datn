@@ -29,26 +29,26 @@ const Comment = () => {
     setOpenHotelDrawn(false);
   };
 
-  const showDeleteConfirm = (itemId: string) => {
-    setDeletingItemId(itemId);
-    setDeleteModalVisible(true);
+  // const showDeleteConfirm = (itemId: string) => {
+  //   setDeletingItemId(itemId);
+  //   setDeleteModalVisible(true);
+  // };
+
+  const handleDeleteConfirm = (id: string) => {
+    deleteReview(id)
+      .unwrap()
+      .then(() => {
+        message.success("Đã xóa bình luận thành công");
+        setDeleteModalVisible(false);
+      })
+      .catch((error) => {
+        message.error(error.data.message);
+      });
   };
 
-  // const handleDeleteConfirm = () => {
-  //   deleteReview(deletingItemId)
-  //     .unwrap()
-  //     .then(() => {
-  //       message.success("Đã xóa bình luận thành công");
-  //       setDeleteModalVisible(false);
-  //     })
-  //     .catch((error) => {
-  //       message.error(error.data.message);
-  //     });
-  // };
-
-  // const handleDeleteCancel = () => {
-  //   setDeleteModalVisible(false);
-  // };
+  const handleDeleteCancel = () => {
+    setDeleteModalVisible(false);
+  };
 
   const columns: ColumnsType<IHotel> = [
     {
@@ -94,17 +94,17 @@ const Comment = () => {
         return <span>{moment(createdAt).format("YYYY-MM-DD | HH:mm:ss")}</span>;
       },
     },
-    // {
-    //   title: "Hành động",
-    //   key: "action",
-    //   render: (_, { _id }) => (
-    //     <>
-    //       <Space>
-    //         <Button onClick={() => showDeleteConfirm(_id)}>Xóa</Button>
-    //       </Space>
-    //     </>
-    //   ),
-    // },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (_, { _id }) => (
+        <>
+          <Space>
+            <Button onClick={() => handleDeleteConfirm(_id)}>Xóa</Button>
+          </Space>
+        </>
+      ),
+    },
   ];
 
   const [currentItem, setCurrentItem] = useState(10);
