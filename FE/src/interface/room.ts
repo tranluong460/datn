@@ -8,6 +8,7 @@ export interface IRoom {
   status: string;
   description: string;
   id_amenities: IAmenities[];
+  list_rooms: [];
   id_hotel: IHotel;
   id_roomType: IRoomType;
   createdAt: string;

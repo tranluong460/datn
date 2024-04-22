@@ -76,6 +76,15 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
               <InputNumber className="w-full" min={1} />
             </Form.Item>
           </Col>
+          <Col span={12}>
+            <Form.Item
+              name="list_rooms"
+              label="Số phòng"
+              rules={[{ required: true, message: "Vui lòng nhập số phòng!" }]}
+            >
+              <Input className="w-full" />
+            </Form.Item>
+          </Col>
 
           <Col span={12}>
             <Form.Item

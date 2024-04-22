@@ -63,6 +63,17 @@ const RoomManager = () => {
       render: (id_hotel) => id_hotel,
     },
     {
+      title: "Số phòng",
+      dataIndex: "list_rooms",
+      key: "list_rooms",
+      render: (list_rooms) =>
+        list_rooms?.map((room: any) => (
+          <span key={room._id} className="mx-0.5">
+            <span>{room.room}</span>,
+          </span>
+        )),
+    },
+    {
       title: "Khách sạn",
       dataIndex: "id_hotel",
       key: "id_hotel",
