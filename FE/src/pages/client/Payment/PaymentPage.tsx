@@ -72,12 +72,14 @@ const PaymentPage = () => {
     setIsDepositAmount(!isDepositAmount);
   };
 
-  const onToggleBooking = (method: string) => {
+  const onToggleBooking = (method: string, form: any) => {
     const newDataBooking = { ...dataBooking };
 
     newDataBooking.payment_method = method;
     newDataBooking.is_deposit_amount = isDepositAmount;
     newDataBooking.total_price = totalPrice;
+    newDataBooking.info = form;
+
     if (voucher) {
       newDataBooking.id_voucher = voucher._id;
     }
@@ -145,7 +147,9 @@ const PaymentPage = () => {
 
           <div className="block mt-0">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <BillInfo onToggleBooking={(value) => onToggleBooking(value)} />
+              <BillInfo
+                onToggleBooking={(value, form) => onToggleBooking(value, form)}
+              />
 
               <BookingInfo
                 totalPrice={totalPrice}

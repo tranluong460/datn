@@ -3,13 +3,14 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 type BillInfoProps = {
-  onToggleBooking: (value: string) => void;
+  onToggleBooking: (value: string, form: any) => void;
 };
 
 const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
   const [show, setShow] = useState(false);
   const [method, setMethod] = useState("");
   const [agree, setAgree] = useState(false);
+  const [form, setForm] = useState({ name: "", cmt: "", phone: "" });
 
   const handleMethodChange = (name: string) => {
     setMethod(name);
@@ -17,6 +18,15 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
 
   const onToggle = () => {
     setShow(!show);
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
   };
 
   const toggleBooking = () => {
@@ -28,7 +38,10 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
       return toast.error("Bạn chưa đồng ý với điều khoản!");
     }
 
-    onToggleBooking(method);
+    if (form.cmt == "" || form.name == "" || form.phone == "")
+      return toast.error("Vui lòng điền form");
+
+    onToggleBooking(method, form);
   };
 
   const data = [
@@ -60,6 +73,36 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
         <span className="font-semibold text-textLight2nd dark:text-textDark2nd">
           Đã bao gồm ăn sáng
         </span>
+      </div>
+
+      <div className="rounded-md p-6 mb-5 bg-light dark:bg-dark">
+        <div>
+          <span> Tên</span>
+          <input
+            type="string"
+            name="name"
+            className="mt-2 w-full px-4 py-2 rounded-xl transition outline-none border-2 disabled:opacity-70 disabled:cursor-not-allowed border-divideLight dark:border-divideDark bg-light dark:bg-dark text-textLight2nd dark:text-textDark2nd"
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <span>Số điện thoại</span>
+          <input
+            type="string"
+            name="phone"
+            className="mt-2 w-full px-4 py-2 rounded-xl transition outline-none border-2 disabled:opacity-70 disabled:cursor-not-allowed border-divideLight dark:border-divideDark bg-light dark:bg-dark text-textLight2nd dark:text-textDark2nd"
+            onChange={onChange}
+          />
+        </div>
+        <div>
+          <span>Chứng minh thư</span>
+          <input
+            type="string"
+            name="cmt"
+            className="mt-2 w-full px-4 py-2 rounded-xl transition outline-none border-2 disabled:opacity-70 disabled:cursor-not-allowed border-divideLight dark:border-divideDark bg-light dark:bg-dark text-textLight2nd dark:text-textDark2nd"
+            onChange={onChange}
+          />
+        </div>
       </div>
 
       <div className="rounded-md p-6 mb-5 bg-light dark:bg-dark">

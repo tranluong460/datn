@@ -7,6 +7,17 @@ const bookingValidate = joi.object({
   check_out: joi.date().required().messages(validationErrors("Ngày trả phòng")),
   id_voucher: joi.string(),
   total_price: joi.number().required().messages(validationErrors("Tổng giá")),
+  info: joi
+    .object({
+      name: joi.string().required(),
+      phone: joi
+        .string()
+        .pattern(/^(0|\+84)[3|5|7|8|9][0-9]{8}$/)
+        .required(),
+      cmt: joi.string().required(),
+    })
+    .required(),
+
   is_deposit_amount: joi
     .boolean()
     .required()

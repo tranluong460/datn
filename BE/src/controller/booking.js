@@ -223,6 +223,7 @@ export const create = async (req, res) => {
         check_out: req.body.check_out,
         total_price: req.body.total_price,
         city: req.body.city,
+        info: req.body.info,
         is_deposit_amount,
       });
 
