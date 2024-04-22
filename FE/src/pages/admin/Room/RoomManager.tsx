@@ -57,7 +57,7 @@ const RoomManager = () => {
       ),
     },
     {
-      title: "Số lượng phòng còn trống",
+      title: "Số lượng phòng",
       dataIndex: "quantity",
       key: "quantity",
       render: (id_hotel) => id_hotel,

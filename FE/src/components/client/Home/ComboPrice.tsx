@@ -20,7 +20,7 @@ const ComboPrice = () => {
 
   useEffect(() => {
     if (isLoading) {
-      return;
+      <div>Đang load dữ liệu</div>;
     }
     if (hotelData && hotelData.data) {
       setData(hotelData?.data);
