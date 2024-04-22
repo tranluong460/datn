@@ -13,6 +13,11 @@ export interface IBooking {
   createdAt: string;
   updatedAt: string;
   id_payment: IPaymentBooking;
+  info: {
+    name: string;
+    phone: string;
+    cmt: string;
+  };
 }
 
 export interface IRoomBooking {

@@ -115,6 +115,16 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
           </div>
         </div>
 
+        <div>
+          <span>Thông tin thanh toán</span>
+
+          <div>
+            <p> Tên: {info?.info?.name}</p>
+            <p> Số điện thoại: {info?.info?.phone}</p>
+            <p> CMT: {info?.info?.cmt}</p>
+          </div>
+        </div>
+
         <div className="w-[340px]">
           <div className="mb-4 pr-10">
             <p className="text-sm leading-6">
