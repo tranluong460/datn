@@ -33,6 +33,19 @@ export const bookingApi = createApi({
       }),
       invalidatesTags: ["Booking"],
     }),
+    updateInfoBooking: builder.mutation({
+      query: (data) => {
+        const { _id, ...newData } = data;
+
+        return {
+          url: `/booking/${_id}`,
+          method: "PUT",
+          body: newData,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Booking"],
+    }),
     updateBooking: builder.mutation({
       query: (data) => {
         const { _id, ...newData } = data;
@@ -120,4 +133,5 @@ export const {
   useCalculateTotalAmountDayMutation,
   useCalculateTotalAmountMonthMutation,
   useGetTotalStatusQuery,
+  useUpdateInfoBookingMutation,
 } = bookingApi;

@@ -6,6 +6,22 @@ const BookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    info: {
+      _id: false,
+      name: {
+        type: String,
+      },
+      phone: {
+        type: String,
+      },
+      cmt: {
+        type: String,
+      },
+      update: {
+        type: Boolean,
+        default: false,
+      },
+    },
     check_in: {
       type: Date,
       required: true,

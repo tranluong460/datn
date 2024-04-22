@@ -223,6 +223,7 @@ export const create = async (req, res) => {
         check_out: req.body.check_out,
         total_price: req.body.total_price,
         city: req.body.city,
+        info: req.body.info,
         is_deposit_amount,
       });
 
@@ -243,6 +244,45 @@ export const create = async (req, res) => {
 
       return sendResponse(res, 200, "Đặt phòng thành công", data);
     });
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
+export const updateInfoBooking = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!mongoose.isValidObjectId(id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
+    if (req.body.name === "" || req.body.phone === "" || req.body.cmt === "") {
+      return sendResponse(res, 400, "Vui lòng điền đầy đủ thông tin");
+    }
+
+    const bk = await BookingModel.findById(id);
+
+    if (bk.info.update) {
+      return sendResponse(res, 400, "Chỉ được cập nhật thông tin 1 lần");
+    }
+
+    const booking = await BookingModel.findByIdAndUpdate(
+      id,
+      {
+        info: {
+          name: req.body.name,
+          phone: req.body.phone,
+          cmt: req.body.cmt,
+          update: true,
+        },
+      },
+      { new: true }
+    );
+
+    return sendResponse(res, 200, "Cập nhật thành công", booking);
   } catch (error) {
     console.error(error);
 
