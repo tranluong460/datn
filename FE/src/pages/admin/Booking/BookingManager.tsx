@@ -135,6 +135,70 @@ const BookingManager = () => {
         ),
     },
     {
+      title: "Chứng minh thư",
+      dataIndex: "info",
+      key: "cmt",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        confirm,
+        clearFilters,
+      }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={searchInput}
+            placeholder="Search CMT"
+            value={selectedKeys[0]}
+            onChange={(e) =>
+              setSelectedKeys(e.target.value ? [e.target.value] : [])
+            }
+            onPressEnter={() => handleSearch(selectedKeys as string[], confirm)}
+            style={{ marginBottom: 8, display: "block" }}
+          />
+          <Space>
+            <Button
+              type="default"
+              onClick={() => onClickSearch(confirm, selectedKeys)}
+              icon={<SearchOutlined />}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Search
+            </Button>
+            <Button
+              onClick={() => {
+                setSearchText("");
+                onClearSearch(clearFilters, confirm);
+              }}
+              size="small"
+              style={{ width: 90 }}
+            >
+              Reset
+            </Button>
+          </Space>
+        </div>
+      ),
+      filterIcon: (filtered: boolean) => (
+        <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
+      ),
+      onFilter: (value, record) =>
+        record?.info?.cmt
+          .toString()
+          .toLowerCase()
+          .includes((value as string).toLowerCase()),
+      onFilterDropdownOpenChange: (visible) => {
+        if (visible) {
+          setTimeout(() => searchInput.current?.select(), 100);
+        }
+      },
+      render: (text) =>
+        searchText ? (
+          <Highlighter searchWords={[searchText]} textToHighlight={text?.cmt} />
+        ) : (
+          text?.cmt
+        ),
+    },
+    {
       title: "Phòng",
       dataIndex: "list_room",
       key: "list_room",
