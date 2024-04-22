@@ -9,6 +9,7 @@ import {
   calculateTotalAmountDay,
   calculateTotalAmountMonth,
   getTotalStatus,
+  updateInfoBooking,
 } from "../controller/booking";
 import { loginMiddleware, isAdminMiddleware } from "../middleware";
 
@@ -29,6 +30,7 @@ router.post(
   isAdminMiddleware,
   calculateTotalAmountMonth
 );
+router.put("/:id", loginMiddleware, updateInfoBooking);
 router.patch("/:id", loginMiddleware, update);
 
 export default router;

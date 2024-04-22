@@ -35,6 +35,7 @@ import {
   useCalculateTotalAmountDayMutation,
   useCalculateTotalAmountMonthMutation,
   useGetTotalStatusQuery,
+  useUpdateInfoBookingMutation,
 } from "./booking";
 
 // Hotel API
@@ -147,6 +148,7 @@ export {
   useLockUserMutation,
   useChangeRoleUserMutation,
   reviewApi,
+  useUpdateInfoBookingMutation,
   useGetAllReviewQuery,
   useGetOneReviewQuery,
   useCreateReviewMutation,

@@ -251,6 +251,45 @@ export const create = async (req, res) => {
   }
 };
 
+export const updateInfoBooking = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!mongoose.isValidObjectId(id)) {
+      return sendResponse(res, 400, "ID không hợp lệ");
+    }
+
+    if (req.body.name === "" || req.body.phone === "" || req.body.cmt === "") {
+      return sendResponse(res, 400, "Vui lòng điền đầy đủ thông tin");
+    }
+
+    const bk = await BookingModel.findById(id);
+
+    if (bk.info.update) {
+      return sendResponse(res, 400, "Chỉ được cập nhật thông tin 1 lần");
+    }
+
+    const booking = await BookingModel.findByIdAndUpdate(
+      id,
+      {
+        info: {
+          name: req.body.name,
+          phone: req.body.phone,
+          cmt: req.body.phone,
+          update: true,
+        },
+      },
+      { new: true }
+    );
+
+    return sendResponse(res, 200, "Cập nhật thành công", booking);
+  } catch (error) {
+    console.error(error);
+
+    return sendResponse(res, 500, "Đã có lỗi xảy ra");
+  }
+};
+
 export const update = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;

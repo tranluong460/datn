@@ -17,6 +17,10 @@ const BookingSchema = new mongoose.Schema(
       cmt: {
         type: String,
       },
+      update: {
+        type: Boolean,
+        default: false,
+      },
     },
     check_in: {
       type: Date,

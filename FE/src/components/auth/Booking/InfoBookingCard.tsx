@@ -156,7 +156,8 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
             <div>
               <p>
                 Trạng thái thanh toán:{" "}
-                {info.payment_status ? "Đã thanh toán" : "Chưa thanh toán"}
+                {info.payment_status ? "Đã thanh toán" : "Chưa thanh toán"}{" "}
+                {info.is_deposit_amount ? "đặt cọc" : ""}
               </p>
 
               <p>Trạng thái đơn đặt phòng: {info.status}</p>
@@ -180,6 +181,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
             >
               Xem chi tiết
             </button>
+
             <Modal
               title="Thông tin đơn đặt phòng"
               visible={modalVisible}
