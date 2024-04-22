@@ -7,7 +7,7 @@ import { validateMiddleware } from "../middleware";
 
 export const getAll = async (req, res) => {
   try {
-    const reviewList = await ReviewModel.find().populate({
+    const reviewList = await ReviewModel.find({ disabled: false }).populate({
       path: "id_user",
       select: "_id email",
     });
