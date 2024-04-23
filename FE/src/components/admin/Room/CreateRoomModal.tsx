@@ -20,6 +20,7 @@ import {
   useGetAllAmenitiesQuery,
   useCreateRoomMutation,
 } from "../../../api";
+import { useState } from "react";
 
 type CreateRoomModalProps = {
   isOpenCreate: boolean;
@@ -37,6 +38,8 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
   const [createRoom, resultCreate] = useCreateRoomMutation();
 
   const onFinish = (data: IRoom) => {
+    console.log("🚀 ~ onFinish ~ data:", data);
+
     createRoom(data)
       .unwrap()
       .then((response) => {
@@ -47,6 +50,14 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
       .catch((error) => {
         message.error(error.data.message);
       });
+  };
+
+  const [quantity, setQuantity] = useState(0); // Số lượng đã nhập
+  const [roomCount, setRoomCount] = useState(0); // Số lượng phòng đã nhập
+
+  // Hàm xử lý sự kiện khi số phòng thay đổi
+  const handleRoomChange = (value) => {
+    setRoomCount(value ? Math.min(value, quantity) : 0); // Giữ cho số lượng phòng không vượt quá số lượng đã nhập
   };
 
   return (
@@ -73,16 +84,41 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
               label="Số lượng"
               rules={[{ required: true, message: "Vui lòng nhập số lượng!" }]}
             >
-              <InputNumber className="w-full" min={1} />
+              <InputNumber
+                className="w-full"
+                min={1}
+                onChange={(value) => setQuantity(value!)}
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
               name="list_rooms"
               label="Số phòng"
-              rules={[{ required: true, message: "Vui lòng nhập số phòng!" }]}
+              rules={[
+                { required: true, message: "Vui lòng nhập số phòng!" },
+                () => ({
+                  validator(_, value) {
+                    // Kiểm tra số lượng phòng
+                    if (value) {
+                      const rooms = value
+                        .split(",")
+                        .map((room: any) => room.trim());
+                      if (Number(rooms.length) !== Number(quantity)) {
+                        return Promise.reject(
+                          `Số phòng phải bằng số lượng phòng ${quantity} không thể nhập hơn hay nhỏ hơn số lượng đã chọn!`
+                        );
+                      }
+                    }
+                    return Promise.resolve();
+                  },
+                }),
+              ]}
             >
-              <Input className="w-full" />
+              <Input
+                className="w-full"
+                onChange={(e) => handleRoomChange(e.target.value)}
+              />
             </Form.Item>
           </Col>
 

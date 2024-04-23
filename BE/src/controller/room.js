@@ -117,7 +117,9 @@ export const update = async (req, res) => {
     return sendResponse(res, 400, "ID không hợp lệ");
   }
 
-  const newOldImage = req.fields.oldImage?.split(',')?.filter(url => url?.trim() !== '');
+  const newOldImage = req.fields.oldImage
+    ?.split(",")
+    ?.filter((url) => url?.trim() !== "");
 
   const newnewOld = newOldImage?.map((img) => ({ url: img }));
 
@@ -139,7 +141,6 @@ export const update = async (req, res) => {
       }
     }
 
-
     const datL = req.fields.list_rooms.split(",");
 
     const list_rooms = datL.map((r) => ({ room: Number(r) }));
@@ -150,7 +151,10 @@ export const update = async (req, res) => {
     );
 
     // Tạo mảng mới chứa thông tin URL của ảnh mới và ảnh cũ
-    const images = [...newnewOld, ...newImages.map((imageUrl) => ({ url: imageUrl }))];
+    const images = [
+      ...newnewOld,
+      ...newImages.map((imageUrl) => ({ url: imageUrl })),
+    ];
 
     // Cập nhật trường ảnh trong dữ liệu mới
     newData = {

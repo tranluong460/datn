@@ -111,7 +111,6 @@ export const remove = async (req, res) => {
     return sendResponse(res, 200, "Xóa bình luận thành công");
   } catch (error) {
     console.log(error);
-
     return sendResponse(res, 500, "Đã có lỗi xảy ra khi xóa bình luận");
   }
 };
