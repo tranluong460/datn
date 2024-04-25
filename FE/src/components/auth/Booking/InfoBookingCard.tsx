@@ -364,9 +364,9 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
                         message: "vui lòng nhập số điện thoại!",
                       },
                       {
-                        pattern: /^(036|037)\d{7}$/,
-                        message:
-                          "Số điện thoại phải đủ 10 số và đầu 036 - 037!",
+                        pattern:
+                          /^(0|\+84)(3[2-9]|5[689]|7[06-9]|8[1-9]|9[0-46-9])\d{7}$/,
+                        message: "Số điện thoại không hợp lệ!",
                       },
                     ]}
                   >

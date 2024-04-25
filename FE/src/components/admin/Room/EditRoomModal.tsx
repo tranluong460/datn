@@ -21,7 +21,6 @@ import {
   useGetAllAmenitiesQuery,
   useUpdateRoomMutation,
 } from "../../../api";
-import { useEffect, useState } from "react";
 
 type EditRoomModalProps = {
   isOpenEdit: boolean;
@@ -44,7 +43,6 @@ const EditRoomModal = ({
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
   const [editRoom, resultEdit] = useUpdateRoomMutation();
 
-  console.log("render");
   const onFinish = (data: IRoom) => {
     editRoom(data)
       .unwrap()
