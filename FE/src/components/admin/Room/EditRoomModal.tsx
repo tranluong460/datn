@@ -54,7 +54,6 @@ const EditRoomModal = ({
         message.error(error.data.message);
       });
   };
-
   return (
     <Modal
       title="Chỉnh sửa phòng"
@@ -83,6 +82,7 @@ const EditRoomModal = ({
               data.id_amenities.map((item) => item._id),
             id_hotel: data && data.id_hotel && data.id_hotel._id,
             id_roomType: data && data.id_roomType && data.id_roomType._id,
+            list_rooms: data.list_rooms?.map((room) => room?.room).join(", "),
           }}
           autoComplete="off"
         >
@@ -98,6 +98,16 @@ const EditRoomModal = ({
                 rules={[{ required: true, message: "Vui lòng nhập số lượng!" }]}
               >
                 <InputNumber className="w-full" min={1} />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                name="list_rooms"
+                label="Số Phòng"
+                rules={[{ required: true, message: "Vui lòng nhập số phòng!" }]}
+              >
+                <Input className="w-full" min={1} />
               </Form.Item>
             </Col>
 
@@ -121,7 +131,6 @@ const EditRoomModal = ({
                 </Select>
               </Form.Item>
             </Col>
-
             <Col span={12}>
               <Form.Item
                 name="id_roomType"
