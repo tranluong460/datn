@@ -114,9 +114,13 @@ const EditBookingDrawn = ({
           </Form.Item>
 
           <Form.Item name="room_number" label="Số phòng">
-            <Select mode="multiple" className="w-[30px]" maxCount={3}>
+            <Select
+              mode="multiple"
+              className="w-[30px]"
+              maxCount={data?.list_room?.quantity}
+            >
               {data?.list_room?.idRoom?.list_rooms.map((item: any) => (
-                <Option key={item._id} value={item._id}>
+                <Option key={item._id} value={item._id} disabled={item.status}>
                   {item.room}
                 </Option>
               ))}
