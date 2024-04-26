@@ -110,4 +110,39 @@
     #sec-if-container .adaptive {
         width: 960px;
     }
+}
+@media (max-width: 991px) {
+    .sec-container {
+        width: 720px;
+    }
+
+    #sec-text-if {
+        width: 650px;
+    }
+
+    #sec-if-container .behavioral {
+        width: 720px;
+    }
+
+    #sec-if-container .adaptive {
+        width: 720px;
+    }
+}
+
+@media (max-width: 767px) {
+    .sec-container {
+        width: 540px;
+    }
+
+    #sec-text-if {
+        width: 400px;
+    }
+
+    #sec-if-container .behavioral {
+        width: 540px;
+    }
+
+    #sec-if-container .adaptive {
+        width: 540px;
+    }
 } */
