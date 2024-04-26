@@ -97,6 +97,7 @@ const Search = () => {
   const content = (
     <div>
       <p className="text-[red] font-bold">{errorMessage}</p>
+      <p className="text-[red] font-bold">{errorDay}</p>
     </div>
   );
   // ẩn/hiện + - để chọn số lượng phòng,người lớn, trẻ em
@@ -169,13 +170,17 @@ const Search = () => {
       updatedQuery.checkout = dateRange.endDate;
     }
 
+    setErrorDay("");
     if (dateRange.endDate === "") {
       setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
       return;
     }
 
-    if (dateRange.startDate + 30 < dateRange.endDate) {
-      setErrorDay("Bạn không thể đặt phòng trên 30 ngày");
+    setErrorMessage("");
+    if (dateRange.startDate + 29 < dateRange.endDate) {
+      setErrorDay(
+        "Ngày trả phòng chỉ có thể sau tối đa 29 ngày từ ngày nhận phòng"
+      );
       return;
     }
     // Nếu không có lỗi, tiếp tục xử lý như bình thường
@@ -266,7 +271,6 @@ const Search = () => {
               }}
             />
           </Space>
-          <p className="">{errorDay}</p>
         </div>
         <div
           className="flex items-center justify-between ml-4 text-[18px] relative font-[Graphik]"
