@@ -37,10 +37,11 @@ export const getAll = async (req, res) => {
           path: "idRoom",
           populate: {
             path: "id_roomType",
-            model: "RoomType", // Thay "RoomTypeModel" bằng tên của model RoomType
+            model: "RoomType",
           },
         },
-      });
+      })
+      .populate("id_payment");
 
     if (!bookingList || bookingList.length === 0) {
       return sendResponse(res, 200, "Không có danh sách đặt phòng", []);

@@ -69,7 +69,7 @@ const BookingManager = () => {
   const columns: TableProps<IBooking>["columns"] = [
     {
       title: "Tên",
-      dataIndex: "id_user",
+      dataIndex: "info",
       key: "name",
       filterDropdown: ({
         setSelectedKeys,
@@ -115,7 +115,7 @@ const BookingManager = () => {
         <SearchOutlined style={{ color: filtered ? "#1677ff" : undefined }} />
       ),
       onFilter: (value, record) =>
-        record.id_user.id_information.name
+        record?.info?.name
           .toString()
           .toLowerCase()
           .includes((value as string).toLowerCase()),
@@ -128,10 +128,10 @@ const BookingManager = () => {
         searchText ? (
           <Highlighter
             searchWords={[searchText]}
-            textToHighlight={text?.id_information?.name}
+            textToHighlight={text?.name}
           />
         ) : (
-          text?.id_information?.name
+          text?.name
         ),
     },
     {
@@ -370,22 +370,61 @@ const BookingManager = () => {
       },
     },
     {
-      title: "Tổng giá",
+      title: "Giá",
       dataIndex: "total_price",
       key: "total_price",
-      render: (total_price) =>
-        total_price.toLocaleString("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }),
-      sorter: (a, b) => a.total_price - b.total_price,
+      render: (total_price, { id_payment, is_deposit_amount }) => (
+        <div>
+          <p>
+            Tổng:
+            {id_payment?.total_payment.toLocaleString("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            })}
+          </p>
+          {is_deposit_amount && (
+            <p>
+              {is_deposit_amount ? "Cọc: " : "Thanh toán: "}
+              {total_price.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </p>
+          )}
+          {is_deposit_amount && (
+            <p>
+              Còn lại:
+              {(id_payment?.total_payment - total_price).toLocaleString(
+                "vi-VN",
+                {
+                  style: "currency",
+                  currency: "VND",
+                }
+              )}
+            </p>
+          )}
+        </div>
+      ),
     },
     {
       title: "Trạng thái thanh toán",
       dataIndex: "payment_status",
       key: "payment_status",
-      render: (payment_status) =>
-        payment_status ? "Đã thanh toán" : "Chưa thanh toán",
+      render: (payment_status, { is_deposit_amount }) => (
+        <div>
+          {is_deposit_amount ? (
+            payment_status ? (
+              <p className="text-green-500">Đã thanh toán cọc</p>
+            ) : (
+              <p className="text-red-500">Chưa thanh toán cọc</p>
+            )
+          ) : payment_status ? (
+            <p className="text-green-500">Đã thanh toán</p>
+          ) : (
+            <p className="text-red-500">Chưa thanh toán</p>
+          )}
+        </div>
+      ),
     },
     {
       title: "Trạng thái đơn hàng",

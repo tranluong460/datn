@@ -9,7 +9,6 @@ import {
 
 const Review = () => {
   const { data: dataHotel } = useGetAllHotelQuery("");
-  console.log("🚀 ~ Review ~ dataHotel:", dataHotel?.data[0]?._id);
   const { data: userData } = useInfoAccountQuery("");
   const { data } = useGetAllReviewQuery("");
   const [Data, setData] = useState([]);
