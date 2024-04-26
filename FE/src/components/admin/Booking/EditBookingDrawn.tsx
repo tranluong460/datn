@@ -1,6 +1,16 @@
 import { useUpdateBookingMutation } from "../../../api";
 import { IBooking } from "../../../interface";
-import { Button, Form, Input, Modal, Select, Space, Spin, message } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Space,
+  Spin,
+  message,
+} from "antd";
 
 type EditBookingDrawnProps = {
   loading: boolean;
@@ -32,7 +42,7 @@ const EditBookingDrawn = ({
 
   const statusOptionsMap: any = {
     "Chờ thanh toán": [
-      { value: "Đã hủy bỏ", label: "Đã hủy bỏ" },
+      // { value: "Đã hủy bỏ", label: "Đã hủy bỏ" },
       { value: "Đang xử lý", label: "Đang xử lý" },
     ],
     "Đang xử lý": [
@@ -40,9 +50,10 @@ const EditBookingDrawn = ({
       { value: "Đã xác nhận", label: "Đã xác nhận" },
     ],
     "Đã xác nhận": [
+      // { value: "Đã hủy bỏ", label: "Đã hủy bỏ" },
       { value: "Đã hủy bỏ", label: "Đã hủy bỏ" },
       { value: "Đã nhận phòng", label: "Đã nhận phòng" },
-      { value: "Vắng mặt", label: "Vắng mặt" },
+      // { value: "Vắng mặt", label: "Vắng mặt" },
     ],
     "Đã nhận phòng": [{ value: "Thành công", label: "Thành công" }],
   };
@@ -85,6 +96,14 @@ const EditBookingDrawn = ({
             ]}
           >
             <Select options={filteredOptions} />
+          </Form.Item>
+
+          <Form.Item
+            name="success"
+            valuePropName="checked"
+            label="Hoàn tất thanh toán"
+          >
+            <Checkbox />
           </Form.Item>
 
           <Form.Item>

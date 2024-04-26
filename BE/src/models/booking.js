@@ -6,6 +6,10 @@ const BookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    success: {
+      type: Boolean,
+      default: false,
+    },
     info: {
       _id: false,
       name: {

@@ -410,21 +410,23 @@ const BookingManager = () => {
       title: "Trạng thái thanh toán",
       dataIndex: "payment_status",
       key: "payment_status",
-      render: (payment_status, { is_deposit_amount }) => (
-        <div>
-          {is_deposit_amount ? (
-            payment_status ? (
-              <p className="text-green-500">Đã thanh toán cọc</p>
-            ) : (
-              <p className="text-red-500">Chưa thanh toán cọc</p>
-            )
-          ) : payment_status ? (
-            <p className="text-green-500">Đã thanh toán</p>
-          ) : (
-            <p className="text-red-500">Chưa thanh toán</p>
-          )}
-        </div>
-      ),
+      render: (payment_status, { is_deposit_amount, success, id_payment }) => {
+        return (
+          <div>
+            {id_payment.status === "Thất bại"
+              ? "Thất bại"
+              : success
+              ? "Có thể nhận phòng"
+              : is_deposit_amount
+              ? payment_status
+                ? "Đã thanh toán cọc"
+                : "Chưa thanh toán cọc"
+              : payment_status
+              ? "Đã thanh toán"
+              : "Chưa thanh toán"}
+          </div>
+        );
+      },
     },
     {
       title: "Trạng thái đơn hàng",

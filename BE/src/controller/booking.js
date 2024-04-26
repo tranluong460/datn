@@ -225,7 +225,7 @@ export const create = async (req, res) => {
         total_price: req.body.total_price,
         city: req.body.city,
         info: req.body.info,
-        is_deposit_amount,
+        is_deposit_amount: is_deposit_amount,
       });
 
       if (!data) {
@@ -293,7 +293,7 @@ export const updateInfoBooking = async (req, res) => {
 
 export const update = async (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
+  const { status, success } = req.body;
 
   try {
     if (!mongoose.isValidObjectId(id)) {
@@ -311,7 +311,7 @@ export const update = async (req, res) => {
 
     const newBooking = await BookingModel.findOneAndUpdate(
       { _id: id },
-      { status: status },
+      { status: status, success: success },
       { new: true }
     ).populate({
       path: "id_user",
