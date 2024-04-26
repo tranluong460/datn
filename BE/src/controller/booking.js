@@ -333,7 +333,7 @@ export const update = async (req, res) => {
       },
     });
 
-    Promise.all(
+    await Promise.all(
       newBooking.room_number.map(async (bk) => {
         await RoomModel.findOneAndUpdate(
           { "list_rooms._id": bk },
@@ -356,7 +356,7 @@ export const update = async (req, res) => {
     }
 
     if (newBooking.status === "Thành công") {
-      Promise.all(
+      await Promise.all(
         newBooking.room_number.map(async (bk) => {
           await RoomModel.findOneAndUpdate(
             { "list_rooms._id": bk },

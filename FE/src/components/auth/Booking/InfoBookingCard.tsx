@@ -193,13 +193,13 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
               </p>
             )}
 
-            <p className="text-sm leading-6">
+            {/* <p className="text-sm leading-6">
               Giá trị đơn hàng:
               {info?.id_payment?.total_payment.toLocaleString("vi-VN", {
                 style: "currency",
                 currency: "VND",
               })}
-            </p>
+            </p> */}
 
             <div>
               <p>
