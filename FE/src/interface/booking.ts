@@ -4,9 +4,11 @@ export interface IBooking {
   _id: string;
   id_user: IUser;
   check_in: string;
+  success: boolean;
   check_out: string;
   total_price: number;
   payment_method: string;
+  id_amenities: any;
   list_room: IRoomBooking[];
   status: string;
   payment_status: boolean;

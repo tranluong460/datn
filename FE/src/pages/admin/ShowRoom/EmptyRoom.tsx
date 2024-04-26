@@ -15,14 +15,16 @@ const EmptyRoom = () => {
           <DatePicker onChange={onChange} /> <p>đến gian từ: 27/04/2024</p>
         </div>
       </Space>
-      {data?.data.map((room) => {
+
+      {data?.data?.map((room: any, index: number) => {
         return (
-          <div className="flex items-center">
-            <p className="w-[150px]  py-2">{room.id_roomType.name}</p>
+          <div key={`${index}-emt`} className="flex items-center">
+            <p className="w-[150px]  py-2">{room?.id_roomType?.name}</p>
             <div className="flex gap-2">
-              {room.list_rooms.map((ls) => {
+              {room?.list_rooms.map((ls: any, index: number) => {
                 return (
                   <div
+                    key={`${index}-emr`}
                     className={`text-white p-4  mt-2 ${
                       ls.status ? "bg-blue-500" : "bg-red-500"
                     }`}

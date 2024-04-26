@@ -10,6 +10,13 @@ const BookingSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    id_amenities: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Amenities",
+        required: true,
+      },
+    ],
     info: {
       _id: false,
       name: {

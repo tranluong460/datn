@@ -373,35 +373,47 @@ const BookingManager = () => {
       title: "Giá",
       dataIndex: "total_price",
       key: "total_price",
-      render: (total_price, { id_payment, is_deposit_amount }) => (
+      render: (total_price, { id_payment, is_deposit_amount, success }) => (
         <div>
-          <p>
-            Tổng:
-            {id_payment?.total_payment.toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            })}
-          </p>
-          {is_deposit_amount && (
+          {success ? (
             <p>
-              {is_deposit_amount ? "Cọc: " : "Thanh toán: "}
-              {total_price.toLocaleString("vi-VN", {
+              Tổng:
+              {id_payment?.total_payment.toLocaleString("vi-VN", {
                 style: "currency",
                 currency: "VND",
               })}
             </p>
-          )}
-          {is_deposit_amount && (
-            <p>
-              Còn lại:
-              {(id_payment?.total_payment - total_price).toLocaleString(
-                "vi-VN",
-                {
+          ) : (
+            <div>
+              <p>
+                Tổng:
+                {id_payment?.total_payment.toLocaleString("vi-VN", {
                   style: "currency",
                   currency: "VND",
-                }
+                })}
+              </p>
+              {is_deposit_amount && (
+                <p>
+                  {is_deposit_amount ? "Cọc: " : "Thanh toán: "}
+                  {total_price.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </p>
               )}
-            </p>
+              {is_deposit_amount && (
+                <p>
+                  Còn lại:
+                  {(id_payment?.total_payment - total_price).toLocaleString(
+                    "vi-VN",
+                    {
+                      style: "currency",
+                      currency: "VND",
+                    }
+                  )}
+                </p>
+              )}
+            </div>
           )}
         </div>
       ),
@@ -416,7 +428,7 @@ const BookingManager = () => {
             {id_payment.status === "Thất bại"
               ? "Thất bại"
               : success
-              ? "Có thể nhận phòng"
+              ? "Thành công"
               : is_deposit_amount
               ? payment_status
                 ? "Đã thanh toán cọc"

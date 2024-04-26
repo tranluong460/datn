@@ -293,7 +293,7 @@ export const updateInfoBooking = async (req, res) => {
 
 export const update = async (req, res) => {
   const { id } = req.params;
-  const { status, success } = req.body;
+  const { status, success, id_amenities } = req.body;
 
   try {
     if (!mongoose.isValidObjectId(id)) {
@@ -304,6 +304,14 @@ export const update = async (req, res) => {
       return sendResponse(res, 404, "Trạng thái không được để trống");
     }
 
+    if (!success && status === "Đã nhận phòng") {
+      return sendResponse(
+        res,
+        404,
+        "Vui lòng kiểm tra xem người dùng đã thanh toán số tiền còn lại chưa"
+      );
+    }
+
     const booking = await BookingModel.findById(id);
     if (booking.status === "Đã hủy bỏ" || booking.status === "Thành công") {
       return sendResponse(res, 404, "Không thể cập nhật trạng thái");
@@ -311,7 +319,7 @@ export const update = async (req, res) => {
 
     const newBooking = await BookingModel.findOneAndUpdate(
       { _id: id },
-      { status: status, success: success },
+      { status: status, success: success, id_amenities: id_amenities },
       { new: true }
     ).populate({
       path: "id_user",

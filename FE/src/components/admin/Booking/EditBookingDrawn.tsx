@@ -1,4 +1,7 @@
-import { useUpdateBookingMutation } from "../../../api";
+import {
+  useGetAllAmenitiesQuery,
+  useUpdateBookingMutation,
+} from "../../../api";
 import { IBooking } from "../../../interface";
 import {
   Button,
@@ -19,6 +22,7 @@ type EditBookingDrawnProps = {
   onCancel: () => void;
 };
 
+const { Option } = Select;
 const EditBookingDrawn = ({
   isOpenEdit,
   data,
@@ -27,16 +31,17 @@ const EditBookingDrawn = ({
 }: EditBookingDrawnProps) => {
   const [form] = Form.useForm();
   const [updateBooking, resultEdit] = useUpdateBookingMutation();
+  const { data: allAmenities } = useGetAllAmenitiesQuery("");
 
   const onFinish = (data: IBooking) => {
     updateBooking(data)
       .unwrap()
       .then((response) => {
-        message.success(response.message);
+        message.success(response?.message);
         onCancel();
       })
       .catch((error) => {
-        message.error(error.data.message);
+        message.error(error?.data?.message);
       });
   };
 
@@ -78,7 +83,13 @@ const EditBookingDrawn = ({
           name="edit_room_type"
           form={form}
           onFinish={onFinish}
-          initialValues={data}
+          initialValues={{
+            ...data,
+            id_amenities:
+              data &&
+              data?.id_amenities &&
+              data?.id_amenities.map((item: any) => item._id),
+          }}
         >
           <Form.Item name="_id" hidden>
             <Input />
@@ -98,12 +109,27 @@ const EditBookingDrawn = ({
             <Select options={filteredOptions} />
           </Form.Item>
 
+          {data?.status === "Đã nhận phòng" && (
+            <Form.Item name="id_amenities" label="Tiện ích">
+              <Select mode="multiple" className="w-[30px]">
+                {allAmenities?.data &&
+                  allAmenities?.data?.map(
+                    (item: { _id: string; name: string }) => (
+                      <Option key={item._id} value={item._id}>
+                        {item.name}
+                      </Option>
+                    )
+                  )}
+              </Select>
+            </Form.Item>
+          )}
+
           <Form.Item
             name="success"
             valuePropName="checked"
             label="Hoàn tất thanh toán"
           >
-            <Checkbox />
+            <Checkbox disabled={data?.success} />
           </Form.Item>
 
           <Form.Item>
