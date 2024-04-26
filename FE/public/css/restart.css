@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -516,3 +516,62 @@ fieldset {
     -ms-flex-order: 3;
     order: 3;
 }
+@media (max-width: 767px) {
+    .sec-container {
+        width: 540px;
+    }
+
+    #sec-text-if {
+        width: 400px;
+    }
+
+    #sec-if-container .behavioral {
+        width: 540px;
+    }
+
+    #sec-if-container .adaptive {
+        width: 540px;
+    }
+}
+
+@media (max-width: 575px) {
+    .sec-container {
+        width: 100%;
+    }
+
+    #sec-text-if {
+        width: 300px;
+    }
+
+    #sec-if-container .behavioral {
+        width: 100%;
+    }
+
+    #sec-if-container .adaptive {
+        width: 100%;
+    }
+
+    #sec-overlay {
+        background-color: #fff;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #sec-container {
+        position: static;
+        transform: none;
+        -ms-transform: none;
+        background-color: #fff;
+        border-radius: 0;
+        box-shadow: none;
+        min-width: 300px;
+    }
+
+    #sec-text-container {
+        padding: 10px;
+    }
+
+    #sec-if-container {
+        width: 100%;
+    }
+} */
