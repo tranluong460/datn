@@ -90,6 +90,8 @@ const HotelListPage = () => {
     children,
   ]);
 
+  const { data: AllHotel } = useGetAllHotelQuery("");
+
   const [selectedValues, setSelectedValues] = useState(1);
   // Cập nhật onChange function để thay đổi giá trị của radio button cho từng phần tử
   const onChange = (e: RadioChangeEvent) => {
@@ -124,14 +126,14 @@ const HotelListPage = () => {
       list_room: [
         {
           idRoom: data?._id,
-          quantity: 1,
+          quantity: quantity,
         },
       ],
       city: 1,
     };
 
     setCookie("booking", dataBooking, { path: "/" });
-    navigate(`/payment/661f928e1ca3c1911267f933`);
+    navigate(`/payment/${AllHotel?.data[0]?._id}`);
   };
 
   return (

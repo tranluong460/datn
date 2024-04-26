@@ -1,21 +1,14 @@
-import { useGetAllRoomQuery } from "../../../api";
-import { DatePicker, Space } from "antd";
+import {
+  useGetAllRoomQuery,
+  useUpdateStatusRoomNumberMutation,
+} from "../../../api";
+
 const EmptyRoom = () => {
   const { data } = useGetAllRoomQuery("");
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
+  const [upStatus, checkUp] = useUpdateStatusRoomNumberMutation();
+
   return (
     <div>
-      <Space direction="vertical" className="flex">
-        <div className="flex gap-2 items-center">
-          <DatePicker onChange={onChange} /> <p>thời gian từ: 26/04/2024</p>
-        </div>
-        <div className="flex gap-2 items-center">
-          <DatePicker onChange={onChange} /> <p>đến gian từ: 27/04/2024</p>
-        </div>
-      </Space>
-
       {data?.data?.map((room: any, index: number) => {
         return (
           <div key={`${index}-emt`} className="flex items-center">

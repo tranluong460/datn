@@ -17,6 +17,11 @@ const BookingSchema = new mongoose.Schema(
         required: true,
       },
     ],
+    room_number: [
+      {
+        type: String,
+      },
+    ],
     info: {
       _id: false,
       name: {

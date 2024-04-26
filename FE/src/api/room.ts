@@ -86,6 +86,18 @@ export const roomApi = createApi({
       },
       invalidatesTags: ["Room"],
     }),
+    updateStatusRoomNumber: builder.mutation({
+      query: (body: any) => {
+        const { _id, ...data } = body;
+
+        return {
+          url: `room/status/${_id}`,
+          method: "POST",
+          body: data,
+          credentials: "include",
+        };
+      },
+    }),
   }),
 });
 
@@ -95,4 +107,5 @@ export const {
   useCreateRoomMutation,
   useUpdateRoomMutation,
   useSearchRoomMutation,
+  useUpdateStatusRoomNumberMutation,
 } = roomApi;
