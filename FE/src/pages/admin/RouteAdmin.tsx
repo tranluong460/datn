@@ -13,6 +13,7 @@ import {
   VoucherManage,
 } from "..";
 import CommentManage from "./Comment/CommentManage";
+import EmptyRoom from "./ShowRoom/EmptyRoom";
 
 const RouteAdmin = () => {
   return (
@@ -28,7 +29,7 @@ const RouteAdmin = () => {
           <Route path="/roomType-manager" element={<RoomTypeManage />} />
           <Route path="/comment-manager" element={<CommentManage />} />
           <Route path="/voucher-manager" element={<VoucherManage />} />
-
+          <Route path="/empty-room" element={<EmptyRoom />} />
         </Route>
 
         <Route path="/*" element={<Page404 />} />

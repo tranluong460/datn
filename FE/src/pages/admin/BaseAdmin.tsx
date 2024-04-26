@@ -125,6 +125,7 @@ const BaseAdmin = () => {
     (humanRole.includes(data.data.role) &&
       getItem("Quản lý voucher", "/admin/voucher-manager", <AiOutlineTag />)) ||
       null,
+    getItem("phòng", "/admin/empty-room", <AiOutlineTag />),
   ];
 
   // eslint-disable-next-line
