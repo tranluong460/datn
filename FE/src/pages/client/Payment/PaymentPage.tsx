@@ -26,9 +26,10 @@ const PaymentPage = () => {
   const calculateTotalPrice = (
     basePrice: number,
     voucherDiscount: number,
-    isDeposit: boolean
+    isDeposit: boolean,
+    quantity: number
   ): number => {
-    let totalPrice = basePrice;
+    let totalPrice = basePrice * quantity;
 
     if (voucherDiscount !== 0) {
       totalPrice -= voucherDiscount;
@@ -55,7 +56,8 @@ const PaymentPage = () => {
           const newTotal = calculateTotalPrice(
             cookie?.booking.total_price,
             res?.data?.data.discountValue,
-            isDepositAmount
+            isDepositAmount,
+            cookie?.booking?.list_room[0]?.quantity
           );
 
           setTotalPrice(newTotal);
@@ -95,8 +97,8 @@ const PaymentPage = () => {
         const dataPayment = {
           amount: total_price,
           total_payment: voucher
-            ? dataBooking.total_price - voucher.discountValue
-            : dataBooking.total_price,
+            ? total_price - voucher.discountValue
+            : total_price,
           bookingId: _id,
         };
 
@@ -129,7 +131,8 @@ const PaymentPage = () => {
     const newTotal = calculateTotalPrice(
       cookie?.booking.total_price,
       voucher?.discountValue || 0,
-      isDepositAmount
+      isDepositAmount,
+      cookie?.booking?.list_room[0]?.quantity
     );
 
     setTotalPrice(newTotal);
