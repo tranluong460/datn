@@ -56,7 +56,7 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
   const [roomCount, setRoomCount] = useState(0); // Số lượng phòng đã nhập
 
   // Hàm xử lý sự kiện khi số phòng thay đổi
-  const handleRoomChange = (value) => {
+  const handleRoomChange = (value: any) => {
     setRoomCount(value ? Math.min(value, quantity) : 0); // Giữ cho số lượng phòng không vượt quá số lượng đã nhập
   };
 

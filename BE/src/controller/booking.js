@@ -293,7 +293,7 @@ export const updateInfoBooking = async (req, res) => {
 
 export const update = async (req, res) => {
   const { id } = req.params;
-  const { status, success, id_amenities } = req.body;
+  const { status, success, id_amenities, room_number } = req.body;
 
   try {
     if (!mongoose.isValidObjectId(id)) {
@@ -319,7 +319,12 @@ export const update = async (req, res) => {
 
     const newBooking = await BookingModel.findOneAndUpdate(
       { _id: id },
-      { status: status, success: success, id_amenities: id_amenities },
+      {
+        status: status,
+        success: success,
+        id_amenities: id_amenities,
+        room_number: room_number,
+      },
       { new: true }
     ).populate({
       path: "id_user",
@@ -327,6 +332,16 @@ export const update = async (req, res) => {
         path: "id_information",
       },
     });
+
+    await Promise.all(
+      newBooking.room_number.map(async (bk) => {
+        await RoomModel.findOneAndUpdate(
+          { "list_rooms._id": bk },
+          { $set: { "list_rooms.$.status": true } },
+          { new: true }
+        );
+      })
+    );
 
     if (newBooking.status === "Đã hủy bỏ") {
       const check_in = moment(newBooking.check_in).format("DD/MM/YYYY");
@@ -341,6 +356,16 @@ export const update = async (req, res) => {
     }
 
     if (newBooking.status === "Thành công") {
+      await Promise.all(
+        newBooking.room_number.map(async (bk) => {
+          await RoomModel.findOneAndUpdate(
+            { "list_rooms._id": bk },
+            { $set: { "list_rooms.$.status": false } },
+            { new: true }
+          );
+        })
+      );
+
       sendMailSuccessBooking(
         newBooking.id_user.email,
         newBooking.id_user.id_information.name
