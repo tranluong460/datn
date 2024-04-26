@@ -174,10 +174,16 @@ const Search = () => {
     if (dateRange.endDate === "") {
       setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
       return;
+    } else if (dateRange.endDate === dateRange.startDate) {
+      setErrorMessage(
+        "Bạn cần nhập lại thông tin ngày nhận phòng và trả phòng phải khác ngày"
+      );
+      return;
     }
 
     setErrorMessage("");
-    if (dateRange.startDate + 29 < dateRange.endDate) {
+    const maxEndDate = dayjs(dateRange.startDate).add(29, "day");
+    if (dayjs(dateRange.endDate).isAfter(maxEndDate, "day")) {
       setErrorDay(
         "Ngày trả phòng chỉ có thể sau tối đa 29 ngày từ ngày nhận phòng"
       );
