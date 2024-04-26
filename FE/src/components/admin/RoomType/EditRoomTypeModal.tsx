@@ -10,8 +10,6 @@ type EditRoomTypeModalProps = {
   onCancel: () => void;
 };
 
-console.log("render");
-
 const EditRoomTypeModal = ({
   isOpenEdit,
   loading,

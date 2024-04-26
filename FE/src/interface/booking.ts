@@ -13,6 +13,7 @@ export interface IBooking {
   createdAt: string;
   updatedAt: string;
   id_payment: IPaymentBooking;
+  is_deposit_amount: boolean;
   info: {
     name: string;
     phone: string;
@@ -28,6 +29,7 @@ export interface IRoomBooking {
 export interface IPaymentBooking {
   _id: string;
   id_booking: string;
+  total_payment: number;
   amount: number;
   code: string;
   status: string;

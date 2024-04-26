@@ -82,7 +82,7 @@ const EditRoomModal = ({
               data.id_amenities.map((item) => item._id),
             id_hotel: data && data.id_hotel && data.id_hotel._id,
             id_roomType: data && data.id_roomType && data.id_roomType._id,
-            list_rooms: data.list_rooms?.map((room) => room?.room).join(", "),
+            list_rooms: data?.list_rooms?.map((room) => room?.room).join(", "),
           }}
           autoComplete="off"
         >

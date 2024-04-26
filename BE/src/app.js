@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
+import cron from "node-cron";
 
 import {
   AmenitiesRouter,
@@ -17,6 +18,7 @@ import {
   RoomTypeRouter,
   VoucherRouter,
 } from "./router";
+import { BookingModel, PaymentModel } from "./models";
 
 dotenv.config();
 
@@ -39,6 +41,32 @@ app.use("/banner", BannerRouter);
 app.use("/voucher", VoucherRouter);
 
 mongoose.connect(process.env.DB_URL);
+
+cron.schedule("* * * * * *", async () => {
+  const currentTime = new Date();
+  const fifteenMinutesAgo = new Date(currentTime.getTime() - 15 * 60000);
+
+  try {
+    const overdueBookings = await BookingModel.find({
+      createdAt: { $lte: fifteenMinutesAgo },
+      status: "Chờ thanh toán",
+    });
+
+    await Promise.all(
+      overdueBookings.map(async (booking) => {
+        booking.status = "Đã hủy bỏ";
+
+        const payment = await PaymentModel.findById(booking.id_payment);
+        payment.status = "Thất bại";
+
+        await booking.save();
+        await payment.save();
+      })
+    );
+  } catch (error) {
+    console.error("Lỗi khi tìm đơn hàng đã quá hạn");
+  }
+});
 
 process.on("uncaughtException", (err) => {
   console.log(err);

@@ -9,9 +9,9 @@ import {
 } from "../../../api";
 import { useState } from "react";
 
-// !
 import type { FormProps } from "antd";
 import { Form, Input } from "antd";
+
 type FieldType = {
   name?: string;
   phone?: string;
@@ -23,7 +23,6 @@ type InfoBookingCardProps = {
 };
 
 const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
-  console.log(info);
   const [errorCheckBox, setErrorCheckBox] = useState("");
   const [isCheckBoxChecked, setIsCheckBoxChecked] = useState(false);
 
@@ -182,15 +181,17 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
               })}
             </p>
 
-            <p className="text-sm leading-6">
-              Còn lại:
-              {(
-                info?.id_payment?.total_payment - info?.id_payment?.amount
-              ).toLocaleString("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              })}
-            </p>
+            {info?.is_deposit_amount && (
+              <p className="text-sm leading-6">
+                Còn lại:
+                {(
+                  info?.id_payment?.total_payment - info?.id_payment?.amount
+                ).toLocaleString("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                })}
+              </p>
+            )}
 
             <p className="text-sm leading-6">
               Giá trị đơn hàng:
