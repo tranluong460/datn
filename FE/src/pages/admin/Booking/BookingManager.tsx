@@ -495,6 +495,8 @@ const BookingManager = () => {
             >
               Cập nhật
             </Button>
+
+            {status === "Thành công" && <Button>Xuất hóa đơn</Button>}
           </Space>
         </>
       ),

@@ -112,7 +112,7 @@ const BookingInfo = ({
           </div>
         </div>
 
-        <div className="relative mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
+        {/* <div className="relative mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
           Đặt cọc trước:
           <Checkbox onClick={setIsDepositAmount} />
           {voucher && (
@@ -135,7 +135,7 @@ const BookingInfo = ({
               <Button onClick={setVoucher}>Xóa</Button>
             </div>
           )}
-        </div>
+        </div> */}
 
         <div className="relative mb-3 pb-5 border-b-2 border-dashed border-divideLight dark:border-divideDark">
           Voucher:
@@ -155,7 +155,7 @@ const BookingInfo = ({
           </span>
         </div>
 
-        <div className="flex items-center justify-between text-base mb-4 font-bold">
+        {/* <div className="flex items-center justify-between text-base mb-4 font-bold">
           <div>
             <span className="text-textLight dark:text-textDark">
               Đặt cọc giữ phòng:
@@ -167,7 +167,7 @@ const BookingInfo = ({
           </div>
 
           {isDepositAmount ? "Có" : "Không"}
-        </div>
+        </div> */}
 
         <div className="flex items-center justify-between text-base mb-4 font-bold">
           <span className="text-textLight dark:text-textDark">
