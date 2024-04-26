@@ -33,6 +33,8 @@ const EditBookingDrawn = ({
   const [updateBooking, resultEdit] = useUpdateBookingMutation();
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
 
+  console.log(data);
+
   const onFinish = (data: IBooking) => {
     updateBooking(data)
       .unwrap()
@@ -88,7 +90,7 @@ const EditBookingDrawn = ({
             id_amenities:
               data &&
               data?.id_amenities &&
-              data?.id_amenities.map((item: any) => item._id),
+              data?.id_amenities.map((item: any) => item),
           }}
         >
           <Form.Item name="_id" hidden>
