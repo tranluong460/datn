@@ -26,7 +26,8 @@ const Search = () => {
 
   // ấn vào nút tìm kiếm nó sẽ render lại
   const [isSearched, setIsSearched] = useState(false);
-
+  // thông báo nếu checkout vượt qua 30 ngày
+  const [errorDay, setErrorDay] = useState("");
   // thông báo nếu chưa nhập số lượng phòng
   const [errorMessage, setErrorMessage] = useState("");
   const [roomInfo, setRoomInfo] = useState([
@@ -173,6 +174,10 @@ const Search = () => {
       return;
     }
 
+    if (dateRange.startDate + 30 < dateRange.endDate) {
+      setErrorDay("Bạn không thể đặt phòng trên 30 ngày");
+      return;
+    }
     // Nếu không có lỗi, tiếp tục xử lý như bình thường
     updatedQuery.quantity = room;
     updatedQuery.children = roomInfo[0].children;
@@ -208,6 +213,7 @@ const Search = () => {
       setIsScrollDisabled(false);
     }
   }, [isExpanded]);
+
   return (
     <>
       {isExpanded && <div className="overlay" />}
@@ -260,6 +266,7 @@ const Search = () => {
               }}
             />
           </Space>
+          <p className="">{errorDay}</p>
         </div>
         <div
           className="flex items-center justify-between ml-4 text-[18px] relative font-[Graphik]"
