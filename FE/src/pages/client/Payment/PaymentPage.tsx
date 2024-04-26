@@ -97,8 +97,9 @@ const PaymentPage = () => {
         const dataPayment = {
           amount: total_price,
           total_payment: voucher
-            ? total_price - voucher.discountValue
-            : total_price,
+            ? dataBooking.total_price * dataBooking?.list_room[0]?.quantity -
+              voucher.discountValue
+            : dataBooking.total_price * dataBooking?.list_room[0]?.quantity,
           bookingId: _id,
         };
 
