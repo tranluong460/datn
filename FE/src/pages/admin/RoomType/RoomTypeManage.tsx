@@ -190,9 +190,9 @@ const RoomTypeManage = () => {
               <th className="border border-gray-300 border-solid  bg-gray-200">
                 Số lượng Trẻ em
               </th>
-              <th className="border border-gray-300 border-solid  bg-gray-200">
+              {/* <th className="border border-gray-300 border-solid  bg-gray-200">
                 Trạng thái phòng
-              </th>
+              </th> */}
               <th className="border border-gray-300 border-solid  bg-gray-200">
                 Hành Động
               </th>
@@ -221,7 +221,7 @@ const RoomTypeManage = () => {
                     <td className="border border-gray-300 border-solid ">
                       {items.children}
                     </td>
-                    <td className="border border-gray-300 border-solid py-2">
+                    {/* <td className="border border-gray-300 border-solid py-2">
                       <Space wrap>
                         <Select
                           defaultValue={items.status}
@@ -243,7 +243,7 @@ const RoomTypeManage = () => {
                           ]}
                         />
                       </Space>
-                    </td>
+                    </td> */}
                     <td className="border border-gray-300 border-solid ">
                       <button
                         onClick={() => handleEditClick(items._id)}

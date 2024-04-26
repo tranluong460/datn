@@ -73,43 +73,43 @@ const AmenitiesManager = () => {
       dataIndex: "name",
       key: "name",
     },
-    {
-      title: "Features",
-      dataIndex: "features",
-      key: "features",
-      render: (features) => (
-        <Space direction="vertical" size="small">
-          {features.map(
-            (item: { name: string; surcharge: boolean }, index: number) => (
-              <Space key={item.name} direction="horizontal">
-                <div>
-                  {index + 1}. {item.name}
-                </div>
-                {/* {item.surcharge && <Tag>Phụ phí</Tag>} */}
-              </Space>
-            )
-          )}
-        </Space>
-      ),
-    },
-    {
-      title: "Trạng thái",
-      key: "status",
-      render: ({ _id, status }) => (
-        <Space wrap>
-          <Select
-            defaultValue={status}
-            style={{ width: 120 }}
-            onChange={(value) => handleChange(value)}
-            onClick={() => setIdAmenities(_id)}
-            options={[
-              { value: "Đang áp dụng", label: "Đang áp dụng" },
-              { value: "Không được áp dụng", label: "Không được áp dụng" },
-            ]}
-          />
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Features",
+    //   dataIndex: "features",
+    //   key: "features",
+    //   render: (features) => (
+    //     <Space direction="vertical" size="small">
+    //       {features.map(
+    //         (item: { name: string; surcharge: boolean }, index: number) => (
+    //           <Space key={item.name} direction="horizontal">
+    //             <div>
+    //               {index + 1}. {item.name}
+    //             </div>
+    //             {/* {item.surcharge && <Tag>Phụ phí</Tag>} */}
+    //           </Space>
+    //         )
+    //       )}
+    //     </Space>
+    //   ),
+    // },
+    // {
+    //   title: "Trạng thái",
+    //   key: "status",
+    //   render: ({ _id, status }) => (
+    //     <Space wrap>
+    //       <Select
+    //         defaultValue={status}
+    //         style={{ width: 120 }}
+    //         onChange={(value) => handleChange(value)}
+    //         onClick={() => setIdAmenities(_id)}
+    //         options={[
+    //           { value: "Đang áp dụng", label: "Đang áp dụng" },
+    //           { value: "Không được áp dụng", label: "Không được áp dụng" },
+    //         ]}
+    //       />
+    //     </Space>
+    //   ),
+    // },
     {
       title: "Hành động",
       key: "action",

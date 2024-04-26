@@ -26,7 +26,7 @@ import {
   AiOutlineLogout,
   AiOutlineSetting,
   AiFillHome,
-  AiOutlineTag
+  AiOutlineTag,
 } from "../../icons";
 import { Logo } from "../../components";
 import { useInfoAccountQuery, useLogoutAccountMutation } from "../../api";
@@ -74,53 +74,57 @@ const BaseAdmin = () => {
   const facilitiesRole = ["Facilities Manager", "Admin", "Manager"];
 
   const menuItems: MenuItem[] = [
-    getItem("Dashboard", "/admin", <MdOutlineDashboardCustomize />),
+    (data.data.role === "Admin" &&
+      getItem("Dashboard", "/admin", <MdOutlineDashboardCustomize />)) ||
+      null,
     (data.data.role === "Admin" &&
       getItem("Khách sạn", "/admin/hotel-manager", <LiaHotelSolid />)) ||
-    null,
+      null,
     (roomRole.includes(data.data.role) &&
       getItem(
         "Quản lý phòng",
         "/admin/room-manager",
         <MdOutlineRoomPreferences />
       )) ||
-    null,
+      null,
     (roomRole.includes(data.data.role) &&
       getItem(
         "Quản lý loại phòng",
         "/admin/roomType-manager",
         <AiOutlineHdd />
       )) ||
-    null,
+      null,
     (facilitiesRole.includes(data.data.role) &&
       getItem(
         "Quản lý tiện ích",
         "/admin/amenities-manager",
         <PiLightbulbFilament />
       )) ||
-    null,
+      null,
     (humanRole.includes(data.data.role) &&
       getItem(
         "Quản lý người dùng",
         "/admin/user-manager",
         <AiOutlineUser />
       )) ||
-    null,
-    getItem("Quản lý bình luận", "/admin/comment-manager", <AiOutlineUser />),
+      null,
+    (data.data.role === "Admin" &&
+      getItem(
+        "Quản lý bình luận",
+        "/admin/comment-manager",
+        <AiOutlineUser />
+      )) ||
+      null,
     (reservationRole.includes(data.data.role) &&
       getItem(
         "Quản lý Đặt Phòng",
         "/admin/booking-manager",
         <TbBrandBooking />
       )) ||
-    null,
+      null,
     (humanRole.includes(data.data.role) &&
-      getItem(
-        "Quản lý voucher",
-        "/admin/voucher-manager",
-        <AiOutlineTag />
-      )) ||
-    null,
+      getItem("Quản lý voucher", "/admin/voucher-manager", <AiOutlineTag />)) ||
+      null,
   ];
 
   // eslint-disable-next-line
