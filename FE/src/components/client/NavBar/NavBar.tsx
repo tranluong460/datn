@@ -533,3 +533,804 @@ export default NavBar;
 //   </div>
 // </Container>
 // </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </div>
+// navbar di chuển
+// <div className={`fixed top-0 left-0 right-0 py-3 px-5 md:px-0 md:py-0 shadow bg-light dark:bg-dark transition-transform duration-500 ease-in-out ${!visible ? '-translate-y-full' : ''}`} style={{ zIndex: '100' }}>
+// <Container>
+//   <div className="flex flex-row items-center justify-between gap-5 py-4">
+//     <NavBarIcon />
+//     <Logo url="/" />
+
+//     <div className="flex flex-row gap-5 justify-center items-center">
+//       {/* <Search /> */}
+//       <DarkMode />
+//       <UserMenu />
+//     </div>
+//   </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </div>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </div>
+// </div>
+// </Container>
+// </div>
+// </Container>
+// </div>
+// </div>
+// </div>
+// </div>
+// </div>
