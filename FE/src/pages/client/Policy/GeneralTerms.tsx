@@ -6263,20 +6263,4 @@ export default GeneralTerms;
 //               style={{
 //                 listStyleType: "none",
 //               }}
-//             >
-//               c. Trong thời hạn 03 (ba) ngày kể từ ngày xảy ra Sự kiện Bất khả
-//               kháng, Bên bị ảnh hưởng bởi Sự kiện Bất khả kháng phải thông báo
-//               văn bản cho Bên kia, trong đó nêu chi tiết về Sự kiện Bất khả
-//               kháng, các biện pháp đã tiến hành để đề phòng, khắc phục thiệt
-//               hại, dự kiến kế hoạch khắc phục và biện pháp giải quyết.
-//             </li>
-//           </ol>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               textAlign: "justify",
-//               margin: "12pt 0in 0in",
-//             }}
-// 
+//    
