@@ -148,7 +148,7 @@ const Search = () => {
     startDate: moment().format("YYYY-MM-DD"),
     endDate: moment().add(1, "days").format("YYYY-MM-DD"),
   });
-
+  const maxEndDate = dayjs(dateRange.startDate).add(29, "day");
   const onSubmit = () => {
     let currentQuery = {};
 
@@ -170,6 +170,14 @@ const Search = () => {
 
     if (dateRange.endDate === "") {
       setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
+      return;
+    } else if (dateRange.endDate === dateRange.startDate) {
+      setErrorMessage("Ngày nhận phòng và trả phòng đang trùng nhau");
+      return;
+    } else if (dayjs(dateRange.endDate).isAfter(maxEndDate, "day")) {
+      setErrorMessage(
+        "Từ ngày checkin đến checkout không được vượt quá 29 ngày"
+      );
       return;
     }
 
@@ -212,7 +220,7 @@ const Search = () => {
     <>
       {isExpanded && <div className="overlay" />}
       <button
-        className={`fixed text-black text-4xl top-8 right-72 z-[999] ${
+        className={`fixed text-black text-4xl top-8 right-72 z-[999] xl:right-2 xl:top-5 ${
           isExpanded ? "" : "hidden"
         }`}
         onClick={handleCollapse}
@@ -230,8 +238,6 @@ const Search = () => {
                 checkin == "" ? "bottom-10" : ""
               } transition-search-bottom inset-x-0`
         }`}
-
-        // search-bar ${ isVisible ? "visible" : "hidden" }
       >
         <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[18px] pl-2">
           <p>
