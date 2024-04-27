@@ -5945,47 +5945,4 @@ export default GeneralTerms;
 //               margin: "12pt 0in 0in",
 //             }}
 //           >
-//             &nbsp;
-//           </p>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               textAlign: "justify",
-//               margin: "12pt 0in 0in",
-//             }}
-//           >
-//             <strong>Điều 6. Điều khoản thanh toán và hoàn tiền (nếu có)</strong>
-//           </p>
-//           <p
-//             style={{
-//               listStyleType: "none",
-//             }}
-//           >
-//             6.1. Khách/ Đối tác sau khi lựa chọn dịch vụ qua Trang Web{" "}
-//             <a
-//               href={url}
-//               style={{
-//                 color: "#0563c1",
-//                 textDecoration: "underline",
-//               }}
-//             >
-//               {url}
-//             </a>{" "}
-//             sẽ thực hiện điền thông tin người đặt phòng và thanh toán trực tiếp
-//             toàn bộ Tổng Giá của Yêu Cầu Dịch Vụ qua Cổng thanh toán của Trang
-//             Web. Sau khi thanh toán thành công, Khách/ Đối tác sẽ nhận được
-//             email Xác nhận đặt phòng gửi tới email của người đặt phòng kèm theo
-//             thông tin chi tiết về Yêu Cầu Dịch Vụ đã được xác nhận.
-//           </p>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               textAlign: "justify",
-//               margin: "0in 0in 10pt",
-//             }}
-//           >
-//             6.2. Chính sách hoàn tiền áp dụng cho yêu cầu hủy Yêu Cầu Dịch Vụ
+// 
