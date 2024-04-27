@@ -8,7 +8,7 @@ type InfoUserProps = {
 };
 
 const InfoUser = ({ user }: InfoUserProps) => {
-  const [openForm, setOpenform] = useState(false)
+  const [openForm, setOpenform] = useState(false);
 
   return (
     <div className="mt-5 overflow-hidden">
@@ -56,12 +56,18 @@ const InfoUser = ({ user }: InfoUserProps) => {
             />
           </dd>
         </div> */}
-        <div className="flex justify-center">
-          <Button onClick={() => setOpenform(true)}>Cập nhật</Button>
+        <div className="flex justify-center ">
+          <Button className="dark:text-white" onClick={() => setOpenform(true)}>
+            Cập nhật
+          </Button>
         </div>
       </dl>
 
-      <UpdateInfo isOpenUpdate={openForm} onCancel={() => setOpenform(false)} user={user.id_information} />
+      <UpdateInfo
+        isOpenUpdate={openForm}
+        onCancel={() => setOpenform(false)}
+        user={user.id_information}
+      />
     </div>
   );
 };

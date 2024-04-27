@@ -225,7 +225,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
           <div className="flex items-center gap-2">
             <button
               onClick={showModal}
-              className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
+              className="bg-blue-500 p-1 rounded-md text-light dark:text-white hover:opacity-80 disabled:cursor-not-allowed "
             >
               Xem chi tiết
             </button>

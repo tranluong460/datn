@@ -1,16 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { useInfoAccountQuery } from "../../../api";
 
 type BillInfoProps = {
   onToggleBooking: (value: string, form: any) => void;
 };
 
 const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
+  const { data: dataUser, isLoading, isSuccess } = useInfoAccountQuery("");
   const [show, setShow] = useState(false);
   const [method, setMethod] = useState("");
   const [agree, setAgree] = useState(false);
-  const [form, setForm] = useState({ name: "", cmt: "", phone: "" });
+  const [form, setForm] = useState({
+    name:
+      dataUser?.data?.id_information?.name !== ""
+        ? dataUser?.data?.id_information?.name
+        : "",
+    cmt: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    if (dataUser && dataUser.data && dataUser.data.id_information) {
+      const { name, cmt, phone } = dataUser.data.id_information;
+      setForm((prevForm) => ({
+        ...prevForm,
+        name: name !== "" ? name : "",
+        cmt: cmt !== "" ? cmt : "",
+        phone: phone !== "" ? phone : "",
+      }));
+    }
+  }, [dataUser]);
 
   const handleMethodChange = (name: string) => {
     setMethod(name);
@@ -83,6 +104,7 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
             name="name"
             className="mt-2 w-full px-4 py-2 rounded-xl transition outline-none border-2 disabled:opacity-70 disabled:cursor-not-allowed border-divideLight dark:border-divideDark bg-light dark:bg-dark text-textLight2nd dark:text-textDark2nd"
             onChange={onChange}
+            value={form.name}
           />
         </div>
         <div>
@@ -92,6 +114,7 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
             name="phone"
             className="mt-2 w-full px-4 py-2 rounded-xl transition outline-none border-2 disabled:opacity-70 disabled:cursor-not-allowed border-divideLight dark:border-divideDark bg-light dark:bg-dark text-textLight2nd dark:text-textDark2nd"
             onChange={onChange}
+            value={form.phone}
           />
         </div>
         <div>
@@ -101,6 +124,7 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
             name="cmt"
             className="mt-2 w-full px-4 py-2 rounded-xl transition outline-none border-2 disabled:opacity-70 disabled:cursor-not-allowed border-divideLight dark:border-divideDark bg-light dark:bg-dark text-textLight2nd dark:text-textDark2nd"
             onChange={onChange}
+            value={form.cmt}
           />
         </div>
       </div>
