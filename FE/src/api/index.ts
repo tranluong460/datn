@@ -62,6 +62,7 @@ import {
   useCreateRoomMutation,
   useUpdateRoomMutation,
   useSearchRoomMutation,
+  useUpdateStatusRoomNumberMutation,
 } from "./room";
 
 // RoomType API
@@ -136,6 +137,7 @@ export {
   useGetOneRoomQuery,
   useCreateRoomMutation,
   useUpdateRoomMutation,
+  useUpdateStatusRoomNumberMutation,
   roomTypeApi,
   useGetAllRoomTypeQuery,
   useGetOneRoomTypeQuery,

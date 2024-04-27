@@ -1,5 +1,5 @@
 import qs from "query-string";
-import { useGetOneRoomQuery } from "../../../api";
+import { useGetAllHotelQuery, useGetOneRoomQuery } from "../../../api";
 import { Button, Modal, DatePicker, Space } from "antd";
 import dayjs from "dayjs";
 import moment from "moment";
@@ -53,6 +53,8 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
     "days"
   );
 
+  const { data: AllHotel } = useGetAllHotelQuery("");
+
   const handleOk = () => {
     const totalPriceEnd = numberOfDays * dataRoom?.data?.id_roomType?.price;
     const dataBooking = {
@@ -74,7 +76,7 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
     }
 
     setCookie("booking", dataBooking, { path: "/" });
-    navigate(`/payment/661f928e1ca3c1911267f933`);
+    navigate(`/payment/${AllHotel?.data[0]?._id}`);
   };
 
   return (

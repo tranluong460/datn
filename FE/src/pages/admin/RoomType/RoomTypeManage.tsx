@@ -200,28 +200,27 @@ const RoomTypeManage = () => {
           </thead>
           {data?.data?.map((items: any, index: number) => {
             return (
-              <>
-                <tbody className="pl-2">
-                  <tr>
-                    <td className="border border-gray-300 border-solid">
-                      {index + 1}
-                    </td>
-                    <td className="border border-gray-300 border-solid ">
-                      {items.name}
-                    </td>
-                    <td className="border border-gray-300 border-solid ">
-                      {items.price}
-                    </td>
-                    <td className="border border-gray-300 border-solid ">
-                      {items.bed}
-                    </td>
-                    <td className="border border-gray-300 border-solid ">
-                      {items.adults}
-                    </td>
-                    <td className="border border-gray-300 border-solid ">
-                      {items.children}
-                    </td>
-                    {/* <td className="border border-gray-300 border-solid py-2">
+              <tbody className="pl-2" key={index}>
+                <tr>
+                  <td className="border border-gray-300 border-solid">
+                    {index + 1}
+                  </td>
+                  <td className="border border-gray-300 border-solid ">
+                    {items.name}
+                  </td>
+                  <td className="border border-gray-300 border-solid ">
+                    {items.price}
+                  </td>
+                  <td className="border border-gray-300 border-solid ">
+                    {items.bed}
+                  </td>
+                  <td className="border border-gray-300 border-solid ">
+                    {items.adults}
+                  </td>
+                  <td className="border border-gray-300 border-solid ">
+                    {items.children}
+                  </td>
+                  {/* <td className="border border-gray-300 border-solid py-2">
                       <Space wrap>
                         <Select
                           defaultValue={items.status}
@@ -244,17 +243,16 @@ const RoomTypeManage = () => {
                         />
                       </Space>
                     </td> */}
-                    <td className="border border-gray-300 border-solid ">
-                      <button
-                        onClick={() => handleEditClick(items._id)}
-                        className="shadow px-5 py-1 rounded-md hover:text-blue-500 hover:border-blue-500"
-                      >
-                        Sửa
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </>
+                  <td className="border border-gray-300 border-solid ">
+                    <button
+                      onClick={() => handleEditClick(items._id)}
+                      className="shadow px-5 py-1 rounded-md hover:text-blue-500 hover:border-blue-500"
+                    >
+                      Sửa
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
             );
           })}
         </table>

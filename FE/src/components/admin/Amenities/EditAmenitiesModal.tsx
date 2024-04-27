@@ -2,7 +2,7 @@ import { Button, Form, Input, Modal, Space, Spin, message } from "antd";
 
 import { IAmenities } from "../../../interface";
 import { useUpdateAmenitiesMutation } from "../../../api/amenities";
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "../../../icons";
+// import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "../../../icons";
 
 type EditAmenitiesModalProps = {
   loading: boolean;
@@ -65,7 +65,7 @@ const EditAmenitiesModal = ({
             <Input />
           </Form.Item>
 
-          <Form.List name="features">
+          {/* <Form.List name="features">
             {(fields, { add, remove }) => (
               <>
                 {fields.length > 0 && <Form.Item label="Features" />}
@@ -94,7 +94,7 @@ const EditAmenitiesModal = ({
                           <Input />
                         </Form.Item>
 
-                        {/* <Form.Item
+                        <Form.Item
                           key={`features-${key}-surcharge-${index}`}
                           label="Phụ phí"
                           name={[name, "surcharge"]}
@@ -102,7 +102,7 @@ const EditAmenitiesModal = ({
                           rules={[{ required: false }]}
                         >
                           <Switch className="bg-[#efefef]" />
-                        </Form.Item> */}
+                        </Form.Item>
 
                         <Form.Item className="cursor-pointer">
                           {fields.length > 0 ? (
@@ -130,7 +130,7 @@ const EditAmenitiesModal = ({
                 </Form.Item>
               </>
             )}
-          </Form.List>
+          </Form.List> */}
 
           <Form.Item>
             <Space>

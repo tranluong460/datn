@@ -33,8 +33,6 @@ const EditBookingDrawn = ({
   const [updateBooking, resultEdit] = useUpdateBookingMutation();
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
 
-  console.log(data);
-
   const onFinish = (data: IBooking) => {
     updateBooking(data)
       .unwrap()
@@ -91,6 +89,10 @@ const EditBookingDrawn = ({
               data &&
               data?.id_amenities &&
               data?.id_amenities.map((item: any) => item),
+            room_number:
+              data &&
+              data?.room_number &&
+              data?.room_number.map((item: any) => item),
           }}
         >
           <Form.Item name="_id" hidden>
@@ -110,6 +112,26 @@ const EditBookingDrawn = ({
           >
             <Select options={filteredOptions} />
           </Form.Item>
+
+          {data?.status === "Đã xác nhận" && (
+            <Form.Item name="room_number" label="Số phòng">
+              <Select
+                mode="multiple"
+                className="w-[30px]"
+                maxCount={data?.list_room?.quantity}
+              >
+                {data?.list_room?.idRoom?.list_rooms.map((item: any) => (
+                  <Option
+                    key={item._id}
+                    value={item._id}
+                    disabled={item.status}
+                  >
+                    {item.room}
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
+          )}
 
           {data?.status === "Đã nhận phòng" && (
             <Form.Item name="id_amenities" label="Tiện ích">
