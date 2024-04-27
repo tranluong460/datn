@@ -111,6 +111,7 @@ export const register = async (req, res) => {
       }
 
       const randomCode = generateRandomCode(6);
+      console.log("🚀 ~ validateMiddleware ~ randomCode:", randomCode);
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
