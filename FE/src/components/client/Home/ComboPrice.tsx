@@ -45,7 +45,7 @@ const ComboPrice = () => {
       {hiddenSearch == false ? <Search /> : ""}
 
       <Container>
-        <div className="mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-8 relative">
+        <div className="mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-8 relative ">
           <div className="flex flex-col items-center mb-5 text-center md:mb-8">
             <h2 className="flex ">
               <p className="ml-0 md:ml-2 text-lg md:text-xl lg:text-2xl mb-2 md:mb-4 select-none font-bold text-neutral-500">
@@ -54,13 +54,13 @@ const ComboPrice = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-4 gap-5 relative cursor-pointer ">
+          <div className="grid grid-cols-4 gap-5 relative cursor-pointer">
             {hotelData?.data?.length > 0 ? (
               hotelData?.data
                 .slice(startIndex, startIndex + 4)
                 .map((room: any, index: number) => {
                   return (
-                    <div key={room?._id} className={`relative dark:border`}>
+                    <div key={room?._id} className={`relative`}>
                       <ComboPriceCard
                         data={room}
                         key={index}

@@ -39,7 +39,10 @@ const ProfilePage = () => {
         </div>
 
         <InfoUser user={data?.data} />
-      </div>{" "}
+      </div>
+      <div>
+
+      </div>
     </>
   );
 };

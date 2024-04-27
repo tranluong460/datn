@@ -61,13 +61,11 @@ const BookingInfo = ({
 
           <div className="text-base leading-normal text-textLight2nd dark:text-textDark2nd">
             <p className="font-medium">
-              Nhận phòng: {moment(booking.check_in).format("DD/MM/YYYY")}{" "}
-              (14:00)
+              Nhận phòng: {moment(booking.check_in).format("DD/MM/YYYY")}
             </p>
 
             <p className="font-medium">
-              Trả phòng: {moment(booking.check_out).format("DD/MM/YYYY")}{" "}
-              (12:00)
+              Trả phòng: {moment(booking.check_out).format("DD/MM/YYYY")}
             </p>
           </div>
         </div>
