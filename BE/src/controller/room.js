@@ -271,14 +271,14 @@ export const updateStatus = async (req, res) => {
     const roomIdToFind = req.params.roomId;
     const status = req.body.status;
     const room = await RoomModel.findOneAndUpdate(
-      { 'list_rooms._id': roomIdToFind },
-      { $set: { 'list_rooms.$.status': status } },
+      { "list_rooms._id": roomIdToFind },
+      { $set: { "list_rooms.$.status": status } },
       { new: true }
     );
 
-    return sendResponse(res, 200, 'Cập nhật trạng thái thành công', room)
+    return sendResponse(res, 200, "Cập nhật trạng thái thành công", room);
   } catch (error) {
     console.log(error);
     return sendResponse(res, 500, "Lỗi server");
   }
-}
+};
