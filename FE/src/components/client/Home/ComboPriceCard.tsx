@@ -39,7 +39,7 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
 
   return (
     <>
-      <div className="overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105">
+      <div className="overflow-hidden shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 dark:border">
         <img
           src={data?.images[0]?.url}
           alt="Service"
