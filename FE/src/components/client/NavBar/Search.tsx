@@ -26,7 +26,8 @@ const Search = () => {
 
   // ấn vào nút tìm kiếm nó sẽ render lại
   const [isSearched, setIsSearched] = useState(false);
-
+  // thông báo nếu checkout vượt qua 30 ngày
+  const [errorDay, setErrorDay] = useState("");
   // thông báo nếu chưa nhập số lượng phòng
   const [errorMessage, setErrorMessage] = useState("");
   const [roomInfo, setRoomInfo] = useState([
@@ -96,6 +97,7 @@ const Search = () => {
   const content = (
     <div>
       <p className="text-[red] font-bold">{errorMessage}</p>
+      <p className="text-[red] font-bold">{errorDay}</p>
     </div>
   );
   // ẩn/hiện + - để chọn số lượng phòng,người lớn, trẻ em
@@ -168,11 +170,25 @@ const Search = () => {
       updatedQuery.checkout = dateRange.endDate;
     }
 
+    setErrorDay("");
     if (dateRange.endDate === "") {
       setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
       return;
+    } else if (dateRange.endDate === dateRange.startDate) {
+      setErrorMessage(
+        "Bạn cần nhập lại thông tin ngày nhận phòng và trả phòng phải khác ngày"
+      );
+      return;
     }
 
+    setErrorMessage("");
+    const maxEndDate = dayjs(dateRange.startDate).add(29, "day");
+    if (dayjs(dateRange.endDate).isAfter(maxEndDate, "day")) {
+      setErrorDay(
+        "Ngày trả phòng chỉ có thể sau tối đa 29 ngày từ ngày nhận phòng"
+      );
+      return;
+    }
     // Nếu không có lỗi, tiếp tục xử lý như bình thường
     updatedQuery.quantity = room;
     updatedQuery.children = roomInfo[0].children;
@@ -208,6 +224,7 @@ const Search = () => {
       setIsScrollDisabled(false);
     }
   }, [isExpanded]);
+
   return (
     <>
       {isExpanded && <div className="overlay" />}
