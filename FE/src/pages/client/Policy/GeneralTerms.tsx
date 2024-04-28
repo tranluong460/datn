@@ -5692,20 +5692,4 @@ export default GeneralTerms;
 //               margin: "0in 0in 10pt",
 //             }}
 //           >
-//             &nbsp;4.3. Trường hợp đặc biệt:&nbsp;Trong một số trường hợp đặc
-//             biệt (bao gồm nhưng không giới hạn: sự kiện bất khả kháng, hoạt động
-//             nâng cấp, sửa chữa Khách Sạn v.v...), MeliaHanoi có quyền di dời
-//             Khách sang loại phòng/ Khách Sạn khác có tiêu chuẩn tương đương loại
-//             phòng/ Khách Sạn mà Khách/ Đối Tác đã đặt và được MeliaHanoi xác
-//             nhận.
-//           </p>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               textAlign: "justify",
-//               margin: "0in 0in 10pt",
-//             }}
-//           >
-//        
+//         
