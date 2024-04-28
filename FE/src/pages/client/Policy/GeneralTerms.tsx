@@ -5754,18 +5754,4 @@ export default GeneralTerms;
 //                 margin: "0in 0in 10pt",
 //               }}
 //             >
-//               Các yêu cầu đặc biệt khác như phòng ở tầng cao, phòng liền kề…, sẽ
-//               được cung cấp tùy thuộc vào khả năng sẵn có của Khách Sạn tại thời
-//               điểm nhận phòng.
-//             </li>
-//           </ul>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               textAlign: "justify",
-//               margin: "0in 0in 10pt",
-//             }}
-//           >
 //  
