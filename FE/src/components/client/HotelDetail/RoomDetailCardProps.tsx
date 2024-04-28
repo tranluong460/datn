@@ -21,8 +21,21 @@ const { RangePicker } = DatePicker;
 
 const RoomDetailCard = ({ room, onCloseDetail }: any) => {
   const [currentImage, setCurrentImage] = useState<string>(room?.images[0].url);
-
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+
+  const [numberRooms, setNumberRooms] = useState(1);
+
+  const increaseRooms = () => {
+    if (numberRooms <= 7) {
+      setNumberRooms(numberRooms + 1);
+    }
+  };
+
+  const reduceRooms = () => {
+    if (numberRooms > 1) {
+      setNumberRooms(numberRooms - 1);
+    }
+  };
 
   const handleThumbnailClick = (imageUrl: string, index: number) => {
     setCurrentImageIndex(index);
@@ -64,7 +77,7 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
       list_room: [
         {
           idRoom: dataRoom?.data?._id,
-          quantity: 1,
+          quantity: numberRooms,
         },
       ],
       city: 1,
@@ -133,7 +146,6 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
                 {room?.id_roomType?.adults} người lớn
               </p>
               <p>Số lượng giường ngủ: {room?.id_roomType?.bed}</p>
-              <p>Phòng còn trống: {room?.quantity}</p>
               <p>
                 Giá phòng:
                 {room?.id_roomType?.price.toLocaleString("vi-VN", {
@@ -142,6 +154,28 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
                 })}{" "}
                 / đêm
               </p>
+            </div>
+
+            <div className="flex justify-between">
+              <div className="font-bold">Số lượng phòng muốn đặt:</div>
+
+              <div className="flex gap-2 items-center">
+                <button
+                  onClick={reduceRooms}
+                  className="bg-gray-500 px-4 py-2 rounded-full text-white"
+                >
+                  -
+                </button>
+                <p className="font-bold bg-gray-500 text-white py-2 px-6">
+                  {numberRooms}
+                </p>
+                <button
+                  onClick={increaseRooms}
+                  className="bg-gray-500 px-4 py-2 rounded-full text-white"
+                >
+                  +
+                </button>
+              </div>
             </div>
 
             <RangePicker

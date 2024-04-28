@@ -43,7 +43,30 @@ const EditRoomModal = ({
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
   const [editRoom, resultEdit] = useUpdateRoomMutation();
 
+  // test
+  // end test
   const onFinish = (data: IRoom) => {
+    // const roomArray = data?.list_rooms
+    //   ?.split(",")
+    //   .map((room) => ({ room: Number(room.trim()) }));
+    // // Kiểm tra xem có phòng nào có status = true không
+    // // Kiểm tra xem data có list_rooms không và list_rooms có phải là một mảng không
+    // if (Array.isArray(roomArray) && roomArray.length > 0) {
+    //   // Kiểm tra xem có phòng nào có status = true không
+    //   const hasActiveRoom = roomArray.some((room: any) => room.status === true);
+
+    //   if (hasActiveRoom) {
+    //     message.error(
+    //       "Không thể sửa phòng vì có phòng đang ở trạng thái active!"
+    //     );
+    //     return;
+    //   }
+    // } else {
+    //   // Xử lý trường hợp roomArray không hợp lệ
+    //   console.error("Dữ liệu list_rooms không hợp lệ");
+    //   return;
+    // }
+
     editRoom(data)
       .unwrap()
       .then((response) => {
