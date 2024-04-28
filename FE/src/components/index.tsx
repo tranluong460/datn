@@ -32,6 +32,7 @@ import Sidebar from "./auth/Sidebar";
 import Footer from "./client/Footer/Footer";
 import ReviewInput from "./client/Review/ReviewInput";
 import Comment from "./client/Review/Comment";
+import RateProps from "./client/Review/Rate";
 // import Attractive from "./client/Home/Attractive";
 // import AttractiveCard from "./client/Home/AttractiveCard";
 import Experience from "./client/Home/Experience";
@@ -149,6 +150,7 @@ export {
   Modal,
   RegisterModal,
   SearchModal,
+  RateProps,
   DarkMode,
   Logo,
   MenuItem,
