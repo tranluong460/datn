@@ -5736,22 +5736,4 @@ export default GeneralTerms;
 //                 margin: "0in 0in 10pt",
 //               }}
 //             >
-//               Nếu Khách/ Đối Tác không cung cấp thông tin đúng hạn, MeliaHanoi
-//               có quyền hủy đặt phòng khỏi hệ thống, từ chối áp dụng giá ưu đãi
-//               theo Voucher, xác nhận Yêu Cầu Dịch Vụ, thỏa thuận, hợp đồng đã ký
-//               kết giữa Khách/ Đối Tác và MeliaHanoi. Trong trường hợp đó,
-//               MeliaHanoi sẽ áp dụng Giá Công Bố tại Khách Sạn vào ngày Khách làm
-//               thủ tục nhận phòng nếu còn phòng trống, và Đối Tác sẽ chịu hoàn
-//               toàn trách nhiệm giải quyết các khiếu nại của Khách phát sinh do
-//               việc cung cấp thông tin muộn.
-//             </li>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
-//  
+//         
