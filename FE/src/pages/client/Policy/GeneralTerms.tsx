@@ -5793,14 +5793,4 @@ export default GeneralTerms;
 //               em) không có xác nhận trước, Khách/ Đối Tác sẽ phải trả một khoản
 //               phụ thu tương ứng theo bảng Giá Công Bố của Khách Sạn tại thời
 //               điểm nhận phòng.
-//             </li>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
-//       
+//s
