@@ -69,7 +69,7 @@ const Comment = () => {
       ),
     },
     {
-      title: "Tên Người dùng",
+      title: "Email",
       dataIndex: "id_user",
       key: "id_user",
       render: (user) => {

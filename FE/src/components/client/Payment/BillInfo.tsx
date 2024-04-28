@@ -60,7 +60,7 @@ const BillInfo = ({ onToggleBooking }: BillInfoProps) => {
     }
 
     if (form.cmt == "" || form.name == "" || form.phone == "")
-      return toast.error("Vui lòng điền form");
+      return toast.error("Vui lòng điền tên của bạn");
 
     onToggleBooking(method, form);
   };

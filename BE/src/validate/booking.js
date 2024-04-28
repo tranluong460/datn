@@ -13,8 +13,15 @@ const bookingValidate = joi.object({
       phone: joi
         .string()
         .pattern(/^(0|\+84)[3|5|7|8|9][0-9]{8}$/)
-        .required(),
-      cmt: joi.string().required(),
+        .required()
+        .messages({
+          "any.required": "Bạn chưa nhập số điện thoại",
+          "string.pattern.base": "Số điện thoại không đúng định dạng! \n",
+        }),
+      cmt: joi.string().required().length(12).messages({
+        "any.required": "Bạn chưa nhập căn cước công dân",
+        "string.length": "Căn cước công dân phải có đúng 12 số!",
+      }),
     })
     .required(),
 
