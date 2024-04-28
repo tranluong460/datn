@@ -47,6 +47,14 @@ const InfoUser = ({ user }: InfoUserProps) => {
         </div>
         {/* <div className="bg-light dark:bg-dark border-t border-divideLight dark:border-divideDark px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
           <dt className="text-sm font-medium text-textLight dark:text-textDark">
+            Căn cước công dân
+          </dt>
+          <dd className="mt-1 text-sm text-textLight2nd dark:text-textDark2nd sm:mt-0 sm:col-span-2">
+            {user.id_information.cmt}
+          </dd>
+        </div> */}
+        {/* <div className="bg-light dark:bg-dark border-t border-divideLight dark:border-divideDark px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt className="text-sm font-medium text-textLight dark:text-textDark">
             Ảnh
           </dt>
           <dd className="mt-1 text-sm text-textLight2nd dark:text-textDark2nd sm:mt-0 sm:col-span-2">

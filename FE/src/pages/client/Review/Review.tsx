@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ReviewInput, Comment } from "../../../components";
+import { ReviewInput, Comment, RateProps } from "../../../components";
 import Evaluate from "../../../components/client/Review/Evaluate";
 import {
   useGetAllReviewQuery,
@@ -27,6 +27,7 @@ const Review = () => {
 
       <div className="flex justify-between">
         <Comment data={Data} />
+        <RateProps data={Data} />
         <Evaluate id_hotel={dataHotel} data={userData} />
       </div>
 
