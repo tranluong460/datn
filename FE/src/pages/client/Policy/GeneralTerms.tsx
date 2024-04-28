@@ -5708,32 +5708,4 @@ export default GeneralTerms;
 //               margin: "0in 0in 10pt",
 //             }}
 //           >
-//             4.4. Thông tin cung cấp cho Khách sạn trước ngày đến: Để Khách nhận
-//             được chất lượng dịch vụ tốt nhất từ Khách Sạn và đảm bảo an ninh cho
-//             Khách, Khách/ Đối Tác cần cung cấp cho bộ phận đặt phòng của Khách
-//             Sạn:
-//           </p>
-//           <ul>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
-//               Thông tin chuyến bay và thời gian tới Khách Sạn dự kiến cần được
-//               cung cấp cho Khách Sạn ít nhất 05 ngày trước ngày Khách đến trong
-//               trường hợp Khách yêu cầu dịch vụ đón, tiễn.
-//             </li>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
-//         
+//        
