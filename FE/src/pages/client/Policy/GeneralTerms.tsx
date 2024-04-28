@@ -5768,29 +5768,4 @@ export default GeneralTerms;
 //               margin: "0in 0in 10pt",
 //             }}
 //           >
-//             4.5. Thay đổi thông tin:
-//           </p>
-//           <ul>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
-//               Đối với các Yêu Cầu Dịch Vụ được phép hủy hoặc thay đổi: Bất cứ sự
-//               thay đổi nào về thông tin, bữa ăn, dịch vụ phát sinh so với Yêu
-//               Cầu Dịch Vụ ban đầu cần được gửi cho bộ phận đặt phòng của Khách
-//               Sạn trước số ngày tối thiểu để điều chỉnh Yêu Cầu Dịch Vụ theo quy
-//               định ghi trong Xác nhận đặt phòng và được xác nhận của Bộ phận đặt
-//               phòng của Khách sạn. Nếu sự thay đổi không được xác nhận trước,
-//               MeliaHanoi có quyền áp dụng Giá Công Bố tại Khách Sạn vào ngày
-//               Khách làm thủ tục nhận phòng và Đối Tác sẽ chịu hoàn toàn trách
-//               nhiệm giải quyết các khiếu nại của Khách phát sinh do việc cung
-//               cấp thông tin muộn. Trong trường hợp có thêm Khách (bao gồm cả trẻ
-//               em) không có xác nhận trước, Khách/ Đối Tác sẽ phải trả một khoản
-//               phụ thu tương ứng theo bảng Giá Công Bố của Khách Sạn tại thời
-//               điểm nhận phòng.
-//s
+//  
