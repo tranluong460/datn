@@ -35,6 +35,7 @@ const EditRoomModal = ({
   loading,
   data,
 }: EditRoomModalProps) => {
+  console.log("🚀 ~ data:", data);
   const [form] = Form.useForm();
   const { Option } = Select;
 
@@ -43,8 +44,13 @@ const EditRoomModal = ({
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
   const [editRoom, resultEdit] = useUpdateRoomMutation();
 
-  // test
-  // end test
+  const usedRooms = data?.list_rooms?.reduce((acc: number[], room: any) => {
+    if (room.status) {
+      acc.push(room.room);
+    }
+    return acc;
+  }, []);
+
   const onFinish = (data: IRoom) => {
     // const roomArray = data?.list_rooms
     //   ?.split(",")
@@ -66,7 +72,6 @@ const EditRoomModal = ({
     //   console.error("Dữ liệu list_rooms không hợp lệ");
     //   return;
     // }
-
     editRoom(data)
       .unwrap()
       .then((response) => {
@@ -112,7 +117,6 @@ const EditRoomModal = ({
           <Form.Item name="_id" hidden>
             <Input />
           </Form.Item>
-
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -125,6 +129,20 @@ const EditRoomModal = ({
             </Col>
 
             <Col span={12}>
+              <div>
+                {usedRooms && usedRooms.length > 0 && (
+                  <div className="flex flex-wrap">
+                    <p className="text-black font-bold">
+                      {" "}
+                      Các phòng này đang được sử dụng và không được phép xoá và
+                      sửa:
+                    </p>{" "}
+                    <p className="text-red-500 font-bold">
+                      {usedRooms.join(", ")}
+                    </p>
+                  </div>
+                )}
+              </div>
               <Form.Item
                 name="list_rooms"
                 label="Số Phòng"
@@ -132,6 +150,16 @@ const EditRoomModal = ({
               >
                 <Input className="w-full" min={1} />
               </Form.Item>
+
+              {/* {data?.list_rooms?.map((room: any) => {
+                console.log(room);
+                return (
+                  <div>
+                    các phòng này hiện đang được sử dụng không được xoá và sửa
+                    <p>{room?.status == false ? room.room : ""}</p>
+                  </div>
+                );
+              })} */}
             </Col>
 
             <Col span={12}>

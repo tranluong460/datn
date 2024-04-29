@@ -1,6 +1,6 @@
 import qs from "query-string";
 import { useGetAllHotelQuery, useGetOneRoomQuery } from "../../../api";
-import { Button, Modal, DatePicker, Space } from "antd";
+import { Button, DatePicker } from "antd";
 import dayjs from "dayjs";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
@@ -20,13 +20,14 @@ type RoomDetailCardProps = {
 const { RangePicker } = DatePicker;
 
 const RoomDetailCard = ({ room, onCloseDetail }: any) => {
+  console.log("🚀 ~ RoomDetailCard ~ room:", room.quantity);
   const [currentImage, setCurrentImage] = useState<string>(room?.images[0].url);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   const [numberRooms, setNumberRooms] = useState(1);
 
   const increaseRooms = () => {
-    if (numberRooms <= 7) {
+    if (numberRooms <= room.quantity - 1) {
       setNumberRooms(numberRooms + 1);
     }
   };
@@ -191,7 +192,6 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
               }}
             />
             <p className="text-red-500 font-bold">{errorMessage}</p>
-
             {room?.id_roomType?.status !== "Không được áp dụng" ? (
               <Button
                 type="primary"
