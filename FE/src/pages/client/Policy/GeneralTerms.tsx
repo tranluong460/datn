@@ -5655,17 +5655,5 @@ export default GeneralTerms;
 //                 margin: "0in 0in 10pt",
 //               }}
 //             >
-//               Tối đa 04 người trong 01 phòng ngủ bao gồm cả trẻ em dưới 12 tuổi:
-//               03A &amp; 01C hoặc 02A &amp; 02C.
-//             </li>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
-//        
+//             
 //    
