@@ -5597,15 +5597,4 @@ export default GeneralTerms;
 //               textAlign: "justify",
 //             }}
 //           >
-//             Các khoản phí nhận phòng sớm/trả phòng muộn nêu trên sẽ được tính
-//             theo Giá Công Bố của Khách sạn&nbsp;(bao gồm giá chương trình khuyến
-//             mại nếu đang áp dụng tại thời điểm thanh toán)&nbsp;khi Khách trực
-//             tiếp thanh toán cho Khách sạn.
-//           </p>
-//           <p
-//             style={{
-//               listStyleType: "none",
-//             }}
-//           >
-//             &nbsp;
-//       
+//          
