@@ -5632,12 +5632,4 @@ export default GeneralTerms;
 //             >
 //               {url}
 //             </a>
-//             , qua email hoặc văn bản trước khi Khách làm thủ tục nhận phòng.
-//             MeliaHanoi sẽ xác nhận đặt phòng/ dịch vụ được gửi qua email đăng ký
-//             của Khách hàng.
-//           </p>
-//           <p
-//             style={{
-//               listStyleType: "none",
-//             }}
-//        
+//           
