@@ -660,218 +660,330 @@
 //                   $("body").addClass("visible-helper"),
 //                     $("#js-left-menu, #js-right-menu")
 //                       .find(".js-tooltip")
-//                       .tooltip("show");
-//                 })
-//                 .on("shown.bs.modal", function () {
-//                   $("#js-left-menu, #js-right-menu")
-//                     .find(".js-tooltip")
-//                     .tooltip("show");
-//                 })
-//                 .on("hidden.bs.modal", function () {
-//                   $("body").removeClass("visible-helper"),
-//                     setTimeout(function () {
-//                       $("#js-left-menu, #js-right-menu")
-//                         .find(".js-tooltip")
-//                         .tooltip("hide");
-//                     });
-//                 });
-//           },
-//         })),
-//         $(document).ready(function () {
-//           window.NuHiepScript.init();
-//         });
-//     },
-//     294: function (t, e, n) {
-//       "use strict";
-//       n(127);
-//     },
-//     295: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n.require[data-v-4cce9ca6] {\n    border: 1px solid #f00 !important;\n}\n",
-//         "",
-//       ]);
-//     },
-//     297: function (t, e, n) {
-//       "use strict";
-//       n(128);
-//     },
-//     298: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n#chapter-list-sort-btn[data-v-abaf3886] {\n    cursor: pointer;\n}\na[data-v-abaf3886] {\n    cursor: pointer;\n}\n",
-//         "",
-//       ]);
-//     },
-//     299: function (t, e, n) {
-//       "use strict";
-//       n(129);
-//     },
-//     300: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n.user-default-avatar[data-v-472d14d3] {\n    width: 45px;\n    font-size: 45px;\n}\n#reviews_book a[data-v-472d14d3] {\n    cursor: pointer;\n}\n",
-//         "",
-//       ]);
-//     },
-//     312: function (t, e, n) {
-//       "use strict";
-//       n(131);
-//     },
-//     313: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n#bookAuthor a[data-v-3807dc18] {\n    cursor: pointer;\n}\n",
-//         "",
-//       ]);
-//     },
-//     314: function (t, e, n) {
-//       "use strict";
-//       n(132);
-//     },
-//     315: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n.top-fan[data-v-84d735ce]{\n  text-shadow:none;\n    background: #b78a28 -webkit-gradient(linear, left top, right top,\nfrom(#b78a28), to(#b78a28), color-stop(0.5, #FFFF99)) 0 0 no-repeat;\n    color: rgba(255, 255, 255, 0.1);\n    font-weight: bold;\n    position: relative;\n    -webkit-animation: shine-data-v-84d735ce 2s infinite;\n    -webkit-background-clip: text;\n    -webkit-background-size: 150px;\n}\n@-webkit-keyframes shine-data-v-84d735ce {\n0% {\n        background-position: top left;\n}\n100% {\n        background-position: top right;\n}\n}\n",
-//         "",
-//       ]);
-//     },
-//     316: function (t, e, n) {
-//       "use strict";
-//       n(133);
-//     },
-//     317: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n.require[data-v-32c3e250] {\n    border: 1px solid #f00 !important;\n}\n",
-//         "",
-//       ]);
-//     },
-//     318: function (t, e, n) {
-//       "use strict";
-//       n(134);
-//     },
-//     319: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n.require[data-v-50648a25] {\n    border: 1px solid #f00 !important;\n}\n",
-//         "",
-//       ]);
-//     },
-//     320: function (t, e, n) {
-//       "use strict";
-//       n(135);
-//     },
-//     321: function (t, e, n) {
-//       (t.exports = n(15)(!1)).push([
-//         t.i,
-//         "\n.require[data-v-172e8569] {\n    border: 1px solid #f00 !important;\n}\n",
-//         "",
-//       ]);
-//     },
-//     372: function (t, e, n) {
-//       "use strict";
-//       n.r(e);
-//       var r = n(29),
-//         i = n(58),
-//         a = n.n(i),
-//         o = n(1),
-//         s = n(59),
-//         c = n.n(s),
-//         l = (n(156), n(2));
-//       var u = n(60),
-//         d = n(61),
-//         m = (n(69), n(0)),
-//         v = n.n(m),
-//         f = n(33),
-//         p = n(3),
-//         h = n(39),
-//         W = (n(68), n(8)),
-//         g = n(6);
-//       function b(t, e, n, r, i, a, o) {
-//         try {
-//           var s = t[a](o),
-//             c = s.value;
-//         } catch (t) {
-//           return void n(t);
-//         }
-//         s.done ? e(c) : Promise.resolve(c).then(r, i);
-//       }
-//       function k(t) {
-//         return function () {
-//           var e = this,
-//             n = arguments;
-//           return new Promise(function (r, i) {
-//             var a = t.apply(e, n);
-//             function o(t) {
-//               b(a, r, i, o, s, "next", t);
-//             }
-//             function s(t) {
-//               b(a, r, i, o, s, "throw", t);
-//             }
-//             o(void 0);
-//           });
-//         };
-//       }
-//       function C(t, e) {
-//         var n = Object.keys(t);
-//         if (Object.getOwnPropertySymbols) {
-//           var r = Object.getOwnPropertySymbols(t);
-//           e &&
-//             (r = r.filter(function (e) {
-//               return Object.getOwnPropertyDescriptor(t, e).enumerable;
-//             })),
-//             n.push.apply(n, r);
-//         }
-//         return n;
-//       }
-//       function w(t) {
-//         for (var e = 1; e < arguments.length; e++) {
-//           var n = null != arguments[e] ? arguments[e] : {};
-//           e % 2
-//             ? C(Object(n), !0).forEach(function (e) {
-//                 _(t, e, n[e]);
-//               })
-//             : Object.getOwnPropertyDescriptors
-//             ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n))
-//             : C(Object(n)).forEach(function (e) {
-//                 Object.defineProperty(
-//                   t,
-//                   e,
-//                   Object.getOwnPropertyDescriptor(n, e)
-//                 );
-//               });
-//         }
-//         return t;
-//       }
-//       function _(t, e, n) {
-//         return (
-//           e in t
-//             ? Object.defineProperty(t, e, {
-//                 value: n,
-//                 enumerable: !0,
-//                 configurable: !0,
-//                 writable: !0,
-//               })
-//             : (t[e] = n),
-//           t
-//         );
-//       }
-//       var y = {
-//         data: function () {
-//           return {
-//             navList: o.userNav,
-//             bxhList: [
-//               {
-//                 id: "6",
-//                 name: "Thịnh hành",
-//                 icon: "icon-up",
-//                 slug: "thinh-hanh",
-//               },
-//               {
-//                 id: "1",
-//                 name: "Đọc nhiều",
-//                 icon: "icon-sound-waves",
-//                 slug: "doc-nhieu",
-//               },
-//               {
+
+//     vf,
+//     zf,
+//     Nf,
+//     pj,
+//     Jw,
+//     lE,
+//     Mf,
+//     mg,
+//     Dj,
+//     Fg,
+//     Zf,
+//     bE,
+//     pE,
+//     Af,
+//     Ij,
+//     AE,
+//     Vf,
+//     dw,
+//     lf,
+//     jg,
+//     Ng,
+//     Wg,
+//     vg,
+//     qf,
+//     Of,
+//     NE,
+//     RD,
+//     mw,
+//     ZD,
+//     tg,
+//     Df,
+//     zj,
+//     Mg,
+//     tf,
+//     Wf,
+//     rE,
+//     ED,
+//     gw,
+//     gg,
+//     Ej,
+//     mD,
+//     tw,
+//     jD,
+//     Ew,
+//     KD,
+//     pw,
+//     Ow,
+//     BD,
+//     pg,
+//     df,
+//     TE,
+//     ww,
+//     gj,
+//     kf,
+//     vE,
+//     Gj,
+//     lD,
+//     Lw,
+//     Vw,
+//     Ff,
+//     Ig,
+//     Dg,
+//     Qg,
+//     PD,
+//     bw,
+//     Aw,
+//     ng,
+//     mf,
+//     OE,
+//     ME,
+//     Gf,
+//     OD,
+//     Tw,
+//     Pj,
+//     Vg,
+//     sE,
+//     Sw,
+//     GD,
+//     Gg,
+//     Lj,
+//     XD,
+//     qw,
+//     Kw,
+//     Uw,
+//     lw,
+//     tj,
+//     Xw,
+//     hD,
+//     rj,
+//     bf,
+//     kE,
+//     zw,
+//     Yf,
+//     Zw,
+//     Xj,
+//     Pf,
+//     dE,
+//     Hg,
+//     If,
+//     fD,
+//     Rj,
+//     rD,
+//     dj,
+//     rf,
+//     Hw,
+//     CE,
+//     kD,
+//     fg,
+//     Ww,
+//     xg,
+//     Zj,
+//     vj,
+//     sD,
+//     UD,
+//     fw,
+//     bg,
+//     nD,
+//     hj,
+//     tD,
+//     RE,
+//     FE,
+//     kg,
+//     sj,
+//     Bw,
+//     wj,
+//     nE,
+//     wf,
+//     vD,
+//     cE,
+//     Hj,
+//     Ef,
+//     Sf,
+//     Qf,
+//     BE,
+//     jw,
+//     Mj,
+//     tE,
+//     sw,
+//     Kj,
+//     Mw,
+//     Og,
+//     Yj,
+//     mj,
+//     hw,
+//     Kf,
+//     fj,
+//     Lf,
+//     lg,
+//     jf,
+//     Xg,
+//     Kg,
+//     Jg,
+//     SE,
+//     xw,
+//     wg,
+//     nw,
+//     Qj,
+//     FD,
+//     Uj,
+//     cf,
+//     Hf,
+//     LD,
+//     Cg,
+//     Dw,
+//     Tf,
+//     Tj,
+//     Bf,
+//     Fj,
+//     kw,
+//     Sg,
+//     Pg,
+//     Bj,
+//     Pw,
+//     nf,
+//     qj,
+//     qg,
+//     VD,
+//     Cf,
+//     xD,
+//     Jf,
+//     DD,
+//     cj,
+//     Rg,
+//     Bg,
+//     nj,
+//     Iw,
+//     SD,
+//     Nj,
+//     JD,
+//     Ag,
+//     Uf,
+//     Eg,
+//     Aj,
+//     Yg,
+//     cg,
+//     MD,
+//     xj,
+//     Ug,
+//     rg,
+//     pD,
+//     bj,
+//     Cj,
+//     YD,
+//     CD,
+//     lj,
+//     Rw,
+//     wD,
+//     hg,
+//     sf,
+//     vw,
+//     qD,
+//     cw,
+//     dg,
+//     Yw,
+//     gf,
+//     xE,
+//     ff,
+//     zD,
+//     gD,
+//     AD,
+//     Vj,
+//     xf,
+//     Tg,
+//     dD,
+//     Sj,
+//     IE,
+//     sg,
+//     Xf,
+//     Qw,
+//     Oj,
+//     Gw,
+//     Nw,
+//     ND,
+//     Cw,
+//     pf,
+//     Wj,
+//     QE,
+//     Rf,
+//     cD,
+//     zg,
+//     rw,
+//     Jj;
+//   var CZ;
+//   var M4;
+//   function TG(WG, Zp, hp) {
+//     var Yp = zp(WG, "0x" + hp);
+//     var Ep = zp(WG, ";", Yp);
+//     var jp = Yp + Fp(hp) + 3;
+//     var wp = Gp(WG, jp, Ep - jp);
+//     var fp = Gp(WG, 0, Yp);
+//     var gp = Gp(WG, Ep + 1);
+//     var Dp = fp + gp + typeof h[Zp];
+//     var Up = bG(Dp, 568217);
+//     return wp - Up;
+//   }
+//   var A3;
+//   var TU;
+//   var D;
+//   var wX;
+//   function QG() {
+//     (JE = [+!+[]] + [+[]] - +!+[] - +!+[]),
+//       (VE = +!+[] + !+[] + !+[]),
+//       (LE = +!+[] + !+[] + !+[] + !+[] + !+[]),
+//       (PE = !+[] + !+[] + !+[] + !+[]),
+//       (zE = [+!+[]] + [+[]] - +!+[]),
+//       (qE = +[]),
+//       (XE = +!+[]),
+//       (mE = +!+[] + !+[] + !+[] + !+[] + !+[] + !+[] + !+[]),
+//       (GE = [+!+[]] + [+[]] - []),
+//       (HE = +!+[] + !+[] + !+[] + !+[] + !+[] + !+[]),
+//       (KE = !+[] + !+[]);
+//   }
+//   var n3;
+//   var I1;
+//   var HE, XE, zE, LE, VE, qE, JE, GE, KE, mE, PE;
+//   var cU;
+//   var M2;
+//   function dG(tG, kG) {
+//     TU.push(vP);
+//     var sG = function () {};
+//     sG[Y.K6.call(null, K3(xX), I3, J4)][Y.V6(S3(OU), K3(dX), V2)] = tG;
+//     sG[Y.K6(K3(xX), S3(OU), J4)][Y.P6.apply(null, [U2, K3(tX), K2])] =
+//       function (NG) {
+//         TU.push(B3);
+//         var OG;
+//         return (OG = this[Y.L6(kX, qP)] = kG(NG)), TU.pop(), OG;
+//       };
+//     sG[Y.K6.apply(null, [K3(xX), KP, J4])][Y.H6(K3(gP), AU, Y2)] = function () {
+//       TU.push(sX);
+//       var rG;
+//       return (
+//         (rG = this[Y.L6.call(null, NX, qP)] = kG(this[Y.L6(NX, qP)])),
+//         TU.pop(),
+//         rG
+//       );
+//     };
+//     var RG;
+//     return (RG = new sG()), TU.pop(), RG;
+//   }
+//   var Y;
+//   var FZ;
+//   var RZ;
+//   var b3;
+//   var Z3;
+//   var Pm;
+//   function xG(BG) {
+//     BG = BG ? BG : j3(BG);
+//     var SG = jU(R4(BG, OU), Vm[rU]);
+//     if (jU(Em(Em(N2(BG, T2), N2(BG, j2)), BG), OU)) {
+//       SG++;
+//     }
+//     return SG;
+//   }
+//   var kZ;
+//   var I2;
+//   var MZ;
+//   var IZ;
+//   var O1;
+//   function Fp(a) {
+//     return a.length;
+//   }
+//   var x3;
+//   var ZK;
+//   var Vm;
+//   Pm;
+// })();
