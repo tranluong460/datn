@@ -176,6 +176,14 @@ export const create = async (req, res) => {
         );
       }
 
+      if (req.body.list_room[0].quantity > roomBooking.list_rooms.length) {
+        return sendResponse(
+          res,
+          404,
+          "Xin lỗi, số lượng phòng đã được đặt đã vượt quá số lượng phòng còn lại."
+        );
+      }
+
       const userBooking = await BookingModel.findOne({
         id_user: user._id,
         status: "Chờ thanh toán",
@@ -216,6 +224,8 @@ export const create = async (req, res) => {
           user_list: [...voucher_user_list, idu],
         });
       }
+
+      return;
 
       const data = await BookingModel.create({
         id_user: user._id,
