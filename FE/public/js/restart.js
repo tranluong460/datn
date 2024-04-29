@@ -483,189 +483,300 @@
 //               K3(g2),
 //               D2,
 //               K3(U2),
-//               h2,
-//               Y2,
-//               K3(f2),
-//               K3(v3),
-//               Y2,
-//               K3(Y2),
-//               K3(Z2),
-//               q2,
-//               K3(j2),
-//               X2,
-//               K3(K2),
-//               K3(V2),
-//               K3(P2),
-//               L2,
-//               AU,
-//               K3(h2),
-//               I3,
-//               K3(j2),
-//               K3(E2),
-//               H2,
-//             ];
-//             lU = AE;
+// 293: function (t, e) {
+//       var n;
+//       (window.NuHiepScript =
+//         ((n = function () {
+//           if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+//             var t = document.createElement("style");
+//             t.appendChild(
+//               document.createTextNode("@-ms-viewport{width:auto!important}")
+//             ),
+//               document.querySelector("head").appendChild(t);
 //           }
-//           break;
-//         case hj:
-//           {
-//             lU = AE;
-//             return [
-//               "J6",
-//               "Kh",
-//               "XY",
-//               "NY",
-//               "V6",
-//               "rY",
-//               "b6",
-//               "PY",
-//               "tY",
-//               "Sh",
-//               "Ch",
-//               "v6",
-//               "MY",
-//               "d6",
-//               "SY",
-//               "Dh",
-//               "jh",
-//               "Zh",
-//               "Fh",
-//               "wh",
-//               "kh",
-//               "VY",
-//               "hh",
-//               "DY",
-//               "R6",
-//               "Ph",
-//             ];
-//           }
-//           break;
-// case Ej:
-//           {
-//             while (DU(m2, rU)) {
-//               var J2 = IU(
-//                 CU(NU(CU(m2, z2), TU[NU(TU.length, OU)]), D),
-//                 G2.length
-//               );
-//               var p2 = GU(F2, m2);
-//               var c2 = GU(G2, J2);
-//               P3 += vU(vE, [E3(jU(j3(p2), c2), jU(j3(c2), p2))]);
-//               m2--;
+//         }),
+//         {
+//           init: function () {
+//             n(),
+//               $(".js-slider").each(function () {
+//                 var t = $(this),
+//                   e = t.find('[data-type="poster"]'),
+//                   n = t.find('[data-type="info"]'),
+//                   r = new Swiper(n, {
+//                     spaceBetween: 0,
+//                     fadeEffect: {
+//                       crossFade: !1,
+//                     },
+//                     effect: "fade",
+//                     slidesPerView: 1,
+//                   });
+//                 new Swiper(e, {
+//                   navigation: {
+//                     nextEl: e.find(".swiper-button-next"),
+//                     prevEl: e.find(".swiper-button-prev"),
+//                   },
+//                   effect: "coverflow",
+//                   loop: !0,
+//                   centeredSlides: !0,
+//                   spaceBetween: 0,
+//                   slidesPerView: "auto",
+//                   coverflow: {
+//                     rotate: 0,
+//                     stretch: 0,
+//                     depth: 100,
+//                     modifier: 1,
+//                     slideShadows: !1,
+//                   },
+//                   autoplay: 5e3,
+//                   autoplayDisableOnInteraction: !1,
+//                   on: {
+//                     slideChangeTransitionEnd: function () {
+//                       r.slideTo(this.realIndex);
+//                     },
+//                   },
+//                 }),
+//                   e.addClass("loaded");
+//               }),
+//               window.dispatchEvent(new Event("resize")),
+//               $(".js-swiper-slider").each(function () {
+//                 var t = $(this);
+//                 new Swiper(t, {
+//                   spaceBetween: 15,
+//                   slidesPerView: 1,
+//                   navigation: {
+//                     nextEl: t.find(".swiper-button-next"),
+//                     prevEl: t.find(".swiper-button-prev"),
+//                   },
+//                   pagination: {
+//                     el: t.find(".swiper-pagination"),
+//                     type: "bullets",
+//                   },
+//                 });
+//               }),
+//               $(".js-tooltip").tooltip(),
+//               new hcSticky("#js-left-menu", {
+//                 top: 16,
+//               }),
+//               new hcSticky("#js-right-menu", {
+//                 top: window.innerHeight - 150 - 16,
+//               }),
+//               $("#js-guide")
+//                 .on("show.bs.modal", function () {
+//                   $("body").addClass("visible-helper"),
+//                     $("#js-left-menu, #js-right-menu")
+//                       .find(".js-tooltip")
+//                       .tooltip("show");
+//                 })
+//                 .on("shown.bs.modal", function () {
+//                   $("#js-left-menu, #js-right-menu")
+//                     .find(".js-tooltip")
+//                     .tooltip("show");
+//                 })
+//                 .on("hidden.bs.modal", function () {
+//                   $("body").removeClass("visible-helper"),
+//                     setTimeout(function () {
+//                       $("#js-left-menu, #js-right-menu")
+//                         .find(".js-tooltip")
+//                         .tooltip("hide");
+//                     });
+//                 });
+//           },
+//         })),
+//         $(document).ready(function () {
+//           window.NuHiepScript.init();
+//         });
+//     },
+//     294: function (t, e, n) {
+//       "use strict";
+//       n(127);
+//     },
+//     295: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n.require[data-v-4cce9ca6] {\n    border: 1px solid #f00 !important;\n}\n",
+//         "",
+//       ]);
+//     },
+//     297: function (t, e, n) {
+//       "use strict";
+//       n(128);
+//     },
+//     298: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n#chapter-list-sort-btn[data-v-abaf3886] {\n    cursor: pointer;\n}\na[data-v-abaf3886] {\n    cursor: pointer;\n}\n",
+//         "",
+//       ]);
+//     },
+//     299: function (t, e, n) {
+//       "use strict";
+//       n(129);
+//     },
+//     300: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n.user-default-avatar[data-v-472d14d3] {\n    width: 45px;\n    font-size: 45px;\n}\n#reviews_book a[data-v-472d14d3] {\n    cursor: pointer;\n}\n",
+//         "",
+//       ]);
+//     },
+//     312: function (t, e, n) {
+//       "use strict";
+//       n(131);
+//     },
+//     313: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n#bookAuthor a[data-v-3807dc18] {\n    cursor: pointer;\n}\n",
+//         "",
+//       ]);
+//     },
+//     314: function (t, e, n) {
+//       "use strict";
+//       n(132);
+//     },
+//     315: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n.top-fan[data-v-84d735ce]{\n  text-shadow:none;\n    background: #b78a28 -webkit-gradient(linear, left top, right top,\nfrom(#b78a28), to(#b78a28), color-stop(0.5, #FFFF99)) 0 0 no-repeat;\n    color: rgba(255, 255, 255, 0.1);\n    font-weight: bold;\n    position: relative;\n    -webkit-animation: shine-data-v-84d735ce 2s infinite;\n    -webkit-background-clip: text;\n    -webkit-background-size: 150px;\n}\n@-webkit-keyframes shine-data-v-84d735ce {\n0% {\n        background-position: top left;\n}\n100% {\n        background-position: top right;\n}\n}\n",
+//         "",
+//       ]);
+//     },
+//     316: function (t, e, n) {
+//       "use strict";
+//       n(133);
+//     },
+//     317: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n.require[data-v-32c3e250] {\n    border: 1px solid #f00 !important;\n}\n",
+//         "",
+//       ]);
+//     },
+//     318: function (t, e, n) {
+//       "use strict";
+//       n(134);
+//     },
+//     319: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n.require[data-v-50648a25] {\n    border: 1px solid #f00 !important;\n}\n",
+//         "",
+//       ]);
+//     },
+//     320: function (t, e, n) {
+//       "use strict";
+//       n(135);
+//     },
+//     321: function (t, e, n) {
+//       (t.exports = n(15)(!1)).push([
+//         t.i,
+//         "\n.require[data-v-172e8569] {\n    border: 1px solid #f00 !important;\n}\n",
+//         "",
+//       ]);
+//     },
+//     372: function (t, e, n) {
+//       "use strict";
+//       n.r(e);
+//       var r = n(29),
+//         i = n(58),
+//         a = n.n(i),
+//         o = n(1),
+//         s = n(59),
+//         c = n.n(s),
+//         l = (n(156), n(2));
+//       var u = n(60),
+//         d = n(61),
+//         m = (n(69), n(0)),
+//         v = n.n(m),
+//         f = n(33),
+//         p = n(3),
+//         h = n(39),
+//         W = (n(68), n(8)),
+//         g = n(6);
+//       function b(t, e, n, r, i, a, o) {
+//         try {
+//           var s = t[a](o),
+//             c = s.value;
+//         } catch (t) {
+//           return void n(t);
+//         }
+//         s.done ? e(c) : Promise.resolve(c).then(r, i);
+//       }
+//       function k(t) {
+//         return function () {
+//           var e = this,
+//             n = arguments;
+//           return new Promise(function (r, i) {
+//             var a = t.apply(e, n);
+//             function o(t) {
+//               b(a, r, i, o, s, "next", t);
 //             }
-//             lU += Yj;
-//           }
-//           break;
-//         case kE:
-//           {
-//             var A2 = xU[qE];
-//             mU.UE = vU(jj, [A2]);
-//             while (g3(mU.UE.length, C2)) mU.UE += mU.UE;
-//             lU += wj;
-//           }
-//           break;
-//         case fj:
-//           {
-//             TU.push(n2);
-//             M2 = function (v2) {
-//               return vU.apply(this, [tE, arguments]);
-//             };
-//             lU = AE;
-//             JU(LE, [K3(l2), U2]);
-//             TU.pop();
-//           }
-//           break;
-//         case TE:
-//           {
-//             lU += gj;
-//             var x2 = xU[qE];
-//             F3.fE = vU(Dj, [x2]);
-//             while (g3(F3.fE.length, d2)) F3.fE += F3.fE;
-//           }
-//           break;
-//         case vE:
-//           {
-//             var t2 = xU[qE];
-//             if (k2(t2, Uj)) {
-//               return h[cU[j2]][cU[s2]](t2);
-//             } else {
-//               t2 -= Zj;
-//               return h[cU[j2]][cU[s2]][cU[f2]](null, [
-//                 CU(N2(t2, O2), qj),
-//                 CU(IU(t2, Xj), Kj),
-//               ]);
+//             function s(t) {
+//               b(a, r, i, o, s, "throw", t);
 //             }
-//             lU = AE;
-//           }
-//           break;
-//         case Vj:
-//           {
-//             return [
-//               "BY",
-//               "z6",
-//               "zh",
-//               "r6",
-//               "Ih",
-//               "W6",
-//               "k6",
-//               "Xh",
-//               "Nh",
-//               "U6",
-//               "x6",
-//               "Yh",
-//               "wY",
-//               "Lh",
-//               "RY",
-//               "Mh",
-//               "UY",
-//               "P6",
-//               "ZY",
-//               "CY",
-//               "qh",
-//               "FY",
-//               "jE",
-//               "YY",
-//             ];
-//           }
-//           break;
-//         case Pj:
-//           {
-//             var r2 = xU[qE];
-//             var R2 = xU[XE];
-//             var B2 = xU[KE];
-//             lU += bE;
-//             var O3 = CU([], []);
-//             var N3 = IU(CU(NU(B2, TU[NU(TU.length, OU)]), D), l3);
-//             var t3 = S2[R2];
-//           }
-//           break;
-//         case Lj:
-//           {
-//             I2 = [
-//               K3(V2),
-//               v3,
-//               K3(Q2),
-//               v3,
-//               T2,
-//               OU,
-//               OU,
-//               K3(w2),
-//               W3,
-//               OU,
-//               v3,
-//               K3(b2),
-//               s2,
-//               f2,
-//               K3(s2),
-//               K3(b2),
-//               s2,
-//               h2,
-//               K3(v3),
-//               K3(h2),
-//               Y2,
-//               K3(E2),
-//               j2,
-//               K3(OU),
-//             ];
-//             lU = AE;
-//           }
-//           break;
+//             o(void 0);
+//           });
+//         };
+//       }
+//       function C(t, e) {
+//         var n = Object.keys(t);
+//         if (Object.getOwnPropertySymbols) {
+//           var r = Object.getOwnPropertySymbols(t);
+//           e &&
+//             (r = r.filter(function (e) {
+//               return Object.getOwnPropertyDescriptor(t, e).enumerable;
+//             })),
+//             n.push.apply(n, r);
+//         }
+//         return n;
+//       }
+//       function w(t) {
+//         for (var e = 1; e < arguments.length; e++) {
+//           var n = null != arguments[e] ? arguments[e] : {};
+//           e % 2
+//             ? C(Object(n), !0).forEach(function (e) {
+//                 _(t, e, n[e]);
+//               })
+//             : Object.getOwnPropertyDescriptors
+//             ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n))
+//             : C(Object(n)).forEach(function (e) {
+//                 Object.defineProperty(
+//                   t,
+//                   e,
+//                   Object.getOwnPropertyDescriptor(n, e)
+//                 );
+//               });
+//         }
+//         return t;
+//       }
+//       function _(t, e, n) {
+//         return (
+//           e in t
+//             ? Object.defineProperty(t, e, {
+//                 value: n,
+//                 enumerable: !0,
+//                 configurable: !0,
+//                 writable: !0,
+//               })
+//             : (t[e] = n),
+//           t
+//         );
+//       }
+//       var y = {
+//         data: function () {
+//           return {
+//             navList: o.userNav,
+//             bxhList: [
+//               {
+//                 id: "6",
+//                 name: "Thịnh hành",
+//                 icon: "icon-up",
+//                 slug: "thinh-hanh",
+//               },
+//               {
+//                 id: "1",
+//                 name: "Đọc nhiều",
+//                 icon: "icon-sound-waves",
+//                 slug: "doc-nhieu",
+//               },
+//               {
