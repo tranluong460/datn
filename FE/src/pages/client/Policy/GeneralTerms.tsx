@@ -5640,9 +5640,4 @@ export default GeneralTerms;
 //             style={{
 //               listStyleType: "none",
 //             }}
-//           >
-//             4.2. Quy định về lưu trú: Số lượng Khách tối đa trên một phòng Khách
-//             Sạn&nbsp;(ngoại trừ các trường hợp đặc biệt được nói rõ)&nbsp;được
-//             áp dụng như sau:
-//          
-//    
+//        
