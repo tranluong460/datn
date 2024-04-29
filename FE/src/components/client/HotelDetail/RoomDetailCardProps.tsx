@@ -20,13 +20,14 @@ type RoomDetailCardProps = {
 const { RangePicker } = DatePicker;
 
 const RoomDetailCard = ({ room, onCloseDetail }: any) => {
+  console.log("🚀 ~ RoomDetailCard ~ room:", room.quantity);
   const [currentImage, setCurrentImage] = useState<string>(room?.images[0].url);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
   const [numberRooms, setNumberRooms] = useState(1);
 
   const increaseRooms = () => {
-    if (numberRooms <= 7) {
+    if (numberRooms <= room.quantity - 1) {
       setNumberRooms(numberRooms + 1);
     }
   };
