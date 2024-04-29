@@ -5667,16 +5667,5 @@ export default GeneralTerms;
 //                 margin: "0in 0in 10pt",
 //               }}
 //             >
-//               Mỗi phòng chỉ được đặt thêm 01 giường phụ tùy theo chính sách áp
-//               dụng tại từng Khách sạn.
-//             </li>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
+//        
 //    
