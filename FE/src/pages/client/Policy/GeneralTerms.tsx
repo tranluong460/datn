@@ -5608,17 +5608,4 @@ export default GeneralTerms;
 //             }}
 //           >
 //             &nbsp;
-//           </p>
-//           <p
-//             style={{
-//               listStyleType: "none",
-//             }}
-//           >
-//             <strong>Điều 4. Chính sách đặt phòng và nhận phòng</strong>
-//           </p>
-//           <p
-//             style={{
-//               listStyleType: "none",
-//             }}
-//           >
-//           
+//       
