@@ -225,8 +225,6 @@ export const create = async (req, res) => {
         });
       }
 
-      return;
-
       const data = await BookingModel.create({
         id_user: user._id,
         list_room: req.body.list_room[0],
