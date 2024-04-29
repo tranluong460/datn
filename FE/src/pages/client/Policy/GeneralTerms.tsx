@@ -5580,21 +5580,4 @@ export default GeneralTerms;
 //                       textAlign: "center",
 //                       margin: "0in 0in 10pt",
 //                     }}
-//                   >
-//                     Tùy thuộc vào tình trạng phòng sẵn có và xác nhận đồng ý của
-//                     Khách sạn.
-//                   </p>
-//                 </td>
-//               </tr>
-//             </tbody>
-//           </table>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               marginLeft: "35.45pt",
-//               textAlign: "justify",
-//             }}
-//           >
-//          
+//               
