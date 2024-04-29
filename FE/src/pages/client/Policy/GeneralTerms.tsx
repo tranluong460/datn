@@ -5644,16 +5644,5 @@ export default GeneralTerms;
 //             4.2. Quy định về lưu trú: Số lượng Khách tối đa trên một phòng Khách
 //             Sạn&nbsp;(ngoại trừ các trường hợp đặc biệt được nói rõ)&nbsp;được
 //             áp dụng như sau:
-//           </p>
-//           <ul>
-//             <li
-//               style={{
-//                 marginTop: "6.0pt",
-//                 marginRight: "0in",
-//                 marginBottom: "6.0pt",
-//                 textAlign: "justify",
-//                 margin: "0in 0in 10pt",
-//               }}
-//             >
-//             
+//          
 //    
