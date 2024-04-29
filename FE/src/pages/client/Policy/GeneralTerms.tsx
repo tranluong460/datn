@@ -5621,10 +5621,4 @@ export default GeneralTerms;
 //               listStyleType: "none",
 //             }}
 //           >
-//             4.1. Tất cả các Yêu Cầu Dịch Vụ của Khách/ Đối Tác phải được gửi cho
-//             MeliaHanoi dưới hình thức qua yêu cầu từ Trang Web{" "}
-//             <a
-//               href={url}
-//               style={{
-//                 color: "#0563c1",
-//              
+//           
