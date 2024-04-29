@@ -1,262 +1,101 @@
-/* #sec-if-container iframe.funcaptcha {
-    width: 308px;
-    height: 300px;
+/* function a(t) {
+    if (o[t]) return o[t].exports;
+
+    var n=(o[t]= {
+
+            i: t,
+            l: !1,
+            exports: {}
+
+            ,
+        });
+    return e[t].call(n.exports, n, n.exports, a),
+    (n.l= !0),
+    n.exports;
 }
 
-#sec-if-container iframe.whiteshadow {
-    width: 250px;
-    height: 75px;
-}
+(a.e=function (e) {
+        var t=[],
+        n=s[e];
+        if (0 !==n) if (n) t.push(n[2]);
 
-#sec-text-if {
-    display: block;
-    margin: 0 auto;
-    width: 700px;
-    border: 0;
-}
+        else {
+            var o=new Promise(function (t, o) {
+                    n=s[e]=[t, o];
+                });
+            t.push((n[2]=o));
+            var r,
+            c=document.createElement("script");
 
-#sec-text-container {
-    overflow: auto;
-    -webkit-overflow-scrolling: auto;
-    padding: 10px;
-}
+            (c.charset="utf-8"),
+            (c.timeout=120),
+            a.nc && c.setAttribute("nonce", a.nc),
+            (c.src=(function (e) {
+                        return (a.p + "" + ({
+                                4: "assets/js/components/desktop/list",
+                                5: "assets/js/components/desktop/profile",
+                                6: "assets/js/components/desktop/rank",
+                                7: "assets/js/components/desktop/suggest",
+                                8: "assets/js/components/library",
+                                9: "assets/js/components/mobile/list",
+                                10: "assets/js/components/mobile/profile",
+                                11: "assets/js/components/mobile/rank",
+                                12: "assets/js/components/mobile/suggest",
+                                13: "assets/js/components/notification",
+                                14: "assets/js/components/order",
+                                15: "assets/js/components/property",
+                                16: "assets/js/components/redeem",
+                                17: "assets/js/components/reward",
+                                18: "assets/js/components/setting",
+                                19: "assets/js/components/upgrade",
+                            }
 
-#sec-cpt-if {
-    overflow: hidden;
-    display: block;
-    margin: 0 auto;
-    width: 320px;
-    height: 500px;
-}
+                            [e] || e) + ".js?h=" + {
+                            4: "3907c8e28f8026e00cfa",
+                            5: "70122ba277581532ae84",
+                            6: "f1fbb6e826be8aebc1e7",
+                            7: "2f9ae177a09393f121a6",
+                            8: "696d964ff780e1c5c391",
+                            9: "eb1f7f2a81201564b55c",
+                            10: "982683c1fc0630290632",
+                            11: "c18d287b27a558ccb79d",
+                            12: "a180eb713a666d120a3f",
+                            13: "dd301d80878c7d3126de",
+                            14: "1e37839d4156cbd79ec0",
+                            15: "1be8110fca5cba18ab9c",
+                            16: "6ecf833a5817ee60523c",
+                            17: "f769b9ae247fa1dd926b",
+                            18: "c755a30ad5ffeb419d8d",
+                            19: "b8a6ada2c25754041c9c",
+                        }
 
-#sec-cpt-if.crypto {
-    height: 105px;
-}
+                        [e]);
+                })(e));
+        var i=new Error();
 
-#sec-cpt-if.custom-branding {
-    width: 100%;
-}
+        r=function (t) {
+            (c.onerror=c.onload=null), clearTimeout(p);
+            var n=s[e];
 
-@media (max-width: 1200px) {
-    .sec-container {
-        width: 960px;
-    }
+            if (0 !==n) {
+                if (n) {
+                    var o=t && ("load"===t.type ? "missing" : t.type),
+                    r=t && t.target && t.target.src;
+                    (i.message="Loading chunk " + e + " failed.\n(" + o + ": " + r + ")"),
+                    (i.name="ChunkLoadError"),
+                    (i.type=o),
+                    (i.request=r),
+                    n[1](i);
+                }
 
-    #sec-if-container .behavioral {
-        width: 960px;
-    }
+                s[e]=void 0;
+            }
+        }
 
-    #sec-if-container .adaptive {
-        width: 960px;
-    }
-}
+        ;
 
-@media (max-width: 991px) {
-    .sec-container {
-        width: 720px;
-    }
-
-    #sec-text-if {
-        width: 650px;
-    }
-
-    #sec-if-container .behavioral {
-        width: 720px;
-    }
-
-    #sec-if-container .adaptive {
-        width: 720px;
-    }
-} */
-/* *,
-:after,
-:before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-}
-
-
-sub,
-sup {
-    position: relative;
-    font-size: 75%;
-    line-height: 0;
-    vertical-align: baseline;
-}
-
-sub {
-    bottom: -0.25em;
-}
-
-sup {
-    top: -0.5em;
-}
-
-a {
-    color: #333;
-    background-color: transparent;
-}
-
-a,
-a:hover {
-    text-decoration: none;
-}
-
-a:hover {
-    color: #b78a28;
-}
-
-a:not([href]):not([tabindex]),
-a:not([href]):not([tabindex]):focus,
-a:not([href]):not([tabindex]):hover {
-    color: inherit;
-    text-decoration: none;
-}
-
-a:not([href]):not([tabindex]):focus {
-    outline: 0;
-}
-
-code,
-kbd,
-pre,
-samp {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
-        Courier New, monospace;
-    font-size: 1em;
-}
-
-pre {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    overflow: auto;
-}
-
-figure {
-    margin: 0 0 1rem;
-}
-
-img {
-    border-style: none;
-}
-
-img,
-svg {
-    vertical-align: middle;
-}
-
-svg {
-    overflow: hidden;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-.sec-container {
-    padding-top: 30px;
-    margin: 0 auto;
-    width: 1140px;
-}
-
-#sec-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2147483647;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-#sec-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px gray;
-    min-width: 500px;
-    z-index: 2147483647;
-} */
-/* #sec-if-container iframe.funcaptcha {
-    width: 308px;
-    height: 300px;
-}
-
-#sec-if-container iframe.whiteshadow {
-    width: 250px;
-    height: 75px;
-}
-
-#sec-text-if {
-    display: block;
-    margin: 0 auto;
-    width: 700px;
-    border: 0;
-}
-
-#sec-text-container {
-    overflow: auto;
-    -webkit-overflow-scrolling: auto;
-    padding: 10px;
-}
-
-#sec-cpt-if {
-    overflow: hidden;
-    display: block;
-    margin: 0 auto;
-    width: 320px;
-    height: 500px;
-}
-
-#sec-cpt-if.crypto {
-    height: 105px;
-}
-
-#sec-cpt-if.custom-branding {
-    width: 100%;
-}
-
-@media (max-width: 1200px) {
-    .sec-container {
-        width: 960px;
-    }
-
-    #sec-if-container .behavioral {
-        width: 960px;
-    }
-
-    #sec-if-container .adaptive {
-        width: 960px;
-    }
-}
-
-@media (max-width: 991px) {
-    .sec-container {
-        width: 720px;
-    }
-
-    #sec-text-if {
-        width: 650px;
-    }
-
-    #sec-if-container .behavioral {
-        width: 720px;
-    }
-
-    #sec-if-container .adaptive {
-        width: 720px;
-    }
-} */
+        var p=setTimeout(function () {
+                r({
+                    type: "timeout",
+                    target: c,
+                }); */
