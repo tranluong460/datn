@@ -978,4 +978,163 @@ template {
 
 [hidden] {
     display: none !important;
+} .btn-outline-info:disabled {
+    color: #0065ff;
+    background-color: transparent;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled).active,
+.btn-outline-info:not(:disabled):not(.disabled):active,
+.show>.btn-outline-info.dropdown-toggle {
+    color: #fff;
+    background-color: #0065ff;
+    border-color: #0065ff;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled).active:focus,
+.btn-outline-info:not(:disabled):not(.disabled):active:focus,
+.show>.btn-outline-info.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 101, 255, 0.5);
+    -moz-box-shadow: 0 0 0 0.2rem rgba(0, 101, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(0, 101, 255, 0.5);
+}
+
+.btn-outline-warning {
+    color: #cc9e14;
+    border-color: #cc9e14;
+}
+
+.btn-outline-warning:hover {
+    color: #212529;
+    background-color: #cc9e14;
+    border-color: #cc9e14;
+}
+
+.btn-outline-warning.focus,
+.btn-outline-warning:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(204, 158, 20, 0.5);
+    -moz-box-shadow: 0 0 0 0.2rem rgba(204, 158, 20, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(204, 158, 20, 0.5);
+}
+
+.btn-outline-warning.disabled,
+.btn-outline-warning:disabled {
+    color: #cc9e14;
+    background-color: transparent;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled).active,
+.btn-outline-warning:not(:disabled):not(.disabled):active,
+.show>.btn-outline-warning.dropdown-toggle {
+    color: #212529;
+    background-color: #cc9e14;
+    border-color: #cc9e14;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled).active:focus,
+.btn-outline-warning:not(:disabled):not(.disabled):active:focus,
+.show>.btn-outline-warning.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(204, 158, 20, 0.5);
+    -moz-box-shadow: 0 0 0 0.2rem rgba(204, 158, 20, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(204, 158, 20, 0.5);
+}
+
+.btn-outline-danger {
+    color: #bf2c24;
+    border-color: #bf2c24;
+}
+
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #bf2c24;
+    border-color: #bf2c24;
+}
+
+.btn-outline-danger.focus,
+.btn-outline-danger:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(191, 44, 36, 0.5);
+    -moz-box-shadow: 0 0 0 0.2rem rgba(191, 44, 36, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(191, 44, 36, 0.5);
+}
+
+.btn-outline-danger.disabled,
+.btn-outline-danger:disabled {
+    color: #bf2c24;
+    background-color: transparent;
+}
+
+.btn-outline-danger:not(:disabled):not(.disabled).active,
+.btn-outline-danger:not(:disabled):not(.disabled):active,
+.show>.btn-outline-danger.dropdown-toggle {
+    color: #fff;
+    background-color: #bf2c24;
+    border-color: #bf2c24;
+}
+
+.btn-outline-danger:not(:disabled):not(.disabled).active:focus,
+.btn-outline-danger:not(:disabled):not(.disabled):active:focus,
+.show>.btn-outline-danger.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(191, 44, 36, 0.5);
+    -moz-box-shadow: 0 0 0 0.2rem rgba(191, 44, 36, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(191, 44, 36, 0.5);
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #333;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #b78a28;
+    text-decoration: none;
+}
+
+.btn-link.focus,
+.btn-link:focus {
+    text-decoration: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn-link.disabled,
+.btn-link:disabled {
+    color: #6c757d;
+    pointer-events: none;
+}
+
+.btn-group-lg>.btn,
+.btn-lg {
+    padding: 0.75rem 4rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    -webkit-border-radius: 1.75rem;
+    -moz-border-radius: 1.75rem;
+    border-radius: 1.75rem;
+}
+
+.btn-group-sm>.btn,
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    border-radius: 0.2rem;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-block+.btn-block {
+    margin-top: 0.5rem;
+}
+
+input[type="button"].btn-block,
+input[type="reset"].btn-block,
+input[type="submit"].btn-block {
+    width: 100%;
 }
