@@ -5560,16 +5560,4 @@ export default GeneralTerms;
 //                 </td>
 //               </tr>
 //               <tr>
-//                 <td
-//                   className="border-divideLight dark:border-divideDark"
-//                   colSpan={3}
-//                   style={{
-//                     borderWidth: "1px",
-//                     width: "437.95pt",
-//                     borderTop: "none",
-//                     padding: "0in 5.4pt",
-//                   }}
-//                   width="584"
-//                 >
-//                   <p
-//                   
+//                
