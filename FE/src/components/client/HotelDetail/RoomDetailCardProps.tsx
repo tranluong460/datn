@@ -1,6 +1,6 @@
 import qs from "query-string";
 import { useGetAllHotelQuery, useGetOneRoomQuery } from "../../../api";
-import { Button, Modal, DatePicker, Space } from "antd";
+import { Button, DatePicker } from "antd";
 import dayjs from "dayjs";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
@@ -191,7 +191,6 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
               }}
             />
             <p className="text-red-500 font-bold">{errorMessage}</p>
-
             {room?.id_roomType?.status !== "Không được áp dụng" ? (
               <Button
                 type="primary"
