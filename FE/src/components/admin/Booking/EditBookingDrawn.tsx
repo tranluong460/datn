@@ -34,6 +34,16 @@ const EditBookingDrawn = ({
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
 
   const onFinish = (data: IBooking) => {
+    if (data?.status === "Đã xác nhận") {
+      if (data.room_number.length === 0) {
+        return message.error("Vui lòng chọn số phòng");
+      }
+
+      if (data.list_room.quantity > data.room_number.length) {
+        return message.error(`Đơn hàng cần ${data.list_room.quantity} phòng`);
+      }
+    }
+
     updateBooking(data)
       .unwrap()
       .then((response) => {
@@ -96,6 +106,10 @@ const EditBookingDrawn = ({
           }}
         >
           <Form.Item name="_id" hidden>
+            <Input />
+          </Form.Item>
+
+          <Form.Item name="list_room" hidden>
             <Input />
           </Form.Item>
 
