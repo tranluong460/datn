@@ -119,6 +119,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
   const status = [
     "Chưa thanh toán",
     "Đang xử lý",
+    "Đã hủy bỏ",
     "Chờ thanh toán",
     "Đã xác nhận",
   ];
@@ -327,7 +328,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
                 onClick={showModalAbate}
                 className="bg-blue-500 p-1 rounded-md text-light dark:text-dark hover:opacity-80 disabled:cursor-not-allowed"
               >
-                Sửa thông tin thánh toán
+                Sửa thông tin thanh toán
               </button>
 
               <Modal
