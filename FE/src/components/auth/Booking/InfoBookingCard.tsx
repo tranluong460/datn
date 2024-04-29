@@ -238,7 +238,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
               footer={null}
             >
               <p>Phòng: {info?.list_room?.idRoom?.id_roomType?.name}</p>
-              <p>Số lượng phòng: {info?.list_room[0]?.quantity}</p>
+              <p>Số lượng phòng: {info?.list_room?.quantity}</p>
               <div>
                 <p className="flex">
                   <img
@@ -273,7 +273,7 @@ const InfoBookingCard = ({ info }: InfoBookingCardProps) => {
                   onOk={handleOk}
                 >
                   <p>Phòng: {info?.list_room[0]?.idRoom?.id_roomType?.name}</p>
-                  <p>Số lượng phòng: {info?.list_room[0]?.quantity}</p>
+                  <p>Số lượng phòng: {info?.list_room?.quantity}</p>
                   <div>
                     <p className="flex">
                       <img
