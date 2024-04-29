@@ -147,44 +147,97 @@
     }
 } 
 */
-/* @media (max-width: 575px) {
-    .sec-container {
-        width: 100%;
-    }
 
-    #sec-text-if {
-        width: 300px;
-    }
+/* *,
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
-    #sec-if-container .behavioral {
-        width: 100%;
-    }
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
 
-    #sec-if-container .adaptive {
-        width: 100%;
-    }
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+    display: block;
+}
 
-    #sec-overlay {
-        background-color: #fff;
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+body {
+    margin: 0;
+    font-family: Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI,
+        Roboto, Helvetica Neue, Arial, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    text-align: left;
+    background-color: #fff;
+}
 
-    #sec-container {
-        position: static;
-        transform: none;
-        -ms-transform: none;
-        background-color: #fff;
-        border-radius: 0;
-        box-shadow: none;
-        min-width: 300px;
-    }
+[tabindex="-1"]:focus {
+    outline: 0 !important;
+}
 
-    #sec-text-container {
-        padding: 10px;
-    }
+hr {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
 
-    #sec-if-container {
-        width: 100%;
-    }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+abbr[data-original-title],
+abbr[title] {
+    text-decoration: underline;
+    text-decoration: underline dotted;
+    cursor: help;
+    border-bottom: 0;
+    text-decoration-skip-ink: none;
+}
+
+address {
+    font-style: normal;
+    line-height: inherit;
+}
+
+address,
+dl,
+ol,
+ul {
+    margin-bottom: 1rem;
+}
+
+dl,
+ol,
+ul {
+    margin-top: 0;
 } */
