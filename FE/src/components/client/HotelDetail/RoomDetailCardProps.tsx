@@ -11,6 +11,7 @@ import { IRoom } from "../../../interface";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import RoomAmenities from "./RoomAmenities";
 import styles from "./styles.module.css";
+import Search from "../NavBar/Search";
 
 type RoomDetailCardProps = {
   room: IRoom;
@@ -20,7 +21,7 @@ type RoomDetailCardProps = {
 const { RangePicker } = DatePicker;
 
 const RoomDetailCard = ({ room, onCloseDetail }: any) => {
-  console.log("🚀 ~ RoomDetailCard ~ room:", room.quantity);
+  const [showSearch, setShowSearch] = useState(false);
   const [currentImage, setCurrentImage] = useState<string>(room?.images[0].url);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
 
@@ -70,31 +71,36 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
   const { data: AllHotel } = useGetAllHotelQuery("");
 
   const handleOk = () => {
-    const totalPriceEnd = numberOfDays * dataRoom?.data?.id_roomType?.price;
-    const dataBooking = {
-      check_in: dateRange.startDate,
-      check_out: dateRange.endDate,
-      total_price: totalPriceEnd,
-      list_room: [
-        {
-          idRoom: dataRoom?.data?._id,
-          quantity: numberRooms,
-        },
-      ],
-      city: 1,
-    };
-
-    if (dateRange.endDate === "" || dateRange.startDate === "") {
-      setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
-      return;
-    }
-
-    setCookie("booking", dataBooking, { path: "/" });
-    navigate(`/payment/${AllHotel?.data[0]?._id}`);
+    setShowSearch(true);
   };
+
+  // const handleOk = () => {
+  //   const totalPriceEnd = numberOfDays * dataRoom?.data?.id_roomType?.price;
+  //   const dataBooking = {
+  //     check_in: dateRange.startDate,
+  //     check_out: dateRange.endDate,
+  //     total_price: totalPriceEnd,
+  //     list_room: [
+  //       {
+  //         idRoom: dataRoom?.data?._id,
+  //         quantity: numberRooms,
+  //       },
+  //     ],
+  //     city: 1,
+  //   };
+
+  //   if (dateRange.endDate === "" || dateRange.startDate === "") {
+  //     setErrorMessage("Bạn cần nhập thông tin ngày nhận phòng và trả phòng");
+  //     return;
+  //   }
+
+  //   setCookie("booking", dataBooking, { path: "/" });
+  //   navigate(`/payment/${AllHotel?.data[0]?._id}`);
+  // };
 
   return (
     <>
+      {showSearch && <Search />}
       <div className="flex w-[1300px]">
         <div className="flex flex-col bg-[#98999b]">
           <div className="w-[850px] relative ">
@@ -157,7 +163,7 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
               </p>
             </div>
 
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <div className="font-bold">Số lượng phòng muốn đặt:</div>
 
               <div className="flex gap-2 items-center">
@@ -190,7 +196,7 @@ const RoomDetailCard = ({ room, onCloseDetail }: any) => {
                   endDate: dateStrings[1],
                 });
               }}
-            />
+            /> */}
             <p className="text-red-500 font-bold">{errorMessage}</p>
             {room?.id_roomType?.status !== "Không được áp dụng" ? (
               <Button
