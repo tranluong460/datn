@@ -5679,17 +5679,4 @@ export default GeneralTerms;
 //                 margin: "0in 0in 10pt",
 //               }}
 //             >
-//               Áp dụng phụ thu trẻ em từ 06&nbsp;tuổi đến&nbsp;dưới 12 tuổi và
-//               phụ thu người lớn dành cho khách từ 12 tuổi
-//             </li>
-//           </ul>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               textAlign: "justify",
-//               margin: "0in 0in 10pt",
-//             }}
-//           >
-//         
+//    
