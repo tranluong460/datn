@@ -176,12 +176,18 @@ export const create = async (req, res) => {
         );
       }
 
+      let total = 0;
+
+      bookings.map((bk) => {
+        return (total = total + bk.list_room.quantity);
+      });
+
+      if (total >= roomBooking.list_rooms.length) {
+        return sendResponse(res, 404, "Đã hết phòng");
+      }
+
       if (req.body.list_room[0].quantity > roomBooking.list_rooms.length) {
-        return sendResponse(
-          res,
-          404,
-          "Xin lỗi, số lượng phòng đã được đặt đã vượt quá số lượng phòng còn lại."
-        );
+        return sendResponse(res, 404, "Đặt quá nhiều phòng");
       }
 
       const userBooking = await BookingModel.findOne({
