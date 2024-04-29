@@ -186,6 +186,12 @@ export const create = async (req, res) => {
         return sendResponse(res, 404, "Đã hết phòng");
       }
 
+      const total1 = total + req.body.list_room[0].quantity;
+
+      if (total1 >= roomBooking.list_rooms.length) {
+        return sendResponse(res, 404, "Đã hết phòng rồi");
+      }
+
       if (req.body.list_room[0].quantity > roomBooking.list_rooms.length) {
         return sendResponse(res, 404, "Đặt quá nhiều phòng");
       }
