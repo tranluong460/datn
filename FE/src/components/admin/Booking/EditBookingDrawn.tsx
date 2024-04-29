@@ -34,16 +34,6 @@ const EditBookingDrawn = ({
   const { data: allAmenities } = useGetAllAmenitiesQuery("");
 
   const onFinish = (data: IBooking) => {
-    if (data?.status === "Đã xác nhận") {
-      if (data.room_number.length === 0) {
-        return message.error("Vui lòng chọn số phòng");
-      }
-
-      if (data.list_room.quantity > data.room_number.length) {
-        return message.error(`Đơn hàng cần ${data.list_room.quantity} phòng`);
-      }
-    }
-
     updateBooking(data)
       .unwrap()
       .then((response) => {
@@ -127,40 +117,37 @@ const EditBookingDrawn = ({
             <Select options={filteredOptions} />
           </Form.Item>
 
-          {data?.status === "Đã xác nhận" && (
-            <Form.Item name="room_number" label="Số phòng">
-              <Select
-                mode="multiple"
-                className="w-[30px]"
-                maxCount={data?.list_room?.quantity}
-              >
-                {data?.list_room?.idRoom?.list_rooms.map((item: any) => (
-                  <Option
-                    key={item._id}
-                    value={item._id}
-                    disabled={item.status}
-                  >
-                    {item.room}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-          )}
+          <Form.Item name="room_number" label="Số phòng">
+            <Select
+              mode="multiple"
+              className="w-[30px]"
+              maxCount={data?.list_room?.quantity}
+              disabled={data?.status !== "Đã xác nhận"}
+            >
+              {data?.list_room?.idRoom?.list_rooms.map((item: any) => (
+                <Option key={item._id} value={item._id} disabled={item.status}>
+                  {item.room}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
 
-          {data?.status === "Đã nhận phòng" && (
-            <Form.Item name="id_amenities" label="Tiện ích">
-              <Select mode="multiple" className="w-[30px]">
-                {allAmenities?.data &&
-                  allAmenities?.data?.map(
-                    (item: { _id: string; name: string }) => (
-                      <Option key={item._id} value={item._id}>
-                        {item.name}
-                      </Option>
-                    )
-                  )}
-              </Select>
-            </Form.Item>
-          )}
+          <Form.Item name="id_amenities" label="Tiện ích">
+            <Select
+              mode="multiple"
+              className="w-[30px]"
+              disabled={data?.status !== "Đã nhận phòng"}
+            >
+              {allAmenities?.data &&
+                allAmenities?.data?.map(
+                  (item: { _id: string; name: string }) => (
+                    <Option key={item._id} value={item._id}>
+                      {item.name}
+                    </Option>
+                  )
+                )}
+            </Select>
+          </Form.Item>
 
           <Form.Item
             name="success"
