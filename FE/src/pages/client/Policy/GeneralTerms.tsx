@@ -5627,9 +5627,4 @@ export default GeneralTerms;
 //               href={url}
 //               style={{
 //                 color: "#0563c1",
-//                 textDecoration: "underline",
-//               }}
-//             >
-//               {url}
-//             </a>
-//           
+//              
