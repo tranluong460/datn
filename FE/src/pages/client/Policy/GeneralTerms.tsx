@@ -5440,21 +5440,4 @@ export default GeneralTerms;
 //                 <td
 //                   className="border-divideLight dark:border-divideDark"
 //                   style={{
-//                     borderWidth: "1px",
-//                     width: "143.7pt",
-//                     borderTop: "none",
-//                     borderLeft: "none",
-//                     padding: "0in 5.4pt",
-//                   }}
-//                   width="192"
-//                 >
-//                   <p
-//                     style={{
-//                       marginTop: "6.0pt",
-//                       marginRight: "0in",
-//                       marginBottom: "6.0pt",
-//                       marginLeft: "0in",
-//                       textAlign: "justify",
-//                       margin: "0in 0in 10pt",
-//                     }}
 //                   
