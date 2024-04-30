@@ -49,12 +49,6 @@ const Search = () => {
     if (room > 1) {
       setRoom(room - 1);
     }
-    // const newRoomInfo = [...roomInfo];
-    // if (roomInfo.length <= 1) {
-    //   return setRoomInfo;
-    // }
-    // newRoomInfo.splice(index, 1);
-    // setRoomInfo(newRoomInfo);
   };
 
   // tăng số lượng người lớn
