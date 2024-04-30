@@ -5498,16 +5498,4 @@ export default GeneralTerms;
 //                   width="180"
 //                 >
 //                   <p
-//                     style={{
-//                       marginTop: "6.0pt",
-//                       marginRight: "0in",
-//                       marginBottom: "6.0pt",
-//                       marginLeft: "0in",
-//                       textAlign: "justify",
-//                       margin: "0in 0in 10pt",
-//                     }}
-//                   >
-//                     Từ 9:00 giờ tới trước 14:00 giờ
-//                   </p>
-//                 </td>
-//              
+//                  
