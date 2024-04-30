@@ -11,11 +11,11 @@ import { Container, FilterDialog, Search } from "../../../components";
 import { Button, Modal, Radio, RadioChangeEvent, Image } from "antd";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useCookies } from "react-cookie";
-import Review from "../Review/Review";
-
 const HotelListPage = () => {
+  const [quantityRoom, setQuantityRoom] = useState(1);
   const { data } = useGetAllHotelQuery("");
   const [visibleRooms, setVisibleRooms] = useState(5); // Số lượng phòng hiển thị ban đầu
+
   const handleShowMore = () => {
     // Tăng số lượng phòng hiển thị thêm 2
     setVisibleRooms((prev) => prev + 2);
@@ -59,6 +59,18 @@ const HotelListPage = () => {
   const checkinDate = moment(checkin);
   const checkoutDate = moment(checkout);
   const numberOfDays = checkoutDate.diff(checkinDate, "days");
+
+  const increaseRoom = () => {
+    if (quantityRoom < Number(quantity)) {
+      setQuantityRoom(quantityRoom + 1);
+    }
+  };
+
+  const decreaseRoom = () => {
+    if (quantityRoom > 1) {
+      setQuantityRoom(quantityRoom - 1);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -126,7 +138,7 @@ const HotelListPage = () => {
       list_room: [
         {
           idRoom: data?._id,
-          quantity: quantity,
+          quantity: quantityRoom,
         },
       ],
       city: 1,
@@ -301,6 +313,7 @@ const HotelListPage = () => {
             {searchResult?.data
               ?.slice(0, visibleRooms)
               .map((items: any, index: number) => {
+                console.log("🚀 ~ .map ~ items:", items);
                 const id = items._id.toString(); // Assume each item has a unique id
                 const maxIndex = items.images.length - 1;
                 const currentIndex = currentImageIndices[id] || 0;
@@ -361,6 +374,40 @@ const HotelListPage = () => {
                           <span className="">
                             {numberOfDays} đêm đã bao gồm thuế
                           </span>
+                        </div>
+
+                        <div>
+                          <p>
+                            {" "}
+                            sử dụng cho {items?.id_roomType?.adults} người lớn
+                          </p>
+                          <p>
+                            {" "}
+                            sử dụng cho {items?.id_roomType?.children} trẻ em
+                          </p>
+                          <p>Giường ngủ: {items?.id_roomType?.bed}</p>
+
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p> Số lượng phòng muốn đặt</p>
+                            </div>
+
+                            <div className="flex gap-2 items-center ">
+                              <button
+                                className="p-2 bg-blue-500 rounded-full text-white  w-[30px] h-[30px]"
+                                onClick={decreaseRoom}
+                              >
+                                -
+                              </button>
+                              {quantityRoom}
+                              <button
+                                className="p-2 bg-blue-500 rounded-full text-white  w-[30px] h-[30px]"
+                                onClick={increaseRoom}
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
 
