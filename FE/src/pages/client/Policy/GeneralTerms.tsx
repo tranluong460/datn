@@ -5212,15 +5212,5 @@ export default GeneralTerms;
 //               listStyleType: "none",
 //             }}
 //           >
-//             &nbsp;
-//           </p>
-//           <p
-//             style={{
-//               listStyleType: "none",
-//             }}
-//           >
-//             <strong>Điều 3. Quy định về nhận và trả phòng</strong>
-//           </p>
-//           <p
-//             style={{
+//            
 //             
