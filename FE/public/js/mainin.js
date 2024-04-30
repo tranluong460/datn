@@ -470,3 +470,152 @@
 //     };
 //   }
 //   function C(t, e) {
+//   var n = Object.keys(t);
+//         if (Object.getOwnPropertySymbols) {
+//           var r = Object.getOwnPropertySymbols(t);
+//           e &&
+//             (r = r.filter(function (e) {
+//               return Object.getOwnPropertyDescriptor(t, e).enumerable;
+//             })),
+//             n.push.apply(n, r);
+//         }
+//         return n;
+//       }
+//       function w(t) {
+//         for (var e = 1; e < arguments.length; e++) {
+//           var n = null != arguments[e] ? arguments[e] : {};
+//           e % 2
+//             ? C(Object(n), !0).forEach(function (e) {
+//                 _(t, e, n[e]);
+//               })
+//             : Object.getOwnPropertyDescriptors
+//             ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(n))
+//             : C(Object(n)).forEach(function (e) {
+//                 Object.defineProperty(
+//                   t,
+//                   e,
+//                   Object.getOwnPropertyDescriptor(n, e)
+//                 );
+//               });
+//         }
+//         return t;
+//       }
+//       function _(t, e, n) {
+//         return (
+//           e in t
+//             ? Object.defineProperty(t, e, {
+//                 value: n,
+//                 enumerable: !0,
+//                 configurable: !0,
+//                 writable: !0,
+//               })
+//             : (t[e] = n),
+//           t
+//         );
+//       }
+//       var y = {
+//         data: function () {
+//           return {
+//             navList: o.userNav,
+//             bxhList: [
+//               {
+//                 id: "6",
+//                 name: "Thịnh hành",
+//                 icon: "icon-up",
+//                 slug: "thinh-hanh",
+//               },
+//               {
+//                 id: "1",
+//                 name: "Đọc nhiều",
+//                 icon: "icon-sound-waves",
+//                 slug: "doc-nhieu",
+//               },
+//               {
+//                 id: "5",
+//                 name: "Tặng thưởng",
+//                 icon: "icon-candy",
+//                 slug: "tang-thuong",
+//               },
+//               {
+//                 id: "2",
+//                 name: "Đề cử",
+//                 icon: "icon-flower",
+//                 slug: "de-cu",
+//               },
+//               {
+//                 id: "4",
+//                 name: "Yêu thích",
+//                 icon: "icon-like-alt",
+//                 slug: "yeu-thich",
+//               },
+//               {
+//                 id: "3",
+//                 name: "Thảo luận",
+//                 icon: "icon-comment",
+//                 slug: "thao-luan",
+//               },
+//             ],
+//             genreList: [],
+//             keywordName: "",
+//             urlAdminCreate: "",
+//             activeGenreList: [],
+//             activeBxhKey: "",
+//             notificationLastTimestamp: null,
+//           };
+//         },
+//         computed: w(
+//           w(
+//             w(
+//               w(
+//                 {
+//                   userInfo: {},
+//                 },
+//                 Object(p.e)({
+//                   userInfo: function (t) {
+//                     return t.user.userInfo;
+//                   },
+//                   notificationUnreadList: function (t) {
+//                     return t.notifications.unreadList;
+//                   },
+//                   notificationUnreadCount: function (t) {
+//                     return t.notifications.unreadCount;
+//                   },
+//                   messageUnseenRooms: function (t) {
+//                     return t.messages.unseenRooms;
+//                   },
+//                   messageUserMap: function (t) {
+//                     return t.messages.userMap;
+//                   },
+//                 })
+//               ),
+//               Object(p.c)({
+//                 messageUnseenCount: "messages/unseenCount",
+//               })
+//             ),
+//             Object(p.c)(["isLoggedIn", "spinnerUser", "userAvatar", "userName"])
+//           ),
+//           {},
+//           {
+//             hasAvatar: function () {
+//               return !!this.userAvatar;
+//             },
+//             redeemLink: function () {
+//               return o.getPathNav("candy");
+//             },
+//             numberFormatTotalBalance: function () {
+//               return Object(W.e)(this.userInfo.total_balance, ",");
+//             },
+//           }
+//         ),
+//         methods: w(
+//           w(
+//             {},
+//             Object(p.b)({
+//               fetchUnreadNotificationsList:
+//                 "notifications/fetchUnreadNotificationsAction",
+//               fetchUnreadCount: "notifications/fetchUnreadCountAction",
+//               markAsRead: "notifications/markAsReadAction",
+//               fetchMessageUnseenRooms: "messages/fetchUnseenRoomsAction",
+//             })
+//           ),
+//           {},
