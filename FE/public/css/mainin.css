@@ -1873,3 +1873,28 @@ input[type="submit"].btn-block {
     -moz-box-shadow: none;
     box-shadow: none;
 } */
+/* .page-item:first-child .page-link {
+    margin-left: 0;
+    -webkit-border-top-left-radius: 0.25rem;
+    -moz-border-radius-topleft: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    -webkit-border-bottom-left-radius: 0.25rem;
+    -moz-border-radius-bottomleft: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.page-item:last-child .page-link {
+    -webkit-border-top-right-radius: 0.25rem;
+    -moz-border-radius-topright: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    -webkit-border-bottom-right-radius: 0.25rem;
+    -moz-border-radius-bottomright: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #b78a28;
+    border-color: #007bff;
+} */
