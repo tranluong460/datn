@@ -5223,24 +5223,4 @@ export default GeneralTerms;
 //           </p>
 //           <p
 //             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               marginLeft: "35.45pt",
-//               textAlign: "justify",
-//               margin: "0in 0in 10pt",
-//             }}
-//           >
-//             Trừ khi có thông báo và/hoặc xác nhận khác từ Khách Sạn, quy định
-//             về&nbsp;nhận và trả phòng&nbsp;được áp dụng&nbsp;như sau:
-//           </p>
-//           <table
-//             border={1}
-//             className="MsoTableGrid"
-//             style={{
-//               borderCollapse: "collapse",
-//               border: "1.0pt solid text",
-//               marginLeft: "40.85pt",
-//             }}
-//           >
-//           
+//             
