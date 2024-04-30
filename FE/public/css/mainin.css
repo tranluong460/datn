@@ -3625,4 +3625,39 @@ body {
         .navbar-nav--auth>li>a .nh-icon {
             font-size: 1.25rem;
             float: left;
-            line-height: 1.5rem;*/
+            line-height: 1.5rem;.navbar-nav--auth>li>a .counter {
+                    font-size: 0.75rem;
+                    padding: 0.125rem 0.25rem;
+                    position: absolute;
+                    top: 0.125rem;
+                    left: 50%;
+                }
+            
+                .navbar-nav--auth>li.show>a {
+                    background-color: #fff;
+                }
+            
+                .navbar-nav--auth .dropdown-menu {
+                    margin-top: 0;
+                    -webkit-box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.09);
+                    box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.09);
+                    -webkit-transform: none !important;
+                    -moz-transform: none !important;
+                    -ms-transform: none !important;
+                    -o-transform: none !important;
+                    transform: none !important;
+                    top: 100% !important;
+                    right: 0 !important;
+                    left: auto !important;
+                    overflow: hidden;
+                }
+            
+                .navbar-nav--auth .list-inbox>li,
+                .navbar-nav--auth .nh-list>li {
+                    border-bottom: 1px solid #eee;
+                }
+            
+                .navbar-nav--auth .list-inbox>li:last-child,
+                .navbar-nav--auth .nh-list>li:last-child {
+                    border-bottom: 0;*/
