@@ -5195,22 +5195,4 @@ export default GeneralTerms;
 //             thời điểm mà Khách sử dụng.&nbsp;Voucher gốc phải được xuất trình và
 //             thu hồi tại thời điểm nhận phòng, trong trường hợp không xuất trình
 //             được Voucher đủ điều kiện sử dụng thì Khách phải thanh toán trực
-//             tiếp theo Giá Công Bố tại thời điểm nhận phòng. Voucher không có giá
-//             trị quy đổi sang tiền mặt hoặc các dịch vụ khác và chỉ được sử dụng
-//             1 lần không hoàn lại. Không trả lại tiền thừa nếu không dùng hết giá
-//             trị Voucher. Voucher không được áp dụng đồng thời cùng các chương
-//             trình khuyến mãi khác &amp; không được sử dụng để tích điểm vào thẻ
-//             hội viên. Voucher khi sử dụng phải còn nguyên vẹn, không tẩy xóa
-//             hoặc rách rời chắp vá. Voucher không được phát hành đổi trong trường
-//             hợp bị mất hoặc hư hỏng. Áp dụng 01 Voucher/01 hóa đơn. Voucher
-//             không có giá trị quy đổi thành tiền mặt hoặc Voucher có giá trị nhỏ
-//             hơn. Nếu giá trị dịch vụ nhỏ hơn giá trị Voucher, Khách không được
-//             hoàn lại khoản tiền dư.
-//           </p>
-//           <p
-//             style={{
-//               listStyleType: "none",
-//             }}
-//           >
-//            
 //             
