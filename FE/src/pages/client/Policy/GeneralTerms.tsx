@@ -5510,16 +5510,4 @@ export default GeneralTerms;
 //                     Từ 9:00 giờ tới trước 14:00 giờ
 //                   </p>
 //                 </td>
-//                 <td
-//                   className="border-divideLight dark:border-divideDark"
-//                   style={{
-//                     borderWidth: "1px",
-//                     width: "143.7pt",
-//                     borderTop: "none",
-//                     borderLeft: "none",
-//                     padding: "0in 5.4pt",
-//                   }}
-//                   width="192"
-//                 >
-//                   <p
-//                    
+//              
