@@ -5291,15 +5291,4 @@ export default GeneralTerms;
 //                   </p>
 //                 </td>
 //               </tr>
-//               <tr>
-//                 <td
-//                   className="border-divideLight dark:border-divideDark"
-//                   style={{
-//                     borderWidth: "1px",
-//                     width: "134.65pt",
-//                     borderTop: "none",
-//                     padding: "0in 5.4pt",
-//                   }}
-//                   width="180"
-//                 >
-//                
+//              
