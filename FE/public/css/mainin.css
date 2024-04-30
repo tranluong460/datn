@@ -3660,4 +3660,48 @@ body {
             
                 .navbar-nav--auth .list-inbox>li:last-child,
                 .navbar-nav--auth .nh-list>li:last-child {
-                    border-bottom: 0;*/
+                    border-bottom: 0;.footer {
+                            background: #fff url(../images/footer-bg.png) no-repeat bottom;
+                        }
+                    
+                        .nh-list>li>a {
+                            position: relative;
+                            padding-left: 1rem;
+                        }
+                    
+                        .nh-list>li>a:before {
+                            content: "";
+                            width: 0.3125rem;
+                            height: 0.3125rem;
+                            background-color: #666;
+                            display: block;
+                            -webkit-border-radius: 50%;
+                            -moz-border-radius: 50%;
+                            border-radius: 50%;
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            margin: auto;
+                            left: 0;
+                        }
+                    
+                        .nh-list>li>a:hover:before {
+                            background-color: #b78a28;
+                        }
+                    
+                        .book-cover-link {
+                            position: relative;
+                            z-index: 10;
+                            display: inline-block;
+                            -webkit-transform: translateZ(50px);
+                            -moz-transform: translateZ(50px);
+                            transform: translateZ(50px);
+                            -webkit-transition: all 0.2s ease-in-out;
+                            -o-transition: all 0.2s ease-in-out;
+                            -moz-transition: all 0.2s ease-in-out;
+                            transition: all 0.2s ease-in-out;
+                        }
+                    
+                        .book-cover-link:hover {
+                            opacity: 0.8;
+                        }*/
