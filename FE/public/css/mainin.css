@@ -2975,4 +2975,120 @@ body {
             -moz-transform: scale(0.66);
             -o-transform: scale(0.66);
             transform: scale(0.66);
-        } */
+        } .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev-prev {
+            -webkit-transform: scale(0.33);
+            -ms-transform: scale(0.33);
+            -moz-transform: scale(0.33);
+            -o-transform: scale(0.33);
+            transform: scale(0.33);
+        }
+        
+        .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next {
+            -webkit-transform: scale(0.66);
+            -ms-transform: scale(0.66);
+            -moz-transform: scale(0.66);
+            -o-transform: scale(0.66);
+            transform: scale(0.66);
+        }
+        
+        .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next {
+            -webkit-transform: scale(0.33);
+            -ms-transform: scale(0.33);
+            -moz-transform: scale(0.33);
+            -o-transform: scale(0.33);
+            transform: scale(0.33);
+        }
+        
+        .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            display: inline-block;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            background: #b78a28;
+            opacity: 0.25;
+        }
+        
+        button.swiper-pagination-bullet {
+            border: none;
+            margin: 0;
+            padding: 0;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .swiper-pagination-clickable .swiper-pagination-bullet {
+            cursor: pointer;
+        }
+        
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #b78a28;
+        }
+        
+        .swiper-container-vertical>.swiper-pagination-bullets {
+            right: 10px;
+            top: 50%;
+            -webkit-transform: translate3d(0, -50%, 0);
+            -moz-transform: translate3d(0, -50%, 0);
+            transform: translate3d(0, -50%, 0);
+        }
+        
+        .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet {
+            margin: 6px 0;
+            display: block;
+        }
+        
+        .swiper-container-vertical>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+            width: 8px;
+        }
+        
+        .swiper-container-vertical>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+            display: inline-block;
+            -webkit-transition: top 0.2s, -webkit-transform 0.2s;
+            transition: top 0.2s, -webkit-transform 0.2s;
+            -o-transition: 0.2s transform, 0.2s top;
+            -o-transition: 0.2s top, 0.2s -o-transform;
+            -moz-transition: 0.2s transform, 0.2s top, 0.2s -moz-transform;
+            transition: transform 0.2s, top 0.2s;
+            transition: transform 0.2s, top 0.2s, -webkit-transform 0.2s,
+                -moz-transform 0.2s, -o-transform 0.2s;
+            transition: transform 0.2s, top 0.2s, -webkit-transform 0.2s;
+        }
+        
+        .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+            margin: 0 4px;
+        }
+        
+        .swiper-container-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        
+        .swiper-container-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic .swiper-pagination-bullet {
+            -webkit-transition: left 0.2s, -webkit-transform 0.2s;
+            transition: left 0.2s, -webkit-transform 0.2s;
+            -o-transition: 0.2s transform, 0.2s left;
+            -o-transition: 0.2s left, 0.2s -o-transform;
+            -moz-transition: 0.2s transform, 0.2s left, 0.2s -moz-transform;
+            transition: transform 0.2s, left 0.2s;
+            transition: transform 0.2s, left 0.2s, -webkit-transform 0.2s,
+                -moz-transform 0.2s, -o-transform 0.2s;
+            transition: transform 0.2s, left 0.2s, -webkit-transform 0.2s;
+        }*/
