@@ -266,3 +266,207 @@
 //                     nextEl: e.find(".swiper-button-next"),
 //                     prevEl: e.find(".swiper-button-prev"),
 //                   },
+//             effect: "coverflow",
+//               loop: !0,
+//               centeredSlides: !0,
+//               spaceBetween: 0,
+//               slidesPerView: "auto",
+//               coverflow: {
+//                 rotate: 0,
+//                 stretch: 0,
+//                 depth: 100,
+//                 modifier: 1,
+//                 slideShadows: !1,
+//               },
+//               autoplay: 5e3,
+//               autoplayDisableOnInteraction: !1,
+//               on: {
+//                 slideChangeTransitionEnd: function () {
+//                   r.slideTo(this.realIndex);
+//                 },
+//               },
+//             }),
+//               e.addClass("loaded");
+//           }),
+//           window.dispatchEvent(new Event("resize")),
+//           $(".js-swiper-slider").each(function () {
+//             var t = $(this);
+//             new Swiper(t, {
+//               spaceBetween: 15,
+//               slidesPerView: 1,
+//               navigation: {
+//                 nextEl: t.find(".swiper-button-next"),
+//                 prevEl: t.find(".swiper-button-prev"),
+//               },
+//               pagination: {
+//                 el: t.find(".swiper-pagination"),
+//                 type: "bullets",
+//               },
+//             });
+//           }),
+//           $(".js-tooltip").tooltip(),
+//           new hcSticky("#js-left-menu", {
+//             top: 16,
+//           }),
+//           new hcSticky("#js-right-menu", {
+//             top: window.innerHeight - 150 - 16,
+//           }),
+//           $("#js-guide")
+//             .on("show.bs.modal", function () {
+//               $("body").addClass("visible-helper"),
+//                 $("#js-left-menu, #js-right-menu")
+//                   .find(".js-tooltip")
+//                   .tooltip("show");
+//             })
+//             .on("shown.bs.modal", function () {
+//               $("#js-left-menu, #js-right-menu")
+//                 .find(".js-tooltip")
+//                 .tooltip("show");
+//             })
+//             .on("hidden.bs.modal", function () {
+//               $("body").removeClass("visible-helper"),
+//                 setTimeout(function () {
+//                   $("#js-left-menu, #js-right-menu")
+//                     .find(".js-tooltip")
+//                     .tooltip("hide");
+//                 });
+//             });
+//       },
+//     })),
+//     $(document).ready(function () {
+//       window.NuHiepScript.init();
+//     });
+// },
+// 294: function (t, e, n) {
+//   "use strict";
+//   n(127);
+// },
+// 295: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n.require[data-v-4cce9ca6] {\n    border: 1px solid #f00 !important;\n}\n",
+//     "",
+//   ]);
+// },
+// 297: function (t, e, n) {
+//   "use strict";
+//   n(128);
+// },
+// 298: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n#chapter-list-sort-btn[data-v-abaf3886] {\n    cursor: pointer;\n}\na[data-v-abaf3886] {\n    cursor: pointer;\n}\n",
+//     "",
+//   ]);
+// },
+// 299: function (t, e, n) {
+//   "use strict";
+//   n(129);
+// },
+// 300: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n.user-default-avatar[data-v-472d14d3] {\n    width: 45px;\n    font-size: 45px;\n}\n#reviews_book a[data-v-472d14d3] {\n    cursor: pointer;\n}\n",
+//     "",
+//   ]);
+// },
+// 312: function (t, e, n) {
+//   "use strict";
+//   n(131);
+// },
+// 313: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n#bookAuthor a[data-v-3807dc18] {\n    cursor: pointer;\n}\n",
+//     "",
+//   ]);
+// },
+// 314: function (t, e, n) {
+//   "use strict";
+//   n(132);
+// },
+// 315: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n.top-fan[data-v-84d735ce]{\n  text-shadow:none;\n    background: #b78a28 -webkit-gradient(linear, left top, right top,\nfrom(#b78a28), to(#b78a28), color-stop(0.5, #FFFF99)) 0 0 no-repeat;\n    color: rgba(255, 255, 255, 0.1);\n    font-weight: bold;\n    position: relative;\n    -webkit-animation: shine-data-v-84d735ce 2s infinite;\n    -webkit-background-clip: text;\n    -webkit-background-size: 150px;\n}\n@-webkit-keyframes shine-data-v-84d735ce {\n0% {\n        background-position: top left;\n}\n100% {\n        background-position: top right;\n}\n}\n",
+//     "",
+//   ]);
+// },
+// 316: function (t, e, n) {
+//   "use strict";
+//   n(133);
+// },
+// 317: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n.require[data-v-32c3e250] {\n    border: 1px solid #f00 !important;\n}\n",
+//     "",
+//   ]);
+// },
+// 318: function (t, e, n) {
+//   "use strict";
+//   n(134);
+// },
+// 319: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n.require[data-v-50648a25] {\n    border: 1px solid #f00 !important;\n}\n",
+//     "",
+//   ]);
+// },
+// 320: function (t, e, n) {
+//   "use strict";
+//   n(135);
+// },
+// 321: function (t, e, n) {
+//   (t.exports = n(15)(!1)).push([
+//     t.i,
+//     "\n.require[data-v-172e8569] {\n    border: 1px solid #f00 !important;\n}\n",
+//     "",
+//   ]);
+// },
+// 372: function (t, e, n) {
+//   "use strict";
+//   n.r(e);
+//   var r = n(29),
+//     i = n(58),
+//     a = n.n(i),
+//     o = n(1),
+//     s = n(59),
+//     c = n.n(s),
+//     l = (n(156), n(2));
+//   var u = n(60),
+//     d = n(61),
+//     m = (n(69), n(0)),
+//     v = n.n(m),
+//     f = n(33),
+//     p = n(3),
+//     h = n(39),
+//     W = (n(68), n(8)),
+//     g = n(6);
+//   function b(t, e, n, r, i, a, o) {
+//     try {
+//       var s = t[a](o),
+//         c = s.value;
+//     } catch (t) {
+//       return void n(t);
+//     }
+//     s.done ? e(c) : Promise.resolve(c).then(r, i);
+//   }
+//   function k(t) {
+//     return function () {
+//       var e = this,
+//         n = arguments;
+//       return new Promise(function (r, i) {
+//         var a = t.apply(e, n);
+//         function o(t) {
+//           b(a, r, i, o, s, "next", t);
+//         }
+//         function s(t) {
+//           b(a, r, i, o, s, "throw", t);
+//         }
+//         o(void 0);
+//       });
+//     };
+//   }
+//   function C(t, e) {
