@@ -5243,14 +5243,4 @@ export default GeneralTerms;
 //               marginLeft: "40.85pt",
 //             }}
 //           >
-//             <tbody>
-//               <tr>
-//                 <td
-//                   className="border-[1px] w-[278.35pt] border-divideLight dark:border-divideDark"
-//                   colSpan={2}
-//                   style={{
-//                     padding: "0in 5.4pt",
-//                   }}
-//                   width="371"
-//                 >
-//                  
+//           
