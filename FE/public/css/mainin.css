@@ -2569,4 +2569,260 @@ a.badge-danger:focus {
                             content: "\EA49";
                         }
             
-                        .nh-icon.icon-gift:before { */
+                        .nh-icon.icon-gift:before 
+.nh-icon.icon-check:before {
+    content: "\EA51";
+}
+
+.text-overflow-3-lines {
+    -webkit-line-clamp: 3;
+}
+
+.text-overflow-2-lines,
+.text-overflow-3-lines {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.text-overflow-2-lines {
+    -webkit-line-clamp: 2;
+}
+
+.text-overflow-1-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.font-weight-semibold {
+    font-weight: 600 !important;
+}
+
+.fz-13 {
+    font-size: 0.8125rem;
+}
+
+.fz-14 {
+    font-size: 0.875rem;
+}
+
+.fz-body {
+    font-size: 0.9375rem;
+}
+
+.text-inherit {
+    color: inherit !important;
+}
+
+body {
+    min-width: 1200px;
+}
+
+.rounded-2 {
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.rounded-3 {
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    border-radius: 1rem;
+}
+
+.container {
+    position: relative;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.icon-wrapper {
+    width: 1.25rem;
+    text-align: center;
+    display: inline-block;
+}
+
+.border-bottom-dashed {
+    border-bottom: 1px dashed #eee !important;
+}
+
+.border-top-dashed {
+    border-top: 1px dashed #eee !important;
+}
+
+.w-150 {
+    width: 150px;
+}
+
+.nh-section .link--see-more {
+    display: none;
+}
+
+.nh-section:hover .link--see-more {
+    display: block;
+}
+
+.input-jump-to .form-control {
+    text-align: center;
+    width: 3rem;
+}
+
+.page-content {
+    background-color: #fff;
+    padding: 1.25rem;
+    position: relative;
+}
+
+.badge-primary {
+    color: #fff;
+}
+
+.media a.active,
+.media button.active {
+    color: #111 !important;
+    font-weight: 700;
+}
+
+.swiper-container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+.swiper-container-no-flexbox .swiper-slide {
+    float: left;
+}
+
+.swiper-container-vertical>.swiper-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    flex-direction: column;
+}
+
+.swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -moz-box;
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    -o-transition-property: -o-transform;
+    -moz-transition-property: transform, -moz-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform, -moz-transform,
+        -o-transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.swiper-container-android .swiper-slide,
+.swiper-wrapper {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.swiper-container-multirow>.swiper-wrapper {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.swiper-container-free-mode>.swiper-wrapper {
+    -webkit-transition-timing-function: ease-out;
+    -o-transition-timing-function: ease-out;
+    -moz-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    margin: 0 auto;
+}
+
+.swiper-slide {
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    -o-transition-property: transform;
+    -o-transition-property: -o-transform;
+    -moz-transition-property: transform, -moz-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform, -moz-transform,
+        -o-transform;
+    transition-property: transform, -webkit-transform;
+}
+
+.swiper-slide-invisible-blank {
+    visibility: hidden;
+}
+
+.swiper-container-autoheight,
+.swiper-container-autoheight .swiper-slide {
+    height: auto;
+}
+
+.swiper-container-autoheight .swiper-wrapper {
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    -moz-box-align: start;
+    align-items: flex-start;
+    -webkit-transition-property: height, -webkit-transform;
+    transition-property: height, -webkit-transform;
+    -o-transition-property: transform, height;
+    -o-transition-property: height, -o-transform;
+    -moz-transition-property: transform, height, -moz-transform;
+    transition-property: transform, height;
+    transition-property: transform, height, -webkit-transform, -moz-transform,
+        -o-transform;
+    transition-property: transform, height, -webkit-transform;
+}
+
+.swiper-container-3d {
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    perspective: 1200px;
+}
+
+.swiper-container-3d .swiper-cube-shadow,
+.swiper-container-3d .swiper-slide,
+.swiper-container-3d .swiper-slide-shadow-bottom,
+.swiper-container-3d .swiper-slide-shadow-left,
+.swiper-container-3d .swiper-slide-shadow-right,
+.swiper-container-3d .swiper-slide-shadow-top,
+.swiper-container-3d .swiper-wrapper {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.swiper-container-3d .swiper-slide-shadow-bottom,
+.swiper-container-3d .swiper-slide-shadow-left,
+.swiper-container-3d .swiper-slide-shadow-right,
+.swiper-container-3d .swiper-slide-shadow-top {
+    position: absolute;
