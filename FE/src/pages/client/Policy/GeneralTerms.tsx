@@ -5266,16 +5266,4 @@ export default GeneralTerms;
 //                     <strong>Chính sách</strong>
 //                   </p>
 //                 </td>
-//                 <td
-//                   rowSpan={2}
-//                   className="border-divideLight dark:border-divideDark"
-//                   style={{
-//                     borderWidth: "1px",
-//                     width: "159.6pt",
-//                     borderLeft: "none",
-//                     padding: "0in 5.4pt",
-//                   }}
-//                   width="213"
-//                 >
-//                   <p
-//                  
+//                 
