@@ -5253,17 +5253,4 @@ export default GeneralTerms;
 //                   }}
 //                   width="371"
 //                 >
-//                   <p
-//                     style={{
-//                       marginTop: "6.0pt",
-//                       marginRight: "0in",
-//                       marginBottom: "6.0pt",
-//                       marginLeft: "0in",
-//                       textAlign: "center",
-//                       margin: "0in 0in 10pt",
-//                     }}
-//                   >
-//                     <strong>Chính sách</strong>
-//                   </p>
-//                 </td>
-//                 
+//                  
