@@ -5177,22 +5177,4 @@ export default GeneralTerms;
 //             <strong>
 //               Điều 2. Quy định về voucher và sử dụng Voucher (nếu có sử dụng)
 //             </strong>
-//           </p>
-//           <p
-//             style={{
-//               marginTop: "6.0pt",
-//               marginRight: "0in",
-//               marginBottom: "6.0pt",
-//               marginLeft: ".5in",
-//               textAlign: "justify",
-//               margin: "0in 0in 10pt",
-//             }}
-//           >
-//             Trừ khi có thỏa thuận khác hoặc MeliaHanoi có chính sách khác, Khách
-//             sử dụng Voucher phải tuân thủ các quy định tại&nbsp;ĐKC, QĐC, các
-//             điều kiện khác quy định trên Voucher và/hoặc chính sách cung cấp
-//             Dịch Vụ tương ứng với loại Voucher được MeliaHanoi phát hành tại
-//             thời điểm mà Khách sử dụng.&nbsp;Voucher gốc phải được xuất trình và
-//             thu hồi tại thời điểm nhận phòng, trong trường hợp không xuất trình
-//             được Voucher đủ điều kiện sử dụng thì Khách phải thanh toán trực
-//             
+//         
