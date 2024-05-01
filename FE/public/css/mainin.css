@@ -3640,4 +3640,18 @@ body {
                                                             position: relative;
                                                             display: inline-block;
                                                             font-size: 0;
+                                                        }.nh-rating .nh-icon {
+                                                            margin-right: 0.25rem;
+                                                            font-size: 0.875rem;
+                                                        }
+                                                        
+                                                        .nh-rating .active {
+                                                            position: absolute;
+                                                            left: 0;
+                                                            top: 0;
+                                                            bottom: 0;
+                                                            white-space: nowrap;
+                                                            overflow: hidden;
+                                                            color: #ffc000;
+                                                            max-width: 100%;
                                                         }
