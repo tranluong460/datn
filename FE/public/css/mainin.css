@@ -3160,5 +3160,292 @@ body {
                     width: 2rem;
                     height: 1.25rem;
                     background-image: url(../images/icons/crown.svg);
+                }.svg-icon.icon-candy {
+                    width: 1.25rem;
+                    height: 1.25rem;
+                    background-image: url(../images/icons/candy.svg);
                 }
+                
+                .svg-icon.icon-flower {
+                    width: 0.6875rem;
+                    height: 1.125rem;
+                }
+                
+                .svg-icon.icon-flower,
+                .svg-icon.icon-flower-big {
+                    background-image: url(../images/icons/flower.svg);
+                }
+                
+                .svg-icon.icon-flower-big {
+                    width: 1.1875rem;
+                    height: 1.875rem;
+                }
+                
+                .svg-icon.icon-depute {
+                    width: 1.3125rem;
+                    height: 1.25rem;
+                }
+                
+                .svg-icon.icon-depute,
+                .svg-icon.icon-depute-big {
+                    background-image: url(../images/icons/depute.svg);
+                }
+                
+                .svg-icon.icon-depute-big {
+                    width: 2.125rem;
+                    height: 1.875rem;
+                }
+                
+                .svg-icon.icon-depute-2 {
+                    width: 1.0625rem;
+                    height: 1.125rem;
+                    background-image: url(../images/icons/depute.svg);
+                }
+                
+                .svg-icon.icon-react-love {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    background-image: url(../images/icons/react-love.svg?v=1);
+                }
+                
+                .svg-icon.icon-react-like {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    background-image: url(../images/icons/react-like.svg?v=1);
+                }
+                
+                .svg-icon.icon-react-fun {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    background-image: url(../images/icons/react-fun.svg?v=1);
+                }
+                
+                .svg-icon.icon-react-sad {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    background-image: url(../images/icons/react-sad.svg?v=1);
+                }
+                
+                .svg-icon.icon-react-angry {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    background-image: url(../images/icons/react-angry.svg?v=1);
+                }
+                
+                .svg-icon.icon-react-attack {
+                    width: 1.75rem;
+                    height: 1.75rem;
+                    background-image: url(../images/icons/react-attack.svg);
+                }
+                
+                .bg-rose-white {
+                    background-color: snow !important;
+                }
+                
+                .bg-blue-white {
+                    background-color: #f7fafa !important;
+                }
+                
+                .bg-vista-white,
+                .bg-yellow-white {
+                    background-color: #f7f5f0 !important;
+                }
+                
+                .bg-black-squeeze,
+                .bg-light-success {
+                    background-color: #f7fcfa !important;
+                }
+                
+                .bg-light-warning {
+                    background-color: #fffcf5 !important;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-container {
+                    padding-bottom: 10px;
+                    visibility: hidden;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-container.loaded {
+                    visibility: visible;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-button-next,
+                .nh-group-slider .slider-thumb .swiper-button-prev {
+                    width: 40px;
+                    height: 40px;
+                    background-color: #fff;
+                    background-image: none;
+                    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+                    -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+                    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    border-radius: 50%;
+                    top: 50%;
+                    -webkit-transition: all 0.2s ease-in-out;
+                    -o-transition: all 0.2s ease-in-out;
+                    -moz-transition: all 0.2s ease-in-out;
+                    transition: all 0.2s ease-in-out;
+                    margin-top: -20px;
+                    color: #999;
+                    font-size: 13px;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-button-next.swiper-button-disabled,
+                .nh-group-slider .slider-thumb .swiper-button-prev.swiper-button-disabled {
+                    display: none;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-button-next:hover,
+                .nh-group-slider .slider-thumb .swiper-button-prev:hover {
+                    opacity: 0.8;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-button-next .truyencv-icon,
+                .nh-group-slider .slider-thumb .swiper-button-prev .truyencv-icon {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    margin: auto;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-button-next {
+                    right: 10px;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-button-prev {
+                    left: 10px;
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-slide {
+                    width: 140px;
+                    -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.25);
+                    -moz-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.25);
+                    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.25);
+                    background-color: #eee;
+                    opacity: 0.5;
+                    -webkit-transition: all 0.2s ease-in-out;
+                    -o-transition: all 0.2s ease-in-out;
+                    -moz-transition: all 0.2s ease-in-out;
+                    transition: all 0.2s ease-in-out;
+                    pointer-events: none;
+                }
+                
+                @media (prefers-reduced-motion: reduce) {
+                    .nh-group-slider .slider-thumb .swiper-slide {
+                        -webkit-transition: none;
+                        -o-transition: none;
+                        -moz-transition: none;
+                        transition: none;
+                    }
+                }
+                
+                .nh-group-slider .slider-thumb .swiper-slide-active {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+                
+                .nh-group-slider .slider-thumb .item {
+                    display: block;
+                }
+                
+                .nh-group-slider .slider-thumb .item img {
+                    width: 100%;
+                }
+                
+                .nh-group-slider .slider-info .swiper-slide {
+                    opacity: 0 !important;
+                }
+                
+                .nh-group-slider .slider-info .swiper-slide-active {
+                    opacity: 1 !important;
+                }
+                
+                .nh-slider .swiper-button-next,
+                .nh-slider .swiper-button-prev {
+                    background: 0 0;
+                    font-size: 1.25rem;
+                    color: #999;
+                }
+                
+                .nh-slider .swiper-button-prev {
+                    left: 1.5rem;
+                }
+                
+                .nh-slider .swiper-button-next {
+                    right: 1.5rem;
+                }
+                
+                .nh-avatar {
+                    position: relative;
+                }
+                
+                .nh-avatar:before {
+                    padding-top: 100%;
+                    display: block;
+                    content: "";
+                }
+                
+                .nh-avatar .level {
+                    position: absolute;
+                    bottom: -0.125rem;
+                    line-height: 1.5;
+                    padding: 0 0.75rem;
+                    left: 50%;
+                    -webkit-transform: translateX(-50%);
+                    -moz-transform: translateX(-50%);
+                    -ms-transform: translateX(-50%);
+                    -o-transform: translateX(-50%);
+                    transform: translateX(-50%);
+                    white-space: nowrap;
+                }
+                
+                .nh-avatar.nh-avatar--decor:after {
+                    background: url(../images/avatar-bg.png) no-repeat 50%;
+                    -webkit-background-size: 100% auto;
+                    -moz-background-size: 100% auto;
+                    background-size: 100% auto;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    z-index: 1;
+                    content: "";
+                }
+                
+                .nh-avatar.nh-avatar--90 {
+                    width: 90px;
+                }
+                
+                .nh-avatar.nh-avatar--45 {
+                    width: 45px;
+                }
+                
+                .nh-avatar.nh-avatar--30 {
+                    width: 30px;
+                }
+                
+                .nh-avatar.nh-avatar--24 {
+                    width: 1.5rem;
+                }
+                
+                .nh-avatar>img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    max-width: 100%;
+                    margin: auto;
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    border-radius: 50%;
+                }
+                
+                .dropdown-menu {
+                    -webkit-box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.09);
+                    -moz-box-shadow: 0 10px 15px 0 rgb
 */
