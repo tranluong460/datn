@@ -207,7 +207,10 @@ const RoomTypeManage = () => {
                     {items.name}
                   </td>
                   <td className="border border-gray-300 border-solid ">
-                    {items.price}
+                    {items?.price?.toLocaleString("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
                   </td>
                   <td className="border border-gray-300 border-solid ">
                     {items.bed}

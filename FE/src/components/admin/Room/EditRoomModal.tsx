@@ -74,6 +74,7 @@ const EditRoomModal = ({
     // }
 
     const roomQuantity = data?.quantity;
+
     const listRoomLength = data?.list_rooms?.split(",").length;
 
     if (listRoomLength > roomQuantity) {
@@ -83,6 +84,7 @@ const EditRoomModal = ({
     }
 
     if (listRoomLength < roomQuantity) {
+      console.log(roomQuantity);
       return message.error("Số phòng phải bằng số lượng phòng đã chọn!");
     }
 
