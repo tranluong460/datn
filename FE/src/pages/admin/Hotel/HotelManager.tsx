@@ -43,21 +43,22 @@ const HotelManager = () => {
 
   const columns: ColumnsType<IHotel> = [
     {
-      title: "ID",
+      title: "STT",
       dataIndex: "_id",
       key: "_id",
-      render: (_id) => (
-        <Tooltip placement="right" title="Click để xem thông tin chi tiết">
-          <button
-            onClick={() => {
-              setOpenHotelDrawn(true);
-              setIdHotel(_id);
-            }}
-          >
-            {_id}
-          </button>
-        </Tooltip>
-      ),
+      render: (_id, {}, index) => index + 1,
+      //   (
+      //   <Tooltip placement="right" title="Click để xem thông tin chi tiết">
+      //     <button
+      //       onClick={() => {
+      //         setOpenHotelDrawn(true);
+      //         setIdHotel(_id);
+      //       }}
+      //     >
+      //       {_id}
+      //     </button>
+      //   </Tooltip>
+      // ),
     },
     {
       title: "Tên khách sạn",
