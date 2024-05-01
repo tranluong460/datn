@@ -3692,4 +3692,6 @@ body {
                                                             border-right: 0.75rem solid #999;
                                                             bottom: -0.5rem;
                                                             right: 0;
+                                                        }.ribbon.ribbon--1 {
+                                                            background-color: #ffc100;
                                                         }
