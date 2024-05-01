@@ -233,7 +233,7 @@ const RoomDetailCard = ({ room: Room, onCloseDetail }: any) => {
             <AiOutlineClose />
           </button>
           <div
-            className={`max-[1000px]:hidden max-[1000px]:grid max-[1100px]:grid-cols-[300px_240px_400px]  grid grid-cols-[400px_340px_560px] justify-start border border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white  -top-28 inset-x-0 z-[800] transition-search`}
+            className={`max-[1000px]:hidden max-[1000px]:grid max-[1100px]:grid-cols-[300px_240px_400px]  grid grid-cols-[400px_340px_560px] justify-start border border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white  -top-28 inset-x-0 z-[999] transition-search`}
           >
             <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[18px] pl-2">
               <p>
