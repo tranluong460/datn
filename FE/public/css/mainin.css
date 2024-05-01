@@ -3573,5 +3573,12 @@ body {
                                                     border: 1px solid transparent;
                                                     min-width: 6rem;
                                                     white-space: nowrap;
+                                                }list-gift .item img {
+                                                    height: 2.5rem;
+                                                }
+                                                
+                                                .list-gift .item.active {
+                                                    border-color: #b78a28;
+                                                    background-color: #f5fafc;
                                                 }
 */
