@@ -3448,4 +3448,49 @@ body {
                 .dropdown-menu {
                     -webkit-box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.09);
                     -moz-box-shadow: 0 10px 15px 0 rgb
+                    .dropdown-menu.dropdown-menu--category {
+                            width: 500px;
+                            padding-left: 1.5rem;
+                            padding-right: 1.5rem;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--inbox,
+                        .dropdown-menu.dropdown-menu--notification {
+                            min-width: 400px;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--profile {
+                            min-width: 280px;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--profile ul>li .btn {
+                            width: 5.5rem;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--gift {
+                            min-width: 680px;
+                            left: 128px !important;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--gift:after,
+                        .dropdown-menu.dropdown-menu--gift:before {
+                            right: 10.5rem !important;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--gift[x-placement="bottom-end"] {
+                            margin-top: 1rem !important;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--gift[x-placement="top-end"] {
+                            margin-bottom: 1rem !important;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--depute {
+                            min-width: 232px;
+                        }
+                    
+                        .dropdown-menu.dropdown-menu--depute:after,
+                        .dropdown-menu.dropdown-menu--depute:before {
+                            right: 4rem !important;
+                        }
 */
