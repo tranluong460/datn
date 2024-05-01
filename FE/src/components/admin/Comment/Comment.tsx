@@ -74,6 +74,9 @@ const Comment = () => {
       title: "Đánh giá",
       dataIndex: "rating",
       key: "rating",
+      render: (rating) => {
+        return <p>{rating} ⭐</p>;
+      },
       sorter: (a, b) => a?.rating - b?.rating,
     },
     {
