@@ -79,7 +79,7 @@ const ComboPriceCard: React.FC<ComboPriceCardProps> = ({
 
       {selectedRoom && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-md">
+          <div className="absolute top-[450px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-md">
             <RoomDetailCard
               room={selectedRoom}
               onCloseDetail={closeRoomDetail}
