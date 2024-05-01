@@ -3624,5 +3624,10 @@ body {
                                                         
                                                         .nh-thumb.nh-thumb--90 {
                                                             width: 90px;
+                                                        }.nh-thumb.nh-thumb--210 {
+                                                            width: 210px;
                                                         }
-*/
+                                                        
+                                                        .nh-thumb.nh-thumb--150 {
+                                                            width: 150px;
+                                                        }
