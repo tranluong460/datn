@@ -3536,4 +3536,42 @@ body {
                             right: 1rem;
                             width: 1px;
                         }
+                                                .nh-dropdown .dropdown-menu.dropdown-menu-right[x-placement="top-end"] {
+                                                    margin-bottom: 0.5rem;
+                                                }
+                        
+                                                .nh-dropdown .dropdown-menu.dropdown-menu-right[x-placement="top-end"]:before {
+                                                    border-left: 10px solid transparent;
+                                                    border-right: 10px solid transparent;
+                                                    border-top: 10px solid #eee;
+                                                }
+                        
+                                                .nh-dropdown .dropdown-menu.dropdown-menu-right[x-placement="top-end"]:after {
+                                                    border-left: 8px solid transparent;
+                                                    border-right: 8px solid transparent;
+                                                    border-top: 8px solid #fff;
+                                                    margin-right: 2px;
+                                                    margin-bottom: 2px;
+                                                }
+                        
+                                                .nh-dropdown .dropdown-menu.dropdown-menu-right[x-placement="top-end"]:after,
+                                                .nh-dropdown .dropdown-menu.dropdown-menu-right[x-placement="top-end"]:before {
+                                                    content: "";
+                                                    position: absolute;
+                                                    border-bottom: 0;
+                                                    bottom: -10px;
+                                                    right: 1rem;
+                                                    width: 1px;
+                                                }
+                        
+                                                .list-gift {
+                                                    margin: 0 -0.5rem;
+                                                }
+                        
+                                                .list-gift .item {
+                                                    display: block;
+                                                    border: 1px solid transparent;
+                                                    min-width: 6rem;
+                                                    white-space: nowrap;
+                                                }
 */
