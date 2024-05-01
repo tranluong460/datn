@@ -52,21 +52,10 @@ const Comment = () => {
 
   const columns: ColumnsType<IHotel> = [
     {
-      title: "ID",
+      title: "STT",
       dataIndex: "_id",
       key: "_id",
-      render: (_id) => (
-        <Tooltip placement="right" title="Click để xem thông tin chi tiết">
-          <button
-            onClick={() => {
-              setOpenHotelDrawn(true);
-              setIdHotel(_id);
-            }}
-          >
-            {_id}
-          </button>
-        </Tooltip>
-      ),
+      render: (_id, {}, index) => index + 1,
     },
     {
       title: "Email",
@@ -85,6 +74,7 @@ const Comment = () => {
       title: "Đánh giá",
       dataIndex: "rating",
       key: "rating",
+      sorter: (a, b) => a?.rating - b?.rating,
     },
     {
       title: "Thời gian comment",
