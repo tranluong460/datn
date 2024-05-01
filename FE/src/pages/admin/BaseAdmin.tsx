@@ -117,7 +117,7 @@ const BaseAdmin = () => {
       null,
     (reservationRole.includes(data.data.role) &&
       getItem(
-        "Quản lý Đặt Phòng",
+        "Quản lý đặt phòng",
         "/admin/booking-manager",
         <TbBrandBooking />
       )) ||
@@ -125,7 +125,7 @@ const BaseAdmin = () => {
     (humanRole.includes(data.data.role) &&
       getItem("Quản lý voucher", "/admin/voucher-manager", <AiOutlineTag />)) ||
       null,
-    getItem("phòng", "/admin/empty-room", <AiOutlineTag />),
+    getItem("Phòng trống", "/admin/empty-room", <AiOutlineTag />),
   ];
 
   // eslint-disable-next-line
