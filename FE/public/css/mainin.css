@@ -3630,4 +3630,14 @@ body {
                                                         
                                                         .nh-thumb.nh-thumb--150 {
                                                             width: 150px;
+                                                        }.nh-thumb img {
+                                                            width: 100%;
+                                                            height: auto;
+                                                        }
+                                                        
+                                                        .nh-rating {
+                                                            color: #ffebaf;
+                                                            position: relative;
+                                                            display: inline-block;
+                                                            font-size: 0;
                                                         }
