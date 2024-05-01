@@ -3580,5 +3580,22 @@ body {
                                                 .list-gift .item.active {
                                                     border-color: #b78a28;
                                                     background-color: #f5fafc;
+                                                }.list-gift .item:hover {
+                                                    border-color: #b78a28;
                                                 }
+                                                
+                                                .nh-thumb {
+                                                    display: inline-block;
+                                                    overflow: hidden;
+                                                    position: relative;
+                                                }
+                                                
+                                                .nh-thumb:before {
+                                                    padding-top: 133.333333%;
+                                                    content: "";
+                                                    display: block;
+                                                }
+                                                
+                                                .nh-thumb:hover {
+                                                    opacity: 0.9;
 */
