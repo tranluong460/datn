@@ -3685,4 +3685,11 @@ body {
                                                         .ribbon:after {
                                                             position: absolute;
                                                             left: 0;
+                                                        }.ribbon:after {
+                                                            content: "";
+                                                            border-bottom: 0.5rem solid transparent;
+                                                            border-left: 0.75rem solid #999;
+                                                            border-right: 0.75rem solid #999;
+                                                            bottom: -0.5rem;
+                                                            right: 0;
                                                         }
