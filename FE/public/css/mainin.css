@@ -3697,4 +3697,11 @@ body {
                                                         }.ribbon.ribbon--1:after {
                                                             border-left-color: #ffc100;
                                                             border-right-color: #ffc100;
+                                                        }.ribbon.ribbon--2 {
+                                                            background-color: #f9973a;
+                                                        }
+                                                        
+                                                        .ribbon.ribbon--2:after {
+                                                            border-left-color: #f9973a;
+                                                            border-right-color: #f9973a;
                                                         }
