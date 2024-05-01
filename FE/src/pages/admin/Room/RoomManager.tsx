@@ -22,23 +22,12 @@ const RoomManager = () => {
   };
 
   const columns: ColumnsType<IRoom> = [
-    // {
-    //   title: "ID",
-    //   dataIndex: "_id",
-    //   key: "_id",
-    //   render: (_id) => (
-    //     <Tooltip placement="right" title="Click để xem thông tin chi tiết">
-    //       <button
-    //         onClick={() => {
-    //           setOpenRoomDrawn(true);
-    //           setIdRoom(_id);
-    //         }}
-    //       >
-    //         {_id}
-    //       </button>
-    //     </Tooltip>
-    //   ),
-    // },
+    {
+      title: "STT",
+      dataIndex: "_id",
+      key: "_id",
+      render: (_id, {}, index) => index + 1,
+    },
     {
       title: "Loại phòng",
       dataIndex: "id_roomType",
