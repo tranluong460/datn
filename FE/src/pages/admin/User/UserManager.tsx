@@ -115,19 +115,20 @@ const UserManager = () => {
 
   const columns: ColumnsType<IUser> = [
     {
-      title: "ID",
+      title: "STT",
       dataIndex: "_id",
       key: "_id",
-      render: (_id) => (
-        <Tooltip placement="right" title="Click để xem thông tin chi tiết">
-          <button onClick={() => getInfo(_id)}>{_id}</button>
-        </Tooltip>
-      ),
+      render: (_id, {}, index) => index + 1,
     },
     {
       title: "Tài khoản",
       dataIndex: "email",
       key: "email",
+      render: (email, { _id }) => (
+        <Tooltip placement="right" title="Click để xem thông tin chi tiết">
+          <button onClick={() => getInfo(_id)}>{email}</button>
+        </Tooltip>
+      ),
     },
     {
       title: "Vai trò",
@@ -177,12 +178,19 @@ const UserManager = () => {
                     {user?.data?.role == "Admin" ? (
                       <div className="flex gap-2">
                         <Button danger>Khóa tài khoản</Button>
-                        <Button onClick={() => getInfo2(_id)}>Cập nhật</Button>
                       </div>
                     ) : (
                       ""
                     )}
                   </Popconfirm>
+
+                  {user?.data?.role == "Admin" ? (
+                    <div className="flex gap-2">
+                      <Button onClick={() => getInfo2(_id)}>Cập nhật</Button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </Space>
               )}
             </>
