@@ -3654,4 +3654,7 @@ body {
                                                             overflow: hidden;
                                                             color: #ffc000;
                                                             max-width: 100%;
+                                                        }.nh-nav-tabs .nav-link .counter {
+                                                            background-color: #f7f7f7;
+                                                            color: #666;
                                                         }
