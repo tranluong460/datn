@@ -12,7 +12,6 @@ import { Button, Modal, Radio, RadioChangeEvent, Image } from "antd";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useCookies } from "react-cookie";
 const HotelListPage = () => {
-  const [quantityRoom, setQuantityRoom] = useState(1);
   const { data } = useGetAllHotelQuery("");
   const [visibleRooms, setVisibleRooms] = useState(5); // Số lượng phòng hiển thị ban đầu
 
@@ -60,18 +59,6 @@ const HotelListPage = () => {
   const checkoutDate = moment(checkout);
   const numberOfDays = checkoutDate.diff(checkinDate, "days");
 
-  const increaseRoom = () => {
-    if (quantityRoom < Number(quantity)) {
-      setQuantityRoom(quantityRoom + 1);
-    }
-  };
-
-  const decreaseRoom = () => {
-    if (quantityRoom > 1) {
-      setQuantityRoom(quantityRoom - 1);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,11 +90,25 @@ const HotelListPage = () => {
   ]);
 
   const { data: AllHotel } = useGetAllHotelQuery("");
+  const [quantityRooms, setQuantityRooms]: any = useState({});
+  const increaseRoom = (id: number) => {
+    const currentQuantity = quantityRooms[id] || 0;
+    const newQuantity = currentQuantity + 1;
+    if (newQuantity <= Number(quantity)) {
+      setQuantityRooms((prevQuantityRooms: any) => ({
+        ...prevQuantityRooms,
+        [id]: newQuantity,
+      }));
+    }
+  };
 
-  const [selectedValues, setSelectedValues] = useState(1);
-  // Cập nhật onChange function để thay đổi giá trị của radio button cho từng phần tử
-  const onChange = (e: RadioChangeEvent) => {
-    setValue(e.target.value);
+  const decreaseRoom = (id: number) => {
+    if (quantityRooms[id] > 1) {
+      setQuantityRooms((prevQuantityRooms: any) => ({
+        ...prevQuantityRooms,
+        [id]: prevQuantityRooms[id] - 1,
+      }));
+    }
   };
 
   // chuyển ảnh
@@ -138,7 +139,7 @@ const HotelListPage = () => {
       list_room: [
         {
           idRoom: data?._id,
-          quantity: quantityRoom,
+          quantity: quantityRooms[data?._id] || 1,
         },
       ],
       city: 1,
@@ -164,7 +165,7 @@ const HotelListPage = () => {
             <span className="border-r-gray-500 pr-4 border-r">
               44B đường Lý Thường Kiệt 2RFX+PC Hà Nội
             </span>
-            <Button type="primary" onClick={showModal} className="text-black">
+            <Button type="primary" onClick={showModal} className="text-white">
               Thông tin khách sạn
             </Button>
             <Modal
@@ -193,11 +194,7 @@ const HotelListPage = () => {
                   <h1 className="font-bold">SĐT:</h1>
                   {data?.data[0]?.phone}
                 </span>
-                <span className="flex gap-1">
-                  <h1 className="font-bold">Mức độ đánh giá:</h1>
 
-                  {data?.data[0]?.id_review.length == 0 ? "0" : "1"}
-                </span>
                 <h1>
                   <Image width={200} src={data?.data[0]?.images[0].url} />
                 </h1>
@@ -395,14 +392,14 @@ const HotelListPage = () => {
                             <div className="flex gap-2 items-center ">
                               <button
                                 className="p-2 bg-blue-500 rounded-full text-white  w-[30px] h-[30px]"
-                                onClick={decreaseRoom}
+                                onClick={() => decreaseRoom(items._id)}
                               >
                                 -
                               </button>
-                              {quantityRoom}
+                              {quantityRooms[items._id] || 1}
                               <button
                                 className="p-2 bg-blue-500 rounded-full text-white  w-[30px] h-[30px]"
-                                onClick={increaseRoom}
+                                onClick={() => increaseRoom(items._id)}
                               >
                                 +
                               </button>
@@ -415,11 +412,7 @@ const HotelListPage = () => {
                         <div className="flex justify-between border-b-slate-300 border-b py-8">
                           <div className="flex gap-3 ">
                             <div>
-                              {/* TODO */}
-                              <Radio.Group
-                                onChange={onChange}
-                                value={selectedValues}
-                              >
+                              <Radio.Group value={1}>
                                 <Radio value={1}></Radio>
                               </Radio.Group>
                             </div>
@@ -469,39 +462,5 @@ const HotelListPage = () => {
     </>
   );
 };
-``;
+
 export default HotelListPage;
-
-{
-  /* <Container>
-<FilterDialog
-  isShowRate={showRate}
-  onShowRate={() => setShowRate(!showRate)}
-  isShowDialog={showDialog}
-  onShowDialog={() => setShowDialog(!showDialog)}
-/>
-
-<Container>
-  <div className="pt-5">
-    <FilterTop onShowDialog={() => setShowDialog(!showDialog)} />
-  </div>
-
-  <div className="pb-24 pt-3">
-    <h1 id="products-heading" className="sr-only">
-      Danh sách phòng
-    </h1>
-
-    <div className="grid grid-cols-1 gap-x-5 gap-y-10 lg:grid-cols-4">
-      <Filter
-        isShowRate={showRate}
-        onShowRate={() => setShowRate(!showRate)}
-      />
-
-      <div className="lg:col-span-3">
-        <ListHotel listHotel={searchResult?.data} />
-      </div>
-    </div>
-  </div>
-</Container>
-</Container> */
-}
