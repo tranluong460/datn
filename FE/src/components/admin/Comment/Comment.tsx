@@ -1,7 +1,16 @@
 import { useState } from "react";
 import moment from "moment";
 import type { ColumnsType } from "antd/es/table";
-import { Button, Select, Space, Table, Tooltip, message, Modal } from "antd";
+import {
+  Button,
+  Select,
+  Space,
+  Table,
+  Tooltip,
+  message,
+  Modal,
+  Popconfirm,
+} from "antd";
 
 import { IHotel } from "../../../interface";
 import {
@@ -93,7 +102,17 @@ const Comment = () => {
       render: (_, { _id }) => (
         <>
           <Space>
-            <Button onClick={() => handleDeleteConfirm(_id)}>Xóa</Button>
+            <Popconfirm
+              placement="left"
+              title="Bạn có chắc chắn muốn thực hiện hành động này không?"
+              description="Hành động này không thể hoàn tác."
+              onConfirm={() => handleDeleteConfirm(_id)}
+              okText="Đồng ý"
+              okType="danger"
+              cancelText="Hủy"
+            >
+              <Button>Xóa</Button>
+            </Popconfirm>
           </Space>
         </>
       ),

@@ -126,11 +126,11 @@ const HotelManager = () => {
   return (
     <>
       <Table
-        title={() => (
-          <div className="flex items-center justify-end">
-            <Button onClick={() => setShowCreateModal(true)}>Thêm mới</Button>
-          </div>
-        )}
+        // title={() => (
+        //   <div className="flex items-center justify-end">
+        //     <Button onClick={() => setShowCreateModal(true)}>Thêm mới</Button>
+        //   </div>
+        // )}
         bordered
         rowKey="_id"
         columns={columns}
