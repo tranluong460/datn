@@ -3666,4 +3666,7 @@ body {
                                                             left: 0;
                                                             right: 0;
                                                             background-color: #b78a28;
+                                                        }.nh-nav-tabs .nav-link.active .counter {
+                                                            background-color: #f7f5f0;
+                                                            color: #b78a28;
                                                         }
