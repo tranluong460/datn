@@ -3694,4 +3694,7 @@ body {
                                                             right: 0;
                                                         }.ribbon.ribbon--1 {
                                                             background-color: #ffc100;
+                                                        }.ribbon.ribbon--1:after {
+                                                            border-left-color: #ffc100;
+                                                            border-right-color: #ffc100;
                                                         }
