@@ -3657,4 +3657,13 @@ body {
                                                         }.nh-nav-tabs .nav-link .counter {
                                                             background-color: #f7f7f7;
                                                             color: #666;
+                                                        }.nh-nav-tabs .nav-link.active:before {
+                                                            content: "";
+                                                            height: 3px;
+                                                            width: 100%;
+                                                            position: absolute;
+                                                            bottom: -1px;
+                                                            left: 0;
+                                                            right: 0;
+                                                            background-color: #b78a28;
                                                         }
