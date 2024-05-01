@@ -9,7 +9,12 @@ import moment from "moment";
 import { useSearchRoomMutation, useGetAllHotelQuery } from "../../../api";
 import { Container, FilterDialog, Search } from "../../../components";
 import { Button, Modal, Radio, RadioChangeEvent, Image } from "antd";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import {
+  AiFillMinusCircle,
+  AiFillPlusCircle,
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+} from "react-icons/ai";
 import { useCookies } from "react-cookie";
 const HotelListPage = () => {
   const { data } = useGetAllHotelQuery("");
@@ -195,8 +200,12 @@ const HotelListPage = () => {
                   {data?.data[0]?.phone}
                 </span>
 
-                <h1>
-                  <Image width={200} src={data?.data[0]?.images[0].url} />
+                <h1 className="">
+                  <Image
+                    src={data?.data[0]?.images[0].url}
+                    width={472}
+                    height={300}
+                  />
                 </h1>
               </div>
             </Modal>
@@ -310,7 +319,6 @@ const HotelListPage = () => {
             {searchResult?.data
               ?.slice(0, visibleRooms)
               .map((items: any, index: number) => {
-                console.log("🚀 ~ .map ~ items:", items);
                 const id = items._id.toString(); // Assume each item has a unique id
                 const maxIndex = items.images.length - 1;
                 const currentIndex = currentImageIndices[id] || 0;
@@ -347,7 +355,7 @@ const HotelListPage = () => {
                     </div>
 
                     <div className="flex flex-col w-full justify-between font-[Graphik,sans-serif] max-w-[600px]">
-                      <div className="mt-16 px-10 ">
+                      <div className="mt-5 px-10 ">
                         <span className="underline underline-offset-8 decoration-1 inline-flex text-[24px] leading-9 ">
                           {items.id_roomType.name} ({items.id_roomType.name}{" "}
                           Room)
@@ -374,14 +382,14 @@ const HotelListPage = () => {
                         </div>
 
                         <div>
-                          <p>
-                            {" "}
-                            sử dụng cho {items?.id_roomType?.adults} người lớn
+                          <p className="flex gap-1">
+                            Tối đa:
+                            <p className="font-bold">
+                              {items?.id_roomType?.adults} người lớn ,{" "}
+                              {items?.id_roomType?.children} trẻ em
+                            </p>
                           </p>
-                          <p>
-                            {" "}
-                            sử dụng cho {items?.id_roomType?.children} trẻ em
-                          </p>
+
                           <p>Giường ngủ: {items?.id_roomType?.bed}</p>
 
                           <div className="flex items-center justify-between">
@@ -389,19 +397,22 @@ const HotelListPage = () => {
                               <p> Số lượng phòng muốn đặt</p>
                             </div>
 
-                            <div className="flex gap-2 items-center ">
+                            <div className="flex gap-3 items-center ">
                               <button
-                                className="p-2 bg-blue-500 rounded-full text-white  w-[30px] h-[30px]"
+                                className="text-3xl text-blue-500"
                                 onClick={() => decreaseRoom(items._id)}
                               >
-                                -
+                                <AiFillMinusCircle />
                               </button>
-                              {quantityRooms[items._id] || 1}
+                              <p className="text-2xl">
+                                {" "}
+                                {quantityRooms[items._id] || 1}
+                              </p>
                               <button
-                                className="p-2 bg-blue-500 rounded-full text-white  w-[30px] h-[30px]"
+                                className="text-3xl text-blue-500 "
                                 onClick={() => increaseRoom(items._id)}
                               >
-                                +
+                                <AiFillPlusCircle />
                               </button>
                             </div>
                           </div>
@@ -420,13 +431,28 @@ const HotelListPage = () => {
                             <div className="flex flex-col text-lg">
                               <p> Chỉ phòng lưu trú</p>
                               <p className="">
-                                Từ {items.id_roomType.price} VND mỗi đêm
+                                Từ{" "}
+                                {items?.id_roomType?.price.toLocaleString(
+                                  "vi-VN",
+                                  {
+                                    style: "currency",
+                                    currency: "VND",
+                                  }
+                                )}{" "}
+                                mỗi đêm
                               </p>
                             </div>
                           </div>
                           <div>
                             <p className="font-[550] text-[16px]">
-                              {items.id_roomType.price} VND mỗi đêm
+                              {items?.id_roomType?.price.toLocaleString(
+                                "vi-VN",
+                                {
+                                  style: "currency",
+                                  currency: "VND",
+                                }
+                              )}{" "}
+                              mỗi đêm
                             </p>
                           </div>
                         </div>

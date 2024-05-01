@@ -76,8 +76,6 @@ export const roomApi = createApi({
     }),
     searchRoom: builder.mutation({
       query: (Params: any) => {
-        // const paramsString = new URLSearchParams(Params).toString();
-        console.log(Params);
         return {
           url: `room/search`,
           method: "POST",

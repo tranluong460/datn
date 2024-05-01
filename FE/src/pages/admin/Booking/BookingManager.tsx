@@ -1,4 +1,4 @@
-import { Button, Space, Table, Input, DatePicker } from "antd";
+import { Button, Space, Table, Input, DatePicker, Drawer, Image } from "antd";
 import type { DatePickerProps, GetRef, TableProps } from "antd";
 import { useGetAllBookingQuery, useGetOneBookingQuery } from "../../../api";
 import { IBooking, IRoom } from "../../../interface";
@@ -12,6 +12,17 @@ import { FilterDropdownProps } from "antd/es/table/interface";
 type InputRef = GetRef<typeof Input>;
 
 const BookingManager = () => {
+  //  TODO
+  const [open, setOpen] = useState(false);
+  const showDrawer = (id: string) => {
+    setIdBooking(id); // Đặt ID của hoá đơn bạn muốn hiển thị thông tin chi tiết
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [idBooking, setIdBooking] = useState("");
   const [searchText, setSearchText] = useState("");
@@ -21,6 +32,7 @@ const BookingManager = () => {
 
   const { data: allBooking, isLoading } = useGetAllBookingQuery("");
   const { data: dataOneBooking, isFetching } = useGetOneBookingQuery(idBooking);
+  console.log("🚀 ~ BookingManager ~ dataOneBooking:", dataOneBooking);
 
   const handleSearch = (
     selectedKeys: string[],
@@ -493,10 +505,50 @@ const BookingManager = () => {
                 setIdBooking(_id);
               }}
             >
-              Cập nhật
+              {status === "Thành công" ? "Thành công" : "Cập nhật"}
             </Button>
 
-            {status === "Thành công" && <Button>Xuất hóa đơn</Button>}
+            <Button type="primary" onClick={() => showDrawer(_id)}>
+              Thông tin chi tiết
+            </Button>
+            <Drawer title="Basic Drawer" onClose={onClose} open={open}>
+              <div>
+                <p>
+                  Thời gian nhận phòng:{" "}
+                  {moment(dataOneBooking?.data?.check_in).format("YYYY-MM-DD")}
+                </p>
+
+                <p>
+                  Thời gian trả phòng:{" "}
+                  {moment(dataOneBooking?.data?.check_out).format("YYYY-MM-DD")}
+                </p>
+              </div>
+
+              <div>
+                <p>Tổng số tiền: {dataOneBooking?.data?.total_price} </p>
+                {dataOneBooking?.data?.status}
+                <p>Trạng thái thanh toán:</p>
+                {dataOneBooking?.data?.payment_method}
+              </div>
+
+              {dataOneBooking?.data?.info?.cmt}
+              {dataOneBooking?.data?.info?.name}
+              {dataOneBooking?.data?.info?.phone}
+
+              {dataOneBooking?.data?.id_payment?.status}
+              {dataOneBooking?.data?.id_payment?.amount}
+              {dataOneBooking?.data?.id_payment?.createdAt}
+
+              <div>
+                <p>Thông tin phòng đặt</p>
+                Số lượng phòng đặt:{" "}
+                {dataOneBooking?.data?.list_room?.idRoom?.quantity}
+                <Image
+                  src={dataOneBooking?.data?.list_room?.idRoom?.images[0].url}
+                  alt=""
+                />
+              </div>
+            </Drawer>
           </Space>
         </>
       ),

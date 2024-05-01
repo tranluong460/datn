@@ -23,8 +23,6 @@ const RoomTypeManage = () => {
   const [editRoomType] = useUpdateRoomTypeMutation();
 
   const handleEditClick = (itemId: string) => {
-    console.log("🚀 ~ handleEditClick ~ itemId:", itemId);
-
     setIdRoomType(itemId);
     setShowEditModal(true);
   };
