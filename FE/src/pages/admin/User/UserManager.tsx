@@ -263,7 +263,7 @@ const UserManager = () => {
           <Form form={form} onFinish={onFinish}>
             <Form.Item name="role" label="Vai trò">
               <Select placeholder="Chọn vai trò" allowClear>
-                <Option value="Admin">Admin</Option>
+                {/* <Option value="Admin">Admin</Option> */}
                 <Option value="Reservation Manager">Reservation Manager</Option>
                 <Option value="Human Resources Manager">
                   Human Resources Manager
