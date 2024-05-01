@@ -64,9 +64,10 @@ const AmenitiesManager = () => {
   };
   const columns: ColumnsType<IAmenities> = [
     {
-      title: "ID",
+      title: "STT",
       dataIndex: "_id",
       key: "_id",
+      render: (_id, {}, index) => index + 1,
     },
     {
       title: "Tên tiện ích",
