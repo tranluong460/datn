@@ -32,7 +32,6 @@ const BookingManager = () => {
 
   const { data: allBooking, isLoading } = useGetAllBookingQuery("");
   const { data: dataOneBooking, isFetching } = useGetOneBookingQuery(idBooking);
-  console.log("🚀 ~ BookingManager ~ dataOneBooking:", dataOneBooking);
 
   const handleSearch = (
     selectedKeys: string[],
@@ -511,8 +510,13 @@ const BookingManager = () => {
             <Button type="primary" onClick={() => showDrawer(_id)}>
               Thông tin chi tiết
             </Button>
-            <Drawer title="Basic Drawer" onClose={onClose} open={open}>
-              <div>
+            <Drawer
+              title="Thông tin chi tiết Đặt phòng"
+              onClose={onClose}
+              open={open}
+            >
+              <div className="mb-4">
+                <p className="font-bold">Thời gian:</p>
                 <p>
                   Thời gian nhận phòng:{" "}
                   {moment(dataOneBooking?.data?.check_in).format("YYYY-MM-DD")}
@@ -524,25 +528,50 @@ const BookingManager = () => {
                 </p>
               </div>
 
-              <div>
-                <p>Tổng số tiền: {dataOneBooking?.data?.total_price} </p>
-                {dataOneBooking?.data?.status}
-                <p>Trạng thái thanh toán:</p>
-                {dataOneBooking?.data?.payment_method}
+              <div className="mb-4">
+                <p className="font-bold">Thông tin thanh toán:</p>
+                <p>
+                  Tổng số tiền cần thanh toán:{" "}
+                  {dataOneBooking?.data?.total_price.toLocaleString("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  })}{" "}
+                </p>
+
+                <p>
+                  Tiền khách đã thanh toán:{" "}
+                  {dataOneBooking?.data?.id_payment?.total_payment.toLocaleString(
+                    "vi-VN",
+                    {
+                      style: "currency",
+                      currency: "VND",
+                    }
+                  )}
+                </p>
+
+                <p>
+                  Thời gian thanh toán:{" "}
+                  {moment(dataOneBooking?.data?.id_payment?.createdAt).format(
+                    "dddd,DD/MM/YYYY HH:mm:ss"
+                  )}
+                </p>
+
+                <p>Trạng thái: {dataOneBooking?.data?.status}</p>
+
+                <p>Thánh toán qua: {dataOneBooking?.data?.payment_method}</p>
               </div>
 
-              {dataOneBooking?.data?.info?.cmt}
-              {dataOneBooking?.data?.info?.name}
-              {dataOneBooking?.data?.info?.phone}
+              <div className="mb-4">
+                <p className="font-bold">Thông tin người đặt phòng</p>
 
-              {dataOneBooking?.data?.id_payment?.status}
-              {dataOneBooking?.data?.id_payment?.amount}
-              {dataOneBooking?.data?.id_payment?.createdAt}
+                <p>Chứng minh nhân dân: {dataOneBooking?.data?.info?.cmt}</p>
+
+                <p>Tên người đặt phòng: {dataOneBooking?.data?.info?.name}</p>
+
+                <p>Số điện thoại: {dataOneBooking?.data?.info?.phone}</p>
+              </div>
 
               <div>
-                <p>Thông tin phòng đặt</p>
-                Số lượng phòng đặt:{" "}
-                {dataOneBooking?.data?.list_room?.idRoom?.quantity}
                 <Image
                   src={dataOneBooking?.data?.list_room?.idRoom?.images[0].url}
                   alt=""
