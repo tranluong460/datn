@@ -3618,5 +3618,11 @@ body {
                                                     
                                                         .nh-thumb.nh-thumb--50 {
                                                             width: 50px;
+                                                        }.nh-thumb.nh-thumb--72 {
+                                                            width: 72px;
+                                                        }
+                                                        
+                                                        .nh-thumb.nh-thumb--90 {
+                                                            width: 90px;
                                                         }
 */
