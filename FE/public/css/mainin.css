@@ -3681,4 +3681,8 @@ body {
                                                             color: #fff;
                                                             text-align: center;
                                                             background-color: #999;
+                                                        }.ribbon,
+                                                        .ribbon:after {
+                                                            position: absolute;
+                                                            left: 0;
                                                         }
