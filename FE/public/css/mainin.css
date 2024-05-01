@@ -3673,4 +3673,12 @@ body {
                                                             line-height: 21px;
                                                             color: #666;
                                                             font-size: 0.75rem;
+                                                        }.ribbon {
+                                                            top: 0;
+                                                            font-weight: 600;
+                                                            font-size: 1rem;
+                                                            width: 1.5rem;
+                                                            color: #fff;
+                                                            text-align: center;
+                                                            background-color: #999;
                                                         }
