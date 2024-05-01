@@ -227,13 +227,13 @@ const RoomDetailCard = ({ room: Room, onCloseDetail }: any) => {
         <div>
           {<div className="overlay" />}
           <button
-            className={`fixed text-black text-4xl top-5  z-[999] xl:-right-10 xl:-top-24`}
+            className={`fixed text-4xl -top-5  z-[999] xl:-right-32 xl:-top-36 text-white`}
             onClick={offSearch}
           >
             <AiOutlineClose />
           </button>
           <div
-            className={`max-[1000px]:hidden max-[1000px]:grid max-[1100px]:grid-cols-[300px_240px_400px]  grid grid-cols-[400px_340px_560px] justify-start border border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white  -top-16 inset-x-0 z-[999] transition-search`}
+            className={`max-[1300px]:hidden max-[1300px]:grid max-[1100px]:grid-cols-[300px_240px_400px]  grid grid-cols-[400px_340px_560px] justify-start border border-gary-300  shadow-xl mx-auto text-base max-w-[1300px] fixed bg-white  -top-24 left-[-100px] z-[999] transition-search w-[1300px]`}
           >
             <div className="flex items-center ml-3 gap-2 border-r-[1px] border-gray-300 text-[18px] pl-2">
               <p>
@@ -382,13 +382,13 @@ const RoomDetailCard = ({ room: Room, onCloseDetail }: any) => {
 
       {/* // ! end search */}
 
-      <div className="flex w-[1300px]">
+      <div className="flex w-[1100px]">
         <div className="flex flex-col bg-[#98999b]">
-          <div className="w-[850px] relative">
+          <div className="w-[650px] relative">
             <img
               src={currentImage}
               key={currentImage}
-              className="w-[900px] h-[500px] object-cover"
+              className="w-[700px] h-[350px] object-cover"
             />
 
             <span className="bottom-0 pl-3 py-2 bg-[black] absolute opacity-40 w-full text-[white] font-bold">
@@ -416,7 +416,7 @@ const RoomDetailCard = ({ room: Room, onCloseDetail }: any) => {
             {Room?.id_roomType?.name}
           </h1>
 
-          <span className="text-[13px] mt-3">{Room?.description}</span>
+          <span className="text-[13px]">{Room?.description}</span>
           <div className="mt-3">
             <span className="font-[500]">Tiện nghi của phòng</span>
             <div>
