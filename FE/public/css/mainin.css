@@ -3597,5 +3597,26 @@ body {
                                                 }
                                                 
                                                 .nh-thumb:hover {
-                                                    opacity: 0.9;
+                                                    opacity: 0.9;.nh-thumb>img {
+                                                            position: absolute;
+                                                            top: 0;
+                                                            right: 0;
+                                                            bottom: 0;
+                                                            left: 0;
+                                                            margin: auto;
+                                                            max-width: 100%;
+                                                            min-height: 100%;
+                                                        }
+                                                    
+                                                        .nh-thumb.nh-thumb--1x1:before {
+                                                            padding-top: 100%;
+                                                        }
+                                                    
+                                                        .nh-thumb.nh-thumb--32 {
+                                                            width: 32px;
+                                                        }
+                                                    
+                                                        .nh-thumb.nh-thumb--50 {
+                                                            width: 50px;
+                                                        }
 */
