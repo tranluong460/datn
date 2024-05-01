@@ -3669,4 +3669,8 @@ body {
                                                         }.nh-nav-tabs .nav-link.active .counter {
                                                             background-color: #f7f5f0;
                                                             color: #b78a28;
+                                                        }.pagination .nh-icon {
+                                                            line-height: 21px;
+                                                            color: #666;
+                                                            font-size: 0.75rem;
                                                         }
