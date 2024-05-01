@@ -38,7 +38,18 @@ const CreateRoomModal = ({ isOpenCreate, onCancel }: CreateRoomModalProps) => {
   const [createRoom, resultCreate] = useCreateRoomMutation();
 
   const onFinish = (data: IRoom) => {
-    console.log("🚀 ~ onFinish ~ data:", data);
+    const roomQuantity = data?.quantity;
+    const listRoomLength = data?.list_rooms?.split(",").length;
+
+    if (listRoomLength > roomQuantity) {
+      return message.error(
+        `Số phòng phải bằng số lượng phòng ${roomQuantity} không thể nhập hơn hay nhỏ hơn số lượng đã chọn!`
+      );
+    }
+
+    if (listRoomLength < roomQuantity) {
+      return message.error("Số phòng phải bằng số lượng phòng đã chọn!");
+    }
 
     createRoom(data)
       .unwrap()
