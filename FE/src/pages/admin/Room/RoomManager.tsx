@@ -91,19 +91,19 @@ const RoomManager = () => {
       },
       sorter: (a, b) => a.price - b.price,
     },
-    {
-      title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
+    // {
+    //   title: "Trạng thái",
+    //   dataIndex: "status",
+    //   key: "status",
 
-      render: (_, { quantity }) => {
-        return (
-          <Tag color={quantity > 0 ? "#87d068" : "#f70000"}>
-            {quantity > 0 ? "Có sẵn" : "Đã hết phòng"}
-          </Tag>
-        );
-      },
-    },
+    //   render: (_, { quantity }) => {
+    //     return (
+    //       <Tag color={quantity > 0 ? "#87d068" : "#f70000"}>
+    //         {quantity > 0 ? "Có sẵn" : "Đã hết phòng"}
+    //       </Tag>
+    //     );
+    //   },
+    // },
     {
       title: "Hành động",
       key: "action",
