@@ -149,11 +149,11 @@ const BaseAdmin = () => {
   ];
 
   const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: "Cài đặt",
-      icon: <AiOutlineSetting />,
-    },
+    // {
+    //   key: "1",
+    //   label: "Cài đặt",
+    //   icon: <AiOutlineSetting />,
+    // },
     {
       key: "2",
       label: "Trang chủ",
@@ -221,7 +221,7 @@ const BaseAdmin = () => {
               gap: 30,
             }}
           >
-            <Popover
+            {/* <Popover
               trigger="click"
               content={content}
               placement="bottomRight"
@@ -230,7 +230,7 @@ const BaseAdmin = () => {
               <Badge count={999} size="small">
                 <IoNotificationsOutline size={22} />
               </Badge>
-            </Popover>
+            </Popover> */}
 
             <Dropdown menu={{ items }} className="cursor-pointer">
               <Avatar

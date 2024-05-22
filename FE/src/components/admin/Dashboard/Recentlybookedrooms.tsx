@@ -101,7 +101,7 @@ export default function RecentRooms() {
       <strong className="text-gray-700 font-medium">
         Top 5 phòng được đặt nhiều nhất
       </strong>
-      <div>
+      {/* <div>
         <div className="m-3">
           <label htmlFor="dateRangeInput" className="mr-2">
             Chọn khoảng ngày:
@@ -119,7 +119,7 @@ export default function RecentRooms() {
         >
           Tìm kiếm
         </button>
-      </div>
+      </div> */}
       <div className="mt-4">
         <table className="min-w-full border border-gray-300">
           <thead>
@@ -157,5 +157,3 @@ export default function RecentRooms() {
     </div>
   );
 }
-
-
