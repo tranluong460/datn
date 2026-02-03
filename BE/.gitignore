@@ -68,3 +68,7 @@ Thumbs.db
 */*.njsproj
 */*.sln
 */*.sw?
+
+#
+yarn.lock
+package-lock.json
